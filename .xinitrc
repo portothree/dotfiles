@@ -1,5 +1,3 @@
-xrdb ~/.Xresources
+xrdb ~/.Xresources &
+compton &
 exec bspwm
-
-# Restores the last coloscheme in use
-wal -R
