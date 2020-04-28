@@ -13,4 +13,5 @@
 
 - [Modipy](https://github.com/mopidy/mopidy)
 
-- [Vim-plug](https://github.com/junegunn/vim-plug)
+- [Vim-airline](https://github.com/vim-airline/vim-airline)
+- [Dracula for vim](https://github.com/dracula/vim)
