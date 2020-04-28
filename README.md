@@ -12,3 +12,5 @@
 - [Pywal](https://github.com/dylanaraps/pywal)
 
 - [Modipy](https://github.com/mopidy/mopidy)
+
+- [Vim-plug](https://github.com/junegunn/vim-plug)
