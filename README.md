@@ -25,7 +25,7 @@
 - [Cava](https://github.com/karlstav/cava)
 
 ### Text editor
-- [Vim Javascript](https://github.com/pangloss/vim-javascript)
+- [Vim Polyglot](https://github.com/sheerun/vim-polyglot)
 - [Vim-airline](https://github.com/vim-airline/vim-airline)
 - [Dracula for vim](https://github.com/dracula/vim)
 
