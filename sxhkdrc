@@ -103,6 +103,10 @@ super + ctrl + {1-9}
 # cancel the preselection for the focused node
 super + ctrl + space
 	bspc node -p cancel
+	
+# ImageMagick screenshot biding
+@Print
+	import image.png
 
 # cancel the preselection for the focused desktop
 super + ctrl + shift + space
