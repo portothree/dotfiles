@@ -29,6 +29,7 @@
 - [Vim Polyglot](https://github.com/sheerun/vim-polyglot)
 - [Vim-airline](https://github.com/vim-airline/vim-airline)
 - [Dracula for vim](https://github.com/dracula/vim)
+- [YouComplemeMe](https://github.com/ycm-core/YouCompleteMe)
 
 
 ### File manager
