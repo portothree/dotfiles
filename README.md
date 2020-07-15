@@ -34,6 +34,7 @@
 - [ALE](https://github.com/dense-analysis/ale)
 
 ### Code formatting
+#### C
 - [Astyle](http://astyle.sourceforge.net/)
 
 
