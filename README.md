@@ -33,6 +33,9 @@
 - [YouCompleteMe](https://github.com/ycm-core/YouCompleteMe)
 - [ALE](https://github.com/dense-analysis/ale)
 
+### Code formatting
+- [Astyle](http://astyle.sourceforge.net/)
+
 
 ### File manager
 - [Ranger](https://github.com/ranger/ranger)
