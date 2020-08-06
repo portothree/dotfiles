@@ -32,6 +32,7 @@
 - [Dracula for vim](https://github.com/dracula/vim)
 - [YouCompleteMe](https://github.com/ycm-core/YouCompleteMe)
 - [ALE](https://github.com/dense-analysis/ale)
+- [vim-jsdoc](https://github.com/heavenshell/vim-jsdoc)
 
 ### Code formatting
 #### C
