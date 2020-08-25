@@ -33,6 +33,7 @@
 - [YouCompleteMe](https://github.com/ycm-core/YouCompleteMe)
 - [ALE](https://github.com/dense-analysis/ale)
 - [vim-jsdoc](https://github.com/heavenshell/vim-jsdoc)
+- [emmet-vim](https://github.com/mattn/emmet-vim)
 
 ### Code formatting
 #### C
