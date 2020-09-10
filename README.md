@@ -6,6 +6,9 @@
 - [Z-shell / Oh My ZSH](https://ohmyz.sh)
 - [Urxvt](https://wiki.archlinux.org/index.php/Rxvt-unicode)
 
+### Terminal sessions
+- [Tmux](https://github.com/tmux/tmux)
+
 ### Window manager
 - [Bspwm](https://github.com/baskerville/bspwm)
 - [Sxhkdrc](https://github.com/baskerville/sxhkd)
