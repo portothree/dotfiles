@@ -3,7 +3,7 @@
 ![Current desk screenshot](https://i.imgur.com/ti2LDBF.png)
 
 ### Terminal
-- [Z-shell / Oh My ZSH](https://ohmyz.sh)
+- [Z-shell / Oh My ZSH](https://ohmyz.sh) with [Spaceship prompt](https://github.com/denysdovhan/spaceship-prompt)
 - [Urxvt](https://wiki.archlinux.org/index.php/Rxvt-unicode)
 
 ### Terminal sessions
