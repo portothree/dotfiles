@@ -5,6 +5,7 @@
 ### Terminal
 - [Z-shell / Oh My ZSH](https://ohmyz.sh) with [Spaceship prompt](https://github.com/denysdovhan/spaceship-prompt)
 - [Urxvt](https://wiki.archlinux.org/index.php/Rxvt-unicode)
+- [Kitty](https://github.com/kovidgoyal/kitty)
 
 ### Terminal sessions
 - [Tmux](https://github.com/tmux/tmux)
