@@ -15,3 +15,7 @@ set tabstop=4
 set shiftwidth=4
 set background=dark
 set t_Co=256
+set autoindent
+
+filetype plugin indent on
+
