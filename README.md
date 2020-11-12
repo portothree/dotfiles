@@ -20,7 +20,6 @@
 ### Status bar
 - [Lemonbar](https://github.com/LemonBoy/bar)
 
-
 ### Theming
 - [Pywal](https://github.com/dylanaraps/pywal)
 
@@ -49,3 +48,6 @@
 
 ### Browser
 - [Vimium](https://github.com/philc/vimium)
+
+### Reader
+- [Glow Markdown Reader](https://github.com/charmbracelet/glow)
