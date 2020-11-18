@@ -2,8 +2,11 @@
 
 ![Current desk screenshot](https://i.imgur.com/ti2LDBF.png)
 
-### Terminal
+### Shell
 - [Z-shell / Oh My ZSH](https://ohmyz.sh) with [Spaceship prompt](https://github.com/denysdovhan/spaceship-prompt)
+-
+### Terminal
+- [st](https://st.suckless.org)
 - [Urxvt](https://wiki.archlinux.org/index.php/Rxvt-unicode)
 - [Kitty](https://github.com/kovidgoyal/kitty)
 
@@ -41,7 +44,6 @@
 ### Code formatting
 #### C
 - [Astyle](http://astyle.sourceforge.net/)
-
 
 ### File manager
 - [Ranger](https://github.com/ranger/ranger)
