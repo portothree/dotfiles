@@ -28,6 +28,7 @@
 
 ### Audio
 - [Modipy](https://github.com/mopidy/mopidy)
+	- https://docs.mopidy.com/en/latest/running/service/
 - [Cava](https://github.com/karlstav/cava)
 
 ### Text editor
