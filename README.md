@@ -4,7 +4,7 @@
 
 ### Shell
 - [Z-shell / Oh My ZSH](https://ohmyz.sh) with [Spaceship prompt](https://github.com/denysdovhan/spaceship-prompt)
--
+
 ### Terminal
 - [st](https://st.suckless.org)
 - [Urxvt](https://wiki.archlinux.org/index.php/Rxvt-unicode)
@@ -54,3 +54,6 @@
 
 ### Reader
 - [Glow Markdown Reader](https://github.com/charmbracelet/glow)
+
+### Fonts
+- [Fira Code](https://github.com/tonsky/FiraCode)
