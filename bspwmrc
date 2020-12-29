@@ -2,26 +2,20 @@
 
 sxhkd &
 
-xrandr --output HDMI-1 --primary --mode 1920x1080 --rotate normal --output eDP-1 --mode 1366x768 --rotate normal --right-of HDMI-1
+xrandr --output "HDMI-A-0" --primary --mode 1920x1080 --rotate normal --output eDP --mode 1920x1080 --rotate normal --left "HDMI-A-0"
 
-bspc monitor HDMI-1 -d I II III IV V VI VII VIII IX
-bspc monitor eDP-1 -d X 
+bspc monitor "HDMI-A-0" -d II III IV V VI VII VIII IX X
+bspc monitor eDP -d I
 
-bspc config border_width         2
-bspc config window_gap          12
+bspc config border-width 2
+bspc config window_gap 12
 
-bspc config split_ratio          0.52
-bspc config borderless_monocle   true
-bspc config gapless_monocle      true
+bspc config split_ratio 0.52
+bspc config borderless_monocle true
+bspc config gapless_monocle true
 
-bspc rule -a Gimp desktop='^8' state=floating follow=on
-bspc rule -a Chromium desktop='^2'
-bspc rule -a mplayer2 state=floating
-bspc rule -a Kupfer.py focus=on
-bspc rule -a Screenkey manage=off
+compton --config ~/.config/compton/compton.conf -b &
 
-compton --backend glx --paint-on-overlay --vsync opengl-swc &
-
-wal --theme base16-dracula.json &
+wal --theme pywal/base16-dracula.json &
 
 ~/barf.sh | lemonbar &
