@@ -57,3 +57,4 @@
 
 ### Fonts
 - [Fira Code](https://github.com/tonsky/FiraCode)
+- [Siji](https://github.com/stark/siji)
