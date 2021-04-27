@@ -41,6 +41,7 @@
 - [ALE](https://github.com/dense-analysis/ale)
 - [vim-jsdoc](https://github.com/heavenshell/vim-jsdoc)
 - [emmet-vim](https://github.com/mattn/emmet-vim)
+- [NERDTree](https://github.com/preservim/nerdtree)
 
 ### Code formatting
 #### C
