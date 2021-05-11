@@ -42,6 +42,7 @@
 - [vim-jsdoc](https://github.com/heavenshell/vim-jsdoc)
 - [emmet-vim](https://github.com/mattn/emmet-vim)
 - [NERDTree](https://github.com/preservim/nerdtree)
+- [Node Inspect](https://github.com/eliba2/vim-node-inspect)
 
 ### Code formatting
 #### C
