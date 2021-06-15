@@ -63,3 +63,6 @@
 
 ### Cursor
 - [Unclutter](https://wiki.debian.org/unclutter)
+
+### Notifications
+- [Dunst](https://github.com/dunst-project/dunst)
