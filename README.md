@@ -66,3 +66,6 @@
 
 ### Notifications
 - [Dunst](https://github.com/dunst-project/dunst)
+
+### Resource monitor 
+- [Bpytop](https://github.com/aristocratos/bpytop)
