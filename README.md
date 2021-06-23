@@ -69,3 +69,6 @@
 
 ### Resource monitor 
 - [Bpytop](https://github.com/aristocratos/bpytop)
+
+### Messaging
+- [Hangups](https://github.com/tdryer/hangups)
