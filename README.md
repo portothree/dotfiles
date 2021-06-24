@@ -12,6 +12,8 @@
 
 ### Terminal sessions
 - [Tmux](https://github.com/tmux/tmux)
+	- [TPM](https://github.com/tmux-plugins/tpm)
+	- [tmux-resurrect](https://github.com/tmux-plugins/tmux-resurrect) 
 
 ### Window manager
 - [Bspwm](https://github.com/baskerville/bspwm)
