@@ -72,3 +72,7 @@
 
 ### Messaging
 - [Hangups](https://github.com/tdryer/hangups)
+
+### Additional tools
+- [Wuzz](https://github.com/asciimoo/wuzz)
+- [Thyme](https://github.com/hughbien/thyme)
