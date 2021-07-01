@@ -77,5 +77,6 @@
 
 ### Additional tools
 - [Wuzz](https://github.com/asciimoo/wuzz)
+- [Websocat](https://github.com/vi/websocat)
 - [Thyme](https://github.com/hughbien/thyme)
 - [cli-typer](https://github.com/balzss/cli-typer)
