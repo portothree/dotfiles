@@ -80,3 +80,4 @@
 - [Websocat](https://github.com/vi/websocat)
 - [Thyme](https://github.com/hughbien/thyme)
 - [cli-typer](https://github.com/balzss/cli-typer)
+- [Delta](https://github.com/dandavison/delta)
