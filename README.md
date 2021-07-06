@@ -45,6 +45,7 @@
 - [emmet-vim](https://github.com/mattn/emmet-vim)
 - [NERDTree](https://github.com/preservim/nerdtree)
 - [Node Inspect](https://github.com/eliba2/vim-node-inspect)
+- [Editorconfig](https://github.com/editorconfig/editorconfig-vim)
 
 ### Code formatting
 #### C
