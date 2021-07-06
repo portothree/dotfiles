@@ -20,6 +20,10 @@ start_nvm() {
 # Path to your oh-my-zsh installation.
 export ZSH="/home/porto/.oh-my-zsh"
 
+# Fixes anki video gliteches
+export ANKI_NOHIGHDPI=1
+export ANKI_WEBSCALE=1
+
 ZSH_THEME="robbyrussell"
 
 plugins=(git)
