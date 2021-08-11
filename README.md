@@ -47,12 +47,15 @@
 - [Node Inspect](https://github.com/eliba2/vim-node-inspect)
 - [Editorconfig](https://github.com/editorconfig/editorconfig-vim)
 
-### Code formatting
+### Code formatting / Linters
 #### C
 - [Astyle](http://astyle.sourceforge.net/)
+#### Terraform
+- [TFlint](https://github.com/terraform-linters/tflint)
 
-### File manager
+### Files
 - [Ranger](https://github.com/ranger/ranger)
+- [FZF](https://github.com/junegunn/fzf)
 
 ### Browser
 - [Vimium](https://github.com/philc/vimium)
