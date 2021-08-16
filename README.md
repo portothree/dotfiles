@@ -87,3 +87,4 @@
 - [Delta](https://github.com/dandavison/delta)
 - [Toggl-cli](https://github.com/auhau/toggl-cli/)
 - [brightnessctl](https://github.com/Hummer12007/brightnessctl)
+- [Zathura](https://github.com/pwmt/zathura)
