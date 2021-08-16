@@ -86,3 +86,4 @@
 - [cli-typer](https://github.com/balzss/cli-typer)
 - [Delta](https://github.com/dandavison/delta)
 - [Toggl-cli](https://github.com/auhau/toggl-cli/)
+- [brightnessctl](https://github.com/Hummer12007/brightnessctl)
