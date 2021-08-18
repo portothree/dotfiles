@@ -75,6 +75,8 @@
 
 ### Resource monitor 
 - [Bpytop](https://github.com/aristocratos/bpytop)
+- [ctop](https://github.com/bcicen/ctop)
+- [vtop](https://github.com/MrRio/vtop)
 
 ### Messaging
 - [Hangups](https://github.com/tdryer/hangups)
