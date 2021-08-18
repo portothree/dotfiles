@@ -74,7 +74,7 @@
 - [Dunst](https://github.com/dunst-project/dunst)
 
 ### Resource monitor 
-- [Bpytop](https://github.com/aristocratos/bpytop)
+- [Bpytop](https://github.com/aristocratos/bpytop) / [Bashtop](https://github.com/aristocratos/bashtop)
 - [ctop](https://github.com/bcicen/ctop)
 - [vtop](https://github.com/MrRio/vtop)
 
