@@ -71,13 +71,22 @@ install_dependencies() {
 	# Terminal tools
 	sudo apt install -y \
 		vim \
-		git
+		git \
+		tmux \
+		stow
+
+	# Multimedia
+	sudo apt install -y \
+		pavucontrol
+
+	# Other packages
+	sudo apt install -y \
+		xautolock
 }
 
 config() {
 	cd $(pwd)
-	mv bspwm/ ${HOME}/.config/
-	mv sxhkd/ ${HOME}/.config/
+	stow -v bspwm sxhkd compton vim tmux ranger
 }
 
 manage() {
