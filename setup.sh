@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# describe: Debian porto setup
 
 DOT_REPO="https://github.com/portothree/dotfiles"
 DOT_DEST="$PWD"
@@ -48,6 +49,35 @@ install_dependencies() {
 		echo "Consider configuring it manually"
 		exit 1
 	fi
+
+	# BSPWM and related core components
+	sudo apt install -y \
+		bspwm \
+		sxhkd \
+		rofi \
+		compton \
+		dunst \
+		libnotify-bin \
+		unifont \
+		suckless-tools
+
+	# Fonts
+	sudo apt install -y \
+		fonts-firacode \
+		fonts-hack \
+		fonts-noto-color-emoji \
+		fonts-symbola
+
+	# Terminal tools
+	sudo apt install -y \
+		vim \
+		git
+}
+
+config() {
+	cd $(pwd)
+	mv bspwm/ ${HOME}/.config/
+	mv sxhkd/ ${HOME}/.config/
 }
 
 manage() {
