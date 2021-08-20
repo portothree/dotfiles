@@ -79,10 +79,19 @@ install_dependencies() {
 	sudo apt install -y \
 		pavucontrol
 
+	# Build tools
+	sudo apt install -y \
+		build-essential \
+		cmake \
+		python3-dev
+
 	# Other packages
 	sudo apt install -y \
 		xautolock \
 		unclutter
+
+	config
+	setup_vim
 }
 
 config() {
@@ -90,10 +99,26 @@ config() {
 	stow -v bspwm sxhkd compton vim tmux ranger shell
 }
 
+setup_vim() {
+	VIM_PLUGINS_DIR=${HOME}/.vim/pack/plugins/start
+	mkdir -p "${VIM_PLUGINS_DIR}"
+
+	# ALE
+	git clone --depth 1 https://github.com/dense-analysis/ale.git ${VIM_PLUGINS_DIR}/
+
+	# Vim-polyglot
+	git clone --depth 1 https://github.com/sheerun/vim-polyglot.git ${VIM_PLUGINS_DIR}/
+
+	# YouCompleteMe
+	git clone https://github.com/ycm-core/YouCompleteMe.git ${VIM_PLUGINS_DIR}/YouCompleteMe
+	cd ${VIM_PLUGINS_DIR}/YouCompleteMe
+	python3 install.py --ts-completer --rust-completer
+}
+
 manage() {
 	while :; do
 		echo -e "\n[1] List dotfiles"
-		echo -e "\n[2] Install dependencies"
+		echo -e "\n[2] Install and setup dependencies"
 		echo -e "[q/Q] Quit session"
 
 		read -p "Choose an option: [1]" -n 1 -r USER_INPUT
