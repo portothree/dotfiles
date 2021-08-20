@@ -17,7 +17,3 @@ bspc config gapless_monocle true
 unclutter -idle 1 -root &
 
 compton --config ~/.config/compton/compton.conf -b &
-
-wal --theme pywal/base16-dracula.json &
-
-~/barf.sh | lemonbar &
