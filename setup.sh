@@ -87,9 +87,7 @@ install_dependencies() {
 
 config() {
 	cd $(pwd)
-	mv .zshrc ${HOME}/
-	mv .xinitrc ${HOME}/
-	stow -v bspwm sxhkd compton vim tmux ranger
+	stow -v bspwm sxhkd compton vim tmux ranger shell
 }
 
 manage() {
