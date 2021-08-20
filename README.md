@@ -53,6 +53,9 @@
 #### Terraform
 - [TFlint](https://github.com/terraform-linters/tflint)
 
+#### Shell
+- [shfmt](https://github.com/mvdan/sh)
+
 ### Files
 - [Ranger](https://github.com/ranger/ranger)
 - [FZF](https://github.com/junegunn/fzf)
