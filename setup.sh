@@ -5,6 +5,7 @@ DOT_DEST="$PWD"
 
 init_check() {
 	add_env
+	manage
 }
 
 add_env() {
@@ -24,6 +25,29 @@ add_env() {
 		exit 1
 	fi
 	echo -e "Configuration for SHELL: $current_shell has been updated"
+}
+
+find_dotfiles() {
+	printf "\n"
+	readarray -t dotfiles < <( find "${HOME}" -maxdepth 1 -name ".*" -type f)
+	printf "%s\n" "${dotfiles[@]}"
+}
+
+manage() {
+	while :
+	do
+		echo -e "\n[1] List dotfiles"
+		echo -e "[q/Q] Quit session"
+		
+		read -p "Choose an option: [1]" -n 1 -r USER_INPUT
+		USER_INPUT=${USER_INPUT:-1}
+
+		case $USER_INPUT in
+			[1]* ) find_dotfiles;;
+			[q/Q]* ) exit;;
+			* ) printf "\n%s\n" "Invalid input"
+		esac
+	done
 }
 
 init_check
