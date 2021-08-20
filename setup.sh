@@ -81,11 +81,14 @@ install_dependencies() {
 
 	# Other packages
 	sudo apt install -y \
-		xautolock
+		xautolock \
+		unclutter
 }
 
 config() {
 	cd $(pwd)
+	mv .zshrc ${HOME}/
+	mv .xinitrc ${HOME}/
 	stow -v bspwm sxhkd compton vim tmux ranger
 }
 
