@@ -123,6 +123,7 @@ setup_vim() {
 	# YouCompleteMe
 	git clone https://github.com/ycm-core/YouCompleteMe.git ${VIM_PLUGINS_DIR}/YouCompleteMe
 	cd ${VIM_PLUGINS_DIR}/YouCompleteMe
+	git submodule update --init --recursive
 	python3 install.py --ts-completer --rust-completer
 }
 
