@@ -39,10 +39,10 @@ install_dependencies() {
 	curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh" | bash
 
 	if [[ $CURRENT_SHELL == "zsh" ]]; then
-		echo 'export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ])" && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm"" >> "$HOME/.zshrc'
+		echo 'export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ])" && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm"' >> "$HOME/.zshrc'
 		echo '[ -s "NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >>"$HOME/.zshrc"
 	elif [[ $CURRENT_SHELL == "bash" ]]; then
-		echo 'export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ])" && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm"" >> "$HOME/.bashrc'
+		echo 'export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ])" && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm"' >> "$HOME/.bashrc'
 		echo '[ -s "NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >>"$HOME/.bashrc"
 	else
 		echo "Couldn't start NVM"
