@@ -119,6 +119,7 @@ manage() {
 	while :; do
 		echo -e "\n[1] List dotfiles"
 		echo -e "\n[2] Install and setup dependencies"
+		echo -e "\n[3] Setup dot files"
 		echo -e "[q/Q] Quit session"
 
 		read -p "Choose an option: [1]" -n 1 -r USER_INPUT
@@ -127,6 +128,7 @@ manage() {
 		case $USER_INPUT in
 		[1]*) find_dotfiles ;;
 		[2]*) install_dependencies ;;
+		[3]*) config ;;
 		[q/Q]*) exit ;;
 		*) printf "\n%s\n" "Invalid input" ;;
 		esac
