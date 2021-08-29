@@ -2,10 +2,9 @@
 
 sxhkd &
 
-xrandr --output "HDMI-A-0" --primary --mode 1920x1080 --rotate normal --output eDP --mode 1920x1080 --rotate normal --left "HDMI-A-0"
+xrandr --output "eDP" --primary --mode 1920x1080 --rotate normal
 
-bspc monitor "HDMI-A-0" -d II III IV V VI VII VIII IX X
-bspc monitor eDP -d I
+bspc monitor "eDP" -d I II III IV V VI VII VIII IX X
 
 bspc config border-width 2
 bspc config window_gap 12
@@ -16,4 +15,4 @@ bspc config gapless_monocle true
 
 unclutter -idle 1 -root &
 
-compton --config ~/.config/compton/compton.conf -b &
+compton --config ~/.config/compton/compton.conf -b
