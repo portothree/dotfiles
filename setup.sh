@@ -55,6 +55,7 @@ install_dependencies() {
 		bspwm \
 		sxhkd \
 		rofi \
+		ranger \
 		compton \
 		dunst \
 		libnotify-bin \
