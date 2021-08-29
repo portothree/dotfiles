@@ -97,6 +97,7 @@ install_dependencies() {
 		unclutter
 
 	config
+	setup_st
 	setup_vim
 }
 
