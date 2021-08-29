@@ -83,7 +83,12 @@ install_dependencies() {
 	sudo apt install -y \
 		build-essential \
 		cmake \
-		python3-dev
+		python3-dev \
+		libxft-dev \
+		libx11-dev
+
+	# Terminal emulators
+	git clone https://git.suckless.org/st $HOME/st
 
 	# Other packages
 	sudo apt install -y \
@@ -96,7 +101,12 @@ install_dependencies() {
 
 config() {
 	cd $(pwd)
-	stow -v bspwm sxhkd compton vim tmux ranger shell
+	stow -v bspwm sxhkd compton vim tmux ranger shell st
+}
+
+setup_st() {
+	cd $HOME/st
+	sudo make clean install
 }
 
 setup_vim() {
