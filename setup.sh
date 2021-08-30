@@ -5,6 +5,8 @@ DOT_REPO="https://github.com/portothree/dotfiles"
 DOT_DEST="$PWD"
 CURRENT_SHELL=$(basename "$SHELL")
 
+LUA_DIR=/usr/local/lua
+
 init_check() {
 	add_env
 	manage
@@ -34,6 +36,8 @@ find_dotfiles() {
 }
 
 install_dependencies() {
+	curl "https://luarocks.org/releases/luarocks-3.7.0.tar.gz" --output "$LUA_DIR/luarocks.ta.gz"
+
 	# NVM
 	curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh" | bash
 
@@ -112,6 +116,17 @@ install_dependencies() {
 config() {
 	cd $(pwd)
 	stow -v bspwm sxhkd compton vim tmux ranger shell st
+}
+
+setup_lua() {
+	mkdir $LUA_DIR
+	cd $LUA_DIR
+
+	# Luarocks
+	tar zxpf luarocks.tar.gz
+	cd luarocks
+	./configure && make && make install
+	sudo luarocks install luasocket
 }
 
 setup_node() {
