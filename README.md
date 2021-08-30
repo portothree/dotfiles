@@ -60,6 +60,9 @@
 - [Ranger](https://github.com/ranger/ranger)
 - [FZF](https://github.com/junegunn/fzf)
 
+### Version control
+- [TIG](https://github.com/jonas/tig)
+
 ### Browser
 - [Vimium](https://github.com/philc/vimium)
 
