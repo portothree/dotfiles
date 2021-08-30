@@ -104,6 +104,7 @@ install_dependencies() {
 config() {
 	cd $(pwd)
 	stow -v bspwm sxhkd compton vim tmux ranger shell st
+	nvm install --lts
 }
 
 setup_st() {
