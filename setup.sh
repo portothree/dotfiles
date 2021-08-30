@@ -6,6 +6,7 @@ DOT_DEST="$PWD"
 CURRENT_SHELL=$(basename "$SHELL")
 
 LUA_DIR=/usr/local/lua
+GO_DIR=/usr/local/go
 
 init_check() {
 	add_env
@@ -36,14 +37,13 @@ find_dotfiles() {
 }
 
 install_dependencies() {
-	curl "https://luarocks.org/releases/luarocks-3.7.0.tar.gz" --output "$LUA_DIR/luarocks.ta.gz"
+	curl "https://luarocks.org/releases/luarocks-3.7.0.tar.gz" --output "/usr/local/luarocks.ta.gz"
 
 	# NVM
 	curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh" | bash
 
 	# Go
-	curl "https://golang.org/dl/go1.17.linux-amd64.tar.gz" --output "go1_17.tar.gz"
-	tar -C /usr/local -xzf go1_17.tar.gz
+	curl "https://golang.org/dl/go1.17.linux-amd64.tar.gz" --output "/usr/local/go1_17.tar.gz"
 
 	# BSPWM and related core components
 	sudo apt install -y \
@@ -108,6 +108,7 @@ install_dependencies() {
 	GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt
 
 	config
+	setup_go
 	setup_lua
 	setup_node
 	setup_st
@@ -119,11 +120,16 @@ config() {
 	stow -v bspwm sxhkd compton vim tmux ranger shell st
 }
 
+setup_go() {
+	mkdir $GO_DIR
+	cd /usr/local 
+	tar -C $GO_DIR -xzf go1_17.tar.gz
+}
+
 setup_lua() {
 	mkdir $LUA_DIR
-	cd $LUA_DIR
-
 	# Luarocks
+	cd /usr/local
 	tar zxpf luarocks.tar.gz
 	cd luarocks
 	./configure && make && make install
