@@ -37,6 +37,10 @@ install_dependencies() {
 	# NVM
 	curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh" | bash
 
+	# Go
+	curl "https://golang.org/dl/go1.17.linux-amd64.tar.gz" --output "go1_17.tar.gz"
+	tar -C /usr/local -xzf go1_17.tar.gz
+
 	# BSPWM and related core components
 	sudo apt install -y \
 		bspwm \
@@ -95,6 +99,9 @@ install_dependencies() {
 	sudo apt install -y \
 		xautolock \
 		unclutter
+
+	# Code formatters
+	GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt
 
 	config
 	setup_node
