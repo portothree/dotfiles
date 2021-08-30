@@ -102,7 +102,8 @@ install_dependencies() {
 	# Other packages
 	sudo apt install -y \
 		xautolock \
-		unclutter
+		unclutter \
+		acpi
 
 	# Code formatters
 	GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt
