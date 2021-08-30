@@ -34,7 +34,6 @@ find_dotfiles() {
 }
 
 install_dependencies() {
-
 	# NVM
 	curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh" | bash
 
@@ -98,6 +97,7 @@ install_dependencies() {
 		unclutter
 
 	config
+	setup_node
 	setup_st
 	setup_vim
 }
