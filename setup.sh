@@ -34,21 +34,9 @@ find_dotfiles() {
 }
 
 install_dependencies() {
-	# NVM
-	echo -e "\nInstalling NVM, NODE and NPM"
-	curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh" | bash
 
-	if [[ $CURRENT_SHELL == "zsh" ]]; then
-		echo 'export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ])" && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm"' >> "$HOME/.zshrc"
-		echo '[ -s "NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >>"$HOME/.zshrc"
-	elif [[ $CURRENT_SHELL == "bash" ]]; then
-		echo 'export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ])" && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm"' >> "$HOME/.bashrc"
-		echo '[ -s "NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >>"$HOME/.bashrc"
-	else
-		echo "Couldn't start NVM"
-		echo "Consider configuring it manually"
-		exit 1
-	fi
+	# NVM
+	curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh" | bash
 
 	# BSPWM and related core components
 	sudo apt install -y \
@@ -117,7 +105,26 @@ install_dependencies() {
 config() {
 	cd $(pwd)
 	stow -v bspwm sxhkd compton vim tmux ranger shell st
-	sudo nvm install --lts
+}
+
+setup_node() {
+	echo -e "\nInstalling NVM, NODE and NPM"
+
+	if [[ $CURRENT_SHELL == "zsh" ]]; then
+		echo 'export NVM_DIR="$HOME/.nvm"' >> "$HOME/.zshrc"
+		echo '[ -s "NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >>"$HOME/.zshrc"
+		echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >>"$HOME/.zshrc"
+		nvm install --lts
+	elif [[ $CURRENT_SHELL == "bash" ]]; then
+		echo 'export NVM_DIR="$HOME/.nvm"' >> "$HOME/.bashrc"
+		echo '[ -s "NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >>"$HOME/.bashrc"
+		echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >>"$HOME/.bashrc"
+		nvm install --lts
+	else
+		echo "Couldn't start NVM"
+		echo "Consider configuring it manually"
+		exit 1
+	fi
 }
 
 setup_st() {
