@@ -115,23 +115,9 @@ config() {
 }
 
 setup_node() {
-	echo -e "\nInstalling NVM, NODE and NPM"
+	echo -e "\nInstalling Node LTS and NPM"
 
-	if [[ $CURRENT_SHELL == "zsh" ]]; then
-		echo 'export NVM_DIR="$HOME/.nvm"' >> "$HOME/.zshrc"
-		echo '[ -s "NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >>"$HOME/.zshrc"
-		echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >>"$HOME/.zshrc"
-		nvm install --lts
-	elif [[ $CURRENT_SHELL == "bash" ]]; then
-		echo 'export NVM_DIR="$HOME/.nvm"' >> "$HOME/.bashrc"
-		echo '[ -s "NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >>"$HOME/.bashrc"
-		echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >>"$HOME/.bashrc"
-		nvm install --lts
-	else
-		echo "Couldn't start NVM"
-		echo "Consider configuring it manually"
-		exit 1
-	fi
+	nvm install --lts
 }
 
 setup_st() {
