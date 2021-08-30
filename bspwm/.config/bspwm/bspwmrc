@@ -2,9 +2,10 @@
 
 sxhkd &
 
-xrandr --output "eDP" --primary --mode 1920x1080 --rotate normal
+xrandr --output "HDMI-A-0" --primary --mode 1920x1080 --rotate normal --output eDP --mode 1920x1080 --rotate normal --below "HDMI-A-0"
 
-bspc monitor "eDP" -d I II III IV V VI VII VIII IX X
+bspc monitor "HDMI-A-0" -d II III IV V VI VII VIII IX X
+bspc monitor eDP -d I
 
 bspc config border-width 2
 bspc config window_gap 12

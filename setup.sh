@@ -108,6 +108,7 @@ install_dependencies() {
 	GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt
 
 	config
+	setup_lua
 	setup_node
 	setup_st
 	setup_vim
