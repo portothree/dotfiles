@@ -1,4 +1,5 @@
-syntax on
+packadd! dracula
+syntax enable
 colorscheme dracula
 
 set clipboard=unnamedplus
