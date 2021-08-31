@@ -37,13 +37,13 @@ find_dotfiles() {
 }
 
 install_dependencies() {
-	curl "https://luarocks.org/releases/luarocks-3.7.0.tar.gz" --output "/usr/local/luarocks.ta.gz"
+	sudo curl "https://luarocks.org/releases/luarocks-3.7.0.tar.gz" --output "/usr/local/luarocks.ta.gz"
 
 	# NVM
 	curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh" | bash
 
 	# Go
-	curl "https://golang.org/dl/go1.17.linux-amd64.tar.gz" --output "/usr/local/go1_17.tar.gz"
+	sudo curl "https://golang.org/dl/go1.17.linux-amd64.tar.gz" --output "/usr/local/go1_17.tar.gz"
 
 	# BSPWM and related core components
 	sudo apt install -y \
@@ -66,10 +66,10 @@ install_dependencies() {
 
 	# Terminal tools
 	sudo apt install -y \
-		vim \
 		git \
 		tmux \
-		stow
+		stow \
+		zsh
 
 	# Multimedia
 	sudo apt install -y \
@@ -106,14 +106,9 @@ install_dependencies() {
 		acpi
 
 	# Code formatters
+	# TODO: setup go before executing this
 	GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt
 
-	config
-	setup_go
-	setup_lua
-	setup_node
-	setup_st
-	setup_vim
 }
 
 config() {
@@ -121,14 +116,18 @@ config() {
 	stow -v bspwm sxhkd compton vim tmux ranger shell st
 }
 
+setup_oh_my_zsh() {
+	sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+}
+
 setup_go() {
-	mkdir $GO_DIR
+	sudo mkdir $GO_DIR
 	cd /usr/local 
-	tar -C $GO_DIR -xzf go1_17.tar.gz
+	sudo tar -C $GO_DIR -xzf go1_17.tar.gz
 }
 
 setup_lua() {
-	mkdir $LUA_DIR
+	sudo mkdir $LUA_DIR
 	# Luarocks
 	cd /usr/local
 	tar zxpf luarocks.tar.gz
@@ -171,8 +170,8 @@ setup_vim() {
 		--enable-gui=gtk2 \
 		--enable-cscope \
 		--prefix=/usr/local
-	make VIMRUNTIMEDIR=/usr/local/share/vim/vim82
-	sudo checkinstall
+	sudo make VIMRUNTIMEDIR=/usr/local/share/vim/vim82
+	sudo make install
 
 	# Set vim as default editor with update-alternatives
 	sudo update-alternatives --install /usr/bin/editor editor /usr/local/bin/vim 1
@@ -192,7 +191,7 @@ setup_vim() {
 	# YouCompleteMe
 	git clone https://github.com/ycm-core/YouCompleteMe.git ${VIM_PLUGINS_DIR}/YouCompleteMe
 	cd ${VIM_PLUGINS_DIR}/YouCompleteMe
-	git submodule update --init --recursive
+	sudo git submodule update --init --recursive
 	sudo python3 install.py --ts-completer --rust-completer
 }
 
@@ -202,6 +201,11 @@ manage() {
 		echo -e "\n[1] List dotfiles"
 		echo -e "\n[2] Install and setup dependencies"
 		echo -e "\n[3] Setup dot files"
+		echo -e "\n[4] Setup Node"
+		echo -e "\n[5] Setup GO"
+		echo -e "\n[6] Setup LUA"
+		echo -e "\n[7] Setup STTerm"
+		echo -e "\n[8] Setup VIM"
 		echo -e "[q/Q] Quit session"
 
 		read -p "Choose an option: [1]" -n 1 -r USER_INPUT
@@ -211,6 +215,11 @@ manage() {
 		[1]*) find_dotfiles ;;
 		[2]*) install_dependencies ;;
 		[3]*) config ;;
+		[4]*) setup_node ;;
+		[5]*) setup_go ;;
+		[6]*) setup_lua ;;
+		[7]*) setup_st ;;
+		[8]*) setup_vim ;;
 		[q/Q]*) exit ;;
 		*) printf "\n%s\n" "Invalid input" ;;
 		esac
