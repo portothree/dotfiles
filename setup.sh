@@ -4,7 +4,9 @@
 DOT_REPO="https://github.com/portothree/dotfiles"
 DOT_DEST="$PWD"
 CURRENT_SHELL=$(basename "$SHELL")
-
+VIM_DIR=/usr/src/vim
+VIM_PLUGINS_DIR=${HOME}/.vim/pack/plugins/start
+VIMRUNTIMEDIR=/usr/local/share/vim/vim82
 LUA_DIR=/usr/local/lua
 GO_DIR=/usr/local/go
 
@@ -157,9 +159,8 @@ setup_vim() {
 		vim-gui-common \
 		vim-nox
 
-	cd /usr/src
-	git clone https://github.com/vim/vim.git
-	cd vim
+	sudo git clone https://github.com/vim/vim.git $VIM_DIR/
+	cd $VIM_DIR
 	sudo ./configure --with-features=huge \
 		--enable-multibyte \
 		--enable-rubyinterp=yes \
@@ -170,16 +171,9 @@ setup_vim() {
 		--enable-gui=gtk2 \
 		--enable-cscope \
 		--prefix=/usr/local
-	sudo make VIMRUNTIMEDIR=/usr/local/share/vim/vim82
+	sudo make VIMRUNTIMEDIR=$VIMRUNTIMEDIR
 	sudo make install
-
-	# Set vim as default editor with update-alternatives
-	sudo update-alternatives --install /usr/bin/editor editor /usr/local/bin/vim 1
-	sudo update-alternatives --set editor /usr/local/bin/vim
-	sudo update-alternatives --install /usr/bin/vi vi /usr/local/bin/vim 1
-	sudo update-alternatives --set vi /usr/local/bin/vim
-
-	VIM_PLUGINS_DIR=${HOME}/.vim/pack/plugins/start
+	
 	mkdir -p "${VIM_PLUGINS_DIR}"
 
 	# ALE
@@ -191,8 +185,10 @@ setup_vim() {
 	# YouCompleteMe
 	git clone https://github.com/ycm-core/YouCompleteMe.git ${VIM_PLUGINS_DIR}/YouCompleteMe
 	cd ${VIM_PLUGINS_DIR}/YouCompleteMe
-	sudo git submodule update --init --recursive
-	sudo python3 install.py --ts-completer --rust-completer
+	git submodule update --init --recursive
+	python3 install.py --ts-completer --rust-completer
+
+	cd $DOT_DEST
 }
 
 manage() {
