@@ -102,3 +102,4 @@
 - [] Poetry and Pyenv
 - [] Docker installation to setup script
 - [] All vim plugins installation in a different method
+- [] WICD or WPA supplicant to handle WIFI
