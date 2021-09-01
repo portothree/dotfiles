@@ -96,3 +96,9 @@
 - [Toggl-cli](https://github.com/auhau/toggl-cli/)
 - [brightnessctl](https://github.com/Hummer12007/brightnessctl)
 - [Zathura](https://github.com/pwmt/zathura)
+
+
+# Todo
+- [] Poetry and Pyenv
+- [] Docker installation to setup script
+- [] All vim plugins installation in a different method
