@@ -8,7 +8,9 @@ VIM_DIR=/usr/src/vim
 VIM_PLUGINS_DIR=${HOME}/.vim/pack/plugins/start
 VIMRUNTIMEDIR=/usr/local/share/vim/vim82
 LUA_DIR=/usr/local/lua
+LUAROCKS_DIR=/usr/local/luarocks
 GO_DIR=/usr/local/go
+NYXT_DIR=/usr/local/nyxt
 
 init_check() {
 	add_env
@@ -39,13 +41,17 @@ find_dotfiles() {
 }
 
 install_dependencies() {
-	sudo curl "https://luarocks.org/releases/luarocks-3.7.0.tar.gz" --output "/usr/local/luarocks.ta.gz"
+	# Luarocks
+	sudo curl "https://luarocks.org/releases/luarocks-3.7.0.tar.gz" --output "/usr/local/luarocks-3.7.0.ta.gz"
 
 	# NVM
 	curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh" | bash
 
 	# Go
-	sudo curl "https://golang.org/dl/go1.17.linux-amd64.tar.gz" --output "/usr/local/go1_17.tar.gz"
+	sudo curl "https://golang.org/dl/go1.17.linux-amd64.tar.gz" --output "/usr/local/go-1.17.tar.gz"
+
+	# Nyxt browser
+	sudo curl "https://nyxt.atlas.engineer/static/release/nyxt-linux-2.1.1.tar.xz" --output "/usr/local/nyxt-2.1.1.tar.xz"
 
 	# BSPWM and related core components
 	sudo apt install -y \
@@ -124,16 +130,15 @@ setup_oh_my_zsh() {
 
 setup_go() {
 	sudo mkdir $GO_DIR
-	cd /usr/local 
-	sudo tar -C $GO_DIR -xzf go1_17.tar.gz
+	sudo tar -C $GO_DIR -xzf /usr/local/go-1.17.tar.gz
 }
 
 setup_lua() {
 	sudo mkdir $LUA_DIR
+	sudo mkdir $LUAROCKS_DIR
 	# Luarocks
-	cd /usr/local
-	tar zxpf luarocks.tar.gz
-	cd luarocks
+	tar -C $LUAROCKS_DIR -zxpf /usr/local/luarocks-3.7.0.tar.gz
+	cd $LUAROCKS_DIR
 	./configure && make && make install
 	sudo luarocks install luasocket
 }
@@ -189,6 +194,10 @@ setup_vim() {
 	python3 install.py --ts-completer --rust-completer
 
 	cd $DOT_DEST
+}
+
+setup_nyxt() {
+	sudo tar -C $NYXT_DIR -xf /usr/local/nyxt-2.1.1.tar.xz
 }
 
 manage() {
