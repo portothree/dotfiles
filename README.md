@@ -65,6 +65,7 @@
 
 ### Browser
 - [Vimium](https://github.com/philc/vimium)
+- [Nyxt](https://github.com/atlas-engineer/nyxt)
 
 ### Reader
 - [Glow Markdown Reader](https://github.com/charmbracelet/glow)
@@ -100,6 +101,8 @@
 
 # Todo
 - [] Poetry and Pyenv
+- [] TIG
+- [] Nyxt browser
 - [] Docker installation to setup script
 - [] All vim plugins installation in a different method
 - [] WICD or WPA supplicant to handle WIFI
