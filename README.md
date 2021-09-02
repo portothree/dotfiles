@@ -107,4 +107,5 @@
 - [] All vim plugins installation in a different method
 - [] WICD or WPA supplicant to handle WIFI
 - [] Database tools - MongoDB, DBeaver, RedisInsight
+- [] OpenVPN
 
