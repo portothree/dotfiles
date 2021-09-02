@@ -12,9 +12,12 @@ LUAROCKS_DIR=/usr/local/luarocks
 GO_DIR=/usr/local/go
 NYXT_DIR=/usr/local/nyxt
 
-init_check() {
+init() {
 	add_env
 	manage
+
+	# Increase system's file watchers limit
+	echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 }
 
 add_env() {
@@ -231,4 +234,4 @@ manage() {
 	done
 }
 
-init_check
+init
