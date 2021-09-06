@@ -44,18 +44,6 @@ find_dotfiles() {
 }
 
 install_dependencies() {
-	# Luarocks
-	sudo curl "https://luarocks.org/releases/luarocks-3.7.0.tar.gz" --output "/usr/local/luarocks-3.7.0.ta.gz"
-
-	# NVM
-	curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh" | bash
-
-	# Go
-	sudo curl "https://golang.org/dl/go1.17.linux-amd64.tar.gz" --output "/usr/local/go-1.17.tar.gz"
-
-	# Nyxt browser
-	sudo curl "https://nyxt.atlas.engineer/static/release/nyxt-linux-2.1.1.tar.xz" --output "/usr/local/nyxt-2.1.1.tar.xz"
-
 	# BSPWM and related core components
 	sudo apt install -y \
 		bspwm \
@@ -91,21 +79,33 @@ install_dependencies() {
 		build-essential \
 		checkinstall \
 		cmake \
+		ruby-dev \
+		lua5.2 \
+		liblua5.2-dev \
+		libperl-dev \
 		python2-dev \
 		python3-dev \
+		python3-pip \
 		libxft-dev \
 		libx11-dev \
-		libncurses5-dev \
 		libgtk2.0-dev \
 		libatk1.0-dev \
 		libcairo2-dev \
 		libx11-dev \
 		libxpm-dev \
 		libxt-dev \
-		ruby-dev \
-		lua5.2 \
-		liblua5.2-dev \
-		libperl-dev
+		libssl-dev \
+		zlib1g-dev \
+		libbz2-dev \
+		libreadline-dev \
+		libsqlite3-dev \
+		llvm \
+		libncurses5-dev \
+		libncursesw5-dev \
+		xz-utils \
+		tk-dev \
+		libffi-dev \
+		liblzma-dev
 
 	# Terminal emulators
 	git clone https://git.suckless.org/st $HOME/st
@@ -120,6 +120,20 @@ install_dependencies() {
 	# TODO: setup go before executing this
 	GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt
 
+	# Pyenv
+	curl -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer | bash
+
+	# Luarocks
+	sudo curl "https://luarocks.org/releases/luarocks-3.7.0.tar.gz" --output "/usr/local/luarocks-3.7.0.ta.gz"
+
+	# NVM
+	curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh" | bash
+
+	# Go
+	sudo curl "https://golang.org/dl/go1.17.linux-amd64.tar.gz" --output "/usr/local/go-1.17.tar.gz"
+
+	# Nyxt browser
+	sudo curl "https://nyxt.atlas.engineer/static/release/nyxt-linux-2.1.1.tar.xz" --output "/usr/local/nyxt-2.1.1.tar.xz"
 }
 
 config() {
