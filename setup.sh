@@ -115,7 +115,8 @@ install_dependencies() {
 		xautolock \
 		xinput \
 		unclutter \
-		acpi
+		acpi \
+		krita
 
 	# Code formatters
 	# TODO: setup go before executing this
