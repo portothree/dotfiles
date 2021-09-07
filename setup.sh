@@ -113,6 +113,7 @@ install_dependencies() {
 	# Other packages
 	sudo apt install -y \
 		xautolock \
+		xinput \
 		unclutter \
 		acpi
 
@@ -201,6 +202,13 @@ setup_vim() {
 
 setup_nyxt() {
 	sudo tar -C $NYXT_DIR -xf /usr/local/nyxt-2.1.1.tar.xz
+}
+
+setup_tablet() {
+	MONITOR="DP-0"
+	ID_STYLUS=`xinput | grep "Pen stylus" | cut -f 2 | cut -c 4-5`
+
+	xinput map-to-output $ID_STYLUS $MONITOR
 }
 
 manage() {
