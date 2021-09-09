@@ -46,6 +46,7 @@
 - [NERDTree](https://github.com/preservim/nerdtree)
 - [Node Inspect](https://github.com/eliba2/vim-node-inspect)
 - [Editorconfig](https://github.com/editorconfig/editorconfig-vim)
+- [DirDiff](https://github.com/will133/vim-dirdiff)
 
 ### Code formatting / Linters
 #### C
