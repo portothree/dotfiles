@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Checks if internet is up
+# Dependencies: wget
+
+for file in /sys/class/net/w*/operstate; do
+	read -r STATE <"$file"
+	[ "$STATE" = up ] && wget -q --spider https://google.com || exit 1
+done
