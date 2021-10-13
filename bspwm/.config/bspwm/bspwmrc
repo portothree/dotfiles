@@ -2,10 +2,10 @@
 
 sxhkd &
 
-xrandr --output "HDMI-A-0" --primary --mode 1920x1080 --rotate normal --output eDP --mode 1920x1080 --rotate normal --below "HDMI-A-0"
+xrandr --output "DP-0" --primary --mode 1920x1080 --rotate normal --output "HDMI-0" --mode 1920x1080 --rotate normal --left "DP-0"
 
-bspc monitor "HDMI-A-0" -d II III IV V VI VII VIII IX X
-bspc monitor eDP -d I
+bspc monitor "DP-0" -d II III IV V VI VII VIII IX X
+bspc monitor "HDMI-0" -d I
 
 bspc config border-width 2
 bspc config window_gap 12
@@ -13,6 +13,11 @@ bspc config window_gap 12
 bspc config split_ratio 0.52
 bspc config borderless_monocle true
 bspc config gapless_monocle true
+
+MONITOR="DP-0"
+ID_STYLUS=`xinput | grep "Pen stylus" | cut -f 2 | cut -c 4-5`
+
+xinput map-to-output $ID_STYLUS $MONITOR
 
 unclutter -idle 1 -root &
 
