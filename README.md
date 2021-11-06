@@ -88,6 +88,8 @@
 
 ### Messaging
 - [Hangups](https://github.com/tdryer/hangups)
+- [Weechat](https://github.com/weechat/weechat)
+- [Wee-slack](https://github.com/wee-slack/wee-slack)
 
 ### Additional tools
 - [Wuzz](https://github.com/asciimoo/wuzz)
@@ -98,6 +100,7 @@
 - [Toggl-cli](https://github.com/auhau/toggl-cli/)
 - [brightnessctl](https://github.com/Hummer12007/brightnessctl)
 - [Zathura](https://github.com/pwmt/zathura)
+- [K9s](https://github.com/derailed/k9s)
 
 
 # Todo

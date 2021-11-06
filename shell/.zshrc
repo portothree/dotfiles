@@ -2,7 +2,7 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Go
-export PATH=$PATH:/usr/local/go/bin
+export GO111MODULE=on
  
 export VISUAL=vim
 export EDITOR=vim
@@ -50,8 +50,28 @@ load-nvmrc() {
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
 
+# Python poetry and pyenv
 export PATH="$HOME/.poetry/bin:$PATH"
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
+
+# K8S kubectl 
+[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
+
+# Load crontab from .crontab file
+if test -z $CRONTABCMD; then
+  export CRONTABCMD=$(which crontab)
+
+  crontab() {
+    if [[ $@ == "-e" ]]; then
+      vim "$HOME/.crontab" && $CRONTABCMD "$HOME/.crontab"
+    else
+      $CRONTABCMD $@
+    fi
+  }
+
+  $CRONTABCMD "$HOME/.crontab"
+fi
+  
 
