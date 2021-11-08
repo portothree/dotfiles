@@ -44,17 +44,21 @@ find_dotfiles() {
 }
 
 install_dependencies() {
+	# Install Nix
+	sh <(curl -L https://nixos.org/nix/install) --daemon
+
 	# BSPWM and related core components
+	nix-env -iA \
+		nixpkgs.st \
+		nixpkgs.bspwm \
+		nixpkgs.sxhkd \
+		nixpkgs.rofi \
+		nixpkgs.ranger \
+		nixpkgs.dunst \
+		nixpkgs.libnotify \
+		nixpkgs.unifont
 	sudo apt install -y \
-		bspwm \
-		sxhkd \
-		rofi \
-		ranger \
-		compton \
-		dunst \
-		libnotify-bin \
-		unifont \
-		suckless-tools
+		compton
 
 	# Fonts
 	sudo apt install -y \
