@@ -43,9 +43,12 @@ find_dotfiles() {
 	printf "%s\n" "${dotfiles[@]}"
 }
 
-install_dependencies() {
-	# Install Nix
+install_nix() {
 	sh <(curl -L https://nixos.org/nix/install) --daemon
+}
+
+install_dependencies() {
+	install_nix
 
 	# BSPWM and related core components
 	nix-env -iA \
@@ -73,7 +76,8 @@ install_dependencies() {
 		tig \
 		tmux \
 		stow \
-		zsh
+		zsh \
+		oh-my-zsh
 
 	# Multimedia
 	nix-env -iA \
@@ -150,10 +154,6 @@ install_dependencies() {
 config() {
 	cd $(pwd)
 	stow -v bspwm sxhkd compton vim tmux ranger shell st
-}
-
-setup_oh_my_zsh() {
-	sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 }
 
 setup_go() {
