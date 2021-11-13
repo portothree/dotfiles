@@ -68,21 +68,25 @@ install_dependencies() {
 		fonts-symbola
 
 	# Terminal tools
-	sudo apt install -y \
+	nix-env -iA \
 		git \
+		tig \
 		tmux \
 		stow \
 		zsh
 
 	# Multimedia
-	sudo apt install -y \
+	nix-env -iA \
 		pavucontrol
 
 	# Build tools
-	sudo apt install -y \
-		build-essential \
+	nix-env -iA \
 		checkinstall \
 		cmake \
+		lua
+
+	sudo apt install -y \
+		build-essential \
 		ruby-dev \
 		lua5.2 \
 		liblua5.2-dev \
@@ -115,12 +119,13 @@ install_dependencies() {
 	git clone https://git.suckless.org/st $HOME/st
 
 	# Other packages
-	sudo apt install -y \
-		xautolock \
-		xinput \
+	nix-env -iA \
 		unclutter \
 		acpi \
 		krita
+	sudo apt install -y \
+		xautolock \
+		xinput
 
 	# Code formatters
 	# TODO: setup go before executing this
