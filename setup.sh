@@ -49,7 +49,7 @@ install_nix() {
 
 install_kubectl() {
 	cd $HOME
-	curl -LO "https://dl.k8s.io/release/v19.0.0/bin/linux/amd64/kubectl"
+	curl -LO "https://dl.k8s.io/release/v1.19.0/bin/linux/amd64/kubectl"
 	sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 }
 
