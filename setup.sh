@@ -51,20 +51,19 @@ install_dependencies() {
 	install_nix
 
 	# BSPWM and related core components
+	sudo apt-get install -y \
+		bspwm \
+		sxhkd \
+		compton
 	nix-env -iA \
-		nixpkgs.st \
-		nixpkgs.bspwm \
-		nixpkgs.sxhkd \
 		nixpkgs.rofi \
 		nixpkgs.ranger \
 		nixpkgs.dunst \
 		nixpkgs.libnotify \
 		nixpkgs.unifont
-	sudo apt install -y \
-		compton
 
 	# Fonts
-	sudo apt install -y \
+	sudo apt-get install -y \
 		fonts-firacode \
 		fonts-hack \
 		fonts-noto-color-emoji \
@@ -89,7 +88,7 @@ install_dependencies() {
 		nixpkgs.cmake \
 		nixpkgs.lua
 
-	sudo apt install -y \
+	sudo apt-get install -y \
 		build-essential \
 		ruby-dev \
 		lua5.2 \
@@ -129,7 +128,8 @@ install_dependencies() {
 		nixpkgs.krita
 	sudo apt install -y \
 		xautolock \
-		xinput
+		xinput \
+		net-tools
 
 	# Code formatters
 	# TODO: setup go before executing this
@@ -178,6 +178,8 @@ setup_node() {
 }
 
 setup_st() {
+	cd $DOT_DEST
+	stow st
 	cd $HOME/st
 	sudo make clean install
 }
