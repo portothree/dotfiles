@@ -90,6 +90,7 @@ install_dependencies() {
 
 	sudo apt-get install -y \
 		build-essential \
+		software-properties-common \
 		ruby-dev \
 		lua5.2 \
 		liblua5.2-dev \
@@ -154,6 +155,14 @@ install_dependencies() {
 config() {
 	cd $(pwd)
 	stow -v bspwm sxhkd compton vim tmux ranger shell st
+}
+
+setup_locale() {
+	export LANGUAGE=en_US.UTF-8
+	export LANG=en_US.UTF-8
+	export LC_ALL=en_US.UTF-8
+	locale-gen en_US.UTF-8
+	dpkg-reconfigure locales
 }
 
 setup_go() {
