@@ -47,6 +47,12 @@ install_nix() {
 	sh <(curl -L https://nixos.org/nix/install) --daemon
 }
 
+install_kubectl() {
+	cd $HOME
+	curl -LO "https://dl.k8s.io/release/v19.0.0/bin/linux/amd64/kubectl"
+	sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+}
+
 install_dependencies() {
 	install_nix
 
@@ -251,13 +257,15 @@ manage() {
 	while :
 	do
 		echo -e "\n[1] List dotfiles"
-		echo -e "\n[2] Install and setup dependencies"
-		echo -e "\n[3] Setup dot files"
-		echo -e "\n[4] Setup Node"
-		echo -e "\n[5] Setup GO"
-		echo -e "\n[6] Setup LUA"
-		echo -e "\n[7] Setup STTerm"
-		echo -e "\n[8] Setup VIM"
+		echo -e "\n[2] Install and setup everything"
+		echo -e "\n[3] Install nix"
+		echo -e "\n[4] Install kubectl"
+		echo -e "\n[5] Setup dot files"
+		echo -e "\n[6] Setup Node"
+		echo -e "\n[7] Setup GO"
+		echo -e "\n[8] Setup LUA"
+		echo -e "\n[9] Setup STTerm"
+		echo -e "\n[10] Setup VIM"
 		echo -e "[q/Q] Quit session"
 
 		read -p "Choose an option: [1]" -n 1 -r USER_INPUT
@@ -266,12 +274,14 @@ manage() {
 		case $USER_INPUT in
 		[1]*) find_dotfiles ;;
 		[2]*) install_dependencies ;;
-		[3]*) config ;;
-		[4]*) setup_node ;;
-		[5]*) setup_go ;;
-		[6]*) setup_lua ;;
-		[7]*) setup_st ;;
-		[8]*) setup_vim ;;
+		[3]*) install_nix ;;
+		[4]*) install_kubectl ;;
+		[5]*) config ;;
+		[6]*) setup_node ;;
+		[7]*) setup_go ;;
+		[8]*) setup_lua ;;
+		[9]*) setup_st ;;
+		[10]*) setup_vim ;;
 		[q/Q]*) exit ;;
 		*) printf "\n%s\n" "Invalid input" ;;
 		esac
