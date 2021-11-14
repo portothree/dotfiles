@@ -50,11 +50,8 @@ load-nvmrc() {
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
 
-# Python poetry and pyenv
+# Python poetry 
 export PATH="$HOME/.poetry/bin:$PATH"
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
 
 # K8S kubectl 
 [[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
@@ -75,3 +72,7 @@ if test -z $CRONTABCMD; then
 fi
   
 
+export DOT_REPO=https://github.com/portothree/dotfiles
+export DOT_DEST=/home/porto/dotfiles
+export DOT_REPO=https://github.com/portothree/dotfiles
+export DOT_DEST=/home/porto/dotfiles
