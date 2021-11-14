@@ -70,11 +70,12 @@ install_dependencies() {
 		fonts-symbola
 
 	# Terminal tools
+	sudo apt-get install -y \
+		stow
 	nix-env -iA \
 		nixpkgs.git \
 		nixpkgs.tig \
 		nixpkgs.tmux \
-		nixpkgs.stow \
 		nixpkgs.zsh \
 		nixpkgs.oh-my-zsh
 
@@ -161,8 +162,8 @@ setup_locale() {
 	export LANGUAGE=en_US.UTF-8
 	export LANG=en_US.UTF-8
 	export LC_ALL=en_US.UTF-8
-	locale-gen en_US.UTF-8
-	dpkg-reconfigure locales
+	sudo locale-gen en_US.UTF-8
+	sudo dpkg-reconfigure locales
 }
 
 setup_go() {
