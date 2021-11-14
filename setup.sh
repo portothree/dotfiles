@@ -72,22 +72,22 @@ install_dependencies() {
 
 	# Terminal tools
 	nix-env -iA \
-		git \
-		tig \
-		tmux \
-		stow \
-		zsh \
-		oh-my-zsh
+		nixpkgs.git \
+		nixpkgs.tig \
+		nixpkgs.tmux \
+		nixpkgs.stow \
+		nixpkgs.zsh \
+		nixpkgs.oh-my-zsh
 
 	# Multimedia
 	nix-env -iA \
-		pavucontrol
+		nixpkgs.pavucontrol
 
 	# Build tools
 	nix-env -iA \
-		checkinstall \
-		cmake \
-		lua
+		nixpkgs.checkinstall \
+		nixpkgs.cmake \
+		nixpkgs.lua
 
 	sudo apt install -y \
 		build-essential \
@@ -124,9 +124,9 @@ install_dependencies() {
 
 	# Other packages
 	nix-env -iA \
-		unclutter \
-		acpi \
-		krita
+		nixpkgs.unclutter \
+		nixpkgs.acpi \
+		nixpkgs.krita
 	sudo apt install -y \
 		xautolock \
 		xinput
