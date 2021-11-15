@@ -53,6 +53,13 @@ load-nvmrc
 # Python poetry 
 export PATH="$HOME/.poetry/bin:$PATH"
 
+# Pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+ eval "$(pyenv init -)"
+fi
+
 # K8S kubectl 
 [[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
 
@@ -70,9 +77,3 @@ if test -z $CRONTABCMD; then
 
   $CRONTABCMD "$HOME/.crontab"
 fi
-  
-
-export DOT_REPO=https://github.com/portothree/dotfiles
-export DOT_DEST=/home/porto/dotfiles
-export DOT_REPO=https://github.com/portothree/dotfiles
-export DOT_DEST=/home/porto/dotfiles
