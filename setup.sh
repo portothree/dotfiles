@@ -137,7 +137,9 @@ install_dependencies() {
 	sudo apt install -y \
 		xautolock \
 		xinput \
-		net-tools
+		xclip \
+		net-tools \
+		openvpn
 
 	# Code formatters
 	# TODO: setup go before executing this

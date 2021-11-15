@@ -51,13 +51,13 @@ add-zsh-hook chpwd load-nvmrc
 load-nvmrc
 
 # Python poetry 
-export PATH="$HOME/.poetry/bin:$PATH"
 
 # Pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
- eval "$(pyenv init -)"
+	eval "$(pyenv init -)"
+	eval "$(pyenv init --path)"
 fi
 
 # K8S kubectl 
@@ -77,3 +77,5 @@ if test -z $CRONTABCMD; then
 
   $CRONTABCMD "$HOME/.crontab"
 fi
+
+export PATH="$HOME/.poetry/bin:$PATH"
