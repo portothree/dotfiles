@@ -53,6 +53,19 @@ install_kubectl() {
 	sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 }
 
+install_weechat() {
+	sudo apt-get install -y \
+		weechat-python \
+		python3-websocket
+}
+
+install_weeslack() {
+	mkdir -p $HOME/.weechat/python/autoload
+	cd $HOME/.weechat/python
+	curl -O https://raw.githubusercontent.com/wee-slack/wee-slack/master/wee_slack.py
+	ln -s ../wee_slack.py autoload
+}
+
 install_dependencies() {
 	install_nix
 
@@ -261,13 +274,15 @@ manage() {
 		echo -e "\n[1] List dotfiles"
 		echo -e "\n[2] Install and setup everything"
 		echo -e "\n[3] Install nix"
-		echo -e "\n[4] Install kubectl"
-		echo -e "\n[5] Setup dot files"
-		echo -e "\n[6] Setup Node"
-		echo -e "\n[7] Setup GO"
-		echo -e "\n[8] Setup LUA"
-		echo -e "\n[9] Setup STTerm"
-		echo -e "\n[10] Setup VIM"
+		echo -e "\n[4] Install weechat"
+		echo -e "\n[5] Install weeslack"
+		echo -e "\n[6] Install kubectl"
+		echo -e "\n[7] Setup dot files"
+		echo -e "\n[8] Setup Node"
+		echo -e "\n[9] Setup GO"
+		echo -e "\n[10] Setup LUA"
+		echo -e "\n[11] Setup STTerm"
+		echo -e "\n[12] Setup VIM"
 		echo -e "[q/Q] Quit session"
 
 		read -p "Choose an option: [1]" -n 1 -r USER_INPUT
@@ -277,13 +292,15 @@ manage() {
 		[1]*) find_dotfiles ;;
 		[2]*) install_dependencies ;;
 		[3]*) install_nix ;;
-		[4]*) install_kubectl ;;
-		[5]*) config ;;
-		[6]*) setup_node ;;
-		[7]*) setup_go ;;
-		[8]*) setup_lua ;;
-		[9]*) setup_st ;;
-		[10]*) setup_vim ;;
+		[4]*) install_weechat ;;
+		[5]*) install_weeslack ;;
+		[6]*) install_kubectl ;;
+		[7]*) config ;;
+		[8]*) setup_node ;;
+		[9]*) setup_go ;;
+		[10]*) setup_lua ;;
+		[11]*) setup_st ;;
+		[12]*) setup_vim ;;
 		[q/Q]*) exit ;;
 		*) printf "\n%s\n" "Invalid input" ;;
 		esac
