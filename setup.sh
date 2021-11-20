@@ -98,6 +98,7 @@ install_dependencies() {
 		nixpkgs.zsh \
 		nixpkgs.oh-my-zsh \
 		nixpkgs.taskwarrior \
+		nixpkgs.tasksh \
 		nixpkgs.vit
 
 	# Multimedia
