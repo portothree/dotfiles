@@ -35,7 +35,7 @@ I'm currently using debian `apt` strictly for the base system (up to, and includ
 
 -   [Lemonbar](https://github.com/LemonBoy/bar)
 
-### Theming
+### Themes
 
 -   [Pywal](https://github.com/dylanaraps/pywal)
 
@@ -130,6 +130,7 @@ I'm currently using debian `apt` strictly for the base system (up to, and includ
 -   [brightnessctl](https://github.com/Hummer12007/brightnessctl)
 -   [Zathura](https://github.com/pwmt/zathura)
 -   [K9s](https://github.com/derailed/k9s)
+-   [Taskwarrior](https://taskwarrior.org/)
 
 # Todo
 
