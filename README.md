@@ -139,3 +139,13 @@ I'm currently using debian `apt` strictly for the base system (up to, and includ
 -   [] WICD or WPA supplicant to handle WIFI
 -   [] Database tools - MongoDB, DBeaver, RedisInsight
 -   [] OpenVPN
+
+
+# Link dump
+https://vimawesome.com/
+https://github.com/wting/autojump
+https://github.com/keepcosmos/terjira
+https://github.com/vit-project/vit
+https://github.com/ggreer/the_silver_searcher
+https://github.com/junegunn/fzf
+https://tldr.sh/
