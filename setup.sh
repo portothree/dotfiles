@@ -249,6 +249,9 @@ setup_vim() {
 	# Ledger
 	git clone --depth 1 https://github.com/ledger/vim-ledger
 
+	# Dirsettings
+	git clone https://github.com/chazy/dirsettings
+
 	# ALE
 	git clone --depth 1 https://github.com/dense-analysis/ale.git ${VIM_PLUGINS_DIR}/ale
 
