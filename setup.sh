@@ -246,6 +246,9 @@ setup_vim() {
 	
 	mkdir -p "${VIM_PLUGINS_DIR}"
 
+	# Vimwiki
+	git clone https://github.com/vimwiki/vimwiki
+
 	# Ledger
 	git clone --depth 1 https://github.com/ledger/vim-ledger
 
