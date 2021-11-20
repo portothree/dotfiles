@@ -97,7 +97,8 @@ install_dependencies() {
 		nixpkgs.tmux \
 		nixpkgs.zsh \
 		nixpkgs.oh-my-zsh \
-		nixpkgs.taskwarrior
+		nixpkgs.taskwarrior \
+		nixpkgs.vit
 
 	# Multimedia
 	nix-env -iA \
@@ -177,7 +178,7 @@ install_dependencies() {
 
 config() {
 	cd $(pwd)
-	stow -v bspwm sxhkd compton vim tmux ranger shell st taskwarrior
+	stow -v bspwm sxhkd compton vim tmux ranger shell st taskwarrior vit
 }
 
 setup_locale() {
