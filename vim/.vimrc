@@ -13,4 +13,7 @@ set nocp
 au BufNewFile,BufRead *.ldg,*.ledger setf ledger | comp ledger
 
 filetype plugin indent on
-syntax on 
+syntax on
+
+let g:vimwiki_list = [{'path': '~/www/prometheus/packages/wiki/',
+                      \ 'syntax': 'markdown', 'ext': '.wiki'}]
