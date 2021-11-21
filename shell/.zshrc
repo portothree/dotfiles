@@ -19,7 +19,7 @@ export ANKI_WEBSCALE=1
 
 ZSH_THEME="robbyrussell"
 
-plugins=(git)
+plugins=(git, git-auto-refresh)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -51,6 +51,7 @@ add-zsh-hook chpwd load-nvmrc
 load-nvmrc
 
 # Python poetry 
+export PATH="$HOME/.poetry/bin:$PATH"
 
 # Pyenv
 export PYENV_ROOT="$HOME/.pyenv"
@@ -78,4 +79,3 @@ if test -z $CRONTABCMD; then
   $CRONTABCMD "$HOME/.crontab"
 fi
 
-export PATH="$HOME/.poetry/bin:$PATH"
