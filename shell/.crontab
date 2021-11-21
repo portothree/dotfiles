@@ -1,1 +1,2 @@
 @reboot nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"
+@reboot git -C ~/dotfiles pull > ~/crontab.log 2>&1
