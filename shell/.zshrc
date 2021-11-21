@@ -19,7 +19,7 @@ export ANKI_WEBSCALE=1
 
 ZSH_THEME="robbyrussell"
 
-plugins=(git, git-auto-refresh)
+plugins=(git git-auto-fetch)
 
 source $ZSH/oh-my-zsh.sh
 
