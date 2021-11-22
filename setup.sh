@@ -72,6 +72,12 @@ install_suckless_tools() {
 	git -C $HOME/dmenu clone https://git.suckless.org/dmenu .
 	cd $HOME/dmenu
 	sudo make clean install
+
+	# tabbed
+	mkdir $HOME/tabbed
+	git -C $HOME/tabbed clone https://git.suckless.org/tabbed .
+	cd $HOME/tabbed
+	sudo make clean install
 }
 
 install_surf() {
