@@ -93,6 +93,10 @@ install_fzf() {
 	$HOME/.fzf/install
 }
 
+install_ack() {
+	curl https://beyondgrep.com/ack-v3.5.0 > $HOME/bin/ack && chmod 0755 $HOME/bin/ack
+}
+
 install_dependencies() {
 	install_nix
 
