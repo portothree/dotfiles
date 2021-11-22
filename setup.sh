@@ -189,6 +189,7 @@ install_dependencies() {
 		xautolock \
 		xinput \
 		xclip \
+		xdotool \
 		net-tools \
 		openvpn
 
