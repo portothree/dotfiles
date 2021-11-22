@@ -1,0 +1,3 @@
+#!/bin/bash
+dhclient
+exit 0
