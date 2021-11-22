@@ -88,9 +88,9 @@ install_surf() {
 }
 
 install_fzf() {
-	mkdir $HOME/fzf
-	git -C $HOME/fzf clone https://github.com/junegunn/fzf .
-	$HOME/fzf/install
+	mkdir $HOME/.fzf
+	git -C $HOME/.fzf clone --depth 1 https://github.com/junegunn/fzf .
+	$HOME/.fzf/install
 }
 
 install_dependencies() {
@@ -210,7 +210,7 @@ install_dependencies() {
 
 config() {
 	cd $(pwd)
-	stow -v bspwm sxhkd compton vim tmux ranger shell st taskwarrior vit timewarrior surf
+	stow -v bspwm sxhkd compton vim tmux ranger shell st taskwarrior vit timewarrior surf fzf
 }
 
 setup_locale() {

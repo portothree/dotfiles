@@ -79,3 +79,5 @@ if test -z $CRONTABCMD; then
   $CRONTABCMD "$HOME/.crontab"
 fi
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
