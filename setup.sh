@@ -87,6 +87,12 @@ install_surf() {
 	sudo make clean install
 }
 
+install_fzf() {
+	mkdir $HOME/fzf
+	git -C $HOME/fzf clone https://github.com/junegunn/fzf .
+	$HOME/fzf/install
+}
+
 install_dependencies() {
 	install_nix
 
