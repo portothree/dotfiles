@@ -66,6 +66,21 @@ install_weeslack() {
 	ln -s ../wee_slack.py autoload
 }
 
+install_suckless_tools() {
+	# dmenu
+	mkdir $HOME/dmenu
+	git -C $HOME/dmenu clone https://git.suckless.org/dmenu .
+	cd $HOME/dmenu
+	sudo make clean install
+}
+
+install_surf() {
+	mkdir $HOME/surf
+	git -C $HOME/surf clone https://git.suckless.org/surf .
+	cd $HOME/surf
+	sudo make clean install
+}
+
 install_dependencies() {
 	install_nix
 
@@ -141,7 +156,10 @@ install_dependencies() {
 		xz-utils \
 		tk-dev \
 		libffi-dev \
-		liblzma-dev
+		liblzma-dev \
+		libgtk-3-dev \
+		libwebkit2gtk-4.0-dev \
+		libgcr-3-dev
 
 	# Terminal emulators
 	git clone https://git.suckless.org/st $HOME/st
@@ -290,12 +308,14 @@ manage() {
 		echo -e "\n[4] Install weechat"
 		echo -e "\n[5] Install weeslack"
 		echo -e "\n[6] Install kubectl"
-		echo -e "\n[7] Setup dot files"
-		echo -e "\n[8] Setup Node"
-		echo -e "\n[9] Setup GO"
-		echo -e "\n[10] Setup LUA"
-		echo -e "\n[11] Setup STTerm"
-		echo -e "\n[12] Setup VIM"
+		echo -e "\n[7] Install surf"
+		echo -e "\n[8] Install suckless tools"
+		echo -e "\n[9] Setup dot files"
+		echo -e "\n[10] Setup Node"
+		echo -e "\n[11] Setup GO"
+		echo -e "\n[12] Setup LUA"
+		echo -e "\n[13] Setup STTerm"
+		echo -e "\n[14] Setup VIM"
 		echo -e "[q/Q] Quit session"
 
 		read -p "Choose an option: [1]" -n 1 -r USER_INPUT
@@ -308,12 +328,14 @@ manage() {
 		[4]*) install_weechat ;;
 		[5]*) install_weeslack ;;
 		[6]*) install_kubectl ;;
-		[7]*) config ;;
-		[8]*) setup_node ;;
-		[9]*) setup_go ;;
-		[10]*) setup_lua ;;
-		[11]*) setup_st ;;
-		[12]*) setup_vim ;;
+		[7]*) install_suckless_tools ;;
+		[8]*) install_surf ;;
+		[9]*) config ;;
+		[10]*) setup_node ;;
+		[11]*) setup_go ;;
+		[12]*) setup_lua ;;
+		[13]*) setup_st ;;
+		[14]*) setup_vim ;;
 		[q/Q]*) exit ;;
 		*) printf "\n%s\n" "Invalid input" ;;
 		esac
