@@ -127,14 +127,17 @@ install_vim_plugins() {
 	# ALE
 	git clone --depth 1 https://github.com/dense-analysis/ale.git ${VIM_PLUGINS_DIR}/ale
 
-	# Vim-polyglot
+	# Polyglot
 	git clone --depth 1 https://github.com/sheerun/vim-polyglot.git ${VIM_PLUGINS_DIR}/polyglot
 
-	# Vim-airline
+	# Airline
 	git clone https://github.com/vim-airline/vim-airline ${VIM_PLUGINS_DIR}/airline
 
 	# NERDTree
 	git clone https://github.com/preservim/nerdtree ${VIM_PLUGINS_DIR}/nerdtree
+
+	# Prettier
+	git clone https://github.com/prettier/vim-prettier ${VIM_PLUGINS_DIR}/prettier
 
 	# YouCompleteMe
 	git clone https://github.com/ycm-core/YouCompleteMe.git ${VIM_PLUGINS_DIR}/youcompleteme
