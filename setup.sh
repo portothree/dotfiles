@@ -7,7 +7,7 @@ CURRENT_SHELL=$(basename "$SHELL")
 VIM_DIR=/usr/src/vim
 VIM_PLUGINS_DIR=${HOME}/.vim/pack/plugins/start
 VIM_THEMES_DIR=${HOME}/.vim/pack/themes/start
-VIMRUNTIMEDIR=${HOME}/.nix-profile/bin/vim
+VIMRUNTIMEDIR=/usr/local/share/vim/vim82
 LUA_DIR=/usr/local/lua
 LUAROCKS_DIR=/usr/local/luarocks
 GO_DIR=/usr/local/go
@@ -108,7 +108,19 @@ install_vim() {
 		vim-gui-common \
 		vim-nox
 
-	nix-env -iA nixpkgs.vim
+	sudo git clone https://github.com/vim/vim.git $VIM_DIR/
+	cd $VIM_DIR
+	sudo ./configure --with-features=huge \
+		--enable-multibyte \
+		--enable-rubyinterp=yes \
+		--enable-python3interp=yes
+		--with-python3-config-dir=$(python3-config --configdir) \
+		--enable-perlinterp=yes \
+		--enable-luainterp=yes \
+		--enable-csope \
+		--prefix=/usr/local
+	sudo make VIMRUNTIMEDIR=$VIMRUNTIMEDIR
+	sudo make install
 }
 
 install_vim_plugins() {

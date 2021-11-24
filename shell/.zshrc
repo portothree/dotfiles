@@ -54,6 +54,7 @@ load-nvmrc
 export PATH="$HOME/.poetry/bin:$PATH"
 
 # Pyenv
+export PYTHON_CONFIGURE_OPTS="--enable-shared"
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
@@ -81,3 +82,9 @@ fi
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export DOT_REPO=https://github.com/portothree/dotfiles
+export DOT_DEST=/home/porto/dotfiles
+export DOT_REPO=https://github.com/portothree/dotfiles
+export DOT_DEST=/home/porto/dotfiles
+export DOT_REPO=https://github.com/portothree/dotfiles
+export DOT_DEST=/home/porto/dotfiles
