@@ -6,7 +6,8 @@ DOT_DEST="$PWD"
 CURRENT_SHELL=$(basename "$SHELL")
 VIM_DIR=/usr/src/vim
 VIM_PLUGINS_DIR=${HOME}/.vim/pack/plugins/start
-VIMRUNTIMEDIR=/usr/local/share/vim/vim82
+VIM_THEMES_DIR=${HOME}/.vim/pack/themes/start
+VIMRUNTIMEDIR=${HOME}/.nix-profile/bin/vim
 LUA_DIR=/usr/local/lua
 LUAROCKS_DIR=/usr/local/luarocks
 GO_DIR=/usr/local/go
@@ -107,33 +108,21 @@ install_vim() {
 		vim-gui-common \
 		vim-nox
 
-	sudo git clone https://github.com/vim/vim.git $VIM_DIR/
-	cd $VIM_DIR
-	sudo ./configure --with-features=huge \
-		--enable-multibyte \
-		--enable-rubyinterp=yes \
-		--enable-python3interp=yes \
-		--with-python3-config-dir=$(python3-config --configdir) \
-		--enable-perlinterp=yes \
-		--enable-luainterp=yes \
-		--enable-gui=gtk2 \
-		--enable-cscope \
-		--prefix=/usr/local
-	sudo make VIMRUNTIMEDIR=$VIMRUNTIMEDIR
-	sudo make install
+	nix-env -iA nixpkgs.vim
 }
 
 install_vim_plugins() {
-	mkdir -p "${VIM_PLUGINS_DIR}"
+	rm -rf ${VIM_PLUGINS_DIR}
+	mkdir -p ${VIM_PLUGINS_DIR}
 
 	# Vimwiki
-	git clone https://github.com/vimwiki/vimwiki
+	git clone https://github.com/vimwiki/vimwiki ${VIM_PLUGINS_DIR}/vimwiki
 
 	# Ledger
-	git clone --depth 1 https://github.com/ledger/vim-ledger
+	git clone --depth 1 https://github.com/ledger/vim-ledger ${VIM_PLUGINS_DIR}/ledger
 
 	# Dirsettings
-	git clone https://github.com/chazy/dirsettings
+	git clone https://github.com/chazy/dirsettings ${VIM_PLUGINS_DIR}/dirsettings
 
 	# ALE
 	git clone --depth 1 https://github.com/dense-analysis/ale.git ${VIM_PLUGINS_DIR}/ale
@@ -141,13 +130,24 @@ install_vim_plugins() {
 	# Vim-polyglot
 	git clone --depth 1 https://github.com/sheerun/vim-polyglot.git ${VIM_PLUGINS_DIR}/polyglot
 
-	# YouCompleteMe
-	git clone https://github.com/ycm-core/YouCompleteMe.git ${VIM_PLUGINS_DIR}/YouCompleteMe
-	cd ${VIM_PLUGINS_DIR}/YouCompleteMe
-	git submodule update --init --recursive
-	python3 install.py --ts-completer --rust-completer
+	# Vim-airline
+	git clone https://github.com/vim-airline/vim-airline ${VIM_PLUGINS_DIR}/airline
 
-	cd $DOT_DEST
+	# NERDTree
+	git clone https://github.com/preservim/nerdtree ${VIM_PLUGINS_DIR}/nerdtree
+
+	# YouCompleteMe
+	git clone https://github.com/ycm-core/YouCompleteMe.git ${VIM_PLUGINS_DIR}/youcompleteme
+	(cd ${VIM_PLUGINS_DIR}/youcompleteme; git submodule update --init --recursive)
+	(cd ${VIM_PLUGINS_DIR}/youcompleteme; python3 install.py --ts-completer --rust-completer)
+}
+
+install_vim_themes() {
+	rm -rf ${VIM_THEMES_DIR}
+	mkdir -p ${VIM_THEMES_DIR}
+
+	# Dracula
+	git clone https://github.com/dracula/vim ${VIM_THEMES_DIR}/dracula
 }
 
 install_dependencies() {
@@ -199,6 +199,7 @@ install_dependencies() {
 	sudo apt-get install -y \
 		build-essential \
 		software-properties-common \
+		cmake \
 		ruby-dev \
 		lua5.2 \
 		liblua5.2-dev \
@@ -326,17 +327,18 @@ manage() {
 		echo -e "\n[2] Install and setup everything"
 		echo -e "\n[3] Install VIM"
 		echo -e "\n[4] Install VIM Plugins"
-		echo -e "\n[5] Install nix"
-		echo -e "\n[6] Install weechat"
-		echo -e "\n[7] Install weeslack"
-		echo -e "\n[8] Install kubectl"
-		echo -e "\n[9] Install surf"
-		echo -e "\n[10] Install suckless tools"
-		echo -e "\n[11] Setup dot files"
-		echo -e "\n[12] Setup Node"
-		echo -e "\n[13] Setup GO"
-		echo -e "\n[14] Setup LUA"
-		echo -e "\n[15] Setup STTerm"
+		echo -e "\n[5] Install VIM Themes"
+		echo -e "\n[6] Install nix"
+		echo -e "\n[7] Install weechat"
+		echo -e "\n[8] Install weeslack"
+		echo -e "\n[9] Install kubectl"
+		echo -e "\n[10] Install surf"
+		echo -e "\n[11] Install suckless tools"
+		echo -e "\n[12] Setup dot files"
+		echo -e "\n[13] Setup Node"
+		echo -e "\n[14] Setup GO"
+		echo -e "\n[15] Setup LUA"
+		echo -e "\n[16] Setup STTerm"
 		echo -e "[q/Q] Quit session"
 
 		read -p "Choose an option: [1]" -n 1 -r USER_INPUT
@@ -347,17 +349,18 @@ manage() {
 		[2]*) install_dependencies ;;
 		[3]*) install_vim ;;
 		[4]*) install_vim_plugins ;;
-		[5]*) install_nix ;;
-		[6]*) install_weechat ;;
-		[7]*) install_weeslack ;;
-		[8]*) install_kubectl ;;
-		[9]*) install_suckless_tools ;;
-		[10]*) install_surf ;;
-		[11]*) config ;;
-		[12]*) setup_node ;;
-		[13]*) setup_go ;;
-		[14]*) setup_lua ;;
-		[15]*) setup_st ;;
+		[5]*) install_vim_themes ;;
+		[6]*) install_nix ;;
+		[7]*) install_weechat ;;
+		[8]*) install_weeslack ;;
+		[9]*) install_kubectl ;;
+		[10]*) install_suckless_tools ;;
+		[11]*) install_surf ;;
+		[12]*) config ;;
+		[13]*) setup_node ;;
+		[14]*) setup_go ;;
+		[15]*) setup_lua ;;
+		[16]*) setup_st ;;
 		[q/Q]*) exit ;;
 		*) printf "\n%s\n" "Invalid input" ;;
 		esac
