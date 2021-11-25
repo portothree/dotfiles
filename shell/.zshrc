@@ -82,9 +82,3 @@ fi
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export DOT_REPO=https://github.com/portothree/dotfiles
-export DOT_DEST=/home/porto/dotfiles
-export DOT_REPO=https://github.com/portothree/dotfiles
-export DOT_DEST=/home/porto/dotfiles
-export DOT_REPO=https://github.com/portothree/dotfiles
-export DOT_DEST=/home/porto/dotfiles

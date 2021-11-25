@@ -193,6 +193,7 @@ install_dependencies() {
 	nix-env -iA \
 		nixpkgs.git \
 		nixpkgs.tig \
+		nixpkgs.delta \
 		nixpkgs.tmux \
 		nixpkgs.zsh \
 		nixpkgs.oh-my-zsh \
