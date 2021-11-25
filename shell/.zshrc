@@ -82,3 +82,6 @@ fi
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Fix GLX in nix
+export QT_XCB_GL_INTEGRATION=none
