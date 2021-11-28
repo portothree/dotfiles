@@ -286,7 +286,7 @@ install_dependencies() {
 
 config() {
 	cd $(pwd)
-	stow -v bspwm sxhkd compton vim tmux ranger shell st taskwarrior vit timewarrior surf fzf
+	stow -v bspwm sxhkd compton vim tmux ranger shell st taskwarrior vit timewarrior surf fzf autorandr
 }
 
 setup_locale() {
