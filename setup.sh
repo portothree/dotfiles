@@ -178,7 +178,8 @@ install_dependencies() {
 		nixpkgs.ranger \
 		nixpkgs.dunst \
 		nixpkgs.libnotify \
-		nixpkgs.unifont
+		nixpkgs.unifont \
+		nixpkgs.autorandr
 
 	# Fonts
 	sudo apt-get install -y \
