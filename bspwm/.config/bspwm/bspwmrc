@@ -16,8 +16,8 @@ else
 	xinput map-to-output $ID_STYLUS $MONITOR
 fi
 
-bspc config border-width 2
-bspc config window_gap 12
+bspc config border-width 0.5
+bspc config window_gap 2 
 bspc config split_ratio 0.52
 bspc config borderless_monocle true
 bspc config gapless_monocle true
