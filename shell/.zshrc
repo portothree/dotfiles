@@ -85,3 +85,6 @@ fi
 
 # Fix GLX in nix
 export QT_XCB_GL_INTEGRATION=none
+
+# ADR
+export PATH="$HOME/adr-tools/src:$PATH"

@@ -264,6 +264,9 @@ install_dependencies() {
 		net-tools \
 		openvpn
 
+	# ADR (Achitecture Decision Records) CLI
+	git clone https://github.com/npryce/adr-tools $HOME/adr-tools
+
 	# Code formatters
 	# TODO: setup go before executing this
 	GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt
