@@ -1,0 +1,4 @@
+map <C-i> recolor
+
+set window-height 1000
+set window-width 1000
