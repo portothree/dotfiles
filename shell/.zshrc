@@ -88,3 +88,6 @@ export QT_XCB_GL_INTEGRATION=none
 
 # ADR
 export PATH="$HOME/adr-tools/src:$PATH"
+
+# Taskwarrior
+export TASKWARRIOR_LOCATION_PATH="$HOME/www/memex/trails/tasks/.task"
