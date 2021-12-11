@@ -165,6 +165,11 @@ install_vim_themes() {
 	git clone https://github.com/dracula/vim ${VIM_THEMES_DIR}/dracula
 }
 
+install_games() {
+	nix-env -iA \
+		nixpkgs.nudoku
+}
+
 install_dependencies() {
 	install_nix
 
@@ -263,6 +268,8 @@ install_dependencies() {
 		xdotool \
 		net-tools \
 		openvpn
+
+	install_games
 
 	# ADR (Achitecture Decision Records) CLI
 	git clone https://github.com/npryce/adr-tools $HOME/adr-tools
