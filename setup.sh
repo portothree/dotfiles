@@ -170,6 +170,11 @@ install_games() {
 		nixpkgs.nudoku
 }
 
+install_go() {
+	sudo curl "https://golang.org/dl/go1.17.linux-amd64.tar.gz" --output "/usr/local/go-1.17.tar.gz"
+
+}
+
 install_dependencies() {
 	install_nix
 
@@ -268,8 +273,10 @@ install_dependencies() {
 		xdotool \
 		net-tools \
 		openvpn
+	go get github.com/antonmedv/llama
 
 	install_games
+	install_go	
 
 	# ADR (Achitecture Decision Records) CLI
 	git clone https://github.com/npryce/adr-tools $HOME/adr-tools
@@ -286,9 +293,6 @@ install_dependencies() {
 
 	# NVM
 	curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh" | bash
-
-	# Go
-	sudo curl "https://golang.org/dl/go1.17.linux-amd64.tar.gz" --output "/usr/local/go-1.17.tar.gz"
 
 	# Nyxt browser
 	sudo curl "https://nyxt.atlas.engineer/static/release/nyxt-linux-2.1.1.tar.xz" --output "/usr/local/nyxt-2.1.1.tar.xz"

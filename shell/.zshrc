@@ -3,6 +3,7 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Go
 export GO111MODULE=on
+export PATH=$PATH:/usr/local/go/bin
  
 export VISUAL=vim
 export EDITOR=vim
