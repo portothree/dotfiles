@@ -91,3 +91,8 @@ export PATH="$HOME/adr-tools/src:$PATH"
 
 # Taskwarrior
 export TASKWARRIOR_LOCATION_PATH="$HOME/www/memex/trails/tasks/.task"
+
+# Llama
+function llm {
+  llama "$@" 2> /tmp/path && cd "$(cat /tmp/path)"
+}
