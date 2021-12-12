@@ -21,7 +21,7 @@ spec:
               value: "3001"
           ports:
             - containerPort: 3001
-              name: http-uptime-kuma
+              name: http-up-ku
               protocol: TCP
 ---
 apiVersion: v1
@@ -33,7 +33,7 @@ spec:
     - port: 3001
       nodePort: 30001
       protocol: TCP
-      targetPort: http-uptime-kuma
+      targetPort: http-up-ku
   selector:
     app: uptime-kuma
   sessionAffinity: None
