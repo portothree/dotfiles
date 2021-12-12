@@ -19,3 +19,22 @@ spec:
           env:
             - name: UPTIME_KUMA_PORT
               value: "3001"
+          ports:
+            - containerPorts: 3001
+              name: http-uptime-kuma
+              protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: uptime-kuma-service 
+spec:
+  ports:
+    - port: 3001
+      nodePort: 30001
+      protocol: TCP
+      targetPort: http-uptime-kuma
+  selector:
+    app: uptime-kuma 
+  sessionAffinity: None
+  type: LoadBalancer
