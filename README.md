@@ -119,6 +119,16 @@ I'm currently using debian `apt` strictly for the base system (up to, and includ
 -   [Weechat](https://github.com/weechat/weechat)
 -   [Wee-slack](https://github.com/wee-slack/wee-slack)
 
+### Database
+
+#### MongoDB
+
+#### Redis
+
+#### Postgresql
+
+-   [pgcli](https://github.com/dbcli/pgcli)
+
 ### Additional tools
 
 -   [Wuzz](https://github.com/asciimoo/wuzz)
@@ -138,11 +148,10 @@ I'm currently using debian `apt` strictly for the base system (up to, and includ
 -   [] Docker installation to setup script
 -   [] All vim plugins installation in a different method
 -   [] WICD or WPA supplicant to handle WIFI
--   [] Database tools - MongoDB, DBeaver, RedisInsight
 -   [] OpenVPN
 
-
 # Link dump
+
 https://vimawesome.com/
 https://github.com/wting/autojump
 https://github.com/keepcosmos/terjira
