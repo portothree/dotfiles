@@ -97,3 +97,12 @@ export TASKWARRIOR_LOCATION_PATH="$HOME/www/memex/trails/tasks/.task"
 function llm {
   llama "$@" 2> /tmp/path && cd "$(cat /tmp/path)"
 }
+
+# Mutt
+export MUTT_IMAP_USER=""
+export MUTT_IMAP_PASS=""
+export MUTT_SMTP_URL=""
+export MUTT_SMTP_PASS=""
+export MUTT_FROM=""
+export MUTT_REALNAME=""
+export MUTT_FOLDER=""
