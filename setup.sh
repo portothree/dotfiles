@@ -272,7 +272,8 @@ install_dependencies() {
 		xclip \
 		xdotool \
 		net-tools \
-		openvpn
+		openvpn \
+		mutt
 	go get github.com/antonmedv/llama
 
 	install_games
@@ -300,7 +301,7 @@ install_dependencies() {
 
 config() {
 	cd $(pwd)
-	stow -v bspwm sxhkd compton vim tmux ranger shell st taskwarrior vit timewarrior surf fzf autorandr pgcli qutebrowser
+	stow -v bspwm sxhkd compton vim tmux ranger shell st taskwarrior vit timewarrior surf fzf autorandr pgcli qutebrowser mutt
 }
 
 setup_locale() {
