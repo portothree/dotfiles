@@ -106,3 +106,6 @@ export MUTT_SMTP_PASS=""
 export MUTT_FROM=""
 export MUTT_REALNAME=""
 export MUTT_FOLDER=""
+
+# direnv
+eval "$(direnv hook zsh)"
