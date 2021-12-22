@@ -265,7 +265,11 @@ install_dependencies() {
 	nix-env -iA \
 		nixpkgs.unclutter \
 		nixpkgs.acpi \
-		nixpkgs.krita
+		nixpkgs.krita \
+		nixpkgs.mutt \
+		nixpkgs.niv \
+		nixpkgs.nixfmt \
+		nixpkgs.statix \
 	sudo apt install -y \
 		xautolock \
 		xinput \
