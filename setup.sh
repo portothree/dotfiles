@@ -270,6 +270,7 @@ install_dependencies() {
 		nixpkgs.niv \
 		nixpkgs.nixfmt \
 		nixpkgs.statix \
+		nixpkgs.direnv
 	sudo apt install -y \
 		xautolock \
 		xinput \
