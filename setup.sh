@@ -265,14 +265,21 @@ install_dependencies() {
 	nix-env -iA \
 		nixpkgs.unclutter \
 		nixpkgs.acpi \
-		nixpkgs.krita
+		nixpkgs.krita \
+		nixpkgs.mutt \
+		nixpkgs.niv \
+		nixpkgs.nixfmt \
+		nixpkgs.statix \
+		nixpkgs.direnv \
+		nixpkgs.docui
 	sudo apt install -y \
 		xautolock \
 		xinput \
 		xclip \
 		xdotool \
 		net-tools \
-		openvpn
+		openvpn \
+		mutt
 	go get github.com/antonmedv/llama
 
 	install_games
@@ -300,7 +307,7 @@ install_dependencies() {
 
 config() {
 	cd $(pwd)
-	stow -v bspwm sxhkd compton vim tmux ranger shell st taskwarrior vit timewarrior surf fzf autorandr pgcli qutebrowser
+	stow -v bspwm sxhkd compton vim tmux ranger shell st taskwarrior vit timewarrior surf fzf autorandr pgcli qutebrowser mutt
 }
 
 setup_locale() {
