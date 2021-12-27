@@ -15,5 +15,5 @@ au BufNewFile,BufRead *.ldg,*.ledger setf ledger | comp ledger
 filetype plugin indent on
 syntax on
 
-let g:vimwiki_list = [{'path': '~/www/prometheus/packages/wiki/',
+let g:vimwiki_list = [{'path': '~/www/memex/trails/wiki/',
                       \ 'syntax': 'markdown', 'ext': '.wiki'}]
