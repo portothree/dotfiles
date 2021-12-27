@@ -141,6 +141,7 @@ I'm currently using debian `apt` strictly for the base system (up to, and includ
 -   [Zathura](https://github.com/pwmt/zathura)
 -   [K9s](https://github.com/derailed/k9s)
 -   [Taskwarrior](https://taskwarrior.org/)
+-   [fq](https://github.com/wader/fq)
 
 # Todo
 
