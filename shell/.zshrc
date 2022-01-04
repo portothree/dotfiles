@@ -84,8 +84,8 @@ fi
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Fix GLX in nix
-export QT_XCB_GL_INTEGRATION=none
+# QT 
+export QT_XCB_GL_INTEGRATION=xcb_egl
 
 # ADR
 export PATH="$HOME/adr-tools/src:$PATH"
