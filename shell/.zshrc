@@ -85,7 +85,7 @@ fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # QT 
-export QT_XCB_GL_INTEGRATION=xcb_egl
+export QT_XCB_GL_INTEGRATION=none
 
 # ADR
 export PATH="$HOME/adr-tools/src:$PATH"
