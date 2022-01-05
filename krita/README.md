@@ -12,10 +12,7 @@ $ nix-env -iA nixgl.auto.nixGLNvidia
 
 After that I'm able to run krita with
 ```
-$ nixGLNvidia-390.144 krita
+$ QT_XCB_GL_INTEGRATION=xcb_egl nixGLNvidia-390.144 krita
 ```
 
-Worth note that the env var `QT_XCB_GL_INTEGRATION` is set to `xcb_egl`.
-```
-$ export QT_XCB_GL_INTEGRATION=xcb_egl
-```
+Note that the env var `QT_XCB_GL_INTEGRATION` is set to `xcb_egl`.
