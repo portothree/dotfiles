@@ -23,6 +23,15 @@ spec:
             - containerPort: 3001
               name: http-up-ku
               protocol: TCP
+          resources:
+            limits:
+              cpu: "0.1"
+          volumeMounts:
+            - mountPath: /data
+              name: data
+      volumes:
+        - name: data
+          emptyDir: {}
 ---
 apiVersion: v1
 kind: Service
