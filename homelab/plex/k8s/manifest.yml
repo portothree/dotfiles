@@ -1,61 +1,54 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: plex
+  name: plex-server
   labels:
-    app: plex
+    name: plex-server
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: plex
+      name: plex-server
   template:
     metadata:
       labels:
-        app: plex
+        name: plex-server
     spec:
-      containers:
-        - name: plex
-          image: linuxserver/plex
-          imagePullPolicy: Always
-          ports:
-            - containerPort: 32400
-              name: plex
-          env:
-            - name: PGID
-              value: "17464003"
-            - name: PUID
-              value: "17464002"
-            - name: TZ
-              value: "America/New_York"
-            - name: PLEX_CLAIM
-              value: "claim-asdfasdfasdf"
-          volumeMounts:
-            - name: plex-config
-              mountPath: /config
-            - name: plex-media
-              mountPath: /Media
+      hostNetwork: true
       volumes:
-        - name: plex-config
-          nfs:
-            server: 10.0.0.20
-            path: /srv/K8s/plex-config
-        - name: plex-media
-          nfs:
-            server: 10.0.0.20
-            path: /srv/Media
-
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: plex
-spec:
-  selector:
-    app: plex
-  ports:
-    - name: plex
-      protocol: TCP
-      port: 32400
-      targetPort: 32400
-  type: NodePort
+        - hostPath:
+            path: /volumes/plex-config
+          name: config
+        - hostPath:
+            path: /mnt/disks/library/videos
+          name: movies
+        - hostPath:
+            path: /mnt/disks/library/tvseries
+          name: tv
+      containers:
+        - name: plex-server
+          image: plexinc/pms-docker
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            tcpSocket:
+              port: 32400
+            initialDelaySeconds: 60
+            periodSeconds: 5
+          volumeMounts:
+            - mountPath: /config
+              name: config
+            - mountPath: /movies
+              name: movies
+            - mountPath: /tv
+              name: tv
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "4000"
+            - name: VERSION
+              value: "docker"
+            - name: UMASK_SET
+              value: "022"
+            - name: TZ
+              value: "Europe/Lisbon"
