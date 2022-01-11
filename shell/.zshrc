@@ -24,7 +24,9 @@ plugins=(git git-auto-fetch)
 
 source $ZSH/oh-my-zsh.sh
 
+# Aliases
 alias r="ranger"
+alias nvtop="nixGLNvidia-390.144 nvtop"
 
 # NVM
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"

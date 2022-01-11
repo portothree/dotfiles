@@ -112,6 +112,7 @@ I'm currently using debian `apt` strictly for the base system (up to, and includ
 -   [Bpytop](https://github.com/aristocratos/bpytop) / [Bashtop](https://github.com/aristocratos/bashtop)
 -   [ctop](https://github.com/bcicen/ctop)
 -   [vtop](https://github.com/MrRio/vtop)
+-   [nvtop](https://github.com/Syllo/nvtop) - NVIDIA GPUs htop like monitoring tool
 
 ### Messaging
 
