@@ -106,3 +106,7 @@ export MUTT_FOLDER=""
 
 # direnv
 eval "$(direnv hook zsh)"
+
+# Bluetooth MAC addresses
+export BT_ADDRESS_NOTHING_EAR_1=""
+export BT_ADDRESS_REDMI_9=""
