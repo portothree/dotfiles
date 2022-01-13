@@ -212,7 +212,8 @@ install_dependencies() {
 		nixpkgs.tasksh \
 		nixpkgs.vit \
 		nixpkgs.timewarrior \
-		nixpkgs.nvtop
+		nixpkgs.nvtop \
+		nixpkgs.dijo
 
 	# Multimedia
 	nix-env -iA \
