@@ -67,6 +67,7 @@ fi
 
 # K8S kubectl 
 [[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
+alias k8s-show-ns="kubectl api-resources --verbs=list --namespaced -o name | xargs -n1 kubectl get "$@" --show-kind --ignore-not-found"
 
 # Load crontab from .crontab file
 if test -z $CRONTABCMD; then
