@@ -68,6 +68,7 @@ fi
 # K8S kubectl 
 [[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
 alias k8s-show-ns="kubectl api-resources --verbs=list --namespaced -o name | xargs -n1 kubectl get "$@" --show-kind --ignore-not-found"
+alias k8s-delete-all-ns='kubectl delete "$(kubectl api-resources --namespaced=true --verbs=delete -o name | tr "\n" "," | sed -e 's/,$//')" --all'
 
 # Load crontab from .crontab file
 if test -z $CRONTABCMD; then
