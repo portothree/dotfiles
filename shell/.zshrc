@@ -115,4 +115,4 @@ export BT_ADDRESS_NOTHING_EAR_1=""
 export BT_ADDRESS_REDMI_9=""
 
 # Prompt
-PROMPT="%(?.%F{green}.%F{red})${PURE_PROMPT_SYMBOL:-λ}%f "
+PROMPT="%(?.%F{green}.%F{red})λ%f %B%F{cyan}%~%f%b "
