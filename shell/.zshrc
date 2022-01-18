@@ -1,6 +1,7 @@
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+
 # Go
 export GO111MODULE=on
 export PATH=$PATH:/usr/local/go/bin
@@ -112,3 +113,6 @@ eval "$(direnv hook zsh)"
 # Bluetooth MAC addresses
 export BT_ADDRESS_NOTHING_EAR_1=""
 export BT_ADDRESS_REDMI_9=""
+
+# Prompt
+PROMPT="%(?.%F{green}.%F{red})${PURE_PROMPT_SYMBOL:-λ}%f "
