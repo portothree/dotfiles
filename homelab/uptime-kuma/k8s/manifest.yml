@@ -1,23 +1,8 @@
 apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: kuma-pv
-  labels:
-    type: local
-spec:
-  capacity:
-    storage: 256Mi
-  accessModes:
-    - ReadWriteOnce
-  claimRef:
-    name: kuma-pvc
----
-apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: kuma-pvc
 spec:
-  volumeName: kuma-pv
   accessModes:
     - ReadWriteOnce
   resources:
