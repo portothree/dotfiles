@@ -4,10 +4,10 @@ metadata:
   name: kuma-pvc
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
-      storage: 1Gi
+      storage: 200Mb 
 ---
 apiVersion: apps/v1
 kind: Deployment
