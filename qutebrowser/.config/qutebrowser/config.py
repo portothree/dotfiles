@@ -8,7 +8,6 @@ c.url.default_page = memex_web_path
 c.url.start_pages = [
     "https://calendar.google.com/u/0/r/week",
     "https://github.com/notifications",
-    "https://www.indiehackers.com",
     "https://news.ycombinator.com",
     memex_web_path,
 ]
