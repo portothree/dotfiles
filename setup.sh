@@ -170,8 +170,9 @@ install_games() {
 		nixpkgs.nudoku
 }
 
-install_music_tools() {
+install_media_tools() {
 	nix-env -iA \
+		nixpkgs.playerctl \
 		nixpkgs.spotifyd \
 		nixpkgs.spotify-tui
 }
@@ -293,7 +294,7 @@ install_dependencies() {
 	go get github.com/antonmedv/llama
 
 	install_games
-	install_music_tools
+	install_media_tools
 	install_go	
 
 	# ADR (Achitecture Decision Records) CLI
