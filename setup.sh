@@ -170,6 +170,12 @@ install_games() {
 		nixpkgs.nudoku
 }
 
+install_music_tools() {
+	nix-env -iA \
+		nixpkgs.spotifyd \
+		nixpkgs.spotify-tui
+}
+
 install_go() {
 	sudo curl "https://golang.org/dl/go1.17.linux-amd64.tar.gz" --output "/usr/local/go-1.17.tar.gz"
 
@@ -213,7 +219,8 @@ install_dependencies() {
 		nixpkgs.vit \
 		nixpkgs.timewarrior \
 		nixpkgs.nvtop \
-		nixpkgs.dijo
+		nixpkgs.dijo \
+		nixpkgs.pulsemixer
 
 	# Multimedia
 	nix-env -iA \
@@ -286,6 +293,7 @@ install_dependencies() {
 	go get github.com/antonmedv/llama
 
 	install_games
+	install_music_tools
 	install_go	
 
 	# ADR (Achitecture Decision Records) CLI
