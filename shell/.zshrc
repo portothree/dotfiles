@@ -116,3 +116,6 @@ export BT_ADDRESS_REDMI_9=""
 
 # Prompt
 PROMPT="%(?.%F{green}.%F{red})λ%f %B%F{cyan}%~%f%b "
+
+# ripgrep
+alias rgf="rg --files | rg"
