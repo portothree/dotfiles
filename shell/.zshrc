@@ -88,6 +88,7 @@ fi
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND="rg --files | fzf"
 
 # QT 
 export QT_XCB_GL_INTEGRATION=none
@@ -119,3 +120,4 @@ PROMPT="%(?.%F{green}.%F{red})λ%f %B%F{cyan}%~%f%b "
 
 # ripgrep
 alias rgf="rg --files | rg"
+
