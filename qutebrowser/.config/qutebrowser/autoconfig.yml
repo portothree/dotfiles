@@ -22,3 +22,4 @@ settings:
     https://calendar.google.com?cid=%25s: true
     https://mail.google.com?extsrc=mailto&url=%25s: false
     https://mail.yandex.ru?mailto=%25s: true
+    https://outlook.office365.com?mailtouri=%25s: true
