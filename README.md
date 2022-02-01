@@ -165,3 +165,10 @@ I'm currently using debian `apt` strictly for the base system (up to, and includ
 # Shell scripts
 
 Handful collection of shell scripts inspired by https://github.com/salman-abedin/alfred
+
+# Hardware
+
+## AMD Wraith Prism
+- https://github.com/serebit/wraith-master
+- https://gitlab.com/serebit/wraith-master
+- https://github.com/gfduszynski/cm-rgb
