@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-# Wacom tablet only in the main monitor
-MONITOR="DP-0"
-ID_STYLUS=`xinput | grep "Pen stylus" | cut -f 2 | cut -c 4-5`
-xinput map-to-output $ID_STYLUS $MONITOR
-
