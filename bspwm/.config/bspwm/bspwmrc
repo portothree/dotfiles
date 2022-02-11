@@ -6,14 +6,10 @@ sxhkd &
 if [[ $(bspc query -M --names) == "eDP"]]; then
 	autorandr -l laptop
 else
-	xrandr --output "DP-0" --primary --mode 1920x1080 --rotate normal --output "HDMI-0" --mode 1920x1080 --rotate normal --left "DP-0"
+	autorandr -l pc
+
 	bspc monitor "DP-0" -d II III IV V VI VII VIII IX X
 	bspc monitor "HDMI-0" -d I
-
-	# Wacom tablet only in the main monitor
-	MONITOR="DP-0"
-	ID_STYLUS=`xinput | grep "Pen stylus" | cut -f 2 | cut -c 4-5`
-	xinput map-to-output $ID_STYLUS $MONITOR
 fi
 
 bspc config border-width 0.5
@@ -23,5 +19,5 @@ bspc config borderless_monocle true
 bspc config gapless_monocle true
 
 # Mouse cursor settings
-unclutter -idle 1 -root &
-xdotool mousemove 999999 999999 &
+unclutter -idle 1 -root
+xdotool mousemove 999999 999999
