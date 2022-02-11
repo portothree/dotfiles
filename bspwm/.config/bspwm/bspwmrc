@@ -2,12 +2,10 @@
 
 sxhkd &
 
-## Monitor settings
-if [[ $(bspc query -M --names) == "eDP"]]; then
-	autorandr -l laptop
-else
-	autorandr -l pc
+autorandr --change
 
+## Monitor settings
+if [[ $(bspc query -M --names) != "eDP"]]; then
 	bspc monitor "DP-0" -d II III IV V VI VII VIII IX X
 	bspc monitor "HDMI-0" -d I
 fi
