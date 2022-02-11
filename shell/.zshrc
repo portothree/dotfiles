@@ -121,5 +121,3 @@ PROMPT="%(?.%F{green}.%F{red})λ%f %B%F{cyan}%~%f%b "
 
 # ripgrep
 alias rgf="rg --files | rg"
-
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
