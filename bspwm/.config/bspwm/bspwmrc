@@ -1,7 +1,6 @@
 #! /bin/sh
 
 sxhkd &
-
 autorandr --change
 
 ## Monitor settings
@@ -19,3 +18,4 @@ bspc config gapless_monocle true
 # Mouse cursor settings
 unclutter -idle 1 -root
 xdotool mousemove 999999 999999
+keynav &

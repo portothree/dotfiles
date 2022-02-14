@@ -274,6 +274,8 @@ install_dependencies() {
 	# Other packages
 	nix-env -iA \
 		nixpkgs.unclutter \
+		nixpkgs.xdotool \
+		nixpkgs.keynav \
 		nixpkgs.acpi \
 		nixpkgs.krita \
 		nixpkgs.mutt \
@@ -282,12 +284,11 @@ install_dependencies() {
 		nixpkgs.statix \
 		nixpkgs.direnv \
 		nixpkgs.docui \
-		nixpkgs.fq
+		nixpkgs.fq 
 	sudo apt install -y \
 		xautolock \
 		xinput \
 		xclip \
-		xdotool \
 		net-tools \
 		openvpn \
 		mutt
