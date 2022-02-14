@@ -3,14 +3,10 @@
 ## Virsh devices
 VIRSH_GPU_VIDEO=pci_0000_27_00_0
 VIRSH_GPU_AUDIO=pci_0000_27_00_1
-VIRSH_GPU_USB=pci_0000_27_00_2
-VIRSH_GPU_SERIAL=pci_0000_27_00_3
 
 ## Unbind gpu from vfio and bind to nvidia
 virsh nodedev-reattach $VIRSH_GPU_VIDEO
 virsh nodedev-reattach $VIRSH_GPU_AUDIO
-virsh nodedev-reattach $VIRSH_GPU_USB
-virsh nodedev-reattach $VIRSH_GPU_SERIAL
 
 ## Unload vfio
 modprobe -r vfio_pci
