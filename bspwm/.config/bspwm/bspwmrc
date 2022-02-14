@@ -4,7 +4,7 @@ sxhkd &
 autorandr --change
 
 ## Monitor settings
-if [[ $(bspc query -M --names) != "eDP"]]; then
+if [[ $(bspc query -M --names | head -n 1) != "eDP"]]; then
 	bspc monitor "DP-0" -d II III IV V VI VII VIII IX X
 	bspc monitor "HDMI-0" -d I
 fi
