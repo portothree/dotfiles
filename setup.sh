@@ -189,7 +189,7 @@ install_dependencies() {
 	sudo apt-get install -y \
 		bspwm \
 		sxhkd \
-		compton
+		picom	
 	nix-env -iA \
 		nixpkgs.rofi \
 		nixpkgs.ranger \
@@ -320,7 +320,7 @@ install_dependencies() {
 
 config() {
 	cd $(pwd)
-	stow -v bspwm sxhkd compton vim tmux ranger shell st taskwarrior vit timewarrior surf fzf autorandr pgcli qutebrowser mutt
+	stow -v bspwm sxhkd picom vim tmux ranger shell st taskwarrior vit timewarrior surf fzf autorandr pgcli qutebrowser mutt
 }
 
 setup_locale() {
