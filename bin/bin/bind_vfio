@@ -1,8 +1,8 @@
 #!/bin/bash
 
 ## Virsh devices
-VIRSH_GPU_VIDEO=pci_0000_27_00_0
-VIRSH_GPU_AUDIO=pci_0000_27_00_1
+VIRSH_GPU_VIDEO=pci_0000_28_00_0
+VIRSH_GPU_AUDIO=pci_0000_28_00_1
 
 ## Load vfio
 modprobe vfio
