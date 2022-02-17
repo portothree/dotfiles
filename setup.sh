@@ -220,6 +220,7 @@ install_dependencies() {
 		nixpkgs.vit \
 		nixpkgs.timewarrior \
 		nixpkgs.nvtop \
+		nixpkgs.s-tui \
 		nixpkgs.dijo \
 		nixpkgs.pulsemixer
 
