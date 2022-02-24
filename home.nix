@@ -40,7 +40,6 @@
 			siji
 			unclutter
 			dunst
-			nvtop
 			weechat
 			pgcli
 			mycli
@@ -50,6 +49,11 @@
 			taskwarrior
 		];
 	};
+	nixpkgs = {
+		config = {
+			allowUnfree = true;
+		};
+	};
 	programs = {
 		home-manager = {
 			enable = true;
@@ -58,7 +62,7 @@
 			enable = true;
 			oh-my-zsh = {
 				enable = true;
-			}
+			};
 		};
 		git = {
 			enable = true;
