@@ -6,26 +6,59 @@
 		homeDirectory = "/home/porto";
 		stateVersion = "22.05";
 		packages = with pkgs; [
+			zsh
+			st
+			alacritty
 			vim
 			htop
 			direnv
 			fzf
+			ranger
 			git
+			tig
 			google-cloud-sdk
 			k9s
 			kubectl
 			qutebrowser
 			ripgrep
-			tig
 			xclip
 			keynav
 			xdotool
 			bat
+			bspwm
+			sxhkd
+			lemonbar
+			rofi
+			pywal
+			mopidy
+			mopidy-iris
+			cava
+			astyle
+			shfmt
+			glow
+			fira-code
+			siji
+			unclutter
+			dunst
+			nvtop
+			weechat
+			pgcli
+			mycli
+			wuzz
+			websocat
+			zathura
+			taskwarrior
 		];
 	};
 	programs = {
 		home-manager = {
 			enable = true;
+		};
+		zsh = {
+			enable = true;
+			oh-my-zsh = {
+				enable = true;
+			}
 		};
 		git = {
 			enable = true;
