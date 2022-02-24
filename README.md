@@ -4,6 +4,8 @@ It uses [home-manager](https://github.com/nix-community/home-manager) to install
 
 ![Current desk screenshot](https://i.imgur.com/ti2LDBF.png)
 
+[Home Manager Manual](https://nix-community.github.io/home-manager/)
+
 ### Text editor
 
 #### vim
