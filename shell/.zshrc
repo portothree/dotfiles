@@ -2,6 +2,7 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin/:/sbin"
 
 # nix
 export PATH="/nix/var/nix/profiles/default/bin:$HOME/.nix-profile/bin:$PATH"
+export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
 
 PROMPT="%(?.%F{green}.%F{red})λ%f %B%F{cyan}%~%f%b "
 MEMEX="$HOME/www/memex"
