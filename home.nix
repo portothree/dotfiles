@@ -10,7 +10,6 @@
 			alacritty
 			htop
 			direnv
-			fzf
 			sysz
 			ranger
             git
@@ -181,7 +180,6 @@
 				NIX_PATH = "/home/porto/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels";
 				LOCALE_ARCHIVE = "/usr/lib/locale/locale-archive";
 				MEMEX = "/home/porto/www/memex";
-				FZF_DEFAULT_COMMAND = "rg --files | fzf";
 				TASKWARRIOR_LOCATION_PATH = "/home/porto/www/memex/trails/tasks/.task";
 			};
 			shellAliases = {
@@ -301,7 +299,12 @@
 				bind k select-pane -U
 				bind l select-pane -R
 			'';
-		};
+        };
+        fzf = {
+          enable = true;
+          defaultCommand = "rg --files | fzf";
+          enableZshIntegration = true;
+        };
 		bat = {
 			enable = true;
 			config = {
