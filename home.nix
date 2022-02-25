@@ -143,6 +143,20 @@
                 bspc node -v {-20 0,0 20,0 -20,20 0}
             '';
           };
+          dijo = {
+            target = ".config/dijo/config.toml";
+            text = ''
+              [look]
+              true_chr = "."
+              false_chr = "."
+              future_chr = "."
+
+              [colors]
+              reached = "cyan"
+              todo = "magenta"
+              inactive = "light black"
+            '';
+          };
         };
 	};
 	nixpkgs = {
