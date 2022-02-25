@@ -6,10 +6,8 @@
 		homeDirectory = "/home/porto";
 		stateVersion = "22.05";
 		packages = with pkgs; [
-			zsh
 			st
 			alacritty
-			vim
 			htop
 			direnv
 			fzf
@@ -25,7 +23,6 @@
 			xclip
 			keynav
 			xdotool
-			bat
 			bspwm
 			sxhkd
 			lemonbar
@@ -85,11 +82,6 @@
 				krns = "kubectl api-resources --namespaced=true --verbs=delete -o name | tr '\n' ',' | sed -e 's/,$//'"; 
 				kdns = "kubectl delete '$(krns)' --all";
 			};
-			oh-my-zsh = {
-				enable = true;
-				plugins = [ "git" "git-auto-fetch" ];
-				theme = "robbyrussell";
-			};
 			initExtraFirst = ''
 				source "$(fzf-share)/key-bindings.zsh"
 				source "$(fzf-share)/completion.zsh"
@@ -110,6 +102,37 @@
 				   
 					$CRONTABCMD "$HOME/.crontab"
 				fi
+			'';
+			oh-my-zsh = {
+				enable = true;
+				plugins = [ "git" "git-auto-fetch" ];
+				theme = "robbyrussell";
+			};
+		};
+		vim = {
+			enable = true;
+			settings = {
+				background = "dark";
+				number = true;
+				tabstop = 4;
+				shiftwidth = 4;
+            };
+            plugins = with pkgs.vimPlugins; [
+              vimwiki
+              dracula-vim
+            ];
+            extraConfig = ''
+              set clipboard=unnamedplus
+              set t_Co=256
+              set autoindent
+              set nocp
+              filetype plugin indent on
+              syntax on 
+
+              packadd! dracula
+              colorscheme dracula
+
+              au BufNewFile,BufRead *.ldg,*.ledger setf ledger | comp ledger
 			'';
 		};
 		git = {
@@ -149,7 +172,6 @@
 			enable = true;
 			clock24 = true;
 			keyMode = "vi";
-			terminal = "screen-256color";
 			plugins = with pkgs.tmuxPlugins; [
 				sensible
 				yank
