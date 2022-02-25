@@ -13,7 +13,6 @@
 			sysz
 			ranger
             git
-            gh
 			tig
 			google-cloud-sdk
 			k9s
@@ -49,18 +48,6 @@
 			pulsemixer
         ];
         file = {
-          gh = {
-            target = ".config/gh/config.yml";
-            text = ''
-              git_protocol: https
-              editor: vim
-              prompt: enabled
-              pager: bat
-              aliases:
-                co: pr checkout
-              browser: qutebrowser
-            '';
-          };
           bspwm = {
             target = ".config/bspwm/bspwmrc";
             text = ''
@@ -275,7 +262,19 @@
 					};
 				};
 			};
-		};
+        };
+        gh = {
+          enable = true;
+          settings = {
+            git_protocol = "https";
+            editor = "vim";
+            aliases = {
+              co = "pr checkout";
+              pv = "pr view";
+            };
+            browser = "qutebrowser";
+          };
+        };
 		tmux = {
 			enable = true;
 			clock24 = true;
