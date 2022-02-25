@@ -213,7 +213,6 @@
             };
             plugins = with pkgs.vimPlugins; [
               vimwiki
-              dracula-vim
             ];
             extraConfig = ''
               set clipboard=unnamedplus
@@ -222,9 +221,6 @@
               set nocp
               filetype plugin indent on
               syntax on 
-
-              packadd! dracula
-              colorscheme dracula
 
               au BufNewFile,BufRead *.ldg,*.ledger setf ledger | comp ledger
 			'';
@@ -281,14 +277,6 @@
 			plugins = with pkgs.tmuxPlugins; [
 				sensible
 				yank
-				{
-					plugin = dracula;
-					extraConfig = ''
-						set -g @dracula-show-battery false
-						set -g @dracula-show-powerline true
-						set -g @dracula-refresh-rate 60
-					'';
-				}
 			];
 			extraConfig = ''
 				set -g mouse off 
