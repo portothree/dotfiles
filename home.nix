@@ -12,7 +12,6 @@
 			direnv
 			sysz
 			ranger
-            git
 			tig
 			google-cloud-sdk
 			k9s
@@ -256,7 +255,8 @@
 						syntax-them = "Github";
 					};
 				};
-			};
+            };
+            ignores = [ "__pycache__" ];
         };
         gh = {
           enable = true;
