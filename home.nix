@@ -47,6 +47,8 @@
 			websocat
 			zathura
 			taskwarrior
+			weechat
+			pulsemixer
 		];
 	};
 	nixpkgs = {
@@ -60,9 +62,51 @@
 		};
 		zsh = {
 			enable = true;
+			plugins = [ "git" "git-auto-fetch" ];
 			oh-my-zsh = {
 				enable = true;
 			};
+			sessionVariables = {
+				PROMPT = "%(?.%F{green}.%F{red})λ%f %B%F{cyan}%~%f%b ";
+				VISUAL = "vim";
+				EDITOR = "vim";
+				HISTTIMEFORMAT = "%F %T ";
+				PATH = "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/nix/var/nix/profiles/default/bin:/home/porto/nix-profile/bin";
+				NIX_PATH = "/home/porto/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels";
+				LOCALE_ARCHIVE = "/usr/lib/locale/locale-archive";
+				MEMEX = "/home/porto/www/memex";
+				FZF_DEFAULT_COMMAND = "rg --files | fzf";
+				TASKWARRIOR_LOCATION_PATH = "/home/porto/www/memex/trails/tasks/.task";
+			};
+			shellAliases = {
+				r = "ranger";
+				krita = "QT_XCB_GL_INTEGRATION=none krita";
+				rgf = "rg --files | rg";
+				k8s-show-ns = "kubectl api-resources --verbs=list --namespaced -o name | xargs -n1 kubectl get "$@" --show-kind --ignore-not-found";
+				k8s-delete-all-ns = 'kubectl delete "$(kubectl api-resources --namespaced=true --verbs=delete -o name | tr "\n" "," | sed -e 's/,$//')" --all';
+
+			};
+			initExtra = ''
+				source "$(fzf-share)/key-bindings.zsh"
+				source "$(fzf-share)/completion.zsh"
+				[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
+				eval "$(direnv hook zsh)"
+
+				# Load crontab from .crontab file
+				if test -z $CRONTABCMD; then
+				export CRONTABCMD=$(which crontab)
+
+					crontab() {
+						if [[ $@ == "-e" ]]; then
+							vim "$HOME/.crontab" && $CRONTABCMD "$HOME/.crontab"
+						else
+							$CRONTABCMD $@
+						fi
+					 }
+				   
+					$CRONTABCMD "$HOME/.crontab"
+				fi
+			'';
 		};
 		git = {
 			enable = true;
