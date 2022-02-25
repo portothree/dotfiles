@@ -13,6 +13,7 @@
 			htop
 			direnv
 			fzf
+			sysz
 			ranger
 			git
 			tig
@@ -62,10 +63,8 @@
 		};
 		zsh = {
 			enable = true;
-			plugins = [ "git" "git-auto-fetch" ];
-			oh-my-zsh = {
-				enable = true;
-			};
+			enableAutosuggestions = true;
+			enableCompletion = true;
 			sessionVariables = {
 				PROMPT = "%(?.%F{green}.%F{red})λ%f %B%F{cyan}%~%f%b ";
 				VISUAL = "vim";
@@ -82,11 +81,16 @@
 				r = "ranger";
 				krita = "QT_XCB_GL_INTEGRATION=none krita";
 				rgf = "rg --files | rg";
-				k8s-show-ns = "kubectl api-resources --verbs=list --namespaced -o name | xargs -n1 kubectl get "$@" --show-kind --ignore-not-found";
-				k8s-delete-all-ns = 'kubectl delete "$(kubectl api-resources --namespaced=true --verbs=delete -o name | tr "\n" "," | sed -e 's/,$//')" --all';
-
+				ksns = "kubectl api-resources --verbs=list --namespaced -o name | xargs -n1 kubectl get '$@' --show-kind --ignore-not-found";
+				krns = "kubectl api-resources --namespaced=true --verbs=delete -o name | tr '\n' ',' | sed -e 's/,$//'"; 
+				kdns = "kubectl delete '$(krns)' --all";
 			};
-			initExtra = ''
+			oh-my-zsh = {
+				enable = true;
+				plugins = [ "git" "git-auto-fetch" ];
+				theme = "robbyrussell";
+			};
+			initExtraFirst = ''
 				source "$(fzf-share)/key-bindings.zsh"
 				source "$(fzf-share)/completion.zsh"
 				[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
@@ -94,7 +98,7 @@
 
 				# Load crontab from .crontab file
 				if test -z $CRONTABCMD; then
-				export CRONTABCMD=$(which crontab)
+					export CRONTABCMD=$(which crontab)
 
 					crontab() {
 						if [[ $@ == "-e" ]]; then
@@ -144,6 +148,8 @@
 		tmux = {
 			enable = true;
 			clock24 = true;
+			keyMode = "vi";
+			terminal = "screen-256color";
 			plugins = with pkgs.tmuxPlugins; [
 				sensible
 				yank
