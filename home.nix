@@ -3,7 +3,6 @@
 {
   home = {
     username = "porto";
-    homeDirectory = "/home/porto";
     stateVersion = "22.05";
     packages = with pkgs; [
       st
@@ -46,7 +45,14 @@
       weechat
       pulsemixer
     ];
+    homeDirectory = "/home/porto";
     file = {
+      crontab = {
+        target = ".crontab";
+        text = ''
+          @reboot nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }" > ~/crontab.log 2>&1
+        '';
+      };
       bspwm = {
         target = ".config/bspwm/bspwmrc";
         text = ''
