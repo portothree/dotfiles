@@ -47,7 +47,19 @@
 			taskwarrior
 			weechat
 			pulsemixer
-		];
+        ];
+        file.gh = {
+          target = "./config/gh/config.yml";
+          text = ''
+            git_protocol: https
+            editor: vim
+            prompt: enabled
+            pager: bat
+            aliases:
+              co: pr checkout
+            browser: qutebrowser
+          '';
+        };
 	};
 	nixpkgs = {
 		config = {
