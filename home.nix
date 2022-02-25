@@ -42,7 +42,6 @@
 			mycli
 			wuzz
 			websocat
-			zathura
 			taskwarrior
 			weechat
 			pulsemixer
@@ -310,6 +309,16 @@
 				theme = "Github";
 				italic-text = "always";
 			};
-		};
+        };
+        zathura = {
+          enable = true;
+          options = {
+            window-height = 1000;
+            window-width = 1000;
+          };
+          extraConfig = ''
+            map <C-i> recolor
+          '';
+        };
 	};
 }
