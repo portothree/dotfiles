@@ -144,8 +144,6 @@
             bspc node -v {-20 0,0 20,0 -20,20 0}
         '';
       };
-      alacritty = { enable = true; };
-      htop = { enable = true; };
       dijo = {
         target = ".config/dijo/config.toml";
         text = ''
@@ -165,6 +163,8 @@
   nixpkgs = { config = { allowUnfree = true; }; };
   programs = {
     home-manager = { enable = true; };
+    alacritty = { enable = true; };
+    htop = { enable = true; };
     zsh = {
       enable = true;
       enableAutosuggestions = true;
