@@ -15,6 +15,9 @@ I'm currently using debian `apt` strictly for the base system (up to, and includ
 Make sure `nix` and `home-manager` is installed.
 
 ```
+$ nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+$ nix-channel --update
+$ export NIX_PATH = "$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels";
 $ nix-shell '<home-manager>' -A install
 ```
 
