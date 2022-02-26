@@ -25,6 +25,8 @@
         text = ''
           #!/bin/bash
 
+          home-manager switch
+
           sxhkd &
           keynav &
 

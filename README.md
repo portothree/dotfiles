@@ -10,6 +10,17 @@ It uses [home-manager](https://github.com/nix-community/home-manager) to install
 
 I'm currently using debian `apt` strictly for the base system (up to, and including, X11), and Nix for all userspace apps.
 
+## Usage
+
+Make sure `nix` and `home-manager` is installed.
+
+```
+$ nix-shell '<home-manager>' -A install
+```
+
+Create a symbolic link of `home.nix` or `home.lean.nix` at `$HOME/.config/nixpkgs/home.nix`.
+Run `home-manager switch`
+
 ### Text editor
 
 #### vim
