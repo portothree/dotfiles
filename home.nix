@@ -18,7 +18,6 @@
       xdotool
       bspwm
       sxhkd
-      picom
       lemonbar
       rofi
       pywal
@@ -68,6 +67,7 @@
         text = ''
           sxhkd &
           keynav &
+          picom &
           autorandr --change
 
           if [[ $(bspc query -M --names | head -n 1) != "eDP" ]]; then
@@ -83,8 +83,6 @@
 
           unclutter -idle 1 -root
           xdotool mousemove 999999 999999
-
-          picom --config $HOME/.config/picom/picom.conf &
         '';
       };
       sxhkd = {
@@ -161,6 +159,7 @@
     };
   };
   nixpkgs = { config = { allowUnfree = true; }; };
+  services = { picom = { enable = true; }; };
   programs = {
     home-manager = { enable = true; };
     alacritty = { enable = true; };

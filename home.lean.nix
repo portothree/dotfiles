@@ -27,6 +27,7 @@
 
           sxhkd &
           keynav &
+          picom &
 
           xrandr --output "DP-0" --rotate left --left-of "HDMI-0"
 
