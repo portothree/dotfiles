@@ -301,9 +301,8 @@
     };
     qutebrowser = {
       enable = true;
+      loadAutoConfig = true;
       extraConfig = ''
-        config.load_autoconfig()
-
         default_page = "/home/porto/www/memex/packages/web/index.html"
 
         c.url_default_page = default_page
