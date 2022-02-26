@@ -13,7 +13,6 @@
       xdotool
       bspwm
       sxhkd
-      picom
       unclutter
       pulsemixer
     ];
@@ -42,8 +41,6 @@
 
           unclutter -idle 1 -root
           xdotool mousemove 999999 999999
-
-          picom --config $HOME/.config/picom/picom.conf &
         '';
       };
       sxhkd = {
@@ -102,6 +99,7 @@
     };
   };
   nixpkgs = { config = { allowUnfree = true; }; };
+  services = { picom = { enable = true; }; };
   programs = {
     home-manager = { enable = true; };
     alacritty = { enable = true; };
