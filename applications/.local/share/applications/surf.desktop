@@ -1,7 +1,0 @@
-[Desktop Entry]
-Name=surf
-GenericName=Web Browser
-Exec=surf -F
-Terminal=false
-Type=Application
-Categories=Application;Network;X-Developer;
