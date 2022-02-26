@@ -6,6 +6,10 @@ It uses [home-manager](https://github.com/nix-community/home-manager) to install
 
 [Home Manager Manual](https://nix-community.github.io/home-manager/)
 
+## Debian + Nix as package manager(?)
+
+I'm currently using debian `apt` strictly for the base system (up to, and including, X11), and Nix for all userspace apps.
+
 ### Text editor
 
 #### vim
