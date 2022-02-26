@@ -5,7 +5,6 @@
     username = "porto";
     stateVersion = "22.05";
     packages = with pkgs; [
-      st
       sysz
       ranger
       ripgrep
@@ -107,28 +106,6 @@
     home-manager = { enable = true; };
     alacritty = { enable = true; };
     htop = { enable = true; };
-    zsh = {
-      enable = true;
-      enableAutosuggestions = true;
-      enableCompletion = true;
-      sessionVariables = {
-        PROMPT = "%(?.%F{green}.%F{red})λ%f %B%F{cyan}%~%f%b ";
-        VISUAL = "vim";
-        EDITOR = "vim";
-        HISTTIMEFORMAT = "%F %T ";
-        PATH =
-          "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/nix/var/nix/profiles/default/bin:/home/porto/nix-profile/bin";
-        NIX_PATH =
-          "/home/porto/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels";
-        LOCALE_ARCHIVE = "/usr/lib/locale/locale-archive";
-      };
-      shellAliases = { r = "ranger"; };
-      oh-my-zsh = {
-        enable = true;
-        plugins = [ "git" "git-auto-fetch" ];
-        theme = "robbyrussell";
-      };
-    };
     vim = {
       enable = true;
       settings = {
@@ -148,8 +125,6 @@
     };
     git = {
       enable = true;
-      userName = "Gustavo Porto";
-      userEmail = "gustavoporto@ya.ru";
       extraConfig = {
         core = { editor = "vim"; };
         color = { ui = true; };
@@ -157,19 +132,6 @@
         pull = { ff = "only"; };
         init = { defaultBranch = "master"; };
       };
-    };
-    tmux = {
-      enable = true;
-      clock24 = true;
-      keyMode = "vi";
-      plugins = with pkgs.tmuxPlugins; [ sensible yank ];
-      extraConfig = ''
-        set -g mouse off 
-        bind h select-pane -L
-        bind j select-pane -D
-        bind k select-pane -U
-        bind l select-pane -R
-      '';
     };
     fzf = {
       enable = true;
