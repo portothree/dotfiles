@@ -130,12 +130,8 @@
             bspc node -v {-20 0,0 20,0 -20,20 0}
         '';
       };
-      alacritty = {
-        enable = true;
-      };
-      htop = {
-        enable = true;
-      };
+      alacritty = { enable = true; };
+      htop = { enable = true; };
       dijo = {
         target = ".config/dijo/config.toml";
         text = ''
@@ -180,9 +176,8 @@
         rgf = "rg --files | rg";
         ksns =
           "kubectl api-resources --verbs=list --namespaced -o name | xargs -n1 kubectl get '$@' --show-kind --ignore-not-found";
-        krns = ''
-          kubectl api-resources --namespaced=true --verbs=delete -o name | tr '
-          ' ',' | sed -e 's/,$//''';
+        krns =
+          "kubectl api-resources --namespaced=true --verbs=delete -o name | tr '' ',' | sed -e 's/,$//''";
         kdns = "kubectl delete '$(krns)' --all";
       };
       initExtraFirst = ''
@@ -190,17 +185,17 @@
 
         # Load crontab from .crontab file
         if test -z $CRONTABCMD; then
-        	export CRONTABCMD=$(which crontab)
+          export CRONTABCMD=$(which crontab)
 
-        	crontab() {
-        		if [[ $@ == "-e" ]]; then
-        			vim "$HOME/.crontab" && $CRONTABCMD "$HOME/.crontab"
-        		else
-        			$CRONTABCMD $@
-        		fi
-        	 }
-           
-        	$CRONTABCMD "$HOME/.crontab"
+          crontab() {
+              if [[ $@ == "-e" ]]; then
+                  vim "$HOME/.crontab" && $CRONTABCMD "$HOME/.crontab"
+              else
+                  $CRONTABCMD $@
+              fi
+           }
+         
+          $CRONTABCMD "$HOME/.crontab"
         fi
       '';
       oh-my-zsh = {
