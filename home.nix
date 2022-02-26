@@ -182,8 +182,6 @@
         kdns = "kubectl delete '$(krns)' --all";
       };
       initExtraFirst = ''
-        source "$(fzf-share)/key-bindings.zsh"
-        source "$(fzf-share)/completion.zsh"
         [[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
         eval "$(direnv hook zsh)"
 
