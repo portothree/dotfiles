@@ -18,6 +18,7 @@
       xdotool
       bspwm
       sxhkd
+      picom
       lemonbar
       rofi
       pywal
@@ -28,18 +29,31 @@
       shfmt
       nixfmt
       glow
+      unifont
       fira-code
       siji
       unclutter
-      dunst
       weechat
       pgcli
       mycli
       wuzz
       websocat
+      tasksh
       vit
       weechat
       pulsemixer
+      nudoku
+      playerctl
+      spotifyd
+      spotify-tui
+      s-tui
+      dijo
+      checkinstall
+      cmake
+      lua
+      docui
+      fq
+      mutt
     ];
     homeDirectory = "/home/porto";
     file = {
