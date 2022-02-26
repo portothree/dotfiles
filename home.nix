@@ -37,7 +37,7 @@
       mycli
       wuzz
       websocat
-      taskwarrior
+      vit
       weechat
       pulsemixer
     ];
@@ -166,10 +166,7 @@
           "/home/porto/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels";
         LOCALE_ARCHIVE = "/usr/lib/locale/locale-archive";
       };
-      localVariables = {
-        MEMEX = "/home/porto/www/memex";
-        TASKWARRIOR_LOCATION_PATH = "/home/porto/www/memex/trails/tasks/.task";
-      };
+      localVariables = { MEMEX = "/home/porto/www/memex"; };
       shellAliases = {
         r = "ranger";
         qutebrowser = "QT_XCB_GL_INTEGRATION=none qutebrowser";
@@ -298,6 +295,10 @@
       extraConfig = ''
         map <C-i> recolor
       '';
+    };
+    taskwarrior = {
+      enable = true;
+      dataLocation = "/home/porto/www/memex/trails/tasks/.task";
     };
     qutebrowser = {
       enable = true;
