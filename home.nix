@@ -8,7 +8,6 @@
       st
       alacritty
       htop
-      direnv
       sysz
       ranger
       tig
@@ -183,7 +182,6 @@
       };
       initExtraFirst = ''
         [[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
-        eval "$(direnv hook zsh)"
 
         # Load crontab from .crontab file
         if test -z $CRONTABCMD; then
@@ -274,6 +272,10 @@
         bind k select-pane -U
         bind l select-pane -R
       '';
+    };
+    direnv = {
+      enable = true;
+      enableZshIntegration = true;
     };
     fzf = {
       enable = true;
