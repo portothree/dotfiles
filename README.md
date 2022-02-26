@@ -19,6 +19,11 @@ $ nix-shell '<home-manager>' -A install
 ```
 
 Create a symbolic link of `home.nix` or `home.lean.nix` at `$HOME/.config/nixpkgs/home.nix`.
+
+```
+$ ln home.nix $HOME/.config/nixpkgs/home/nix
+```
+
 Run `home-manager switch`
 
 ### Text editor
