@@ -40,7 +40,6 @@
       pulsemixer
       nudoku
       playerctl
-      spotifyd
       spotify-tui
       s-tui
       dijo
@@ -131,6 +130,7 @@
           bspc node -v {-20 0,0 20,0 -20,20 0}
       '';
     };
+    spotifyd = { enable = true; };
   };
   programs = {
     alacritty = { enable = true; };
