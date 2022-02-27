@@ -4,6 +4,7 @@
   home = {
     username = "porto";
     stateVersion = "22.05";
+    homeDirectory = "/home/porto";
     packages = with pkgs; [
       st
       sysz
@@ -54,7 +55,6 @@
       fq
       mutt
     ];
-    homeDirectory = "/home/porto";
     file = {
       crontab = {
         target = ".crontab";
@@ -159,7 +159,14 @@
     };
   };
   nixpkgs = { config = { allowUnfree = true; }; };
-  services = { picom = { enable = true; }; };
+  services = {
+    xserver = { enable = true; };
+    picom = { enable = true; };
+  };
+  xsession = {
+    enable = true;
+    windowManager = { command = "..."; };
+  };
   programs = {
     home-manager = { enable = true; };
     alacritty = { enable = true; };
