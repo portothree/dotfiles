@@ -1,4 +1,4 @@
-{ ... }:
+{ config, pkgs, ... }:
 
 {
   imports = [ ./common.nix ];
@@ -14,10 +14,13 @@
       unclutter
       pulsemixer
     ];
-    file = {
+  };
+  xsession = {
+    enable = true;
+    windowManager = {
       bspwm = {
-        target = ".config/bspwm/bspwmrc";
-        text = ''
+        enable = true;
+        extraConfig = ''
           #!/bin/bash
 
           home-manager switch
