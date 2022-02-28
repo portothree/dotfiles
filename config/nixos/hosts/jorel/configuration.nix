@@ -13,7 +13,7 @@
   };
   time = { timeZone = "Europe/Lisbon"; };
   networking = {
-    hostName = "uppercut";
+    hostName = "jorel";
     useDHCP = false;
     interfaces = { ens18 = { useDHCP = true; }; };
   };
