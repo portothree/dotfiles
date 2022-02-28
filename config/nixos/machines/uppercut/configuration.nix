@@ -22,14 +22,10 @@
     xserver = {
       enable = true;
       layout = "us";
-      desktopManager = {
-        default = "none";
-      };
       displayManager = {
         defaultSession = "none+bspwm";
       };
       windowManager = {
-        default = "bspwm";
         bspwm = {
           enable = true;
         };
