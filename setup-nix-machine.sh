@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 MACHINE=$2
 VALID_ARGS=$(getopt -o sr --long setup,rebuild -- "$@")
@@ -8,8 +8,7 @@ fi
 
 
 rebuild_machine() {
-	export NIXOS_CONFIG="./config/nixos/machines/$MACHINE/configuration.nix"
-	sudo nixos-rebuild switch -I $NIXOS_CONFIG
+	sudo nixos-rebuild switch -I nixos-config=./config/nixos/machines/$MACHINE/configuration.nix
 }
 
 
