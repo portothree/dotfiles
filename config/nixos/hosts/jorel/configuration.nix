@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./hardware-configuration.nix <home-manager/nixos> ];
+  imports = [ ../common.nix ./hardware-configuration.nix <home-manager/nixos> ];
   boot = {
     loader = {
       grub = {
@@ -11,7 +11,6 @@
       };
     };
   };
-  time = { timeZone = "Europe/Lisbon"; };
   networking = {
     hostName = "jorel";
     useDHCP = false;
@@ -32,8 +31,6 @@
       };
     };
   };
-  sound = { enable = true; };
-  hardware = { pulseaudio = { enable = true; }; };
   users = {
     users = {
       porto = {
@@ -43,8 +40,10 @@
     };
   };
   environment = { systemPackages = with pkgs; [ wget ]; };
-  system = { stateVersion = "21.11"; };
+  sound = { enable = true; };
+  hardware = { pulseaudio = { enable = true; }; };
   home-manager = {
     users = { porto = import ./home.nix { inherit config pkgs; }; };
   };
+  system = { stateVersion = "21.11"; };
 }
