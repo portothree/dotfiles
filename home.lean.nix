@@ -10,7 +10,6 @@
       xclip
       keynav
       xdotool
-      bspwm
       unclutter
       pulsemixer
     ];
@@ -47,7 +46,6 @@
     };
   };
   services = {
-    picom = { enable = true; };
     sxhkd = {
       enable = true;
       extraConfig = ''
