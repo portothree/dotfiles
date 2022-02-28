@@ -1,14 +1,14 @@
 #!/bin/sh
 
-MACHINE=$2
+HOST=$2
 VALID_ARGS=$(getopt -o sr --long setup,rebuild -- "$@")
 if [[ $? -ne 0 ]]; then
     exit 1;
 fi
 
 
-rebuild_machine() {
-	sudo nixos-rebuild switch -I nixos-config=./config/nixos/machines/$MACHINE/configuration.nix
+rebuild() {
+	sudo nixos-rebuild switch -I nixos-config=./config/nixos/hosts/$HOST/configuration.nix --show-trace
 }
 
 
@@ -17,7 +17,7 @@ initial_setup() {
 	sudo nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
 	sudo nix-channel --update
 	
-	rebuild_machine
+	rebuild
 }
 
 
@@ -25,13 +25,13 @@ eval set -- "$VALID_ARGS"
 while [ : ]; do
   case "$1" in
     -s | --setup)
-        echo "Initial setup for machine $MACHINE"
+        echo "Initial setup for host $HOST"
         initial_setup 
         shift
         ;;
     -r | --rebuild)
-        echo "Rebuilding machine $MACHINE"
-        rebuild_machine
+        echo "Rebuilding host $HOST"
+        rebuild
         shift
         ;;
     --) shift;
