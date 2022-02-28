@@ -2,8 +2,6 @@
 
 {
   home = {
-    username = builtins.getEnv "USER";
-    homeDirectory = builtins.getEnv "HOME";
     stateVersion = "22.05";
   };
   nixpkgs = { config = { allowUnfree = true; }; };
