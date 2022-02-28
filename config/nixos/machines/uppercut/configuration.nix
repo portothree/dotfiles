@@ -22,7 +22,18 @@
     xserver = {
       enable = true;
       layout = "us";
-      xkbOptions = "eurosign:e";
+      desktopManager = {
+        default = "none";
+      };
+      displayManager = {
+        defaultSession = "none+bspwm";
+      };
+      windowManager = {
+        default = "bspwm";
+        bspwm = {
+          enable = true;
+        };
+      };
     };
   };
   sound = { enable = true; };
