@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [ ./hardware-configuration.nix <home-manager/nixos> ];
   boot = {
     loader = {
       grub = {
@@ -37,4 +37,7 @@
   };
   environment = { systemPackages = with pkgs; [ wget ]; };
   system = { stateVersion = "21.11"; };
+  home-manager = {
+    users = { porto = { config, pkgs, ... }: import ./home/nix; };
+  };
 }
