@@ -11,13 +11,13 @@
       };
     };
   };
-  networking.hostName = "nixos.main";
-  time.timeZone = "Europe/Lisbon";
-  networking.useDHCP = false;
-  networking.interfaces.ens18.useDHCP = true;
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-  sercices = {
+  time = { timeZone = "Europe/Lisbon"; };
+  networking = {
+    hostName = "uppercut";
+    useDHCP = false;
+    interfaces = { ens18 = { useDHCP = true; }; };
+  };
+  services = {
     openssh = { enable = true; };
     xserver = {
       enable = true;
@@ -25,13 +25,16 @@
       xkbOptions = "eurosign:e";
     };
   };
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-  users.users.porto = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
+  sound = { enable = true; };
+  hardware = { pulseaudio = { enable = true; }; };
+  users = {
+    users = {
+      porto = {
+        isNormalUser = true;
+        extraGroups = [ "wheel" ];
+      };
+    };
   };
-  environment.systemPackages = with pkgs; [ wget ];
-  system.stateVersion = "21.11";
+  environment = { systemPackages = with pkgs; [ wget ]; };
+  system = { stateVersion = "21.11"; };
 }
-
