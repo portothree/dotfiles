@@ -45,7 +45,6 @@
       cmake
       lua
       docui
-      fq
       mutt
     ];
     file = {
