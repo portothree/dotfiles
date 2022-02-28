@@ -38,6 +38,6 @@
   environment = { systemPackages = with pkgs; [ wget ]; };
   system = { stateVersion = "21.11"; };
   home-manager = {
-    users = { porto = { config, pkgs, ... }: import ./home.nix; };
+    users = { porto = import ./home.nix { inherit config pkgs; }; };
   };
 }
