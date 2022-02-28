@@ -9,7 +9,7 @@ fi
 
 rebuild_machine() {
 	export NIXOS_CONFIG="./config/nixos/machines/$MACHINE/configuration.nix"
-	sudo nixos-rebuild switch
+	sudo nixos-rebuild switch -I $NIXOS_CONFIG
 }
 
 
