@@ -6,11 +6,27 @@ It uses [home-manager](https://github.com/nix-community/home-manager) to install
 
 [Home Manager Manual](https://nix-community.github.io/home-manager/)
 
-## Debian + Nix as package manager(?)
+## NixOs
 
-I'm currently using debian `apt` strictly for the base system (up to, and including, X11), and Nix for all userspace apps.
+```
+mkdir /mnt/etc
+nix-env -i git vim
+cd /mnt/etc
+git clone https://github.com/portothree/dotfiles nixos
+cd /mnt/etc/nixos
+nixos-generate-config --show-hardware-config >> ./config/nixos/hosts/<host>/hardware-configuration.nix
 
-## Usage
+nixos-install
+reboot
+```
+
+## Non-NixOs
+
+### Debian + Nix as package manager(?)
+
+For my non-nixos machines I'm currently using debian `apt` strictly for the base system, and Nix for all userspace apps.
+
+### Usage
 
 Make sure `nix` and `home-manager` is installed.
 
@@ -21,7 +37,7 @@ $ export NIX_PATH = "$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/
 $ nix-shell '<home-manager>' -A install
 ```
 
-Create a symbolic link of `home.nix` or `home.lean.nix` at `$HOME/.config/nixpkgs/home.nix`.
+Create a symbolic link of `./config/nixos/hosts/<host>/home.nix` at `$HOME/.config/nixpkgs/home.nix`.
 
 ```
 $ ln home.nix $HOME/.config/nixpkgs/home/nix
