@@ -3,6 +3,8 @@
 {
   imports = [ ../../../home/common.nix ];
   home = {
+    username = "porto";
+    homeDirectory = "/home/porto";
     packages = with pkgs; [
       sysz
       ranger
