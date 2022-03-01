@@ -10,7 +10,7 @@ It uses [home-manager](https://github.com/nix-community/home-manager) to install
 
 ```
 mkdir /mnt/etc
-nix-env -i git vim
+nix-shell '<nixpkgs>' -A git vim
 cd /mnt/etc
 git clone https://github.com/portothree/dotfiles nixos
 cd /mnt/etc/nixos
