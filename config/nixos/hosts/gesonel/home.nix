@@ -8,20 +8,16 @@
       ranger
       ripgrep
       xclip
-      keynav
       xdotool
       unclutter
-      pulsemixer
     ];
   };
   xsession = {
     enable = true;
     windowManager = {
       bspwm = {
-        enable = true;
+        enable = false;
         extraConfig = ''
-          #!/bin/bash
-
           xrandr --output "DP-0" --rotate left --left-of "HDMI-0"
 
           bspc monitor "DP-0" -d I
@@ -40,8 +36,9 @@
     };
   };
   services = {
+    keynav = { enable = true; };
     sxhkd = {
-      enable = true;
+      enable = false;
       extraConfig = ''
         super + Return
           nixGL alacritty 
