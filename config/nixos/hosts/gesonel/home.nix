@@ -18,7 +18,7 @@
     enable = true;
     windowManager = {
       bspwm = {
-        enable = false;
+        enable = true;
         extraConfig = ''
           xrandr --output "DP-0" --rotate left --left-of "HDMI-0"
 
@@ -40,7 +40,7 @@
   services = {
     keynav = { enable = true; };
     sxhkd = {
-      enable = false;
+      enable = true;
       extraConfig = ''
         super + Return
           nixGL alacritty 
