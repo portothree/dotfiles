@@ -1,8 +1,11 @@
 { config, pkgs, ... }:
 
 let
-  unstable = import ("https://nixos.org/channels/nixos-unstable") { };
-  nixgl = import ("https://github.com/guibou/nixGL/archive/main.tar.gz") { };
+  unstable =
+    import (builtins.fetchTarball "https://nixos.org/channels/nixos-unstable")
+    { };
+  nixgl = import (builtins.fetchTarball
+    "https://github.com/guibou/nixGL/archive/main.tar.gz") { };
   nixglPkgs = with nixgl; [ auto.nixGLNvidia ];
 in {
   imports = [ ../../../home/common.nix ];
