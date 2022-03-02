@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  nixgl = import <nixgl>;
+  nixgl = import <nixgl> { inherit config };
   nixglPkgs = with nixgl; [ auto.nixGLNvidia ];
 in {
   imports = [ ../../../home/common.nix ];
