@@ -8,6 +8,7 @@
       sysz
       ranger
       tig
+      bitwarden-cli
       k9s
       kubectl
       ripgrep
