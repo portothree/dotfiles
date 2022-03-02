@@ -8,7 +8,6 @@
       sysz
       ranger
       tig
-      bitwarden-cli
       google-cloud-sdk
       k9s
       kubectl

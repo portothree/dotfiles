@@ -7,7 +7,6 @@
       st
       sysz
       ranger
-      bitwarden-cli
       tig
       google-cloud-sdk
       k9s
