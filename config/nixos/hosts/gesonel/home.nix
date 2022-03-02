@@ -1,7 +1,8 @@
 { config, pkgs, ... }:
 
 let
-  nixgl = import <nixgl> { inherit config };
+  unstable = import ("https://nixos.org/channels/nixos-unstable") { };
+  nixgl = import ("https://github.com/guibou/nixGL/archive/main.tar.gz") { };
   nixglPkgs = with nixgl; [ auto.nixGLNvidia ];
 in {
   imports = [ ../../../home/common.nix ];
