@@ -57,7 +57,7 @@ in {
       enable = true;
       extraConfig = ''
         super + Return
-          nixGL alacritty 
+          nixGLNvidia-460.91.03 alacritty 
         super + Escape
           pkill -USR1 -x sxhkd
         super + alt + {q,r}
@@ -108,7 +108,17 @@ in {
     };
   };
   programs = {
-    alacritty = { enable = true; };
+    alacritty = { 
+      enable = true;
+      settings = {
+        colors = {
+          primary = {
+            background = "0x181818";
+            foreground = "0xd8d8d8"
+          };
+        };
+      };
+    };
     htop = { enable = true; };
     vim = {
       enable = true;
