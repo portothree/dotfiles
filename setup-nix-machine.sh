@@ -7,8 +7,12 @@ if [[ $? -ne 0 ]]; then
 fi
 
 
-rebuild() {
+rebuild_nixos() {
 	sudo nixos-rebuild switch -I nixos-config=./config/nixos/hosts/$HOST/configuration.nix --show-trace
+}
+
+rebuild_home_manager() {
+	home-manager -f ./config/nixos/hosts/$HOST/home.nix switch
 }
 
 
@@ -29,9 +33,14 @@ while [ : ]; do
         initial_setup 
         shift
         ;;
-    -r | --rebuild)
-        echo "Rebuilding host $HOST"
-        rebuild
+    -R | --rebuild-nix)
+        echo "Rebuilding NixOS for host $HOST"
+        rebuild_nixos
+        shift
+        ;;
+    -r | --rebuild-home)
+        echo "Rebuilding home-manager for host $HOST"
+        rebuild_home_manager
         shift
         ;;
     --) shift;
