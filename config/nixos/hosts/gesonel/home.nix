@@ -5,14 +5,15 @@
   home = {
     username = "porto";
     homeDirectory = "/home/porto";
-    packages = with pkgs; [
-      sysz
-      ranger
-      ripgrep
-      xclip
-      xdotool
-      unclutter
-    ];
+    packages = with pkgs; [ sysz ranger ripgrep xclip xdotool ];
+    file = {
+      crontab = {
+        target = ".crontab";
+        text = ''
+          @reboot nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }" > ~/crontab.log 2>&1
+        '';
+      };
+    };
   };
   xsession = {
     enable = true;
@@ -31,7 +32,6 @@
           bspc config bordeless_monocle true
           bspc config gapless_monocle true
 
-          unclutter -idle 1 -root
           xdotool mousemove 999999 999999
         '';
       };
@@ -39,6 +39,11 @@
   };
   services = {
     keynav = { enable = true; };
+    unclutter = {
+      enable = true;
+      timeout = 1;
+      extraOptions = [ "root" ];
+    };
     sxhkd = {
       enable = true;
       extraConfig = ''
