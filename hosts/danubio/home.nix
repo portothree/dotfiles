@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ../../../home/common.nix ];
+  imports = [ ../../config/home-manager/common.nix ];
   home = {
     packages = with pkgs; [
       st

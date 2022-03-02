@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ../../common.nix ./hardware-configuration.nix <home-manager/nixos> ];
+  imports = [ ../common.nix ./hardware-configuration.nix <home-manager/nixos> ];
   boot = {
     loader = {
       grub = {
@@ -12,7 +12,7 @@
     };
   };
   networking = {
-    hostName = "danubio";
+    hostName = "jorel";
     useDHCP = false;
     interfaces = { ens18 = { useDHCP = true; }; };
   };

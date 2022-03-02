@@ -8,7 +8,7 @@ let
     "https://github.com/guibou/nixGL/archive/main.tar.gz") { };
   nixglPkgs = with nixgl; [ auto.nixGLNvidia ];
 in {
-  imports = [ ../../../home/common.nix ];
+  imports = [ ../../config/home-manager/common.nix ];
   home = {
     username = "porto";
     homeDirectory = "/home/porto";

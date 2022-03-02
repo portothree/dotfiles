@@ -14,11 +14,11 @@ setup_channels() {
 }
 
 rebuild_nixos() {
-	sudo nixos-rebuild switch -I nixos-config=./config/nixos/hosts/$HOST/configuration.nix --show-trace
+	sudo nixos-rebuild switch -I nixos-config=./hosts/$HOST/configuration.nix --show-trace
 }
 
 rebuild_home_manager() {
-	home-manager -f ./config/nixos/hosts/$HOST/home.nix switch
+	home-manager -f ./hosts/$HOST/home.nix switch
 }
 
 
