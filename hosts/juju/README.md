@@ -2,7 +2,7 @@
 
 ## Overview
 
-Laptop for work on the go running NixOS
+Laptop for work on the go running NixOS.
 
 ## Specs
 

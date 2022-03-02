@@ -8,7 +8,6 @@
       sysz
       ranger
       tig
-      google-cloud-sdk
       k9s
       kubectl
       ripgrep
@@ -20,12 +19,13 @@
       unifont
       fira-code
       siji
-      weechat
-      pgcli
-      mycli
       wuzz
       websocat
-      weechat
+      nodejs
+      cmake
+      lua
+      docui
+      mutt
     ];
   };
   programs = {
