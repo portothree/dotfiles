@@ -1,11 +1,15 @@
 { config, pkgs, ... }:
 
-{
+let
+  nixgl = import <nixgl>;
+  nixglPkgs = with nixgl; [ auto.nixGLNvidia ];
+in {
   imports = [ ../../../home/common.nix ];
   home = {
     username = "porto";
     homeDirectory = "/home/porto";
-    packages = with pkgs; [ sysz ranger ripgrep xclip xdotool ];
+    packages = with pkgs;
+      [ sysz ranger ripgrep xclip xdotool firefox qutebrowser ] ++ nixglPkgs;
     file = {
       crontab = {
         target = ".crontab";
