@@ -13,7 +13,8 @@ in {
     username = "porto";
     homeDirectory = "/home/porto";
     packages = with pkgs;
-      [ sysz ranger ripgrep xclip xdotool firefox qutebrowser ] ++ nixglPkgs;
+      [ sysz ranger ripgrep xclip xdotool nvtop firefox qutebrowser ]
+      ++ nixglPkgs;
     file = {
       crontab = {
         target = ".crontab";
