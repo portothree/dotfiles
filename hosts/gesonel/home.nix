@@ -13,8 +13,7 @@ in {
     username = "porto";
     homeDirectory = "/home/porto";
     packages = with pkgs;
-      [ sysz ranger ripgrep xclip xdotool firefox qutebrowser ]
-      ++ nixglPkgs;
+      [ sysz ranger ripgrep xclip xdotool firefox qutebrowser ] ++ nixglPkgs;
     file = {
       crontab = {
         target = ".crontab";
@@ -108,13 +107,13 @@ in {
     };
   };
   programs = {
-    alacritty = { 
+    alacritty = {
       enable = true;
       settings = {
         colors = {
           primary = {
             background = "0x181818";
-            foreground = "0xd8d8d8"
+            foreground = "0xd8d8d8";
           };
         };
       };
