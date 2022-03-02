@@ -1,7 +1,7 @@
 #!/bin/sh
 
 HOST=$2
-VALID_ARGS=$(getopt -o sr --long setup,rebuild -- "$@")
+VALID_ARGS=$(getopt -o SsRr --long setup-nixos,setup-channels,rebuild-nixos,rebuild-home -- "$@")
 if [[ $? -ne 0 ]]; then
     exit 1;
 fi
@@ -25,13 +25,13 @@ rebuild_home_manager() {
 eval set -- "$VALID_ARGS"
 while [ : ]; do
   case "$1" in
-    -S | --setup)
+    -S | --setup-nixos)
         echo "Initial NixOS setup for host $HOST"
         setup_channels 
 		rebuild_nixos
         shift
         ;;
-    -s | --setup)
+    -s | --setup-channels)
         echo "Initial non-NixOS setup for host $HOST"
         setup_channels 
         shift
