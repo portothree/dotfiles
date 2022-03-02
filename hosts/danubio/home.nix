@@ -25,7 +25,7 @@
       mycli
       wuzz
       websocat
-      weechat
+      lazydocker
     ];
   };
   programs = {

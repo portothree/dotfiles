@@ -24,8 +24,7 @@
       nodejs
       cmake
       lua
-      docui
-      mutt
+      lazydocker 
     ];
   };
   programs = {
