@@ -22,7 +22,7 @@
       siji
       wuzz
       websocat
-      nodejs-16_x
+      nodejs
       cmake
       lua
       lazydocker 
