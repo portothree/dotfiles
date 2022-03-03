@@ -27,6 +27,7 @@
       wuzz
       websocat
       lazydocker
+      nodejs-16_x
     ];
   };
   programs = {
