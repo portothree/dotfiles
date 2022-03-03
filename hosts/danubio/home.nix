@@ -27,6 +27,8 @@
       wuzz
       websocat
       lazydocker
+      nodejs
+      yarn
     ];
   };
   programs = {
