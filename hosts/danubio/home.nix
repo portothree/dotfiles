@@ -28,6 +28,7 @@
       websocat
       lazydocker
       nodejs-16_x
+      yarn
     ];
   };
   programs = {
