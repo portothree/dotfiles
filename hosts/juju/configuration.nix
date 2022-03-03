@@ -22,10 +22,12 @@
           hidden = true;
           pskRaw = "@WIRELESS_PSKRAW_HOME@";
         };
+        "@WIRELESS_SSID_WOO@" = {
+          pskRaw = "@WIRELESS_PSKRAW_WOO@";
+        };
       };
     };
   };
-  services.xserver.enable = true;
   services = {
     xserver = {
       enable = true;
