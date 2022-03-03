@@ -13,7 +13,7 @@ in {
     username = "porto";
     homeDirectory = "/home/porto";
     packages = with pkgs;
-      [ sysz ranger bitwarden-cli ripgrep xclip xdotool firefox qutebrowser ] ++ nixglPkgs;
+      [ xpra sysz ranger bitwarden-cli ripgrep xclip xdotool firefox qutebrowser ] ++ nixglPkgs;
     file = {
       crontab = {
         target = ".crontab";

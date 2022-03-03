@@ -4,6 +4,7 @@
   imports = [ ../../config/home-manager/common.nix ];
   home = {
     packages = with pkgs; [
+      xpra
       st
       sysz
       ranger
