@@ -35,18 +35,11 @@
     users = {
       porto = {
         isNormalUser = true;
-        extraGroups = [ "wheel" "audio" ];
+        extraGroups = [ "wheel" ];
       };
     };
   };
   environment = { systemPackages = with pkgs; [ wget ]; };
-  sound = { enable = true; };
-  hardware = { pulseaudio = { enable = true; }; };
-  nixpkgs = {
-    config = {
-      pulseaudio = true;
-    };
-  };
   home-manager = {
     users = { porto = import ./home.nix { inherit config pkgs; }; };
   };
