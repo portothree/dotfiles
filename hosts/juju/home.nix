@@ -63,13 +63,7 @@
       bspwm = {
         enable = true;
         extraConfig = ''
-          autorandr --change
-
-          if [[ $(bspc query -M --names | head -n 1) != "eDP" ]]; then
-            bspc monitor "HDMI-0" -d I
-            bspc monitor "DP-0" -d II III IV V VI VII VIII IX X
-          fi
-
+          bspc monitor "eDP" -d I II III IV V VI VII VIII IX X
           bspc config border_width 0.5
           bspc config window_gap 2
           bspc config split_ratio 0.52
