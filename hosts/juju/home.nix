@@ -4,13 +4,11 @@
   imports = [ ../../config/home-manager/common.nix ];
   home = {
     packages = with pkgs; [
-      xpra
       st
       sysz
       ranger
       bitwarden-cli
       tig
-      google-cloud-sdk
       k9s
       kubectl
       ripgrep
@@ -18,18 +16,11 @@
       xdotool
       lemonbar
       rofi
-      pywal
-      mopidy
-      mopidy-iris
-      cava
-      astyle
-      shfmt
       nixfmt
       glow
       unifont
       fira-code
       siji
-      unclutter
       weechat
       pgcli
       mycli
@@ -40,20 +31,14 @@
       weechat
       pulsemixer
       nudoku
-      playerctl
-      spotify-tui
       s-tui
       dijo
-      cmake
-      lua
-      docui
       mutt
     ];
     file = {
       crontab = {
         target = ".crontab";
         text = ''
-          @reboot nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }" > ~/crontab.log 2>&1
         '';
       };
       dijo = {
@@ -158,7 +143,6 @@
     spotifyd = { enable = true; };
   };
   programs = {
-    alacritty = { enable = true; };
     htop = { enable = true; };
     zsh = {
       enable = true;
