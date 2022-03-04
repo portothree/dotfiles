@@ -29,11 +29,20 @@
     };
   };
   services = {
+    openssh = { enable = true; };
     xserver = {
       enable = true;
       layout = "us";
       libinput = {
         enable = true;
+      };
+      displayManager = {
+        defaultSession = "none+bspwm";
+      };
+      windowManager = {
+        bspwm = {
+          enable = true;
+        };
       };
     };
   };
