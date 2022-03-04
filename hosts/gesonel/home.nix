@@ -10,6 +10,7 @@ let
 in {
   imports = [ ../../config/home-manager/common.nix ];
   home = {
+    stateVersion = "22.05";
     username = "porto";
     homeDirectory = "/home/porto";
     packages = with pkgs;

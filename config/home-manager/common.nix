@@ -1,9 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  home = {
-    stateVersion = "22.05";
-  };
   nixpkgs = { config = { allowUnfree = true; }; };
   xdg = { enable = true; };
   services = {
