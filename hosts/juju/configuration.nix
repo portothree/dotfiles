@@ -58,5 +58,8 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+  home-manager = {
+    users = { porto = import ./home.nix { inherit config pkgs; }; };
+  };
   system.stateVersion = "21.11";
 }
