@@ -76,13 +76,18 @@
           bspc config bordeless_monocle true
           bspc config gapless_monocle true
 
-          unclutter -idle 1 -root
           xdotool mousemove 999999 999999
         '';
       };
     };
   };
   services = {
+    keynav = { enable = true; };
+    unclutter = {
+      enable = true;
+      timeout = 1;
+      extraOptions = [ "root" ];
+    };
     sxhkd = {
       enable = true;
       extraConfig = ''
