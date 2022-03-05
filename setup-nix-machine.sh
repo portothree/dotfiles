@@ -8,7 +8,8 @@ fi
 
 setup_channels() {
 	nix-channel --add https://nixos.org/channels/nixos-unstable unstable
-	nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+	nix-channel --add https://github.com/nix-community/home-manager/archive/release-21.11.tar.gz home-manager
+	nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager-unstable
 	nix-channel --add https://github.com/guibou/nixGL/archive/main.tar.gz nixgl
 	nix-channel --update
 }
