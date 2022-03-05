@@ -19,18 +19,6 @@
   };
   services = {
     openssh = { enable = true; };
-    xserver = {
-      enable = true;
-      layout = "us";
-      displayManager = {
-        defaultSession = "none+bspwm";
-      };
-      windowManager = {
-        bspwm = {
-          enable = true;
-        };
-      };
-    };
   };
   users = {
     users = {

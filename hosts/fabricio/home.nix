@@ -5,7 +5,6 @@
   home = {
     stateVersion = "21.11";
     packages = with pkgs; [
-      xpra
       st
       sysz
       ranger
@@ -13,7 +12,6 @@
       k9s
       kubectl
       ripgrep
-      xclip
       astyle
       shfmt
       nixfmt
