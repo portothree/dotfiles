@@ -6,6 +6,7 @@
     stateVersion = "21.11";
     packages = with pkgs; [
       st
+      openvpn
       sysz
       ranger
       tig
@@ -24,7 +25,7 @@
       nodejs
       cmake
       lua
-      lazydocker 
+      lazydocker
     ];
   };
   programs = {
