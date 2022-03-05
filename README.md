@@ -9,14 +9,16 @@ It uses [home-manager](https://github.com/nix-community/home-manager) to install
 ## NixOs
 
 ```
-mkdir /mnt/etc
+mkdir -p /mnt/etc/nixos
 nix-shell '<nixpkgs>' -p git vim
-cd /mnt/etc
-git clone https://github.com/portothree/dotfiles nixos
-cd /mnt/etc/nixos
-nixos-generate-config --show-hardware-config >> ./config/nixos/hosts/<host>/hardware-configuration.nix
+git clone https://github.com/portothree/dotfiles /mnt/etc/nixos
 
-nixos-install
+
+nix-channel --add https://github.com/nix-community/home-manager/archive/release-21.11.tar.gz home-manager
+nix-channel --update
+
+nixos-generate-config --show-hardware-config >> /mnt/etc/nixos/hosts/<host>/hardware-configuration.nix
+nixos-install -I nixos-config=/mnt/etc/nixos/hosts/<host>/hardware-configuration.nix
 reboot
 ```
 
