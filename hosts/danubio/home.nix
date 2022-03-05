@@ -3,7 +3,7 @@
 {
   imports = [ ../../config/home-manager/common.nix ];
   home = {
-    stateVersion = "22.05";
+    stateVersion = "21.11";
     packages = with pkgs; [
       xpra
       st
