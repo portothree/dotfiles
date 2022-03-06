@@ -26,6 +26,7 @@
       cmake
       lua
       lazydocker
+      mongodb-tools
     ];
   };
   programs = {
