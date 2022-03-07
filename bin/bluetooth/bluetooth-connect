@@ -2,6 +2,15 @@
 
 set -euC
 
+#
+# Check if pulseaudio bluetooth module is installed
+#
+apt-cache show pulseaudio-module-bluetooth > /dev/null 2>&1 
+if [ $? -ne 0 ]; then
+	echo "Package pulseaudio-module-bluetooth not found"
+	exit 1;
+fi
+
 connect() {
 	local MAC=$(echo "$1" | cut -d ' ' -f2)
 
