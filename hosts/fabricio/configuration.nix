@@ -16,6 +16,9 @@
     hostName = "fabricio";
     useDHCP = false;
     interfaces = { ens18 = { useDHCP = true; }; };
+    extraHosts = ''
+      192.168.1.100 pve
+    '';
   };
   services = {
     openssh = { enable = true; };

@@ -16,6 +16,9 @@
     hostName = "danubio";
     useDHCP = false;
     interfaces = { ens18 = { useDHCP = true; }; };
+    extraHosts = ''
+      192.168.1.100 pve
+    '';
     firewall = {
       allowedTCPPorts = [ 22 80 3000 8081 ];
       allowedUDPPorts = [ ];
