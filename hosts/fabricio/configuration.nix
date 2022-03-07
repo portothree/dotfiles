@@ -19,6 +19,7 @@
     extraHosts = ''
       192.168.1.100 pve
     '';
+    nameservers = [ "208.67.222.222" "208.67.220.220"];
   };
   services = {
     openssh = { enable = true; };
