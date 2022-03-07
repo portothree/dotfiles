@@ -16,6 +16,10 @@
     hostName = "danubio";
     useDHCP = false;
     interfaces = { ens18 = { useDHCP = true; }; };
+    firewall = {
+      allowedTCPPortRanges = [ { from = 8000; to = 9000;} ];
+      allowedUDPPortRanges = [ { from = 8000; to = 9000;} ];
+    };
   };
   services = {
     openssh = { enable = true; };
