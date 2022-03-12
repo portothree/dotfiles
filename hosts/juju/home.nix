@@ -35,6 +35,9 @@
       s-tui
       dijo
       mutt
+      powertop
+      acpi
+      brightnessctl
     ];
     file = {
       crontab = {
