@@ -2,8 +2,15 @@
 
 {
   imports = [ ./hardware-configuration.nix <home-manager/nixos> ];
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+    initrd = {
+      kernelModules = [ "amdgpu" ];
+    };
+  };
   time.timeZone = "Europe/Lisbon";
   networking = {
     useDHCP = false;
@@ -33,6 +40,7 @@
     xserver = {
       enable = true;
       layout = "us";
+      videoDrivers = [ "amdgpu" ];
       libinput = {
         enable = true;
       };
@@ -63,3 +71,4 @@
   };
   system.stateVersion = "21.11";
 }
+
