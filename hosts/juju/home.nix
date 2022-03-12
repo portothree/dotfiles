@@ -29,6 +29,7 @@
       websocat
       tasksh
       vit
+      timewarrior
       weechat
       pulsemixer
       nudoku
