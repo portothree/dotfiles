@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: kuma-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 256Mi 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: uptime-kuma
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: uptime-kuma
+  template:
+    metadata:
+      labels:
+        app: uptime-kuma
+    spec:
+      containers:
+        - name: uptime-kuma
+          image: louislam/uptime-kuma:1
+          imagePullPolicy: Always
+          env:
+            - name: UPTIME_KUMA_PORT
+              value: "3001"
+          ports:
+            - containerPort: 3001
+              name: http-kuma
+              protocol: TCP
+          resources:
+            limits:
+              cpu: "0.1"
+          volumeMounts:
+            - name: kuma-data
+              readOnly: false
+              mountPath: /app/data
+      volumes:
+        - name: kuma-data
+          persistentVolumeClaim:
+            claimName: kuma-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: uptime-kuma-service
+spec:
+  ports:
+    - port: 3001
+      nodePort: 30001
+      protocol: TCP
+      targetPort: http-kuma
+  selector:
+    app: uptime-kuma
+  sessionAffinity: None
+  type: LoadBalancer
