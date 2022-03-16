@@ -20,6 +20,7 @@
       };
     };
     hostName = "juju";
+    nameservers = [ "208.67.222.222" "208.67.220.220"];
     wireless = {
       enable = true;
       userControlled.enable = true;
