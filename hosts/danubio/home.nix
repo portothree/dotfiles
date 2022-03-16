@@ -14,6 +14,7 @@
       kubectl
       ripgrep
       astyle
+      black
       shfmt
       nixfmt
       glow
@@ -28,6 +29,7 @@
       lazydocker
       nodejs
       yarn
+      poetry
     ];
   };
   programs = {
