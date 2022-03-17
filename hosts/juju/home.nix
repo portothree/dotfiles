@@ -301,9 +301,10 @@
       enable = true;
       loadAutoconfig = true;
       extraConfig = ''
-        default_page = "/home/porto/www/memex/packages/web/index.html"
+        home_page = "/home/porto/www/memex/packages/web/index.html"
 
-        c.url_default_page = default_page
+        c.url.default_page = home_page
+        c.url.start_pages = [ home_page ]
 
         # Colorscheme
         def blood(c, options = {}):

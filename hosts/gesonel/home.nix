@@ -23,7 +23,6 @@ in {
         xclip
         xdotool
         firefox
-        qutebrowser
         sysz
         tig
         rofi
@@ -212,6 +211,16 @@ in {
     taskwarrior = {
       enable = true;
       dataLocation = "/home/porto/www/memex/trails/tasks/.task";
+    };
+    qutebrowser = {
+      enable = true;
+      loadAutoconfig = true;
+      extraConfig = ''
+        home_page = "/home/porto/www/memex/packages/web/index.html"
+
+        c.url.default_page = home_page
+        c.url.start_pages = [ home_page ]
+      '';
     };
   };
 }
