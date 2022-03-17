@@ -14,12 +14,45 @@ in {
     username = "porto";
     homeDirectory = "/home/porto";
     packages = with pkgs;
-      [ xpra sysz ranger bitwarden-cli ripgrep xclip xdotool firefox qutebrowser ] ++ nixglPkgs;
+      [
+        xpra
+        sysz
+        ranger
+        bitwarden-cli
+        ripgrep
+        xclip
+        xdotool
+        firefox
+        qutebrowser
+        sysz
+        tig
+        rofi
+        glow
+        tasksh
+        vit
+        timewarrior
+        s-tui
+        dijo
+      ] ++ nixglPkgs;
     file = {
       crontab = {
         target = ".crontab";
         text = ''
           @reboot nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }" > ~/crontab.log 2>&1
+        '';
+      };
+      dijo = {
+        target = ".config/dijo/config.toml";
+        text = ''
+          [look]
+          true_chr = "."
+          false_chr = "."
+          future_chr = "."
+
+          [colors]
+          reached = "cyan"
+          todo = "magenta"
+          inactive = "light black"
         '';
       };
     };
@@ -175,6 +208,10 @@ in {
       enable = true;
       defaultCommand = "rg --files | fzf";
       enableZshIntegration = true;
+    };
+    taskwarrior = {
+      enable = true;
+      dataLocation = "/home/porto/www/memex/trails/tasks/.task";
     };
   };
 }
