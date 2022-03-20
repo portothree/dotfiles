@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./hardware-configuration.nix <home-manager/nixos> ];
+  imports = [ ./hardware-configuration.nix ./ledger.nix <home-manager/nixos> ];
   boot = {
     loader = {
       systemd-boot.enable = true;
