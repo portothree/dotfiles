@@ -16,7 +16,7 @@ graph TD
 		104 -->|:22| 104_ssh[OpenSSH];
 	end
 	
-	classDef orange fill#f96;
+	classDef orange fill:#f96;
 	class A orange
 ```
 
