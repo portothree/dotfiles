@@ -7,20 +7,14 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    initrd = {
-      kernelModules = [ "amdgpu" ];
-    };
+    initrd = { kernelModules = [ "amdgpu" ]; };
   };
   time.timeZone = "Europe/Lisbon";
   networking = {
     useDHCP = false;
-    interfaces = {
-      wlp1s0 = {
-        useDHCP = true;
-      };
-    };
+    interfaces = { wlp1s0 = { useDHCP = true; }; };
     hostName = "juju";
-    nameservers = [ "208.67.222.222" "208.67.220.220"];
+    nameservers = [ "208.67.222.222" "208.67.220.220" ];
     wireless = {
       enable = true;
       userControlled.enable = true;
@@ -30,9 +24,7 @@
           hidden = true;
           pskRaw = "@WIRELESS_PSKRAW_HOME@";
         };
-        "@WIRELESS_SSID_WOO@" = {
-          pskRaw = "@WIRELESS_PSKRAW_WOO@";
-        };
+        "@WIRELESS_SSID_WOO@" = { pskRaw = "@WIRELESS_PSKRAW_WOO@"; };
       };
     };
   };
@@ -42,17 +34,9 @@
       enable = true;
       layout = "us";
       videoDrivers = [ "amdgpu" ];
-      libinput = {
-        enable = true;
-      };
-      displayManager = {
-        defaultSession = "none+bspwm";
-      };
-      windowManager = {
-        bspwm = {
-          enable = true;
-        };
-      };
+      libinput = { enable = true; };
+      displayManager = { defaultSession = "none+bspwm"; };
+      windowManager = { bspwm = { enable = true; }; };
     };
   };
   sound.enable = true;
@@ -60,16 +44,18 @@
     pulseaudio.enable = true;
     opengl = {
       driSupport = true;
-      extraPackages = with pkgs; [
-        rocm-opencl-icd
-        rocm-opencl-runtime
-        amdvlk
-      ];
+      extraPackages = with pkgs; [ rocm-opencl-icd rocm-opencl-runtime amdvlk ];
     };
   };
-  users.users.porto = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
+  users = {
+    groups = { plugdev = { }; };
+
+    users = {
+      porto = {
+        isNormalUser = true;
+        extraGroups = [ "wheel" "plugdev" ];
+      };
+    };
   };
   environment.systemPackages = with pkgs; [ wget ];
   # Open ports in the firewall.
