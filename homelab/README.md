@@ -2,7 +2,7 @@
 
 ```mermaid
 flowchart TD
-	A[Proxmox VE] -->|192.168.1.100| 100{VM - NixOS};
+	A[Proxmox VE] -->|192.168.1.106| 100{VM - NixOS};
 	100 -->|:80 :443| K3s[K3s kubernetes distribution];
 	K3s -->|:80 :443| Traefik(Traefik ingress controller);
 	A -->|192.158.1.103| 102{VM - Debian};
