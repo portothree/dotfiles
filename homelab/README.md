@@ -3,7 +3,7 @@
 ```mermaid
 flowchart TD
 	A[Proxmox VE] --> B{100 - NixOS K8s node};
-	A --> C{102 - Mining rig};
+	A --> C{102 - Debian Mining rig};
 	A --> D{103 - NixOS working machine};
 	A --> E{104 - NixOS working machine};
 ```
