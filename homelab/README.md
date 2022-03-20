@@ -1,5 +1,10 @@
 # homelab
 
+```mermaid
+flowchart TD
+	A[Proxmox VE] --> B{100 - K8s node};
+```
+
 ## Resources
 
 - https://github.com/0dragosh/homelab-k3s
