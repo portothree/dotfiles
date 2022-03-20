@@ -39,6 +39,7 @@
       powertop
       acpi
       brightnessctl
+      ledger-live-desktop
     ];
     file = {
       crontab = {
