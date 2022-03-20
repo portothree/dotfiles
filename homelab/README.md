@@ -11,6 +11,8 @@ flowchart TD
 	A -->|192.168.1.105| 104{VM - NixOS};
 ```
 
+Diagram/flowchart using [mermaid](https://github.com/mermaid-js/mermaid)
+
 ## Resources
 
 - https://github.com/0dragosh/homelab-k3s
