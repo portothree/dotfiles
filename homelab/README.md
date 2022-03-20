@@ -15,6 +15,9 @@ graph TD
 		A -->|192.168.1.105| 104{VM - NixOS};
 		104 -->|:22| 104_ssh[OpenSSH];
 	end
+	
+	classDef orange fill#f96;
+	class A orange
 ```
 
 Diagram/flowchart using [mermaid](https://github.com/mermaid-js/mermaid)
