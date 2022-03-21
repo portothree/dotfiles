@@ -5,8 +5,8 @@ graph TD
 	subgraph Main PC
 		A[Proxmox VE] -->|192.168.1.106| 100{VM - NixOS};
 		100 -->|:22| 100_ssh[OpenSSH];
-		100 -->|:80 :443| K3s[K3s Kubernetes distribution];
-		K3s -->|:80 :443| Kong(Kong Ingress controller);
+		100 -->|:80| K3s[K3s Kubernetes distribution];
+		K3s -->|:80| Kong(Kong Ingress controller);
 		A -->|192.158.1.103| 102{VM - Debian};
 		102 -->|:22| 102_ssh[OpenSSH];
 		102 --> lolminer[LolMiner ETH/TON with 3060 Ti];
