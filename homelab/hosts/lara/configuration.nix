@@ -30,7 +30,7 @@
     k3s = {
       enable = true;
       role = "server";
-      extraFlags = toString [ "--no-deploy traefik"];
+      extraFlags = toString [ "--disable traefik"];
     };
   };
   users = {
