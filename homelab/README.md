@@ -5,7 +5,7 @@ graph TD
 	subgraph Main PC
 		A[Proxmox VE] -->|192.168.1.106| 100{VM - NixOS};
 		100 -->|:22| 100_ssh[OpenSSH];
-		100 -->|:80| K3s[K3s Kubernetes distribution];
+		100 -->|:6443 :80| K3s[K3s Kubernetes distribution];
 		K3s -->|:80| Kong(Kong Ingress controller);
 		A -->|192.158.1.103| 102{VM - Debian};
 		102 -->|:22| 102_ssh[OpenSSH];

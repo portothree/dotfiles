@@ -21,7 +21,7 @@
     '';
     nameservers = [ "208.67.222.222" "208.67.220.220"];
     firewall = {
-      allowedTCPPorts = [ 22 80 443 6443 ];
+      allowedTCPPorts = [ 22 80 6443 ];
       allowedUDPPorts = [ ];
     };
   };
