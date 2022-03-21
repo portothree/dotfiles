@@ -7,7 +7,7 @@ metadata:
 spec:
   chart:
     spec:
-      chart: kong
+      chart: kong/kong
       sourceRef:
         kind: HelmRepository
         name: kong-charts
