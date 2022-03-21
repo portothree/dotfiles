@@ -5,9 +5,10 @@ metadata:
   name: kong
   namespace: networking
 spec:
+  interval: 5m
   chart:
     spec:
-      chart: kong/kong
+      chart: kong
       sourceRef:
         kind: HelmRepository
         name: kong-charts
