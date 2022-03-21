@@ -28,6 +28,9 @@
       lazydocker
       mongodb-tools
     ];
+    sessionVariables = {
+      EDITOR = "vim";
+    };
   };
   programs = {
     htop = { enable = true; };

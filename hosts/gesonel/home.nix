@@ -33,6 +33,9 @@ in {
         s-tui
         dijo
       ] ++ nixglPkgs;
+    sessionVariables = {
+      EDITOR = "vim";
+    };
     file = {
       crontab = {
         target = ".crontab";

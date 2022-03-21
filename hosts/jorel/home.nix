@@ -48,6 +48,9 @@
       docui
       mutt
     ];
+    sessionVariables = {
+      EDITOR = "vim";
+    };
     file = {
       dijo = {
         target = ".config/dijo/config.toml";

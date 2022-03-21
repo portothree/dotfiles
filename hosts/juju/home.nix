@@ -41,6 +41,9 @@
       brightnessctl
       ledger-live-desktop
     ];
+    sessionVariables = {
+      EDITOR = "vim";
+    };
     file = {
       crontab = {
         target = ".crontab";

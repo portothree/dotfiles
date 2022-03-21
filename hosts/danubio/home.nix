@@ -31,6 +31,9 @@
       yarn
       poetry
     ];
+    sessionVariables = {
+      EDITOR = "vim";
+    };
   };
   programs = {
     htop = { enable = true; };
