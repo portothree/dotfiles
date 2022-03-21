@@ -12,6 +12,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: prometheus-charts
+        namespace: flux-system
       interval: 1m
   install:
     crds: Create
