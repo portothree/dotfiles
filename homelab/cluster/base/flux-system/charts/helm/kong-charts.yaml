@@ -5,6 +5,6 @@ metadata:
   name: kong-charts
   namespace: flux-system
 spec:
-  interval: 10m
   url: https://charts.konghq.com
+  interval: 10m
   timeout: 3m
