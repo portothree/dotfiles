@@ -10,7 +10,7 @@ spec:
       chart: kube-prometheus-stack
       sourceRef:
         kind: HelmRepository
-        name: prometheus-community
+        name: prometheus-charts
       interval: 1m
   install:
     crds: Create
