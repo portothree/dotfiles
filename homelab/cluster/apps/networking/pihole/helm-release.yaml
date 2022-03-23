@@ -24,6 +24,9 @@ spec:
       tls: []
     persistentVolumeClaim:
       enabled: true
+      accessModes:
+        - ReadWriteOnce
+      size: "500Mi"
     serviceTCP:
       type: LoadBalancer
       annotations:
