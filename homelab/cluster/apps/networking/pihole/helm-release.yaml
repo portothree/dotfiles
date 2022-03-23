@@ -17,6 +17,7 @@ spec:
   values:
     ingress:
       enabled: true
+      hosts: ["pi.hole"]
       path: "/"
       tls: []
     persistentVolumeClaim:
