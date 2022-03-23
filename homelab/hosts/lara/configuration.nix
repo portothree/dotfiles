@@ -19,7 +19,7 @@
     extraHosts = ''
       192.168.1.100 pve
     '';
-    nameservers = [ "pi.hole" ];
+    nameservers = [ "1.1.1.1" "1.0.0.1" ];
     firewall = {
       allowedTCPPorts = [ 22 80 6443 ];
       allowedUDPPorts = [ ];
