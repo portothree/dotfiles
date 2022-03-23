@@ -17,9 +17,6 @@ spec:
   values:
     ingress:
       enabled: true
-      annotations:
-        kubernetes.io/ingress.class: "kong"
-      hosts: ["pihole.homelab", "pi.hole"]
       path: "/"
       tls: []
     persistentVolumeClaim:
