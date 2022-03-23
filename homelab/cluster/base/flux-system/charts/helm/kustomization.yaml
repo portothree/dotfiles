@@ -5,3 +5,4 @@ resources:
   - kong-charts.yaml 
   - prometheus-charts.yaml
   - pihole-charts.yaml
+  - bitnami-charts.yaml
