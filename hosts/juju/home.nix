@@ -7,7 +7,7 @@
     packages = with pkgs; [
       (st.overrideAttrs (oldAttrs: rec {
         src = builtins.fetchTarball {
-          url = "https://github.com/portothree/st/archive/master.tar.gz";
+          url = "https://github.com/portothree/st/archive/refs/tags/v0.8.5.tar.gz";
         };
       }))
       sysz
