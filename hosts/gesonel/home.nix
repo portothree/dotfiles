@@ -14,7 +14,12 @@ in {
     username = "porto";
     homeDirectory = "/home/porto";
     packages = with pkgs;
-      [
+    [
+        (st.overrideAttrs (oldAttrs: rec {
+          src = builtins.fetchTarball {
+            url = "https://github.com/portothree/st/archive/refs/tags/v0.8.5-beta.7.tar.gz";
+          };
+        }))
         xpra
         sysz
         ranger
@@ -92,7 +97,7 @@ in {
       enable = true;
       extraConfig = ''
         super + Return
-          nixGLNvidia-460.91.03 alacritty 
+          st
         super + Escape
           pkill -USR1 -x sxhkd
         super + alt + {q,r}
@@ -143,41 +148,6 @@ in {
     };
   };
   programs = {
-    alacritty = {
-      enable = true;
-      settings = {
-        colors = {
-          primary = {
-            background = "#181818";
-            foreground = "#d8d8d8";
-          };
-          cursor = {
-            text = "#d8d8d8";
-            cursor = "#d8d8d8";
-          };
-          normal = {
-            black = "#181818";
-            red = "#ab4642";
-            green = "#a1b56c";
-            yellow = "#f7ca88";
-            blue = "#7cafc2";
-            magenta = "#ba8baf";
-            cyan = "#86c1b9";
-            white = "#d8d8d8";
-          };
-          bright = {
-            black = "#585858";
-            red = "#ab4642";
-            green = "#a1b56c";
-            yellow = "#f7ca88";
-            blue = "#f7ca88";
-            magenta = "#ba8baf";
-            cyan = "#86c1b9";
-            white = "#f8f8f8";
-          };
-        };
-      };
-    };
     htop = { enable = true; };
     vim = {
       enable = true;
