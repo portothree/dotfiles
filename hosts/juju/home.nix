@@ -5,7 +5,11 @@
   home = {
     stateVersion = "21.11";
     packages = with pkgs; [
-      st
+      (st.overrideAttrs (oldAttrs: rec {
+        patches = [ ./st/patches/dracula.diff ];
+        configFile = writeText "config.def.h" (builtins.readFile ./st/config.h);
+        postPatch = oldAttrs.postPatch ++ ''cp ${configFile} config.def.h'';
+      }))
       sysz
       ranger
       bitwarden-cli
@@ -41,14 +45,11 @@
       brightnessctl
       ledger-live-desktop
     ];
-    sessionVariables = {
-      EDITOR = "vim";
-    };
+    sessionVariables = { EDITOR = "vim"; };
     file = {
       crontab = {
         target = ".crontab";
-        text = ''
-        '';
+        text = "";
       };
       dijo = {
         target = ".config/dijo/config.toml";
