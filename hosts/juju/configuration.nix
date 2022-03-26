@@ -1,7 +1,12 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./hardware-configuration.nix ./ledger.nix <home-manager/nixos> ];
+  imports = [
+    ./hardware-configuration.nix
+    ../common.nix
+    ./ledger.nix
+    <home-manager/nixos>
+  ];
   boot = {
     loader = {
       systemd-boot.enable = true;
@@ -14,11 +19,7 @@
     useDHCP = false;
     interfaces = { wlp1s0 = { useDHCP = true; }; };
     hostName = "juju";
-    nameservers = [
-      "192.168.1.106"
-      "208.67.222.222" 
-      "208.67.220.220"
-    ];
+    nameservers = [ "192.168.1.106" "208.67.222.222" "208.67.220.220" ];
     wireless = {
       enable = true;
       userControlled.enable = true;
@@ -62,10 +63,7 @@
     };
   };
   environment.systemPackages = with pkgs; [ wget ];
-  fonts.fonts = with pkgs; [
-    fira-code
-    siji
-  ];
+  fonts.fonts = with pkgs; [ fira-code siji ];
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
