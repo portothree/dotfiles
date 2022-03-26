@@ -6,9 +6,9 @@
     stateVersion = "21.11";
     packages = with pkgs; [
       (st.overrideAttrs (oldAttrs: rec {
-        patches = [ ./st/patches/dracula.diff ];
-        configFile = writeText "config.def.h" (builtins.readFile ./st/config.h);
-        postPatch = oldAttrs.postPatch ++ ''cp ${configFile} config.def.h'';
+        src = builtins.fetchTarball {
+          url = "https://github.com/portothree/st/archive/master.tar.gz";
+        };
       }))
       sysz
       ranger
