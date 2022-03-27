@@ -24,6 +24,7 @@
       lemonbar
       rofi
       nixfmt
+      nodejs
       glow
       weechat
       pgcli
