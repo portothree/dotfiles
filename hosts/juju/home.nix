@@ -1,13 +1,15 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ../../config/home-manager/common.nix ];
+  imports =
+    [ ../../config/home-manager/common.nix ../../config/home-manager/git.nix ];
   home = {
     stateVersion = "21.11";
     packages = with pkgs; [
       (st.overrideAttrs (oldAttrs: rec {
         src = builtins.fetchTarball {
-          url = "https://github.com/portothree/st/archive/refs/tags/v0.8.5-beta.7.tar.gz";
+          url =
+            "https://github.com/portothree/st/archive/refs/tags/v0.8.5-beta.7.tar.gz";
         };
       }))
       sysz
@@ -220,30 +222,6 @@
 
         au BufNewFile,BufRead *.ldg,*.ledger setf ledger | comp ledger
       '';
-    };
-    git = {
-      enable = true;
-      userName = "Gustavo Porto";
-      userEmail = "gustavoporto@ya.ru";
-      extraConfig = {
-        core = { editor = "vim"; };
-        color = { ui = true; };
-        push = { default = "simple"; };
-        pull = { ff = "only"; };
-        init = { defaultBranch = "master"; };
-      };
-      delta = {
-        enable = true;
-        options = {
-          enable = true;
-          options = {
-            navigate = true;
-            line-numbers = true;
-            syntax-them = "Github";
-          };
-        };
-      };
-      ignores = [ "__pycache__" ];
     };
     gh = {
       enable = true;

@@ -1,8 +1,9 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ../../config/home-manager/common.nix ];
- home = {
+  imports =
+    [ ../../config/home-manager/common.nix ../../config/home-manager/git.nix ];
+  home = {
     stateVersion = "22.05";
     packages = with pkgs; [
       xpra
@@ -48,9 +49,7 @@
       docui
       mutt
     ];
-    sessionVariables = {
-      EDITOR = "vim";
-    };
+    sessionVariables = { EDITOR = "vim"; };
     file = {
       dijo = {
         target = ".config/dijo/config.toml";
@@ -68,9 +67,7 @@
       };
     };
   };
-  services = {
-    spotifyd = { enable = true; };
-  };
+  services = { spotifyd = { enable = true; }; };
   programs = {
     alacritty = { enable = true; };
     htop = { enable = true; };
@@ -143,30 +140,6 @@
 
         au BufNewFile,BufRead *.ldg,*.ledger setf ledger | comp ledger
       '';
-    };
-    git = {
-      enable = true;
-      userName = "Gustavo Porto";
-      userEmail = "gustavoporto@ya.ru";
-      extraConfig = {
-        core = { editor = "vim"; };
-        color = { ui = true; };
-        push = { default = "simple"; };
-        pull = { ff = "only"; };
-        init = { defaultBranch = "master"; };
-      };
-      delta = {
-        enable = true;
-        options = {
-          enable = true;
-          options = {
-            navigate = true;
-            line-numbers = true;
-            syntax-them = "Github";
-          };
-        };
-      };
-      ignores = [ "__pycache__" ];
     };
     gh = {
       enable = true;

@@ -1,7 +1,8 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ../../config/home-manager/common.nix ];
+  imports =
+    [ ../../config/home-manager/common.nix ../../config/home-manager/git.nix ];
   home = {
     stateVersion = "21.11";
     packages = with pkgs; [
@@ -31,9 +32,7 @@
       yarn
       poetry
     ];
-    sessionVariables = {
-      EDITOR = "vim";
-    };
+    sessionVariables = { EDITOR = "vim"; };
   };
   programs = {
     htop = { enable = true; };
@@ -86,30 +85,6 @@
         filetype plugin indent on
         syntax on 
       '';
-    };
-    git = {
-      enable = true;
-      userName = "Gustavo Porto";
-      userEmail = "gustavoporto@ya.ru";
-      extraConfig = {
-        core = { editor = "vim"; };
-        color = { ui = true; };
-        push = { default = "simple"; };
-        pull = { ff = "only"; };
-        init = { defaultBranch = "master"; };
-      };
-      delta = {
-        enable = true;
-        options = {
-          enable = true;
-          options = {
-            navigate = true;
-            line-numbers = true;
-            syntax-them = "Github";
-          };
-        };
-      };
-      ignores = [ "__pycache__" ];
     };
     gh = {
       enable = true;
