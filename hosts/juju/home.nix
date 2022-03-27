@@ -23,9 +23,6 @@
       rofi
       nixfmt
       glow
-      unifont
-      fira-code
-      siji
       weechat
       pgcli
       mycli

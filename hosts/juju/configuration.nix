@@ -62,8 +62,8 @@
       };
     };
   };
-  environment.systemPackages = with pkgs; [ wget ];
-  fonts.fonts = with pkgs; [ fira-code siji ];
+  environment.systemPackages = with pkgs; [ wget curl ];
+  fonts.fonts = with pkgs; [ fira-code siji unicode ];
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
