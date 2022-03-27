@@ -6,7 +6,7 @@ graph TD
 		A[Proxmox VE] -->|192.168.1.106| 100{VM - NixOS};
 		100 -->|:22| 100_ssh[OpenSSH];
 		100 -->|:6443 :80| K3s[K3s Kubernetes distribution];
-		K3s -->|192.168.1.100-192.168.1.250| MetalLB(MetalLB layer2 LB);
+		K3s -->|192.168.1.100-192.168.1.250| MetalLB(MetalLB in layer 2 mode);
 		click MetalLB "https://metallb.org/concepts/layer2" _blank
 		K3s -->|:80| Kong(Kong Ingress controller);
 		K3s --> Pi-hole(Pi-hole instance);
