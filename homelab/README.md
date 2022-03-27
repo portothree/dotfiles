@@ -7,6 +7,8 @@ graph TD
 		100 -->|:22| 100_ssh[OpenSSH];
 		100 -->|:6443 :80| K3s[K3s Kubernetes distribution];
 		K3s -->|:80| Kong(Kong Ingress controller);
+		K3s --> PiHole(PiHole instance);
+		Kong --> Pihole;
 		A -->|192.158.1.103| 102{VM - Debian};
 		102 -->|:22| 102_ssh[OpenSSH];
 		102 --> lolminer[LolMiner ETH/TON with 3060 Ti];
