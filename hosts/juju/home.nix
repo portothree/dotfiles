@@ -28,6 +28,7 @@
       mycli
       wuzz
       websocat
+      ledger
       tasksh
       vit
       timewarrior
