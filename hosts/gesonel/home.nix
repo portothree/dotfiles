@@ -15,7 +15,12 @@ in {
     homeDirectory = "/home/porto";
     packages = with pkgs;
       [
-        st 
+        (st.overrideAttrs (oldAttrs: rec {
+          src = builtins.fetchTarball {
+            url =
+              "https://github.com/portothree/st/archive/refs/tags/v0.8.5-beta.7.tar.gz";
+          };
+        }))
         xpra
         sysz
         ranger
