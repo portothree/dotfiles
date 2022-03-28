@@ -97,7 +97,7 @@ in {
       enable = true;
       extraConfig = ''
         super + Return
-          nixGLNvidia-460.91.03 st
+          st
         super + @space
           rofi -show drun
         alt + Tab
