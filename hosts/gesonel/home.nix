@@ -20,6 +20,7 @@ in {
             url =
               "https://github.com/portothree/st/archive/refs/tags/v0.8.5-beta.7.tar.gz";
           };
+          buildInputs = oldAttrs.buildInputs ++ [ harfbuzz ]; 
         }))
         xpra
         sysz
