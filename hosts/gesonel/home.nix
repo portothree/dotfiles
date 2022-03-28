@@ -97,6 +97,10 @@ in {
       extraConfig = ''
         super + Return
           st
+        super + @space
+          rofi -show drun
+        alt + Tab
+          rofi -show window
         super + Escape
           pkill -USR1 -x sxhkd
         super + alt + {q,r}
