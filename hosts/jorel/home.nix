@@ -1,8 +1,11 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ ../../config/home-manager/common.nix ../../config/home-manager/git.nix ];
+  imports = [
+    ../../config/home-manager/common.nix
+    ../../config/home-manager/git.nix
+    ../../config/home-manager/sxhkd.nix
+  ];
   home = {
     stateVersion = "22.05";
     packages = with pkgs; [
