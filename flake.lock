@@ -1,6 +1,27 @@
 {
   "nodes": {
-    "nixgl": {
+    "homeManager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1648366999,
+        "narHash": "sha256-Sdm0lI2ZBc70EnMMmvfDVY7gIM3M4c2L86EdQ9tKRE4=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "888eac32bd657bfe0d024c8770130d80d1c02cd3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "nixGL": {
+      "flake": false,
       "locked": {
         "lastModified": 1644013836,
         "narHash": "sha256-8J6HqBr8+JlZzjyMV8FrCS6ZI6rHo1pTMPilSBf6TaE=",
@@ -32,7 +53,8 @@
     },
     "root": {
       "inputs": {
-        "nixgl": "nixgl",
+        "homeManager": "homeManager",
+        "nixGL": "nixGL",
         "nixpkgs": "nixpkgs"
       }
     }

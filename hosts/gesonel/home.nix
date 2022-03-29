@@ -1,22 +1,12 @@
-{ config, pkgs, ... }:
+{ pkgs, nixGL, ... }:
 
-let
-  unstable =
-    import (builtins.fetchTarball "https://nixos.org/channels/nixos-unstable")
-    { };
-  nixgl = import (builtins.fetchTarball
-    "https://github.com/guibou/nixGL/archive/main.tar.gz") { };
-  nixglPkgs = with nixgl; [ auto.nixGLNvidia ];
-in {
+{
   imports = [
     ../../config/home-manager/common.nix
     ../../config/home-manager/picom.nix
     ../../config/home-manager/sxhkd.nix
   ];
   home = {
-    stateVersion = "22.05";
-    username = "porto";
-    homeDirectory = "/home/porto";
     packages = with pkgs;
       [
         (st.overrideAttrs (oldAttrs: rec {
@@ -27,8 +17,9 @@ in {
           buildInputs = oldAttrs.buildInputs ++ [ harfbuzz ];
         }))
         (pkgs.writeScriptBin "nixFlakes" ''
-          exec ${pkgs.nixUnstable}/bin/nix --experimental-features "nix-command flakes"
+          exec ${pkgs.nixFlakes}/bin/nix --experimental-features "nix-command flakes"
         '')
+        auto.nixGLNvidia
         xpra
         sysz
         ranger
@@ -46,7 +37,7 @@ in {
         timewarrior
         s-tui
         dijo
-      ] ++ nixglPkgs;
+      ];
     sessionVariables = { EDITOR = "vim"; };
     file = {
       crontab = {
@@ -102,6 +93,7 @@ in {
     };
   };
   programs = {
+    home-manager = { enable = true; };
     htop = { enable = true; };
     vim = {
       enable = true;
