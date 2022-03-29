@@ -30,7 +30,6 @@ in {
         nixfmt
         xclip
         xdotool
-        firefox
         sysz
         tig
         rofi
