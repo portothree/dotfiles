@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 HOST=$2
 VALID_ARGS=$(getopt -o SsRr --long setup-nixos,setup-channels,rebuild-nixos,rebuild-home -- "$@")
