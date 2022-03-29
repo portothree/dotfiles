@@ -87,6 +87,7 @@ in {
     };
   };
   services = {
+    picom = { enable = true; };
     keynav = { enable = true; };
     unclutter = {
       enable = true;
