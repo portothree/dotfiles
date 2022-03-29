@@ -91,3 +91,4 @@ Handful collection of shell scripts inspired by https://github.com/salman-abedin
 
 Home manager and flakes with Non-NixOS systems
 - https://dee.underscore.world/blog/home-manager-flakes/
+- https://gvolpe.com/blog/nix-flakes/
