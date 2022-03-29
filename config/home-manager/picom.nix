@@ -3,6 +3,7 @@
 {
   services.picom = {
     enable = true;
+    backend = "xrender";
     extraOptions = ''
       #################################
       #             Shadows           #
@@ -68,7 +69,6 @@
       #################################
 
 
-      backend = "glx";
       vsync = false;
       refresh-rate = 60;
       mark-wmwin-focused = true;
