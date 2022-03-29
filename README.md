@@ -85,3 +85,9 @@ Handful collection of shell scripts inspired by https://github.com/salman-abedin
 - https://github.com/serebit/wraith-master
 - https://gitlab.com/serebit/wraith-master
 - https://github.com/gfduszynski/cm-rgb
+
+
+# FAQ
+
+Home manager and flakes with Non-NixOS systems
+- https://dee.underscore.world/blog/home-manager-flakes/
