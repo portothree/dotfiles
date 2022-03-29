@@ -27,6 +27,7 @@ in {
         ranger
         bitwarden-cli
         ripgrep
+        nixfmt
         xclip
         xdotool
         firefox
