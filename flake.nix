@@ -24,6 +24,6 @@
           homeDirectory = "/home/porto";
         };
       };
-      devShell.${system} = import ./shell.nix { inherit pkgs };
+      devShell."${system}" = import ./shell.nix { inherit pkgs; };
     };
 }
