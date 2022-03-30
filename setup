@@ -15,7 +15,7 @@ setup_channels() {
 }
 
 rebuild_nixos() {
-	sudo nixos-rebuild switch -I nixos-config=./hosts/$HOST/configuration.nix --show-trace
+	sudo nixos-rebuild switch --flake .#$HOST --show-trace
 }
 
 rebuild_home_manager() {
