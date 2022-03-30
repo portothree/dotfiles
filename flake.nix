@@ -8,7 +8,7 @@
     };
     nixgl.url = "github:guibou/nixGL";
   };
-  outputs = inputs @ { self, nixpkgs, home-manager, nixgl }:
+  outputs = { self, nixpkgs, home-manager, nixgl }:
     let system = "x86_64-linux";
     in {
       homeConfigurations = {
@@ -24,5 +24,6 @@
           homeDirectory = "/home/porto";
         };
       };
+      devShell.${system} = import ./shell.nix { inherit pkgs };
     };
 }
