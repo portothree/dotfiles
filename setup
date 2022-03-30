@@ -19,7 +19,9 @@ rebuild_nixos() {
 }
 
 rebuild_home_manager() {
-	home-manager -f ./hosts/$HOST/home.nix switch
+	nix build .#homeConfigurations.$HOST.activationPackage --impure
+	echo "Activating build result"
+	./result/activate
 }
 
 
