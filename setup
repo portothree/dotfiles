@@ -1,18 +1,10 @@
 #!/bin/bash
 
 HOST=$2
-VALID_ARGS=$(getopt -o SsRr --long setup-nixos,setup-channels,rebuild-nixos,rebuild-home -- "$@")
+VALID_ARGS=$(getopt -o SRr --long setup-nixos,rebuild-nixos,rebuild-home -- "$@")
 if [[ $? -ne 0 ]]; then
     exit 1;
 fi
-
-setup_channels() {
-	nix-channel --add https://nixos.org/channels/nixos-unstable unstable
-	nix-channel --add https://github.com/nix-community/home-manager/archive/release-21.11.tar.gz home-manager
-	nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager-unstable
-	nix-channel --add https://github.com/guibou/nixGL/archive/main.tar.gz nixgl
-	nix-channel --update
-}
 
 rebuild_nixos() {
 	sudo nixos-rebuild switch --flake .#$HOST --show-trace
@@ -30,13 +22,7 @@ while [ : ]; do
   case "$1" in
     -S | --setup-nixos)
         echo "Initial NixOS setup for host $HOST"
-        setup_channels 
 		rebuild_nixos
-        shift
-        ;;
-    -s | --setup-channels)
-        echo "Initial non-NixOS setup for host $HOST"
-        setup_channels 
         shift
         ;;
     -R | --rebuild-nixos)
