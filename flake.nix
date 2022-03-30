@@ -9,21 +9,28 @@
     nixgl.url = "github:guibou/nixGL";
   };
   outputs = { self, nixpkgs, home-manager, nixgl }:
-    let system = "x86_64-linux";
+    let
+      system = "x86_64-linux";
+
+      mkPkgs = pkgs: extraOverlays:
+        import pkgs {
+          inherit system;
+          config.allowUnfree = false;
+          overlays = extraOverlays;
+        };
     in {
       homeConfigurations = {
         "gesonel" = home-manager.lib.homeManagerConfiguration {
-          configuration = import ./hosts/gesonel/home.nix;
           inherit system;
-          pkgs = import nixpkgs {
-            inherit system;
-            overlays = [ nixgl.overlay ];
+          configuration = import ./hosts/gesonel/home.nix {
+            pkgs = mkPkgs nixpkgs [ nixgl.overlay ];
+            inherit nixgl;
           };
           stateVersion = "22.05";
           username = "porto";
           homeDirectory = "/home/porto";
         };
       };
-      devShell."${system}" = import ./shell.nix { inherit nixpkgs; };
+      devShell."${system}" = import ./shell.nix { pkgs = mkPkgs nixpkgs [ ]; };
     };
 }

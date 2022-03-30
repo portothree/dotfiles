@@ -1,4 +1,4 @@
-{ pkgs, nixGL, ... }:
+{ pkgs, nixgl, ... }:
 
 {
   imports = [
@@ -15,6 +15,7 @@
           };
           buildInputs = oldAttrs.buildInputs ++ [ harfbuzz ];
         }))
+        (import nixgl { inherit pkgs; } ).nixGLNvidia
         xpra
         sysz
         ranger
