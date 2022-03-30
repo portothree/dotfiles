@@ -12,25 +12,29 @@
     let
       system = "x86_64-linux";
 
-      mkPkgs = pkgs: extraOverlays:
+      mkPkgs = pkgs:
+        { overlays, allowUnfree ? false }:
         import pkgs {
           inherit system;
-          config.allowUnfree = false;
-          overlays = extraOverlays;
+          config.allowUnfree = allowUnfree;
+          inherit overlays;
         };
     in {
       homeConfigurations = {
         "gesonel" = home-manager.lib.homeManagerConfiguration {
           inherit system;
           configuration = import ./hosts/gesonel/home.nix {
-            pkgs = mkPkgs nixpkgs [ nixgl.overlay ];
-            inherit nixgl;
+            pkgs = mkPkgs nixpkgs {
+              overlays = [ nixgl.overlay ];
+              allowUnfree = true;
+            };
           };
           stateVersion = "22.05";
           username = "porto";
           homeDirectory = "/home/porto";
         };
       };
-      devShell."${system}" = import ./shell.nix { pkgs = mkPkgs nixpkgs [ ]; };
+      devShell."${system}" =
+        import ./shell.nix { pkgs = mkPkgs nixpkgs { overlays = [ ]; }; };
     };
 }

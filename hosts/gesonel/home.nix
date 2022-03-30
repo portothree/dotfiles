@@ -1,4 +1,4 @@
-{ pkgs, nixgl, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -6,34 +6,33 @@
     ../../config/home-manager/sxhkd.nix
   ];
   home = {
-    packages = with pkgs;
-      [
-        (st.overrideAttrs (oldAttrs: rec {
-          src = builtins.fetchTarball {
-            url =
-              "https://github.com/portothree/st/archive/refs/tags/v0.8.5-beta.7.tar.gz";
-          };
-          buildInputs = oldAttrs.buildInputs ++ [ harfbuzz ];
-        }))
-        (import nixgl { inherit pkgs; } ).nixGLNvidia
-        xpra
-        sysz
-        ranger
-        bitwarden-cli
-        ripgrep
-        nixfmt
-        xclip
-        xdotool
-        sysz
-        tig
-        rofi
-        glow
-        tasksh
-        vit
-        timewarrior
-        s-tui
-        dijo
-      ];
+    packages = with pkgs; [
+      (st.overrideAttrs (oldAttrs: rec {
+        src = builtins.fetchTarball {
+          url =
+            "https://github.com/portothree/st/archive/refs/tags/v0.8.5-beta.7.tar.gz";
+        };
+        buildInputs = oldAttrs.buildInputs ++ [ harfbuzz ];
+      }))
+      nixgl.auto.nixGLNvidia
+      xpra
+      sysz
+      ranger
+      bitwarden-cli
+      ripgrep
+      nixfmt
+      xclip
+      xdotool
+      sysz
+      tig
+      rofi
+      glow
+      tasksh
+      vit
+      timewarrior
+      s-tui
+      dijo
+    ];
     sessionVariables = { EDITOR = "vim"; };
     file = {
       crontab = {
