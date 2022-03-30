@@ -3,7 +3,6 @@
 {
   imports = [
     ../../config/home-manager/common.nix
-    ../../config/home-manager/picom.nix
     ../../config/home-manager/sxhkd.nix
   ];
   home = {
