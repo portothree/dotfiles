@@ -2,25 +2,27 @@
   description = "@portothree dotfiles";
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-21.11";
-    homeManager = {
+    home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixGL.url = "github:guibou/nixGL";
+    nixgl.url = "github:guibou/nixGL";
   };
-  outputs = { self, nixpkgs, homeManager, nixGL }: {
-    homeConfigurations = {
-      "gesonel" = homeManager.lib.homeManagerConfiguration {
-        configuration = import ./hosts/gesonel/home.nix;
-        pkgs = import nixpkgs {
-          system = "x86_64-linux";
-          overlays = [ nixGL.overlay ];
+  outputs = inputs @ { self, nixpkgs, home-manager, nixgl }:
+    let system = "x86_64-linux";
+    in {
+      homeConfigurations = {
+        "gesonel" = home-manager.lib.homeManagerConfiguration {
+          configuration = import ./hosts/gesonel/home.nix;
+          inherit system;
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = [ nixgl.overlay ];
+          };
+          stateVersion = "22.05";
+          username = "porto";
+          homeDirectory = "/home/porto";
         };
-        system = "x86_64-linux";
-        stateVersion = "22.05";
-        username = "porto";
-        homeDirectory = "/home/porto";
       };
     };
-  };
 }

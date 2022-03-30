@@ -1,6 +1,6 @@
 {
   "nodes": {
-    "homeManager": {
+    "home-manager": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
@@ -20,8 +20,7 @@
         "type": "github"
       }
     },
-    "nixGL": {
-      "flake": false,
+    "nixgl": {
       "locked": {
         "lastModified": 1644013836,
         "narHash": "sha256-8J6HqBr8+JlZzjyMV8FrCS6ZI6rHo1pTMPilSBf6TaE=",
@@ -53,8 +52,8 @@
     },
     "root": {
       "inputs": {
-        "homeManager": "homeManager",
-        "nixGL": "nixGL",
+        "home-manager": "home-manager",
+        "nixgl": "nixgl",
         "nixpkgs": "nixpkgs"
       }
     }
