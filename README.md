@@ -74,6 +74,7 @@ Run `home-manager switch`
 -   https://github.com/ggreer/the_silver_searcher
 -   https://github.com/junegunn/fzf
 -   https://tldr.sh/
+-	https://git.0xee.eu/0xee/nix-home
 
 # Shell scripts
 
