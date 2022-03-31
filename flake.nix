@@ -13,7 +13,7 @@
       system = "x86_64-linux";
 
       mkPkgs = pkgs:
-        { overlays, allowUnfree ? false }:
+        { overlays ? [ ], allowUnfree ? false }:
         import pkgs {
           inherit system;
           config.allowUnfree = allowUnfree;
@@ -34,7 +34,6 @@
           homeDirectory = "/home/porto";
         };
       };
-      devShell."${system}" =
-        import ./shell.nix { pkgs = mkPkgs nixpkgs { overlays = [ ]; }; };
+      devShell."${system}" = import ./shell.nix { pkgs = mkPkgs nixpkgs { }; };
     };
 }

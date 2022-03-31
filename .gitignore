@@ -1,1 +1,6 @@
 .env
+
+# Nix
+result
+result-*
+
