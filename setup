@@ -7,11 +7,13 @@ if [[ $? -ne 0 ]]; then
 fi
 
 rebuild_nixos() {
-	sudo nixos-rebuild switch --flake .#$HOST --show-trace
+	local hostname="$1"
+	sudo nixos-rebuild switch --flake .#$hostname --show-trace
 }
 
 rebuild_home_manager() {
-	nix build .#homeConfigurations.$HOST.activationPackage --impure
+	local hostname="$1"
+	nix build .#homeConfigurations.$hostname.activationPackage --impure
 	echo "Activating build result"
 	./result/activate
 }
@@ -22,17 +24,17 @@ while [ : ]; do
   case "$1" in
     -S | --setup-nixos)
         echo "Initial NixOS setup for host $HOST"
-		rebuild_nixos
+		rebuild_nixos $HOST
         shift
         ;;
     -R | --rebuild-nixos)
         echo "Rebuilding NixOS for host $HOST"
-        rebuild_nixos
+        rebuild_nixos $HOST
         shift
         ;;
     -r | --rebuild-home)
         echo "Rebuilding home-manager for host $HOST"
-        rebuild_home_manager
+        rebuild_home_manager $HOST
         shift
         ;;
     --) shift;
