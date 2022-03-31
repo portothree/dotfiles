@@ -3,7 +3,10 @@
 {
   services.picom = {
     enable = true;
-    backend = "xrender";
+    package = pkgs.writers.writeBashBin "picom" ''
+      ${pkgs.nixgl}/bin/nixGL ${pkgs.picom}/bin/picom "$@"
+    '';
+    backend = "glx";
     extraOptions = ''
       #################################
       #             Shadows           #
