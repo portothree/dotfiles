@@ -4,7 +4,7 @@
   services.picom = {
     enable = true;
     package = pkgs.writers.writeBashBin "picom" ''
-      ${pkgs.nixgl}/bin/nixGL ${pkgs.picom}/bin/picom "$@"
+      ${pkgs.nixgl.auto.nixGLNvidia}/bin/nixGL ${pkgs.picom}/bin/picom "$@"
     '';
     backend = "glx";
     extraOptions = ''
