@@ -83,8 +83,10 @@
     picom = {
       enable = true;
       package = pkgs.writers.writeBashBin "picom" ''
-        ${pkgs.nixgl.auto.nixGLNvidia}/bin/nixGLNvidia-460.91.03 ${pkgs.picom}/bin/picom "$@"
+        ${pkgs.nixgl.auto.nixGLNvidia}/bin/nixGLNvidia-460.91.03 ${pkgs.picom}/bin/picom --xrender-sync-fence "$@"
       '';
+      backend = "glx";
+      experimentalBackends = true;
     };
     keynav = { enable = true; };
     unclutter = {
