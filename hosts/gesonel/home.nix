@@ -136,6 +136,9 @@
     };
     qutebrowser = {
       enable = true;
+      package = pkgs.writers.writeBashBin "qutebrowser" ''
+        ${pkgs.nixgl.auto.nixGLNvidia}/bin/nixGLNvidia-460.91.03 ${pkgs.qutebrowser}/bin/qutebrowser "$@"
+      '';
       loadAutoconfig = true;
       extraConfig = ''
         home_page = "/home/porto/www/memex/packages/web/index.html"
