@@ -2,13 +2,14 @@
   description = "@portothree dotfiles";
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-21.11";
+    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixgl.url = "github:guibou/nixGL";
   };
-  outputs = { self, nixpkgs, home-manager, nixgl }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nixgl }:
     let
       system = "x86_64-linux";
       mkPkgs = pkgs:
@@ -42,6 +43,6 @@
           homeDirectory = "/home/porto";
         };
       };
-      devShell."${system}" = import ./shell.nix { pkgs = mkPkgs nixpkgs { }; };
+      devShell."${system}" = import ./shell.nix { pkgs = mkPkgs nixpkgs-unstable { }; };
     };
 }
