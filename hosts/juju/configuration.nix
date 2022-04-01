@@ -69,6 +69,10 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+  nix = {
+    enable = true;
+    trustedUsers = [ "root" "porto" ];
+  };
   home-manager = {
     users = { porto = import ./home.nix { inherit config pkgs; }; };
   };
