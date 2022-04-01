@@ -5,7 +5,6 @@
     ./hardware-configuration.nix
     ../common.nix
     ./ledger.nix
-    <home-manager/nixos>
   ];
   boot = {
     loader = {
@@ -71,10 +70,11 @@
   # networking.firewall.enable = false;
   nix = {
     enable = true;
+    package = pkgs.nixFlakes;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
     trustedUsers = [ "root" "porto" ];
-  };
-  home-manager = {
-    users = { porto = import ./home.nix { inherit config pkgs; }; };
   };
   system.stateVersion = "21.11";
 }

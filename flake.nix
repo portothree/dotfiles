@@ -20,6 +20,12 @@
           inherit overlays;
         };
     in {
+      nixosConfigurations = {
+        "juju" = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [ ./hosts/juju/configuration.nix ];
+        };
+      };
       homeConfigurations = {
         "gesonel" = home-manager.lib.homeManagerConfiguration {
           inherit system;
@@ -35,14 +41,14 @@
         };
         "juju" = home-manager.lib.homeManagerConfiguration {
           inherit system;
-          configuration = import ./hosts/juju/home.nix {
-            pkgs = mkPkgs nixpkgs {};
-          };
+          configuration =
+            import ./hosts/juju/home.nix { pkgs = mkPkgs nixpkgs { }; };
           stateVersion = "21.11";
           username = "porto";
           homeDirectory = "/home/porto";
         };
       };
-      devShell."${system}" = import ./shell.nix { pkgs = mkPkgs nixpkgs-unstable { }; };
+      devShell."${system}" =
+        import ./shell.nix { pkgs = mkPkgs nixpkgs-unstable { }; };
     };
 }
