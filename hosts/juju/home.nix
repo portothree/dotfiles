@@ -7,7 +7,6 @@
     ../../config/home-manager/sxhkd.nix
   ];
   home = {
-    stateVersion = "21.11";
     packages = with pkgs; [
       (st.overrideAttrs (oldAttrs: rec {
         src = builtins.fetchTarball {

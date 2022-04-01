@@ -11,7 +11,6 @@
   outputs = { self, nixpkgs, home-manager, nixgl }:
     let
       system = "x86_64-linux";
-
       mkPkgs = pkgs:
         { overlays ? [ ], allowUnfree ? false }:
         import pkgs {
@@ -30,6 +29,15 @@
             };
           };
           stateVersion = "22.05";
+          username = "porto";
+          homeDirectory = "/home/porto";
+        };
+        "juju" = home-manager.lib.homeManagerConfiguration {
+          inherit system;
+          configuration = import ./hosts/juju/home.nix {
+            pkgs = mkPkgs nixpkgs {};
+          };
+          stateVersion = "21.11";
           username = "porto";
           homeDirectory = "/home/porto";
         };
