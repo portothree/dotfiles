@@ -17,7 +17,7 @@ rebuild_home_manager() {
 	local hostname="$1"
 	nix build .#homeConfigurations.$hostname.activationPackage --impure
 	echo "Activating build result"
-	sudo ./result/activate
+	./result/activate
 }
 
 
