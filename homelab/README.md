@@ -24,15 +24,13 @@ graph TD
 		
 		A -->|192.168.1.105| 104{VM - NixOS};
 		104 -->|:22| 104_ssh[OpenSSH];
+		
+		
+		B[Watchy] --> {ESP32-PICO-D4 board}
 	end
-	
 	
 	subgraph Gandi.net VPS 
-		B[DATACENTER FR-SD6] -->|46.226.106.65| Tosh{V-R4 - NixOS};	
-	end
-	
-	subgraph	Watchy
-		C[Watchy] --> {ESP32-PICO-D4 board}
+		C[DATACENTER FR-SD6] -->|46.226.106.65| Tosh{V-R4 - NixOS};	
 	end
 	
 	classDef orange fill:#f96;
