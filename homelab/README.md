@@ -5,8 +5,8 @@
 
 ```mermaid
 graph TD
-	subgraph Home PC
-		A[Proxmox VE] -->|192.168.1.106| 100{VM - NixOS};
+	subgraph Home devices
+		A[PC - Proxmox VE] -->|192.168.1.106| 100{VM - NixOS};
 		100 -->|:22| 100_ssh[OpenSSH];
 		100 -->|:6443 :80| K3s[K3s];
 		K3s -->|192.168.1.100-192.168.1.250| MetalLB(MetalLB);
@@ -36,7 +36,7 @@ graph TD
 	classDef orange fill:#f96;
 	classDef blue	fill:#00f;
 	class A orange
-	class B blue
+	class C blue
 ```
 
 Diagram/flowchart using [mermaid](https://github.com/mermaid-js/mermaid)
