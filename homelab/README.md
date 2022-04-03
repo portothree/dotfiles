@@ -28,7 +28,7 @@ graph TD
 	
 	
 	subgraph Gandi.net VPS 
-		A[NixOS] -->|46.226.106.65|	Nginx{Nginx server};	
+		B[NixOS] -->|46.226.106.65|	Nginx{Nginx server};	
 	end
 	
 	classDef orange fill:#f96;
