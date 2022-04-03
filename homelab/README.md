@@ -26,6 +26,11 @@ graph TD
 		104 -->|:22| 104_ssh[OpenSSH];
 	end
 	
+	
+	subgraph Gandi.net VPS 
+		A[NixOS] -->|46.226.106.65|	Nginx{Nginx server};	
+	end
+	
 	classDef orange fill:#f96;
 	class A orange
 ```
