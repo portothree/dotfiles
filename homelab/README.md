@@ -32,7 +32,7 @@ graph TD
 	end
 	
 	subgraph
-		C[Watchy] -->|192.168.1.xxx| {ESP32-PICO-D4 board}
+		C[Watchy] -->|192.168.1.999| {ESP32-PICO-D4 board}
 	end
 	
 	classDef orange fill:#f96;
