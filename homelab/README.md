@@ -28,7 +28,7 @@ graph TD
 	
 	
 	subgraph Gandi.net VPS 
-		B[NixOS] -->|46.226.106.65|	Nginx{Nginx server};	
+		B[DATACENTER FR-SD6] -->|46.226.106.65|V-R4: 2 CPUs 4 GB RAM| Tosh{NixOS};	
 	end
 	
 	classDef orange fill:#f96;
