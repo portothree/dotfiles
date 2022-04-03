@@ -32,7 +32,9 @@ graph TD
 	end
 	
 	classDef orange fill:#f96;
+	classDef blue	fill:#00f;
 	class A orange
+	class B blue
 ```
 
 Diagram/flowchart using [mermaid](https://github.com/mermaid-js/mermaid)
