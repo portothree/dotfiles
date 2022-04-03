@@ -31,7 +31,7 @@ graph TD
 		B[DATACENTER FR-SD6] -->|46.226.106.65| Tosh{V-R4 - NixOS};	
 	end
 	
-	subgraph
+	subgraph	Watchy
 		C[Watchy] --> {ESP32-PICO-D4 board}
 	end
 	
