@@ -26,7 +26,7 @@ graph TD
 		104 -->|:22| 104_ssh[OpenSSH];
 		
 		
-		B[Watchy] --> {ESP32-PICO-D4 board}
+		B[Watchy]
 	end
 	
 	subgraph Gandi.net VPS 
