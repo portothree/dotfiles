@@ -5,7 +5,7 @@
 
 ```mermaid
 graph TD
-	subgraph Main PC
+	subgraph Home PC
 		A[Proxmox VE] -->|192.168.1.106| 100{VM - NixOS};
 		100 -->|:22| 100_ssh[OpenSSH];
 		100 -->|:6443 :80| K3s[K3s];
@@ -28,7 +28,11 @@ graph TD
 	
 	
 	subgraph Gandi.net VPS 
-		B[DATACENTER FR-SD6] -->|46.226.106.65| Tosh{V-R4: NixOS};	
+		B[DATACENTER FR-SD6] -->|46.226.106.65| Tosh{V-R4 - NixOS};	
+	end
+	
+	subgraph
+		C[Watchy] -->|192.168.1.xxx|
 	end
 	
 	classDef orange fill:#f96;
