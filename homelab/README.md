@@ -32,7 +32,7 @@ graph TD
 	end
 	
 	subgraph
-		C[Watchy] -->|192.168.1.xxx|
+		C[Watchy] -->|192.168.1.999|
 	end
 	
 	classDef orange fill:#f96;
