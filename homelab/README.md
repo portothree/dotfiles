@@ -26,11 +26,12 @@ graph TD
 		104 -->|:22| 104_ssh[OpenSSH];
 		
 		
-		B[Watchy]
+		B[Phone - Xiaomi Redmi Note 9]
+		C[E-Paper Watch - Watchy]
 	end
 	
 	subgraph Gandi.net VPS 
-		C[DATACENTER FR-SD6] -->|46.226.106.65| Tosh{V-R4 - NixOS};	
+		A1[DATACENTER FR-SD6] -->|46.226.106.65| Tosh{V-R4 - NixOS};	
 	end
 	
 	classDef orange fill:#f96;
