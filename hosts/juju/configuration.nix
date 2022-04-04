@@ -57,7 +57,7 @@
     users = {
       porto = {
         isNormalUser = true;
-        extraGroups = [ "wheel" "plugdev" ];
+        extraGroups = [ "wheel" "plugdev" "dialout" ];
       };
     };
   };
