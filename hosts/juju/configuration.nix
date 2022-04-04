@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ../common.nix
     ./ledger.nix
+    ./platformio.nix
   ];
   boot = {
     loader = {
