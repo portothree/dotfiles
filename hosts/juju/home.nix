@@ -47,6 +47,7 @@
       acpi
       brightnessctl
       ledger-live-desktop
+      platformio
     ];
     sessionVariables = { EDITOR = "vim"; };
     file = {
