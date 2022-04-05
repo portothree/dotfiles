@@ -46,6 +46,7 @@
         target = ".config/bugwarrior/bugwarriorrc";
         text = ''
           [general]
+          taskrc = $XDG_CONFIG_HOME/task/taskrc
           targets = github_portothree
           shorten = False
           inline_links = False
