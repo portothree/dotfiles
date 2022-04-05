@@ -8,9 +8,7 @@ fi
 
 rebuild_nixos() {
 	local hostname="$1"
-	nix build .#nixosConfigurations.$hostname.config.system.build.toplevel
-	echo "Activating build result"
-	sudo ./result/bin/switch-to-configuration switch
+	sudo nixos-rebuild switch --flake .#$hostname --show-trace
 }
 
 rebuild_home_manager() {
