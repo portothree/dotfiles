@@ -29,6 +29,7 @@
       glow
       tasksh
       vit
+      python39Packages.bugwarrior
       timewarrior
       s-tui
       dijo
@@ -39,6 +40,30 @@
         target = ".crontab";
         text = ''
           @reboot nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }" > ~/crontab.log 2>&1
+        '';
+      };
+      bugwarrior = {
+        target = ".config/bugwarrior/bugwarriorrc";
+        text = ''
+          [general]
+          targets = github_portothree
+          shorten = False
+          inline_links = False
+          annotation_links = True
+          annotation_comments = True
+          legacy_matching = False
+          log.level = DEBUG
+          log.file = /var/log/bugwarrior.log
+          annotation_length = 45
+
+          [github_portothree]
+          service = github
+          github.default_priority = H
+          github.add_tags = open_source
+          github.username = portothree 
+          github.exclude_repos = project_bar,project_baz
+          github.login = portothree 
+          github.password = OMG_LULZ
         '';
       };
       dijo = {
