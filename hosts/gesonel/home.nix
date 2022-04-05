@@ -18,6 +18,7 @@
       xpra
       sysz
       ranger
+      pass
       bitwarden-cli
       ripgrep
       nixfmt
