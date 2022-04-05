@@ -64,7 +64,7 @@
           github.username = portothree 
           github.exclude_repos = project_bar,project_baz
           github.login = portothree 
-          github.password = OMG_LULZ
+          github.token = @oracle:eval:pass GitHub/portothree
         '';
       };
       dijo = {
