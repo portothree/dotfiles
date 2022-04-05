@@ -30,6 +30,7 @@
       glow
       tasksh
       vit
+      python39Packages.taskw
       python39Packages.bugwarrior
       timewarrior
       s-tui
