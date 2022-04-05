@@ -46,7 +46,7 @@
         target = ".config/bugwarrior/bugwarriorrc";
         text = ''
           [general]
-          taskrc = $XDG_CONFIG_HOME/task/taskrc
+          taskrc = ~/.config/task/taskrc
           targets = github_portothree
           shorten = False
           inline_links = False
@@ -54,7 +54,6 @@
           annotation_comments = True
           legacy_matching = False
           log.level = DEBUG
-          log.file = /var/log/bugwarrior.log
           annotation_length = 45
 
           [github_portothree]
