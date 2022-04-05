@@ -22,6 +22,14 @@
       bitwarden-cli
       ripgrep
       nixfmt
+      (let
+        pyPackages = python-packages:
+          with python-packages; [
+            taskw
+            bugwarrior
+          ];
+        pythonWithPackages = python3.withPackages pyPackages;
+      in pythonWithPackages)
       xclip
       xdotool
       sysz
@@ -30,8 +38,6 @@
       glow
       tasksh
       vit
-      python39Packages.taskw
-      python39Packages.bugwarrior
       timewarrior
       s-tui
       dijo
