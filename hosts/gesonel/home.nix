@@ -74,6 +74,13 @@
           github.token = @oracle:eval:pass GitHub/portothree
         '';
       };
+      vit = {
+        target = ".vit/config.ini";
+        text = ''
+          [taskwarrior]
+          taskrc = ~/.config/task/taskrc
+        '';
+      };
       dijo = {
         target = ".config/dijo/config.toml";
         text = ''
