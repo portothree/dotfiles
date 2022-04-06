@@ -79,6 +79,9 @@
         text = ''
           [taskwarrior]
           taskrc = ~/.config/task/taskrc
+
+          [vit]
+          default_keybindings = vi
         '';
       };
       dijo = {
