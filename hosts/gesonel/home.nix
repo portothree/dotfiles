@@ -22,14 +22,7 @@
       bitwarden-cli
       ripgrep
       nixfmt
-      (let
-        pyPackages = python-packages:
-          with python-packages; [
-            taskw
-            bugwarrior
-          ];
-        pythonWithPackages = python3.withPackages pyPackages;
-      in pythonWithPackages)
+      python3
       xclip
       xdotool
       sysz
