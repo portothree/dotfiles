@@ -6,6 +6,7 @@
     ../common.nix
     ./ledger.nix
     ./platformio.nix
+    ./android.nix
   ];
   boot = {
     loader = {
