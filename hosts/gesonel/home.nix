@@ -34,6 +34,7 @@
       timewarrior
       s-tui
       dijo
+      nextdns
     ];
     sessionVariables = { EDITOR = "vim"; };
     file = {
