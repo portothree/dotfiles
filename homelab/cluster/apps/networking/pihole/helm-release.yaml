@@ -31,8 +31,8 @@ spec:
       enabled: true
       policy: "None"
       nameservers:
-        - 45.90.28.143
-        - 45.90.30.143
+        - 45.90.28.156
+        - 45.90.30.156
     serviceTCP:
       annotations:
         metallb.universe.tf/address-pool: default
