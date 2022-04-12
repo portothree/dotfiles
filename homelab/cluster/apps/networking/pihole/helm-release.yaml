@@ -27,6 +27,12 @@ spec:
       accessModes:
         - ReadWriteOnce
       size: "500Mi"
+    podDnsConfig:
+      enabled: true
+      policy: "None"
+      nameservers:
+        - 45.90.28.143
+        - 45.90.30.143
     serviceTCP:
       annotations:
         metallb.universe.tf/address-pool: default
