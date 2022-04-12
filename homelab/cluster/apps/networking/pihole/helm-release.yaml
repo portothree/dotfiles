@@ -27,6 +27,8 @@ spec:
       accessModes:
         - ReadWriteOnce
       size: "500Mi"
+    DNS1: 45.90.28.156
+    DNS2: 45.90.30.156
     podDnsConfig:
       enabled: true
       policy: "None"
