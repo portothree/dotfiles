@@ -48,6 +48,7 @@
       brightnessctl
       ledger-live-desktop
       platformio
+      nextdns
     ];
     sessionVariables = { EDITOR = "vim"; };
     file = {
