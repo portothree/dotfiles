@@ -25,6 +25,10 @@
           inherit system;
           modules = [ ./hosts/juju/configuration.nix ];
         };
+        "danubio" = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [ ./hosts/danubio/configuration.nix ];
+        };
       };
       homeConfigurations = {
         "gesonel" = home-manager.lib.homeManagerConfiguration {
@@ -43,6 +47,14 @@
           inherit system;
           configuration =
             import ./hosts/juju/home.nix { pkgs = mkPkgs nixpkgs { }; };
+          stateVersion = "21.11";
+          username = "porto";
+          homeDirectory = "/home/porto";
+        };
+        "danubio" = home-manager.lib.homeManagerConfiguration {
+          inherit system;
+          configuration =
+            import ./hosts/danubio/home.nix { pkgs = mkPkgs nixpkgs { }; };
           stateVersion = "21.11";
           username = "porto";
           homeDirectory = "/home/porto";
