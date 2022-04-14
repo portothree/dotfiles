@@ -15,7 +15,6 @@
     };
     initrd = { kernelModules = [ "amdgpu" ]; };
   };
-  time.timeZone = "Europe/Lisbon";
   networking = {
     useDHCP = false;
     interfaces = { wlp1s0 = { useDHCP = true; }; };

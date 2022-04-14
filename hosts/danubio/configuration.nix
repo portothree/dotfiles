@@ -35,5 +35,13 @@
   home-manager = {
     users = { porto = import ./home.nix { inherit config pkgs; }; };
   };
+  nix = {
+    enable = true;
+    package = pkgs.nixFlakes;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+    trustedUsers = [ "root" "porto" ];
+  };
   system = { stateVersion = "21.11"; };
 }
