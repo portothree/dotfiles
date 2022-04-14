@@ -1,10 +1,9 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports =
     [ ../../config/home-manager/common.nix ../../config/home-manager/git.nix ];
   home = {
-    stateVersion = "21.11";
     packages = with pkgs; [
       st
       sysz
