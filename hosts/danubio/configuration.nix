@@ -31,7 +31,7 @@
     };
   };
   environment = { systemPackages = with pkgs; [ wget ]; };
-  virtualization = { docker = { enable = true; }; };
+  virtualisation = { docker = { enable = true; }; };
   nix = {
     enable = true;
     package = pkgs.nixFlakes;
