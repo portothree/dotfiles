@@ -31,6 +31,7 @@
       nodejs
       yarn
       poetry
+      docker-compose
     ];
     sessionVariables = { EDITOR = "vim"; };
   };
