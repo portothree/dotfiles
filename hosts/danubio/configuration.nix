@@ -32,9 +32,6 @@
   };
   environment = { systemPackages = with pkgs; [ wget ]; };
   virtualization = { docker = { enable = true; }; };
-  home-manager = {
-    users = { porto = import ./home.nix { inherit config pkgs; }; };
-  };
   nix = {
     enable = true;
     package = pkgs.nixFlakes;
