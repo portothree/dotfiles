@@ -4,6 +4,7 @@
   imports = [
     ../../config/home-manager/common.nix
     ../../config/home-manager/sxhkd.nix
+    ../../config/home-manager/ranger.nix
   ];
   home = {
     packages = with pkgs; [
