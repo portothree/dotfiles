@@ -3,8 +3,8 @@
 {
   imports = [
     ../../config/home-manager/common.nix
-    ../../config/home-manager/git.nix
-    ../../config/home-manager/sxhkd.nix
+    ../../config/git.nix
+    ../../config/sxhkd.nix
   ];
   home = {
     packages = with pkgs; [

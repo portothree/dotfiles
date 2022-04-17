@@ -2,7 +2,7 @@
 
 {
   imports =
-    [ ../../config/home-manager/common.nix ../../config/home-manager/git.nix ];
+    [ ../../config/home-manager/common.nix ../../config/git.nix ];
   home = {
     stateVersion = "21.11";
     packages = with pkgs; [
