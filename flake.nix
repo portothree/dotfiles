@@ -34,7 +34,7 @@
         "gesonel" = home-manager.lib.homeManagerConfiguration {
           inherit system;
           configuration = import ./hosts/gesonel/home.nix {
-            pkgs = mkPkgs nixpkgs {
+            pkgs = mkPkgs nixpkgs-unstable {
               overlays = [ nixgl.overlay ];
               allowUnfree = true;
             };
