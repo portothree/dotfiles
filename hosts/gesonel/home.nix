@@ -35,6 +35,7 @@
       s-tui
       dijo
       nextdns
+      gh
     ];
     sessionVariables = { EDITOR = "vim"; };
     file = {
