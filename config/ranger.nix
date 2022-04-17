@@ -413,12 +413,10 @@
       text = ''
         ext x?html?, has qutebrowser,      X, flag f = qutebrowser -- "$@"
 
-        mime ^text,  label editor = ${"VISUAL:-$EDITOR"} -- "$@"
+        mime ^text,  label editor = "$EDITOR" -- "$@"
         mime ^text,  label pager  = "$PAGER" -- "$@"
-        !mime ^text, label editor, ext xml|html|json|csv|tex|py|pl|rb|css|js|ts|sh|php = ${
-          "VISUAL:-$EDITOR"
-        } -- "$@"
-        !mime ^text, label pager,  ext xml|html|json|csv|tex|py|pl|rb|css|js|ts|sh|php = "$PAGER" -- "$@"
+        !mime ^text, label editor, ext xml|html|json|csv|tex|py|pl|rb|css|js|ts|nix|sh|php = "$EDITOR" -- "$@"
+        !mime ^text, label pager,  ext xml|html|json|csv|tex|py|pl|rb|css|js|ts|nix|sh|php = "$PAGER" -- "$@"
 
         ext 1                         = man "$1"
         ext s[wmf]c, has zsnes, X     = zsnes "$1"
@@ -431,7 +429,7 @@
         ext pl  = perl -- "$1"
         ext rb  = ruby -- "$1"
         ext js  = node -- "$1"
-        ext ts = vim "$@"
+        ext ts = ts-node "$1"
         ext sh  = sh -- "$1"
         ext php = php -- "$1"
 
