@@ -140,7 +140,6 @@
       enable = true;
       nix-direnv = {
         enable = true;
-        enableFlakes = true;
       };
     };
     htop = { enable = true; };
