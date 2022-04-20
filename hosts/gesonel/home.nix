@@ -136,7 +136,6 @@
     };
   };
   programs = {
-    home-manager = { enable = true; };
     htop = { enable = true; };
     vim = {
       enable = true;
