@@ -30,10 +30,6 @@ graph TD
 		C[E-Paper Watch - Watchy]
 	end
 	
-	subgraph Gandi.net VPS 
-		A1[DATACENTER FR-SD6] -->|46.226.106.65| Tosh{V-R4 - NixOS};	
-	end
-	
 	classDef orange fill:#f96;
 	classDef blue	fill:#00f;
 	class A orange
