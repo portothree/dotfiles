@@ -5,6 +5,7 @@
     ../../config/home-manager/common.nix
     ../../config/git.nix
     ../../config/sxhkd.nix
+    ../../config/ranger.nix
   ];
   home = {
     packages = with pkgs; [
