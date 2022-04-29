@@ -44,6 +44,7 @@
       displayManager = { defaultSession = "none+bspwm"; };
       windowManager = { bspwm = { enable = true; }; };
     };
+    blueman.enable = true;
   };
   sound.enable = true;
   hardware = {
@@ -52,6 +53,7 @@
       driSupport = true;
       extraPackages = with pkgs; [ rocm-opencl-icd rocm-opencl-runtime amdvlk ];
     };
+    bluetooth.enable = true;
   };
   users = {
     groups = { plugdev = { }; };
