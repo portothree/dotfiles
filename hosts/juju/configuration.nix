@@ -30,6 +30,7 @@
           pskRaw = "@WIRELESS_PSKRAW_HOME@";
         };
         "@WIRELESS_SSID_WOO@" = { pskRaw = "@WIRELESS_PSKRAW_WOO@"; };
+        "@WIRELESS_SSID_YLD@" = { pskRaw = "@WIRELESS_PSKRAW_YLD@"; };
       };
     };
   };
@@ -58,11 +59,12 @@
     users = {
       porto = {
         isNormalUser = true;
-        extraGroups = [ "wheel" "plugdev" "dialout" ];
+        extraGroups = [ "wheel" "plugdev" "dialout" "docker" ];
       };
     };
   };
   environment.systemPackages = with pkgs; [ wget curl ];
+  virtualisation = { docker = { enable = true; }; };
   fonts.fonts = with pkgs; [ fira-code siji ];
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
