@@ -17,6 +17,7 @@
       }))
       sysz
       ranger
+      pass
       bitwarden-cli
       tig
       k9s
