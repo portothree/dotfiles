@@ -56,7 +56,10 @@
     file = {
       xinit = {
         target = ".xinitrc";
-        text = "exec bspwm";
+        text = ''
+          sxhkd &
+          exec bspwm
+        '';
       };
       crontab = {
         target = ".crontab";
