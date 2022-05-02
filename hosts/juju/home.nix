@@ -54,6 +54,10 @@
     ];
     sessionVariables = { EDITOR = "vim"; };
     file = {
+      xinit = {
+        target = ".xinitrc";
+        text = "exec bspwm";
+      };
       crontab = {
         target = ".crontab";
         text = "";
@@ -200,9 +204,7 @@
     };
     direnv = {
       enable = true;
-      nix-direnv = {
-        enable = true;
-      };
+      nix-direnv = { enable = true; };
       enableZshIntegration = true;
     };
     fzf = {

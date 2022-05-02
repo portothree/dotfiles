@@ -46,8 +46,8 @@
         touchpad = { accelProfile = "flat"; };
       };
       displayManager = {
-        defaultSession = "none+bspwm";
         startx = { enable = true; };
+        defaultSession = "none+bspwm";
       };
       windowManager = { bspwm = { enable = true; }; };
     };
