@@ -45,7 +45,10 @@
         mouse = { accelProfile = "flat"; };
         touchpad = { accelProfile = "flat"; };
       };
-      displayManager = { startx = { enable = true; }; };
+      displayManager = {
+        defaultSession = "none+bspwm";
+        startx = { enable = true; };
+      };
       windowManager = { bspwm = { enable = true; }; };
     };
     blueman.enable = true;
