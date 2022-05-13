@@ -37,6 +37,7 @@ in
       python3
       xclip
       xdotool
+      maim
       sysz
       tig
       rofi
