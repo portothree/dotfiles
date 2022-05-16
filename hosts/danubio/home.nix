@@ -1,8 +1,11 @@
 { pkgs, ... }:
 
 {
-  imports =
-    [ ../../config/home-manager/common.nix ../../config/git.nix ];
+  imports = [
+    ../../config/home-manager/common.nix
+    ../../config/git.nix
+    ../../config/vim.nix
+  ];
   home = {
     packages = with pkgs; [
       st
@@ -68,23 +71,6 @@
         plugins = [ "git" "git-auto-fetch" ];
         theme = "robbyrussell";
       };
-    };
-    vim = {
-      enable = true;
-      settings = {
-        background = "dark";
-        number = true;
-        tabstop = 4;
-        shiftwidth = 4;
-      };
-      extraConfig = ''
-        set clipboard=unnamedplus
-        set t_Co=256
-        set autoindent
-        set nocp
-        filetype plugin indent on
-        syntax on 
-      '';
     };
     gh = {
       enable = true;
