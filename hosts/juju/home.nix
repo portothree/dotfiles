@@ -6,6 +6,7 @@
     ../../config/git.nix
     ../../config/sxhkd.nix
     ../../config/ranger.nix
+    ../../config/keynav.nix
   ];
   home = {
     packages = with pkgs; [
