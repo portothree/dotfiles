@@ -39,6 +39,7 @@
       dijo
       nextdns
       gh
+      zathura
     ];
     sessionVariables = { EDITOR = "vim"; };
     file = {
