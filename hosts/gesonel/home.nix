@@ -7,6 +7,7 @@
     ../../config/ranger.nix
     ../../config/vim.nix
     ../../config/khal.nix
+    ../../config/vdirsyncer.nix
   ];
   home = {
     packages = with pkgs; [
