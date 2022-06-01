@@ -37,6 +37,7 @@
       timewarrior
       s-tui
       dijo
+      khal
       nextdns
       gh
       zathura
