@@ -6,7 +6,7 @@
     text = ''
       [calendars]
 
-      [[private1]]
+      [[private]]
       path = /home/porto/.local/share/khal/calendars/private
       type = calendar
 
@@ -18,7 +18,7 @@
       longdatetimeformat = %Y-%m-%d %H:%M
 
       [default]
-      default_calendar = private1
+      default_calendar = private
     '';
   };
 }
