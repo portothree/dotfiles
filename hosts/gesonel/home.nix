@@ -6,6 +6,7 @@
     ../../config/sxhkd.nix
     ../../config/ranger.nix
     ../../config/vim.nix
+    ../../config/khal.nix
   ];
   home = {
     packages = with pkgs; [
