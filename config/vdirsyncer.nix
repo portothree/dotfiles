@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  home.file.khal = {
+  home.file.vdirsyncer = {
     target = ".config/vdirsyncer/config";
     text = ''
       [general]
