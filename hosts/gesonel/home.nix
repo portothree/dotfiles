@@ -37,6 +37,7 @@
       timewarrior
       s-tui
       dijo
+      vdirsyncer
       khal
       nextdns
       gh
