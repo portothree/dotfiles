@@ -22,7 +22,7 @@
       wuzz
       websocat
       lazydocker
-      nodejs
+      nodejs-16_x
       python3
     ];
   };
