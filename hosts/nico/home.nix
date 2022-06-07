@@ -4,7 +4,6 @@
   imports = [
     ../../config/home-manager/common.nix
     ../../config/git.nix
-    ../../config/zsh.nix
     ../../config/vim.nix
     ../../config/gh.nix
     ../../config/tmux.nix
