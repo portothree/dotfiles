@@ -33,8 +33,5 @@
     };
   };
   environment = { systemPackages = with pkgs; [ wget ]; };
-  home-manager = {
-    users = { porto = import ./home.nix { inherit config pkgs; }; };
-  };
   system = { stateVersion = "21.11"; };
 }
