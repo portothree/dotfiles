@@ -21,8 +21,9 @@
       glow
       wuzz
       websocat
-      nodejs
       lazydocker
+      nodejs
+      python3
     ];
   };
   services = { keybase = { enable = true; }; };
