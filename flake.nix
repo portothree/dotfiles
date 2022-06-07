@@ -29,6 +29,10 @@
           inherit system;
           modules = [ ./hosts/danubio/configuration.nix ];
         };
+        "nico" = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [ ./hosts/nico/configuration.nix ];
+        };
       };
       homeConfigurations = {
         "gesonel" = home-manager.lib.homeManagerConfiguration {
