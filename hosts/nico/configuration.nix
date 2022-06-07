@@ -33,5 +33,13 @@
     };
   };
   environment = { systemPackages = with pkgs; [ wget ]; };
+  nix = {
+    enable = true;
+    package = pkgs.nixFlakes;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+    trustedUsers = [ "root" "porto" ];
+  };
   system = { stateVersion = "21.11"; };
 }
