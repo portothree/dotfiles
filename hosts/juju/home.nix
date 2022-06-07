@@ -52,6 +52,7 @@
       ledger-live-desktop
       platformio
       nextdns
+      yank
     ];
     sessionVariables = { EDITOR = "vim"; };
     file = {
