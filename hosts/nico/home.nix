@@ -26,10 +26,6 @@
     ];
   };
   programs = {
-    bash = {
-      enable = true;
-      sessionVariables = { EDITOR = "vim"; };
-    };
     htop = { enable = true; };
     direnv = {
       enable = true;
