@@ -59,6 +59,14 @@
           username = "porto";
           homeDirectory = "/home/porto";
         };
+        "nico" = home-manager.lib.homeManagerConfiguration {
+          inherit system;
+          configuration =
+            import ./hosts/nico/home.nix { pkgs = mkPkgs nixpkgs { }; };
+          stateVersion = "21.11";
+          username = "porto";
+          homeDirectory = "/home/porto";
+        };
       };
       devShell."${system}" =
         import ./shell.nix { pkgs = mkPkgs nixpkgs-unstable { }; };
