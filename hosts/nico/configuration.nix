@@ -4,12 +4,8 @@
   imports = [ ../common.nix ./hardware-configuration.nix ];
   boot = {
     loader = {
-	systemd-boot = {
-		enable = true;
-	};
-	efi = {
-		canTouchEfiVariables = true;
-	};
+      systemd-boot = { enable = true; };
+      efi = { canTouchEfiVariables = true; };
     };
   };
   networking = {
@@ -19,20 +15,19 @@
     extraHosts = ''
       192.168.1.100 pve
     '';
-    nameservers = [ "208.67.222.222" "208.67.220.220"];
+    nameservers = [ "208.67.222.222" "208.67.220.220" ];
   };
-  services = {
-    openssh = { enable = true; };
-  };
+  services = { openssh = { enable = true; }; };
   users = {
     users = {
       porto = {
         isNormalUser = true;
-        extraGroups = [ "wheel" ];
+        extraGroups = [ "wheel" "docker" ];
       };
     };
   };
   environment = { systemPackages = with pkgs; [ wget ]; };
+  virtualisation = { docker = { enable = true; }; };
   nix = {
     enable = true;
     package = pkgs.nixFlakes;

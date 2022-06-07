@@ -25,6 +25,7 @@
       lazydocker
     ];
   };
+  services = { keybase = { enable = true; }; };
   programs = {
     htop = { enable = true; };
     direnv = {
