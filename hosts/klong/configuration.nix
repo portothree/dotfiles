@@ -1,16 +1,16 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ./hardware-configuration.nix
-    ../common.nix
-  ];
+  imports = [ ./hardware-configuration.nix ../common.nix ];
   boot = {
     loader = {
-      systemd-boot.enable = true;
       efi = {
         canTouchEfiVariables = true;
         efiSysMountPoint = "/boot/efi";
+      };
+      grub = {
+        efiSupport = true;
+        device = "nodev";
       };
     };
   };
