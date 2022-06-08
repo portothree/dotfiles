@@ -53,10 +53,6 @@
   sound.enable = true;
   hardware = {
     pulseaudio.enable = true;
-    opengl = {
-      driSupport = true;
-      extraPackages = with pkgs; [ rocm-opencl-icd rocm-opencl-runtime amdvlk ];
-    };
     bluetooth.enable = true;
   };
   users = {
