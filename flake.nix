@@ -12,6 +12,8 @@
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nixgl }:
     let
       system = "x86_64-linux";
+      username = "porto";
+      homeDirectory = "/home/porto";
       mkPkgs = pkgs:
         { overlays ? [ ], allowUnfree ? false }:
         import pkgs {
@@ -33,10 +35,16 @@
           inherit system;
           modules = [ ./hosts/nico/configuration.nix ];
         };
+        "klong" = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [ ./hosts/klong/configuration.nix ];
+        };
       };
       homeConfigurations = {
         "gesonel" = home-manager.lib.homeManagerConfiguration {
           inherit system;
+          inherit username;
+          inherit homeDirectory;
           configuration = import ./hosts/gesonel/home.nix {
             pkgs = mkPkgs nixpkgs-unstable {
               overlays = [ nixgl.overlay ];
@@ -44,32 +52,38 @@
             };
           };
           stateVersion = "22.05";
-          username = "porto";
-          homeDirectory = "/home/porto";
         };
         "juju" = home-manager.lib.homeManagerConfiguration {
           inherit system;
+          inherit username;
+          inherit homeDirectory;
           configuration =
             import ./hosts/juju/home.nix { pkgs = mkPkgs nixpkgs { }; };
           stateVersion = "21.11";
-          username = "porto";
-          homeDirectory = "/home/porto";
         };
         "danubio" = home-manager.lib.homeManagerConfiguration {
           inherit system;
+          inherit username;
+          inherit homeDirectory;
           configuration =
             import ./hosts/danubio/home.nix { pkgs = mkPkgs nixpkgs { }; };
           stateVersion = "21.11";
-          username = "porto";
-          homeDirectory = "/home/porto";
         };
         "nico" = home-manager.lib.homeManagerConfiguration {
           inherit system;
+          inherit username;
+          inherit homeDirectory;
           configuration =
             import ./hosts/nico/home.nix { pkgs = mkPkgs nixpkgs { }; };
           stateVersion = "21.11";
-          username = "porto";
-          homeDirectory = "/home/porto";
+        };
+        "klong" = home-manager.lib.homeManagerConfiguration {
+          inherit system;
+          inherit username;
+          inherit homeDirectory;
+          configuration =
+            import ./hosts/klong/home.nix { pkgs = mkPkgs nixpkgs { }; };
+          stateVersion = "22.05";
         };
       };
       devShell."${system}" =
