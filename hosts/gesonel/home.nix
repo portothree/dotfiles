@@ -72,6 +72,7 @@
           github.default_priority = H
           github.add_tags = open_source
           github.username = portothree 
+          github.exclude_pull_requests = True
           github.include_repos = dotfiles,memex,homelab,plain-text-anything,spaced-repetition
           github.login = portothree 
           github.token = @oracle:eval:pass GitHub/portothree
