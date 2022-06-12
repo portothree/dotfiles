@@ -25,6 +25,8 @@ graph TD
 		A -->|192.168.1.105| 104{VM - NixOS};
 		104 -->|:22| 104_ssh[OpenSSH];
 		
+		A -->|192.168.1.1114| 105{VM - NixOS};
+		105 -->|:22| 105_ssh[OpenSSH];
 		
 		B[Phone - Xiaomi Redmi Note 9]
 		C[E-Paper Watch - Watchy]
