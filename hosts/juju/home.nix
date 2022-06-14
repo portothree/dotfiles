@@ -6,6 +6,7 @@
     ../../config/git.nix
     ../../config/sxhkd.nix
     ../../config/ranger.nix
+    ../../config/rofi.nix
     ../../config/keynav.nix
   ];
   home = {
@@ -27,7 +28,6 @@
       xclip
       xdotool
       lemonbar
-      rofi
       nixfmt
       nodejs
       glow

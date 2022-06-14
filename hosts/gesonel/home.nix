@@ -5,6 +5,7 @@
     ../../config/home-manager/common.nix
     ../../config/sxhkd.nix
     ../../config/ranger.nix
+    ../../config/rofi.nix
     ../../config/vim.nix
     ../../config/khal.nix
     ../../config/vdirsyncer.nix
@@ -32,7 +33,6 @@
       maim
       sysz
       tig
-      rofi
       glow
       tasksh
       vit
