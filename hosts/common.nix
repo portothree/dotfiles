@@ -10,19 +10,6 @@
       192.168.1.200 uptime.kuma
     '';
   };
-  shellAliases = {
-    cp = "cp -i";
-    diff = "diff --color=auto";
-    dmesg = "dmesg --color=always | lless";
-    egrep = "egrep --color=auto";
-    fgrep = "fgrep --color=auto";
-    grep = "grep --color=auto";
-    mv = "mv -i";
-    ping = "ping -c3";
-    ps = "ps -ef";
-    sudo = "sudo -i";
-    vdir = "vdir --color=auto";
-  };
   i18n = {
     defaultLocale = "en_US.UTF-8";
     supportedLocales = [ "en_US.UTF-8/UTF-8" ];
