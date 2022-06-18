@@ -15,7 +15,7 @@
     supportedLocales = [ "en_US.UTF-8/UTF-8" ];
   };
   console = {
-    font = "Fira Code";
+    font = "FiraCode";
     keyMap = "us";
   };
   fonts = {
