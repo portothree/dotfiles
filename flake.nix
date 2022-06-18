@@ -25,19 +25,55 @@
       nixosConfigurations = {
         "juju" = nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = [ ./hosts/juju/configuration.nix ];
+          modules = [
+            ./hosts/juju/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-mangaer.useUserPackages = true;
+              home-manager.users.porto =
+                import ./hosts/juju/home.nix { pkgs = mkPkgs nixpkgs { }; };
+            }
+          ];
         };
         "danubio" = nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = [ ./hosts/danubio/configuration.nix ];
+          modules = [
+            ./hosts/danubio/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-mangaer.useUserPackages = true;
+              home-manager.users.porto =
+                import ./hosts/danubio/home.nix { pkgs = mkPkgs nixpkgs { }; };
+            }
+          ];
         };
         "nico" = nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = [ ./hosts/nico/configuration.nix ];
+          modules = [
+            ./hosts/nico/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-mangaer.useUserPackages = true;
+              home-manager.users.porto =
+                import ./hosts/nico/home.nix { pkgs = mkPkgs nixpkgs { }; };
+            }
+          ];
         };
         "klong" = nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = [ ./hosts/klong/configuration.nix ];
+          modules = [
+            ./hosts/klong/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-mangaer.useUserPackages = true;
+              home-manager.users.porto =
+                import ./hosts/klong/home.nix { pkgs = mkPkgs nixpkgs { }; };
+            }
+          ];
         };
       };
       homeConfigurations = {
@@ -51,38 +87,6 @@
               allowUnfree = true;
             };
           };
-          stateVersion = "22.05";
-        };
-        "juju" = home-manager.lib.homeManagerConfiguration {
-          inherit system;
-          inherit username;
-          inherit homeDirectory;
-          configuration =
-            import ./hosts/juju/home.nix { pkgs = mkPkgs nixpkgs { }; };
-          stateVersion = "21.11";
-        };
-        "danubio" = home-manager.lib.homeManagerConfiguration {
-          inherit system;
-          inherit username;
-          inherit homeDirectory;
-          configuration =
-            import ./hosts/danubio/home.nix { pkgs = mkPkgs nixpkgs { }; };
-          stateVersion = "21.11";
-        };
-        "nico" = home-manager.lib.homeManagerConfiguration {
-          inherit system;
-          inherit username;
-          inherit homeDirectory;
-          configuration =
-            import ./hosts/nico/home.nix { pkgs = mkPkgs nixpkgs { }; };
-          stateVersion = "21.11";
-        };
-        "klong" = home-manager.lib.homeManagerConfiguration {
-          inherit system;
-          inherit username;
-          inherit homeDirectory;
-          configuration =
-            import ./hosts/klong/home.nix { pkgs = mkPkgs nixpkgs { }; };
           stateVersion = "22.05";
         };
       };
