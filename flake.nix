@@ -30,7 +30,7 @@
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
-              home-mangaer.useUserPackages = true;
+              home-manager.useUserPackages = true;
               home-manager.users.porto =
                 import ./hosts/juju/home.nix { pkgs = mkPkgs nixpkgs { }; };
             }
@@ -43,7 +43,7 @@
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
-              home-mangaer.useUserPackages = true;
+              home-manager.useUserPackages = true;
               home-manager.users.porto =
                 import ./hosts/danubio/home.nix { pkgs = mkPkgs nixpkgs { }; };
             }
@@ -56,7 +56,7 @@
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
-              home-mangaer.useUserPackages = true;
+              home-manager.useUserPackages = true;
               home-manager.users.porto =
                 import ./hosts/nico/home.nix { pkgs = mkPkgs nixpkgs { }; };
             }
@@ -69,7 +69,7 @@
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
-              home-mangaer.useUserPackages = true;
+              home-manager.useUserPackages = true;
               home-manager.users.porto =
                 import ./hosts/klong/home.nix { pkgs = mkPkgs nixpkgs { }; };
             }
