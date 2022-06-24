@@ -30,6 +30,7 @@
       lemonbar
       nixfmt
       nodejs
+      yarn
       glow
       weechat
       pgcli
