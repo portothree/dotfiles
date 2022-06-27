@@ -107,9 +107,9 @@
       bspwm = {
         enable = true;
         extraConfig = ''
-          bspc monitor "DisplayPort-1" -d I II IV
-          bspc monitor "HDMI-A-0" -d V VI VII
-          bspc monitor "eDP" -d VIII IX X 
+          bspc monitor "eDP" -d I
+          bspc monitor "HDMI-A-0" -d II III IV V
+          bspc monitor "DisplayPort-1" -d VI VII VIII IX X
           bspc config border_width 0.5
           bspc config window_gap 2
           bspc config split_ratio 0.52
