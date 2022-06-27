@@ -14,6 +14,10 @@
       efi.canTouchEfiVariables = true;
     };
     initrd = { kernelModules = [ "amdgpu" ]; };
+    kernelParams = [
+      "video=eDP-1:1920x1080@60"
+      "video=HDMI-A-1:1920x1080@60"
+    ];
   };
   networking = {
     useDHCP = false;
