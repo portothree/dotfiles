@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 let
   vim-promet = pkgs.vimUtils.buildVimPlugin {
@@ -17,14 +17,16 @@ in {
       viAlias = true;
       vimAlias = true;
       vimdiffAlias = true;
+      coc = {
+	enable = true;
+      };
       plugins = [
         vim-promet
         pkgs.vimPlugins.vim-prettier
         pkgs.vimPlugins.vim-airline
-        pkgs.vimPlugins.YouCompleteMe
         pkgs.vimPlugins.ale
       ];
-      extraConfig = builtins.concatStringSep "\n" [''
+      extraConfig = builtins.concatStringsSep "\n" [''
         lua << EOF
         ${lib.strings.fileContents ./neovim.lua}
         EOF
