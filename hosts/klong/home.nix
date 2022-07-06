@@ -4,6 +4,7 @@
   imports = [
     ../../config/home-manager/common.nix
     ../../config/git.nix
+    ../../config/neovim.nix
     ../../config/sxhkd.nix
     ../../config/ranger.nix
     ../../config/keynav.nix
@@ -54,7 +55,7 @@
       nextdns
       yank
     ];
-    sessionVariables = { EDITOR = "vim"; };
+    sessionVariables = { EDITOR = "nvim"; };
     file = {
       xinit = {
         target = ".xinitrc";
@@ -135,8 +136,8 @@
       enableCompletion = true;
       sessionVariables = {
         PROMPT = "%(?.%F{green}.%F{red})λ%f %B%F{cyan}%~%f%b ";
-        VISUAL = "vim";
-        EDITOR = "vim";
+        VISUAL = "nvim";
+        EDITOR = "nvim";
         HISTTIMEFORMAT = "%F %T ";
         PATH =
           "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/nix/var/nix/profiles/default/bin:/home/porto/nix-profile/bin";
@@ -178,26 +179,6 @@
         plugins = [ "git" "git-auto-fetch" ];
         theme = "robbyrussell";
       };
-    };
-    vim = {
-      enable = true;
-      settings = {
-        background = "dark";
-        number = true;
-        tabstop = 4;
-        shiftwidth = 4;
-      };
-      plugins = with pkgs.vimPlugins; [ vimwiki ];
-      extraConfig = ''
-        set clipboard=unnamedplus
-        set t_Co=256
-        set autoindent
-        set nocp
-        filetype plugin indent on
-        syntax on 
-
-        au BufNewFile,BufRead *.ldg,*.ledger setf ledger | comp ledger
-      '';
     };
     gh = {
       enable = true;
