@@ -26,7 +26,10 @@
       };
     };
   };
-  environment = { systemPackages = with pkgs; [ wget ]; };
+  environment = {
+    systemPackages = with pkgs; [ wget ];
+    variables = { EDITOR = "nvim"; };
+  };
   virtualisation = { docker = { enable = true; }; };
   nix = {
     enable = true;

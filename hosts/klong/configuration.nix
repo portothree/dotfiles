@@ -63,7 +63,10 @@
       };
     };
   };
-  environment.systemPackages = with pkgs; [ wget curl ];
+  environment = {
+    systemPackages = with pkgs; [ wget curl ];
+    variables = { EDITOR = "nvim"; };
+  };
   virtualisation = { docker = { enable = true; }; };
   fonts.fonts = with pkgs; [ fira-code siji ];
   nix = {

@@ -4,7 +4,7 @@
   imports = [
     ../../config/home-manager/common.nix
     ../../config/git.nix
-    ../../config/vim.nix
+    ../../config/neovim.nix
     ../../config/gh.nix
     ../../config/tmux.nix
   ];

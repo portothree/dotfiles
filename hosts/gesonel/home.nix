@@ -6,7 +6,7 @@
     ../../config/sxhkd.nix
     ../../config/ranger.nix
     ../../config/rofi.nix
-    ../../config/vim.nix
+    ../../config/neovim.nix
     ../../config/khal.nix
     ../../config/vdirsyncer.nix
   ];
@@ -45,7 +45,7 @@
       gh
       zathura
     ];
-    sessionVariables = { EDITOR = "vim"; };
+    sessionVariables = { EDITOR = "nvim"; };
     file = {
       crontab = {
         target = ".crontab";
