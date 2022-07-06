@@ -19,7 +19,7 @@ in {
       vimdiffAlias = true;
       withNodeJs = true;
       coc = { enable = true; };
-      plugins = [ pkgs.vimPlugins.onedark-nvim ];
+      plugins = [ ];
       extraConfig = builtins.concatStringsSep "\n" [''
         lua << EOF
         ${lib.strings.fileContents ./neovim/init.lua}
