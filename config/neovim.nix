@@ -24,7 +24,7 @@ in {
         pkgs.vimPlugins.YouCompleteMe
         pkgs.vimPlugins.ale
       ];
-      extraConfig = builtings.concatStringSep "\n" [''
+      extraConfig = builtins.concatStringSep "\n" [''
         lua << EOF
         ${lib.strings.fileContents ./neovim.lua}
         EOF
