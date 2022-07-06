@@ -17,6 +17,7 @@ in {
       viAlias = true;
       vimAlias = true;
       vimdiffAlias = true;
+      withNodeJs = true;
       coc = {
 	enable = true;
       };
