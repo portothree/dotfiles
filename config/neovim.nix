@@ -14,16 +14,21 @@ in {
   programs = {
     neovim = {
       enable = true;
-      plugins = [ vim-promet ];
-      extraConfig = ''
-        colorscheme promet
-        set clipboard=unnamedplus
-        set t_Co=256
-        set autoindent
-        set nocp
-        filetype plugin indent on
-        syntax on 
-      '';
+      viAlias = true;
+      vimAlias = true;
+      vimdiffAlias = true;
+      plugins = [
+        vim-promet
+        pkgs.vimPlugins.vim-prettier
+        pkgs.vimPlugins.vim-airline
+        pkgs.vimPlugins.YouCompleteMe
+        pkgs.vimPlugins.ale
+      ];
+      extraConfig = builtings.concatStringSep "\n" [''
+        lua << EOF
+        ${lib.strings.fileContents ./neovim.lua}
+        EOF
+      ''];
     };
   };
 }
