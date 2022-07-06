@@ -1,15 +1,15 @@
 { pkgs, lib, ... }:
 
 let
-  vim-promet = pkgs.vimUtils.buildVimPlugin {
-    name = "promet";
-    src = pkgs.fetchFromGitHub {
-      owner = "portothree";
-      repo = "promet.vim";
-      rev = "d630dacfefe30996f54efdc33fa442163eb9fea7";
-      sha256 = "QC+7EkRU4OGjKEzlWhbbph2pW0g7zcLquq1FrUBCG40=";
+  pluginGitHub = ref: repo:
+    pkgs.vimUtils.buildVimPluginFrom2Nix {
+      pname = "${lib.strings.sanitizeDerivationName repo}";
+      version = ref;
+      src = builtins.fetchGit {
+        url = "https://github.com/${repo}.git";
+        ref = ref;
+      };
     };
-  };
 in {
   programs = {
     neovim = {
@@ -18,12 +18,8 @@ in {
       vimAlias = true;
       vimdiffAlias = true;
       withNodeJs = true;
-      coc = {
-	enable = true;
-      };
-      plugins = [
-        vim-promet
-      ];
+      coc = { enable = true; };
+      plugins = [ (pluginGitHub "HEAD" "portothree/promet.vim") ];
       extraConfig = builtins.concatStringsSep "\n" [''
         lua << EOF
         ${lib.strings.fileContents ./neovim.lua}
