@@ -22,7 +22,7 @@ in {
       plugins = [ (pluginGitHub "HEAD" "portothree/promet.vim") ];
       extraConfig = builtins.concatStringsSep "\n" [''
         lua << EOF
-        ${lib.strings.fileContents ./neovim.lua}
+        ${lib.strings.fileContents ./neovim/init.lua}
         EOF
       ''];
     };
