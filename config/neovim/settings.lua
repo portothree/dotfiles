@@ -1,2 +1,2 @@
-cmd('syntax on')
-cmd('colorscheme promet')
+vim.cmd('syntax on')
+vim.cmd('colorscheme promet')
