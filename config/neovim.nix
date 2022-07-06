@@ -23,9 +23,6 @@ in {
       };
       plugins = [
         vim-promet
-        pkgs.vimPlugins.vim-prettier
-        pkgs.vimPlugins.vim-airline
-        pkgs.vimPlugins.ale
       ];
       extraConfig = builtins.concatStringsSep "\n" [''
         lua << EOF
