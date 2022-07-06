@@ -23,6 +23,9 @@ in {
       extraConfig = builtins.concatStringsSep "\n" [''
         lua << EOF
         ${lib.strings.fileContents ./neovim/init.lua}
+        ${lib.strings.fileContents ./neovim/lua/settings.lua}
+        ${lib.strings.fileContents ./neovim/lua/maps.lua}
+        ${lib.strings.fileContents ./neovim/lua/statusline.lua}
         EOF
       ''];
     };
