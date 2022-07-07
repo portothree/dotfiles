@@ -14,6 +14,11 @@
       efi.canTouchEfiVariables = true;
     };
     initrd = { kernelModules = [ "amdgpu" ]; };
+    kernelParams = [
+      "video=eDP-1:1920x1080@60"
+      "video=HDMI-A-1:1920x1080@60"
+      "video=DP-2:1920x1080@60"
+    ];
   };
   networking = {
     useDHCP = false;
@@ -31,6 +36,7 @@
         };
         "@WIRELESS_SSID_WOO@" = { pskRaw = "@WIRELESS_PSKRAW_WOO@"; };
         "@WIRELESS_SSID_YLD@" = { pskRaw = "@WIRELESS_PSKRAW_YLD@"; };
+        "@WIRELESS_SSID_NKOOWOORK@" = { psk = "@WIRELESS_PSK_NKOOWOORK@"; };
       };
     };
   };
