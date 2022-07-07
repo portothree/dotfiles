@@ -110,10 +110,10 @@
       bspwm = {
         enable = true;
         extraConfig = ''
-          xrandr --output "DP-0" --rotate left --left-of "HDMI-0"
+          xrandr --output "DP-0" --left-of "HDMI-0"
 
-          bspc monitor "DP-0" -d I
-          bspc monitor "HDMI-0" -d II III IV V VI VII VIII IX X
+          bspc monitor "DP-0" -d I II III
+          bspc monitor "HDMI-0" -d IV V VI VII VIII IX X
 
           bspc config border_width 0.5
           bspc config window_gap 2
