@@ -23,6 +23,19 @@
         };
     in {
       nixosConfigurations = {
+        "jorel" = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./hosts/jorel/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.porto =
+                import ./hosts/jorel/home.nix { pkgs = mkPkgs nixpkgs { }; };
+            }
+          ];
+        };
         "juju" = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [

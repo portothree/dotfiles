@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ../common.nix ./hardware-configuration.nix <home-manager/nixos> ];
+  imports = [ ./hardware-configuration.nix ../common.nix ];
   boot = {
     loader = {
       grub = {
@@ -22,33 +22,29 @@
       enable = true;
       layout = "us";
       displayManager = {
+        startx = { enable = true; };
         defaultSession = "none+bspwm";
       };
-      windowManager = {
-        bspwm = {
-          enable = true;
-        };
-      };
+      windowManager = { bspwm = { enable = true; }; };
     };
   };
+  sound = { enable = true; };
   users = {
     users = {
       porto = {
         isNormalUser = true;
-        extraGroups = [ "wheel" "audio" ];
+        extraGroups = [ "wheel" "audio" "docker" ];
       };
     };
   };
-  environment = { systemPackages = with pkgs; [ wget ]; };
+  environment = {
+    systemPackages = with pkgs; [ wget ];
+    variables = { EDITOR = "nvim"; };
+  };
+  virtualisation = { docker = { enable = true; }; };
+  fonts = { fonts = with pkgs; [ fira-code siji ]; };
   sound = { enable = true; };
   hardware = { pulseaudio = { enable = true; }; };
-  nixpkgs = {
-    config = {
-      pulseaudio = true;
-    };
-  };
-  home-manager = {
-    users = { porto = import ./home.nix { inherit config pkgs; }; };
-  };
-  system = { stateVersion = "21.11"; };
+  nixpkgs = { config = { pulseaudio = true; }; };
+  system = { stateVersion = "22.05"; };
 }
