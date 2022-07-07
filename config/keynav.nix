@@ -78,16 +78,16 @@
             # Paste
             v sh "xdotool key shift+Insert"
 
-            ### Drag examples
+            ### Drag
             # Start drag holding the left mouse button
-            #q drag 1
+            q drag 1
             # Start drag holding middle mouse + control and shift
-            #w drag 2 ctrl+shift
+            w drag 2 ctrl+shift
             # Dragging with modifiers
-            #q drag 1
-            #ctrl+q drag 1 ctrl
-            #shift+q drag 1 shift
-            #shift+ctrl+q drag 1 shift+ctrl
+            q drag 1
+            ctrl+q drag 1 ctrl
+            shift+q drag 1 shift
+            shift+ctrl+q drag 1 shift+ctrl
 
             ### History
             a history-back
