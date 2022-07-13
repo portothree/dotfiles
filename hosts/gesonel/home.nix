@@ -11,9 +11,6 @@
     ../../config/vdirsyncer.nix
   ];
   home = {
-    stateVersion = "22.05";
-    username = "porto";
-    homeDirectory = "/home/porto";
     packages = with pkgs; [
       (st.overrideAttrs (oldAttrs: rec {
         src = builtins.fetchTarball {
@@ -22,6 +19,7 @@
         };
         buildInputs = oldAttrs.buildInputs ++ [ harfbuzz ];
       }))
+      nixgl.auto.nixGLNvidia
       xpra
       sysz
       ranger
@@ -130,6 +128,9 @@
   services = {
     picom = {
       enable = true;
+      package = pkgs.writers.writeBashBin "picom" ''
+        ${pkgs.nixgl.auto.nixGLNvidia}/bin/nixGLNvidia-460.91.03 ${pkgs.picom}/bin/picom --xrender-sync-fence "$@"
+      '';
       backend = "glx";
       experimentalBackends = true;
     };
@@ -210,6 +211,9 @@
     };
     qutebrowser = {
       enable = true;
+      package = pkgs.writers.writeBashBin "qutebrowser" ''
+        ${pkgs.nixgl.auto.nixGLNvidia}/bin/nixGLNvidia-460.91.03 ${pkgs.qutebrowser}/bin/qutebrowser "$@"
+      '';
       loadAutoconfig = true;
       extraConfig = ''
         home_page = "/home/porto/www/memex/packages/web/index.html"
