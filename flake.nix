@@ -91,16 +91,11 @@
       };
       homeConfigurations = {
         "gesonel" = home-manager.lib.homeManagerConfiguration {
-          inherit system;
-          inherit username;
-          inherit homeDirectory;
-          configuration = import ./hosts/gesonel/home.nix {
-            pkgs = mkPkgs nixpkgs-unstable {
-              overlays = [ nixgl.overlay ];
-              allowUnfree = true;
-            };
+          pkgs = mkPkgs nixpkgs-unstable {
+            overlays = [ nixgl.overlay ];
+            allowUnfree = true;
           };
-          stateVersion = "22.05";
+          modules = [ ./hosts/gesonel/home.nix ];
         };
       };
       devShell."${system}" =

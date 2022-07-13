@@ -11,6 +11,9 @@
     ../../config/vdirsyncer.nix
   ];
   home = {
+    stateVersion = "22.05";
+    username = "porto";
+    homeDirectory = "/home/porto";
     packages = with pkgs; [
       (st.overrideAttrs (oldAttrs: rec {
         src = builtins.fetchTarball {
