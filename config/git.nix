@@ -8,7 +8,10 @@
     extraConfig = {
       core = { editor = "vim"; };
       color = { ui = true; };
-      push = { default = "simple"; };
+      push = {
+        default = "simple";
+        autoSetupRemote = true;
+      };
       pull = { ff = "only"; };
       init = { defaultBranch = "master"; };
     };
