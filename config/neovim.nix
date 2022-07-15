@@ -27,7 +27,7 @@ in {
           };
         };
       };
-      plugins = with pkgs.vimPlugins [ vim-nix coc-eslint ];
+      plugins = with pkgs.vimPlugins; [ vim-nix coc-eslint ];
       extraConfig = builtins.concatStringsSep "\n" [''
         lua << EOF
         ${lib.strings.fileContents ./neovim/init.lua}
