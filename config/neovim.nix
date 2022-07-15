@@ -23,7 +23,9 @@ in {
           eslint = {
             enable = true;
             run = "onType";
+            alwaysShowStatus = true;
             autoFixOnSave = true;
+            format = { enable = true; };
           };
         };
       };
