@@ -1,5 +1,4 @@
 { pkgs, lib, ... }:
-
 let
   pluginGitHub = ref: repo:
     pkgs.vimUtils.buildVimPluginFrom2Nix {
@@ -18,8 +17,17 @@ in {
       vimAlias = true;
       vimdiffAlias = true;
       withNodeJs = true;
-      coc = { enable = true; };
-      plugins = [ ];
+      coc = {
+        enable = true;
+        settings = {
+          eslint = {
+            enable = true;
+            run = "onType";
+            autoFixOnSave = true;
+          };
+        };
+      };
+      plugins = with pkgs.vimPlugins; [ vim-nix coc-eslint ];
       extraConfig = builtins.concatStringsSep "\n" [''
         lua << EOF
         ${lib.strings.fileContents ./neovim/init.lua}
