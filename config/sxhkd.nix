@@ -5,7 +5,7 @@
       enable = true;
       extraConfig = ''
         super + Return
-          st
+          st || alacritty
         super + @space
           rofi -show drun
         alt + Tab
