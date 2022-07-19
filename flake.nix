@@ -83,8 +83,9 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.porto =
-                import ./hosts/klong/home.nix { pkgs = mkPkgs nixpkgs { }; };
+              home-manager.users.porto = import ./hosts/klong/home.nix {
+                pkgs = mkPkgs nixpkgs { overlays = [ nixgl.overlay ]; };
+              };
             }
           ];
         };
