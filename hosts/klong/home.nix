@@ -10,6 +10,7 @@
     ../../config/keynav.nix
   ];
   home = {
+    stateVersion = "22.05";
     packages = with pkgs; [
       sysz
       ranger
