@@ -15,13 +15,7 @@
     supportedLocales = [ "en_US.UTF-8/UTF-8" ];
   };
   console = {
-    font = "FiraCode";
     keyMap = "us";
-  };
-  fonts = {
-    fontDir = { enable = true; };
-    enableGhostscriptFonts = true;
-    fonts = with pkgs; [ fira-code ];
   };
   nix = {
     gc = {
