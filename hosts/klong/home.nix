@@ -186,7 +186,7 @@
       settings = {
         colors = {
           primary = {
-            background = "0x1e2127";
+            background = "0x000000";
             foreground = "0xabb2bf";
             bright_foreground = "0xe6efff";
           };
