@@ -181,6 +181,29 @@
     spotifyd = { enable = true; };
   };
   programs = {
+    autorandr = {
+      enable = true;
+      profiles = {
+        "normal-dual" = {
+          config = {
+            "eDP-1" = {
+              enable = true;
+              primary = true;
+              position = "0x0";
+              mode = "1920x1080";
+              rotate = "normal";
+            };
+            "DP-2" = {
+              enable = true;
+              primary = false;
+              position = "1920x0";
+              mode = "1920x1080";
+              rotate = "normal";
+            };
+          };
+        };
+      };
+    };
     alacritty = {
       enable = true;
       settings = {
