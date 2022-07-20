@@ -19,6 +19,7 @@
 
         systemctl --user start graphical-session.target
 
+        autorandr --change
 
         sxhkd &
 
