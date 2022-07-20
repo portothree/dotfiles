@@ -8,12 +8,12 @@ fi
 
 rebuild_nixos() {
 	local hostname="$1"
-	sudo nixos-rebuild switch --flake .#$hostname --show-trace
+	sudo nixos-rebuild switch --flake .#$hostname
 }
 
 rebuild_home_manager() {
 	local hostname="$1"
-	nix build .#homeConfigurations.$hostname.activationPackage --impure
+	nix build .#homeConfigurations.$hostname.activationPackage
 	echo "Activating build result"
 	./result/activate
 }
