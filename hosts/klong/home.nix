@@ -186,32 +186,43 @@
       settings = {
         colors = {
           primary = {
-            background = "0x181818";
-            foreground = "0xd8d8d8";
+            background = "0x1e2127";
+            foreground = "0xabb2bf";
+            bright_foreground = "0xe6efff";
           };
           cursor = {
             text = "0xd8d8d8";
             cursor = "0xd8d8d8";
           };
           normal = {
-            black = "0x181818";
-            red = "0xab4642";
-            green = "0xaa1b56c";
-            yellow = "0xf7ca88";
-            blue = "0x7cafc2";
-            magenta = "0xba8baf";
-            cyan = "0x86c1b9";
-            white = "0xd8d8d8";
+            black = "0x1e2127";
+            red = "0xe06c75";
+            green = "0x98c379";
+            yellow = "0xd19a66";
+            blue = "0x61afef";
+            magenta = "0xc678dd";
+            cyan = "0x56b6c2";
+            white = "0x828791";
           };
           bright = {
-            black = "0x585858";
-            red = "0xab4642";
-            green = "0xa1b56c";
-            yellow = "0xf7ca88";
-            blue = "0x7ca88";
-            magenta = "0xba8baf";
-            cyan = "0x86c1b9";
-            white = "0xf8f8f8";
+            black = "0x5c6370";
+            red = "0xe06c75";
+            green = "0x98c379";
+            yellow = "0xd19a66";
+            blue = "0x61afef";
+            magenta = "0xc678dd";
+            cyan = "0x56b6c2";
+            white = "0xe6efff";
+          };
+          dim = {
+            black = "0x1e2127";
+            red = "0xe06c75";
+            green = "0x98c379";
+            yellow = "0xd19a66";
+            blue = "0x61afef";
+            magenta = "0xc678dd";
+            cyan = "0x56b6c2";
+            white = "0x828791";
           };
         };
       };
