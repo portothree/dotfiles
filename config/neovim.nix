@@ -17,19 +17,7 @@ in {
       vimAlias = true;
       vimdiffAlias = true;
       withNodeJs = true;
-      coc = {
-        enable = true;
-        settings = {
-          eslint = {
-            enable = true;
-            run = "onType";
-            alwaysShowStatus = true;
-            autoFixOnSave = true;
-            format = { enable = true; };
-          };
-        };
-      };
-      plugins = with pkgs.vimPlugins; [ vim-nix coc-eslint ];
+      plugins = with pkgs.vimPlugins; [ vim-nix ];
       extraConfig = builtins.concatStringsSep "\n" [''
         lua << EOF
         ${lib.strings.fileContents ./neovim/init.lua}
