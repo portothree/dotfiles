@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  file.xinit = {
+  home.file.xinit = {
     target = ".xinitrc";
     text = ''
         [ -f ~/.xprofile ] && . ~/.xprofile
