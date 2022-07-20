@@ -103,7 +103,7 @@
         enable = true;
         extraConfig = ''
           bspc monitor "eDP-1" -d I II III
-          bspc monitor "DP-3" -d IV V VI VII VIII IX X
+          bspc monitor "DP-2" -d IV V VI VII VIII IX X
           bspc config border_width 0.5
           bspc config window_gap 2
           bspc config split_ratio 0.52
