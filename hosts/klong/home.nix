@@ -69,6 +69,7 @@
 
           systemctl --user start graphical-session.target
 
+          autorandr -l normal-dual
 
           sxhkd &
 
