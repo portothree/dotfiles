@@ -1,3 +1,3 @@
 vim.cmd('syntax on')
 vim.cmd('set number')
-vim.cmd('-nargs=0 Prettier :CocCommand prettier.forceFormatDocument')
+vim.cmd('command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument')
