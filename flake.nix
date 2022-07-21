@@ -4,12 +4,17 @@
     nixpkgs.url = "nixpkgs/nixos-22.05";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-22.05";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    home-manager-unstable = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     nixgl.url = "github:guibou/nixGL";
   };
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nixgl }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager
+    , home-manager-unstable, nixgl }:
     let
       system = "x86_64-linux";
       username = "porto";
