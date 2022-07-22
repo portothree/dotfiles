@@ -4,9 +4,11 @@
   imports = [
     ../../config/home-manager/common.nix
     ../../config/sxhkd.nix
+    ../../config/tmux.nix
     ../../config/ranger.nix
     ../../config/rofi.nix
     ../../config/neovim.nix
+    ../../config/gcalcli.nix
     ../../config/khal.nix
     ../../config/vdirsyncer.nix
   ];
@@ -111,17 +113,17 @@
       bspwm = {
         enable = true;
         extraConfig = ''
-          	  autorandr -l dual-normal
+          autorandr -l dual-normal
 
-                    bspc monitor "DP-0" -d I II III
-                    bspc monitor "HDMI-0" -d IV V VI VII VIII IX X
-                    bspc config border_width 0.5
-                    bspc config window_gap 2
-                    bspc config split_ratio 0.52
-                    bspc config bordeless_monocle true
-                    bspc config gapless_monocle true
+          bspc monitor "DP-0" -d I II III
+          bspc monitor "HDMI-0" -d IV V VI VII VIII IX X
+          bspc config border_width 0.5
+          bspc config window_gap 2
+          bspc config split_ratio 0.52
+          bspc config bordeless_monocle true
+          bspc config gapless_monocle true
 
-                    xdotool mousemove 999999 999999
+          xdotool mousemove 999999 999999
         '';
       };
     };
@@ -187,19 +189,6 @@
         pull = { ff = "only"; };
         init = { defaultBranch = "master"; };
       };
-    };
-    tmux = {
-      enable = true;
-      clock24 = true;
-      keyMode = "vi";
-      plugins = with pkgs.tmuxPlugins; [ sensible yank ];
-      extraConfig = ''
-        set -g mouse off 
-        bind h select-pane -L
-        bind j select-pane -D
-        bind k select-pane -U
-        bind l select-pane -R
-      '';
     };
     fzf = {
       enable = true;
