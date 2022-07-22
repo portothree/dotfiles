@@ -38,20 +38,20 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 extraExpecialArgs = { inherit inputs; };
-                users.porto =
-                  import ./hosts/${hostname}/home.nix { inherit pkgs; };
+                users.porto = import ./hosts/${hostname}/home.nix {
+                  pkgs = mkPkgs pkgs { };
+                };
               };
             }
           ];
         };
-      defaultNixpkgs = mkPkgs nixpkgs { };
     in {
       nixosConfigurations = {
-        "jorel" = mkNixosSystem defaultNixpkgs "jorel";
-        "juju" = mkNixosSystem defaultNixpkgs "juju";
-        "danubio" = mkNixosSystem defaultNixpkgs "danubio";
-        "nico" = mkNixosSystem defaultNixpkgs "nico";
-        "klong" = mkNixosSystem defaultNixpkgs "klong";
+        "jorel" = mkNixosSystem nixpkgs "jorel";
+        "juju" = mkNixosSystem nixpkgs "juju";
+        "danubio" = mkNixosSystem nixpkgs "danubio";
+        "nico" = mkNixosSystem nixpkgs "nico";
+        "klong" = mkNixosSystem nixpkgs "klong";
       };
       homeConfigurations = {
         "gesonel" = home-manager.lib.homeManagerConfiguration {
