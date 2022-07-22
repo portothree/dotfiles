@@ -10,6 +10,7 @@
     ../../config/ranger.nix
     ../../config/keynav.nix
     ../../config/gcalcli.nix
+    ../../config/conky.nix
   ];
   home = {
     stateVersion = "22.05";
