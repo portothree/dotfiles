@@ -5,7 +5,6 @@
     ../../config/home-manager/common.nix
     ../../config/xinit.nix
     ../../config/git.nix
-    ../../config/tmux.nix
     ../../config/neovim.nix
     ../../config/ranger.nix
     ../../config/keynav.nix
