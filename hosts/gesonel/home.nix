@@ -4,6 +4,7 @@
   imports = [
     ../../config/home-manager/common.nix
     ../../config/sxhkd.nix
+    ../../config/tmux.nix
     ../../config/ranger.nix
     ../../config/rofi.nix
     ../../config/neovim.nix
@@ -188,19 +189,6 @@
         pull = { ff = "only"; };
         init = { defaultBranch = "master"; };
       };
-    };
-    tmux = {
-      enable = true;
-      clock24 = true;
-      keyMode = "vi";
-      plugins = with pkgs.tmuxPlugins; [ sensible yank ];
-      extraConfig = ''
-        set -g mouse off 
-        bind h select-pane -L
-        bind j select-pane -D
-        bind k select-pane -U
-        bind l select-pane -R
-      '';
     };
     fzf = {
       enable = true;
