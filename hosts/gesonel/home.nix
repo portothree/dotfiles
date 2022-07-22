@@ -29,6 +29,7 @@
       nixfmt
       python3
       xclip
+      xsel
       xdotool
       maim
       sysz
