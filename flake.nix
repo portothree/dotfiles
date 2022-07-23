@@ -14,7 +14,7 @@
     nixgl.url = "github:guibou/nixGL";
   };
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager
-    , home-manager-unstable, nixgl, ... }@inputs:
+    , home-manager-unstable, nixgl }:
     let
       system = "x86_64-linux";
       username = "porto";
@@ -31,7 +31,6 @@
       mkNixosSystem = pkgs: hostName:
         pkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs; };
           modules = [
             { networking = { inherit hostName; }; }
             ./hosts/${hostName}/configuration.nix
@@ -40,7 +39,6 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                extraExpecialArgs = { inherit inputs; };
                 users.porto = import ./hosts/${hostName}/home.nix {
                   pkgs = mkPkgs pkgs { };
                 };
