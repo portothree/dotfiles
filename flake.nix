@@ -14,11 +14,12 @@
     nixgl.url = "github:guibou/nixGL";
   };
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager
-    , home-manager-unstable, nixgl }@inputs:
+    , home-manager-unstable, nixgl, ... }@inputs:
     let
       system = "x86_64-linux";
       username = "porto";
       homeDirectory = "/home/porto";
+
       mkPkgs = pkgs:
         { overlays ? [ ], allowUnfree ? false }:
         import pkgs {
@@ -26,19 +27,21 @@
           inherit overlays;
           config.allowUnfree = allowUnfree;
         };
-      mkNixosSystem = pkgs: hostname:
+
+      mkNixosSystem = pkgs: hostName:
         pkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
           modules = [
-            ./hosts/${hostname}/configuration.nix
+            { networking = { inherit hostName; }; }
+            ./hosts/${hostName}/configuration.nix
             home-manager.nixosModules.home-manager
             {
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 extraExpecialArgs = { inherit inputs; };
-                users.porto = import ./hosts/${hostname}/home.nix {
+                users.porto = import ./hosts/${hostName}/home.nix {
                   pkgs = mkPkgs pkgs { };
                 };
               };
