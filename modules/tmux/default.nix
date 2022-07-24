@@ -1,10 +1,32 @@
 { pkgs, lib, config, ... }:
 
 with lib;
-let cfg = config.modules.tmux;
+let
+  cfg = config.modules.tmux;
+
+  defaultPlugins = with pkgs; [
+    {
+      plugin = tmuxPlugins.continuum;
+      extraConfig = ''
+        set -g @continuum-restore 'on'
+        set -g @continuum-save-interval '60'
+      '';
+    }
+    tmuxPlugins.yank
+  ];
+
+  allPlugins = defaultPlugins ++ cfg.plugins;
 in {
   options.modules.tmux = {
     enable = mkEnableOption "tmux";
+    plugins = mkOption {
+      type = with types; listOf package;
+      default = [ ];
+      example = literalExpression ''
+        with pkgs.tmuxPlugins; [ resurrect ]
+      '';
+      description = "List of tmux plugins to install";
+    };
     gcalcli = mkOption {
       type = types.bool;
       default = false;
@@ -17,16 +39,7 @@ in {
       enable = true;
       clock24 = true;
       keyMode = "vi";
-      plugins = with pkgs; [
-        {
-          plugin = tmuxPlugins.continuum;
-          extraConfig = ''
-            set -g @continuum-restore 'on'
-            set -g @continuum-save-interval '60'
-          '';
-        }
-        tmuxPlugins.yank
-      ];
+      plugins = allPlugins;
       extraConfig = ''
         set -g mouse off 
 

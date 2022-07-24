@@ -2,7 +2,7 @@
 
 {
   imports =
-    [ ./hardware-configuration.nix ../common.nix ../../modules/default.nix ];
+    [ ./hardware-configuration.nix ../common.nix ../../modules ];
   boot = {
     loader = {
       efi = {
@@ -79,6 +79,11 @@
     trustedUsers = [ "root" "porto" ];
   };
   system.stateVersion = "22.05";
-  modules = { tmux.enable = true; };
+  modules = {
+    tmux = {
+      enable = true;
+      gcalcli = true;
+    };
+  };
 }
 
