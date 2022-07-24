@@ -6,7 +6,6 @@
     ../../config/git.nix
     ../../config/neovim.nix
     ../../config/gh.nix
-    ../../config/tmux.nix
   ];
   home = {
     stateVersion = "21.11";

@@ -19,80 +19,40 @@
       system = "x86_64-linux";
       username = "porto";
       homeDirectory = "/home/porto";
+
       mkPkgs = pkgs:
         { overlays ? [ ], allowUnfree ? false }:
         import pkgs {
           inherit system;
-          config.allowUnfree = allowUnfree;
           inherit overlays;
+          config.allowUnfree = allowUnfree;
+        };
+
+      mkNixosSystem = pkgs: hostName:
+        pkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            { networking = { inherit hostName; }; }
+            ./hosts/${hostName}/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.porto = import ./hosts/${hostName}/home.nix {
+                  pkgs = mkPkgs pkgs { };
+                };
+              };
+            }
+          ];
         };
     in {
       nixosConfigurations = {
-        "jorel" = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./hosts/jorel/configuration.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.porto =
-                import ./hosts/jorel/home.nix { pkgs = mkPkgs nixpkgs { }; };
-            }
-          ];
-        };
-        "juju" = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./hosts/juju/configuration.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.porto =
-                import ./hosts/juju/home.nix { pkgs = mkPkgs nixpkgs { }; };
-            }
-          ];
-        };
-        "danubio" = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./hosts/danubio/configuration.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.porto =
-                import ./hosts/danubio/home.nix { pkgs = mkPkgs nixpkgs { }; };
-            }
-          ];
-        };
-        "nico" = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./hosts/nico/configuration.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.porto =
-                import ./hosts/nico/home.nix { pkgs = mkPkgs nixpkgs { }; };
-            }
-          ];
-        };
-        "klong" = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./hosts/klong/configuration.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.porto =
-                import ./hosts/klong/home.nix { pkgs = mkPkgs nixpkgs { }; };
-            }
-          ];
-        };
+        "jorel" = mkNixosSystem nixpkgs "jorel";
+        "juju" = mkNixosSystem nixpkgs "juju";
+        "danubio" = mkNixosSystem nixpkgs "danubio";
+        "nico" = mkNixosSystem nixpkgs "nico";
+        "klong" = mkNixosSystem nixpkgs "klong";
       };
       homeConfigurations = {
         "gesonel" = home-manager.lib.homeManagerConfiguration {

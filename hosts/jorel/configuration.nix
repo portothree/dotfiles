@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./hardware-configuration.nix ../common.nix ];
+  imports = [ ../../modules ../common.nix ./hardware-configuration.nix ];
   boot = {
     loader = {
       grub = {
@@ -12,7 +12,6 @@
     };
   };
   networking = {
-    hostName = "jorel";
     useDHCP = false;
     interfaces = { ens18 = { useDHCP = true; }; };
   };
@@ -47,4 +46,5 @@
   hardware = { pulseaudio = { enable = true; }; };
   nixpkgs = { config = { pulseaudio = true; }; };
   system = { stateVersion = "22.05"; };
+  modules = { tmux = { enable = true; }; };
 }

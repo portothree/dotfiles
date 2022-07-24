@@ -1,7 +1,8 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./hardware-configuration.nix ../common.nix ];
+  imports =
+    [ ./hardware-configuration.nix ../common.nix ../../modules ];
   boot = {
     loader = {
       efi = {
@@ -17,7 +18,6 @@
   networking = {
     useDHCP = false;
     interfaces = { wlp0s20f3 = { useDHCP = true; }; };
-    hostName = "klong";
     nameservers = [ "192.168.1.106" "208.67.222.222" "208.67.220.220" ];
     wireless = {
       enable = true;
@@ -32,6 +32,10 @@
         "@WIRELESS_SSID_NKOOWOORK@" = { psk = "@WIRELESS_PSK_NKOOWOORK@"; };
       };
     };
+  };
+  environment = {
+    systemPackages = with pkgs; [ wget curl ];
+    variables = { EDITOR = "nvim"; };
   };
   services = {
     openssh = { enable = true; };
@@ -64,10 +68,6 @@
       };
     };
   };
-  environment = {
-    systemPackages = with pkgs; [ wget curl ];
-    variables = { EDITOR = "nvim"; };
-  };
   virtualisation = { docker = { enable = true; }; };
   fonts.fonts = with pkgs; [ fira-code siji ];
   nix = {
@@ -79,5 +79,11 @@
     trustedUsers = [ "root" "porto" ];
   };
   system.stateVersion = "22.05";
+  modules = {
+    tmux = {
+      enable = true;
+      gcalcli = true;
+    };
+  };
 }
 
