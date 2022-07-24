@@ -12,7 +12,6 @@
     };
   };
   networking = {
-    hostName = "jorel";
     useDHCP = false;
     interfaces = { ens18 = { useDHCP = true; }; };
   };

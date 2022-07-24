@@ -24,7 +24,6 @@
   networking = {
     useDHCP = false;
     interfaces = { wlp1s0 = { useDHCP = true; }; };
-    hostName = "juju";
     nameservers = [ "192.168.1.106" "208.67.222.222" "208.67.220.220" ];
     wireless = {
       enable = true;

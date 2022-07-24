@@ -9,7 +9,6 @@
     };
   };
   networking = {
-    hostName = "danubio";
     useDHCP = false;
     interfaces = { ens18 = { useDHCP = true; }; };
     extraHosts = ''

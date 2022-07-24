@@ -9,7 +9,6 @@
     };
   };
   networking = {
-    hostName = "nico";
     useDHCP = false;
     interfaces = { ens18 = { useDHCP = true; }; };
     extraHosts = ''
