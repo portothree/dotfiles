@@ -3,6 +3,7 @@
 with lib;
 let
   cfg = config.modules.tmux;
+  pluginName = p: if types.package.check p then p.pname else p.plugin.pname;
   pluginModule = types.submodule {
     options = {
       plugin = mkOption {
@@ -26,9 +27,9 @@ let
     }
     tmuxPlugins.yank
   ];
-  allPlugins =
-    map (p: if types.package.check p then p else p.plugin) defaultPlugins
-    ++ cfg.plugins;
+  allPluginsAndSubmodules = defaultPlugins ++ cfg.plugins;
+  allPlugins = map (p: if types.package.check p then p else p.plugin)
+    allPluginsAndSubmodules;
 in {
   options.modules.tmux = {
     enable = mkEnableOption "tmux";
@@ -67,6 +68,9 @@ in {
         set-option -g status-interval 60
         ${optionalString (cfg.gcalcli)
         "set-option -g status-left '#[fg=black]#(gcalcli agenda --nostarted --nodeclined | head -2 | tail -1)#[default]'"}
+
+        ${(concatMapStringsSep "\n" (p: "${p.extraConfig or ""}")
+          allPluginsAndSubmodules)}
       '';
     };
   };
