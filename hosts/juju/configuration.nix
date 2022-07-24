@@ -2,8 +2,9 @@
 
 {
   imports = [
-    ./hardware-configuration.nix
     ../common.nix
+    ../../modules
+    ./hardware-configuration.nix
     ./ledger.nix
     ./platformio.nix
     ./android.nix
@@ -95,5 +96,11 @@
     trustedUsers = [ "root" "porto" ];
   };
   system.stateVersion = "21.11";
+  modules = {
+    tmux = {
+      enable = true;
+      gcalcli = true;
+    };
+  };
 }
 

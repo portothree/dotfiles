@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ../common.nix ./hardware-configuration.nix ];
+  imports = [ ../../modules ../common.nix ./hardware-configuration.nix ];
   boot = {
     loader = {
       systemd-boot = { enable = true; };
@@ -41,4 +41,5 @@
     trustedUsers = [ "root" "porto" ];
   };
   system = { stateVersion = "21.11"; };
+  modules = { tmux = { enable = true; }; };
 }
