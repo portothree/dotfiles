@@ -28,7 +28,19 @@
       lemonbar
       rofi
       nixfmt
+      node2nix
+      yarn2nix
       nodejs
+      nodePackages.node-pre-gyp
+      nodePackages.node-gyp
+      nodePackages.node-gyp-build
+      yarn
+      python3
+      python2
+      postgresql
+      gnumake
+      libpqxx
+      gcc
       glow
       weechat
       pgcli
@@ -54,6 +66,7 @@
       yank
       jq
       yq
+      cachix
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
