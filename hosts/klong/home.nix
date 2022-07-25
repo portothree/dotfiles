@@ -39,7 +39,6 @@
       python2
       postgresql
       gnumake
-      libpqxx
       gcc
       glow
       weechat
@@ -61,6 +60,7 @@
       acpi
       brightnessctl
       ledger-live-desktop
+      lazydocker
       platformio
       nextdns
       yank
