@@ -35,19 +35,21 @@
           modules = [
             { networking = { inherit hostName; }; }
             ./hosts/${hostName}/configuration.nix
-            hm.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.porto = import ./hosts/${hostName}/home.nix {
-                  pkgs = mkPkgs pkgs { };
-                  inherit inputs;
-                };
-              };
-            }
           ];
         };
+
+      mkHomeManager = pkgs: hm: hostName:
+        home-manager.lib.homeManagerConfiguration {
+          inherit system;
+          inherit username;
+          inherit homeDirectory;
+          configuration = import ./hosts/gesonel/home.nix {
+            inherit pkgs;
+            inherit inputs;
+          };
+        };
+
+      klongPkgs = mkPkgs nixpkgs { };
     in {
       nixosConfigurations = {
         "jorel" = mkNixosSystem nixpkgs home-manager "jorel";
@@ -57,18 +59,7 @@
         "klong" = mkNixosSystem nixpkgs home-manager "klong";
       };
       homeConfigurations = {
-        "gesonel" = home-manager.lib.homeManagerConfiguration {
-          inherit system;
-          inherit username;
-          inherit homeDirectory;
-          configuration = import ./hosts/gesonel/home.nix {
-            pkgs = mkPkgs nixpkgs-unstable {
-              overlays = [ nixgl.overlay ];
-              allowUnfree = true;
-            };
-          };
-          stateVersion = "22.05";
-        };
+        klong = mkHomeManager klongPkgs home-manager "klong";
       };
       devShell."${system}" =
         import ./shell.nix { pkgs = mkPkgs nixpkgs-unstable { }; };

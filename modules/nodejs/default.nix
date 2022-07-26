@@ -5,7 +5,7 @@ let cfg = config.modules.nodejs;
 in {
   options.modules.nodejs = { enable = mkEnableOption "nodejs"; };
   config = mkIf cfg.enable {
-    home-manager.packages = with pkgs; [
+    home.packages = with pkgs; [
       nodejs
       node2nix
       yarn2nix

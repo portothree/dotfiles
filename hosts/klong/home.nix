@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ../../modules
     ../../home-manager
     ../../home-manager/nodejs.nix
     ../../config/xinit.nix
@@ -351,5 +352,12 @@
         c.url.start_pages = [ home_page ]
       '';
     };
+  };
+  modules = {
+    tmux = {
+      enable = true;
+      gcalcli = true;
+    };
+    nodejs.enable = true;
   };
 }
