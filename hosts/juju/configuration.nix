@@ -3,8 +3,8 @@
 {
   imports = [
     ../common.nix
+    ../../home-manager
     ../../modules
-    ../../config/home-manager
     ./hardware-configuration.nix
     ./ledger.nix
     ./platformio.nix

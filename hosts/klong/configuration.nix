@@ -4,7 +4,7 @@
   imports = [
     ./hardware-configuration.nix
     ../common.nix
-    ../../config/home-manager
+    ../../home-manager
     ../../modules
   ];
   boot = {
