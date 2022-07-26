@@ -12,7 +12,6 @@
     ../../config/xinit.nix
   ];
   home = {
-    stateVersion = "22.05";
     packages = with pkgs; [
       st
       sysz
