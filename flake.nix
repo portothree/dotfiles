@@ -14,7 +14,7 @@
     nixgl.url = "github:guibou/nixGL";
   };
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager
-    , home-manager-unstable, nixgl }:
+    , home-manager-unstable, nixgl, ... }@inputs:
     let
       system = "x86_64-linux";
       username = "porto";
@@ -28,31 +28,33 @@
           config.allowUnfree = allowUnfree;
         };
 
-      mkNixosSystem = pkgs: hostName:
+      mkNixosSystem = pkgs: hm: hostName:
         pkgs.lib.nixosSystem {
           inherit system;
           modules = [
             { networking = { inherit hostName; }; }
             ./hosts/${hostName}/configuration.nix
-            home-manager.nixosModules.home-manager
+            hm.nixosModules.home-manager
             {
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
+                extraExpecialArgs = { inherit inputs; };
                 users.porto = import ./hosts/${hostName}/home.nix {
                   pkgs = mkPkgs pkgs { };
                 };
               };
             }
           ];
+          specialArgs = { inherit inputs; };
         };
     in {
       nixosConfigurations = {
-        "jorel" = mkNixosSystem nixpkgs "jorel";
-        "juju" = mkNixosSystem nixpkgs "juju";
-        "danubio" = mkNixosSystem nixpkgs "danubio";
-        "nico" = mkNixosSystem nixpkgs "nico";
-        "klong" = mkNixosSystem nixpkgs "klong";
+        "jorel" = mkNixosSystem nixpkgs home-manager "jorel";
+        "juju" = mkNixosSystem nixpkgs home-manager "juju";
+        "danubio" = mkNixosSystem nixpkgs home-manager "danubio";
+        "nico" = mkNixosSystem nixpkgs home-manager "nico";
+        "klong" = mkNixosSystem nixpkgs-unstable home-manager-unstable "klong";
       };
       homeConfigurations = {
         "gesonel" = home-manager.lib.homeManagerConfiguration {
