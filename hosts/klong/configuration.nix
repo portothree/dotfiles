@@ -48,7 +48,6 @@
       };
       displayManager = {
         startx = { enable = true; };
-        defaultSession = "none+bspwm";
       };
     };
     blueman.enable = true;
