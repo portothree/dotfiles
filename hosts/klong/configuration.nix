@@ -83,12 +83,5 @@
     trustedUsers = [ "root" "porto" ];
   };
   system.stateVersion = "22.05";
-  modules = {
-    tmux = {
-      enable = true;
-      gcalcli = true;
-    };
-    nodejs.enable = true;
-  };
 }
 
