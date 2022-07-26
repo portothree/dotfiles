@@ -1,12 +1,9 @@
-{ pkgs, lib, config, ... }:
+{ inputs, pkgs, lib, config, ... }:
 
 with lib;
-let
-  cfg = config.modules.nodejs;
+let cfg = config.modules.nodejs;
 in {
-  options.modules.nodejs = {
-    enable = mkEnableOption "nodejs";
-  };
+  options.modules.nodejs = { enable = mkEnableOption "nodejs"; };
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       nodejs
@@ -19,4 +16,4 @@ in {
       yarn
     ];
   };
-};
+}
