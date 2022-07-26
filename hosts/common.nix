@@ -16,7 +16,6 @@
   };
   console = { keyMap = "us"; };
   nixpkgs = { config = { allowUnfree = true; }; };
-  xdg = { enable = true; };
   nix = {
     gc = {
       automatic = true;

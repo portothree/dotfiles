@@ -40,9 +40,9 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                extraExpecialArgs = { inherit inputs; };
                 users.porto = import ./hosts/${hostName}/home.nix {
                   pkgs = mkPkgs pkgs { };
+                  inherit inputs;
                 };
               };
             }

@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ../../home-manager
     ../../config/xinit.nix
     ../../config/git.nix
     ../../config/neovim.nix
@@ -27,6 +28,14 @@
       lemonbar
       rofi
       nixfmt
+      nodejs
+      node2nix
+      yarn2nix
+      nodePackages.npm
+      nodePackages.node-gyp
+      nodePackages.node-pre-gyp
+      nodePackages.node-gyp-build
+      yarn
       python3
       python2
       postgresql
@@ -349,12 +358,5 @@
         c.url.start_pages = [ home_page ]
       '';
     };
-  };
-  modules = {
-    tmux = {
-      enable = true;
-      gcalcli = true;
-    };
-    nodejs.enable = true;
   };
 }
