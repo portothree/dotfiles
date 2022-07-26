@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, pkgs, lib, ... }:
 
 {
   time = { timeZone = "Europe/Lisbon"; };

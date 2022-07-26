@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ../../config/home-manager/common.nix
     ../../config/git.nix
     ../../config/neovim.nix
     ../../config/sxhkd.nix

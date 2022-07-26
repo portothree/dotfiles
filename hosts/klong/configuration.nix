@@ -1,8 +1,12 @@
 { inputs, config, pkgs, ... }:
 
 {
-  imports =
-    [ ./hardware-configuration.nix ../common.nix ../../modules ];
+  imports = [
+    ./hardware-configuration.nix
+    ../common.nix
+    ../../config/home-manager
+    ../../modules
+  ];
   boot = {
     loader = {
       efi = {

@@ -4,6 +4,7 @@
   imports = [
     ../common.nix
     ../../modules
+    ../../config/home-manager
     ./hardware-configuration.nix
     ./ledger.nix
     ./platformio.nix

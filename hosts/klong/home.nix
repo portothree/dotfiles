@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ../../config/home-manager/common.nix
     ../../config/xinit.nix
     ../../config/git.nix
     ../../config/neovim.nix
