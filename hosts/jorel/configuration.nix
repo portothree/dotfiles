@@ -4,17 +4,13 @@
   imports = [ ../../modules ../common.nix ./hardware-configuration.nix ];
   boot = {
     loader = {
-      systemd-boot = {
-        enable = true;
-      };
-      efi = {
-         canTouchEfiVariables = true;
-      };
+      systemd-boot = { enable = true; };
+      efi = { canTouchEfiVariables = true; };
     };
   };
   fileSystems."/home" = {
-	device = "/dev/pool/home";
-	fsType = "ext4";
+    device = "/dev/pool/home";
+    fsType = "ext4";
   };
   networking = {
     useDHCP = false;
@@ -49,6 +45,12 @@
   sound = { enable = true; };
   hardware = { pulseaudio = { enable = true; }; };
   nixpkgs = { config = { pulseaudio = true; }; };
-  system = { stateVersion = "22.05"; copySystemConfiguration = true; };
-  modules = { tmux = { enable = true; }; };
+  system = {
+    stateVersion = "22.05";
+    copySystemConfiguration = true;
+  };
+  modules = {
+    tmux = { enable = true; };
+    nodejs.enable = true;
+  };
 }
