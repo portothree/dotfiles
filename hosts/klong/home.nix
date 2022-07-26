@@ -3,6 +3,7 @@
 {
   imports = [
     ../../home-manager
+    ../../home-manager/nodejs.nix
     ../../config/xinit.nix
     ../../config/git.nix
     ../../config/neovim.nix
@@ -28,14 +29,6 @@
       lemonbar
       rofi
       nixfmt
-      nodejs
-      node2nix
-      yarn2nix
-      nodePackages.npm
-      nodePackages.node-gyp
-      nodePackages.node-pre-gyp
-      nodePackages.node-gyp-build
-      yarn
       python3
       python2
       postgresql
