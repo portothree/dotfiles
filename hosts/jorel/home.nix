@@ -102,13 +102,7 @@
   };
   xsession = {
     enable = true;
-    windowManager = {
-      bspwm = {
-        enable = true;
-        extraConfig =
-          "	bspc monitor \"DP-1\" -d I II III\n	bspc monitor \"HDMI-1\" -d IV V VI VII VIII IX X\n	bspc config border_width 0.5\n	bspc config window_gap 2\n	bspc config split_ratio 0.52\n	bspc config bordeless_monocle true\n	bspc config gapless_monocle true\n	\n	xdotool mousemove 999999 999999\n";
-      };
-    };
+    windowManager = { };
   };
   services = {
     picom = { enable = true; };
@@ -238,6 +232,13 @@
   };
   modules = {
     tmux = { enable = true; };
+    bspwm = {
+      enable = true;
+      extraConfig = ''
+        bspc monitor "DP-1" -d I II III
+        bspc monitor "HDMI-1" -d IV V VI VII VIII IX X
+      '';
+    };
     nodejs.enable = true;
   };
 }
