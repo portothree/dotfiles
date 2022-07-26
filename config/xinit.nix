@@ -18,12 +18,6 @@
         fi
 
         systemctl --user start graphical-session.target
-
-        autorandr --change
-
-        sxhkd &
-
-        exec bspwm
     '';
   };
 }
