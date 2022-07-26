@@ -12,7 +12,7 @@
       };
     };
   };
-  fileSystems."/home/" = {
+  fileSystems."/home" = {
 	device = "/dev/pool/home";
 	fsType = "ext4";
   };
