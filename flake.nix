@@ -54,7 +54,7 @@
         "juju" = mkNixosSystem nixpkgs home-manager "juju";
         "danubio" = mkNixosSystem nixpkgs home-manager "danubio";
         "nico" = mkNixosSystem nixpkgs home-manager "nico";
-        "klong" = mkNixosSystem nixpkgs-unstable home-manager-unstable "klong";
+        "klong" = mkNixosSystem nixpkgs home-manager "klong";
       };
       homeConfigurations = {
         "gesonel" = home-manager.lib.homeManagerConfiguration {
