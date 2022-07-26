@@ -1,12 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ../../home-manager
-    ../../modules
-    ../common.nix
-    ./hardware-configuration.nix
-  ];
+  imports = [ ../common.nix ./hardware-configuration.nix ];
   boot = {
     loader = {
       systemd-boot = { enable = true; };
@@ -53,9 +48,5 @@
   system = {
     stateVersion = "22.05";
     copySystemConfiguration = true;
-  };
-  modules = {
-    tmux = { enable = true; };
-    nodejs.enable = true;
   };
 }

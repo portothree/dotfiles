@@ -2,6 +2,8 @@
 
 {
   imports = [
+    ../../home-manager
+    ../../modules
     ../../config/git.nix
     ../../config/neovim.nix
     ../../config/sxhkd.nix
@@ -103,17 +105,8 @@
     windowManager = {
       bspwm = {
         enable = true;
-        extraConfig = ''
-		bspc monitor "DP-1" -d I II III
-		bspc monitor "HDMI-1" -d IV V VI VII VIII IX X
-		bspc config border_width 0.5
-		bspc config window_gap 2
-		bspc config split_ratio 0.52
-		bspc config bordeless_monocle true
-		bspc config gapless_monocle true
-		
-		xdotool mousemove 999999 999999
-	'';
+        extraConfig =
+          "	bspc monitor \"DP-1\" -d I II III\n	bspc monitor \"HDMI-1\" -d IV V VI VII VIII IX X\n	bspc config border_width 0.5\n	bspc config window_gap 2\n	bspc config split_ratio 0.52\n	bspc config bordeless_monocle true\n	bspc config gapless_monocle true\n	\n	xdotool mousemove 999999 999999\n";
       };
     };
   };
@@ -242,5 +235,9 @@
         c.url.start_pages = [ home_page ]
       '';
     };
+  };
+  modules = {
+    tmux = { enable = true; };
+    nodejs.enable = true;
   };
 }

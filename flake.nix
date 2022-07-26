@@ -28,7 +28,7 @@
           config.allowUnfree = allowUnfree;
         };
 
-      mkNixosSystem = pkgs: hm: hostName:
+      mkNixosSystem = pkgs: hostName:
         pkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
@@ -43,23 +43,25 @@
           inherit system;
           inherit username;
           inherit homeDirectory;
-          configuration = import ./hosts/gesonel/home.nix {
+          configuration = import ./hosts/${hostName}/home.nix {
             inherit pkgs;
             inherit inputs;
           };
         };
 
-      klongPkgs = mkPkgs nixpkgs { };
     in {
       nixosConfigurations = {
-        "jorel" = mkNixosSystem nixpkgs home-manager "jorel";
-        "juju" = mkNixosSystem nixpkgs home-manager "juju";
-        "danubio" = mkNixosSystem nixpkgs home-manager "danubio";
-        "nico" = mkNixosSystem nixpkgs home-manager "nico";
-        "klong" = mkNixosSystem nixpkgs home-manager "klong";
+        "jorel" = mkNixosSystem nixpkgs "jorel";
+        "juju" = mkNixosSystem nixpkgs "juju";
+        "danubio" = mkNixosSystem nixpkgs "danubio";
+        "nico" = mkNixosSystem nixpkgs "nico";
+        "klong" = mkNixosSystem nixpkgs "klong";
       };
       homeConfigurations = {
-        klong = mkHomeManager klongPkgs home-manager "klong";
+        jorel = mkHomeManager (mkPkgs nixpkgs { }) home-manager "jorel";
+        klong =
+          mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; }) home-manager
+          "klong";
       };
       devShell."${system}" =
         import ./shell.nix { pkgs = mkPkgs nixpkgs-unstable { }; };

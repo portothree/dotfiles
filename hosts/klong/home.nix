@@ -4,7 +4,6 @@
   imports = [
     ../../modules
     ../../home-manager
-    ../../home-manager/nodejs.nix
     ../../config/xinit.nix
     ../../config/git.nix
     ../../config/neovim.nix
@@ -14,7 +13,6 @@
     ../../config/conky.nix
   ];
   home = {
-    stateVersion = "22.05";
     packages = with pkgs; [
       sysz
       ranger
