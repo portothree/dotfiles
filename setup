@@ -6,6 +6,11 @@ if [[ $? -ne 0 ]]; then
     exit 1;
 fi
 
+setup_nixos() {
+	local hostname="$1"
+	sudo nixos-rebuild switch --flake .#$hostname -I nixos-config=hosts/$hostname/configuration.nix
+}
+
 rebuild_nixos() {
 	local hostname="$1"
 	sudo nixos-rebuild switch --flake .#$hostname
@@ -24,7 +29,7 @@ while [ : ]; do
   case "$1" in
     -S | --setup-nixos)
         echo "Initial NixOS setup for host $HOST"
-		rebuild_nixos $HOST
+	setup_nixos $HOST
         shift
         ;;
     -R | --rebuild-nixos)
