@@ -84,6 +84,7 @@
       enable = true;
       gcalcli = true;
     };
+    nodejs.enable = true;
   };
 }
 
