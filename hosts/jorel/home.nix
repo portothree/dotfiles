@@ -12,7 +12,6 @@
     ../../config/xinit.nix
   ];
   home = {
-    stateVersion = "22.05";
     packages = with pkgs; [
       st
       sysz
@@ -232,6 +231,7 @@
   };
   modules = {
     tmux = { enable = true; };
+    alacritty.enable = true;
     bspwm = {
       enable = true;
       extraConfig = ''
