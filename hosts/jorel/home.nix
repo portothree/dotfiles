@@ -231,6 +231,7 @@
   };
   modules = {
     tmux = { enable = true; };
+    alacritty.enable = true;
     bspwm = {
       enable = true;
       extraConfig = ''
