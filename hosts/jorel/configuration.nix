@@ -4,12 +4,17 @@
   imports = [ ../../modules ../common.nix ./hardware-configuration.nix ];
   boot = {
     loader = {
-      grub = {
+      systemd-boot = {
         enable = true;
-        version = 2;
-        device = "/dev/sda";
+      };
+      efi = {
+         canTouchEfiVariables = true;
       };
     };
+  };
+  fileSystems."/home/" = {
+	device = "/dev/pool/home";
+	fsType = "ext4";
   };
   networking = {
     useDHCP = false;
@@ -27,7 +32,6 @@
       windowManager = { bspwm = { enable = true; }; };
     };
   };
-  sound = { enable = true; };
   users = {
     users = {
       porto = {
@@ -45,6 +49,6 @@
   sound = { enable = true; };
   hardware = { pulseaudio = { enable = true; }; };
   nixpkgs = { config = { pulseaudio = true; }; };
-  system = { stateVersion = "22.05"; };
+  system = { stateVersion = "22.05"; copySystemConfiguration = true; };
   modules = { tmux = { enable = true; }; };
 }
