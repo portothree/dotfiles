@@ -4,6 +4,7 @@
   imports = [
     ../../modules
     ../../home-manager
+    ../../config/xinit.nix
     ../../config/git.nix
     ../../config/neovim.nix
     ../../config/ranger.nix
