@@ -1,8 +1,9 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 {
   imports = [
-    ../../config/home-manager/common.nix
+    ../../home-manager
+    ../../home-manager/nodejs.nix
     ../../config/xinit.nix
     ../../config/git.nix
     ../../config/neovim.nix
@@ -28,7 +29,11 @@
       lemonbar
       rofi
       nixfmt
-      nodejs
+      python3
+      python2
+      postgresql
+      gnumake
+      gcc
       glow
       weechat
       pgcli
@@ -49,11 +54,13 @@
       acpi
       brightnessctl
       ledger-live-desktop
+      lazydocker
       platformio
       nextdns
       yank
       jq
       yq
+      cachix
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {

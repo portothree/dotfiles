@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, pkgs, lib, ... }:
 
 {
   time = { timeZone = "Europe/Lisbon"; };
@@ -14,9 +14,8 @@
     defaultLocale = "en_US.UTF-8";
     supportedLocales = [ "en_US.UTF-8/UTF-8" ];
   };
-  console = {
-    keyMap = "us";
-  };
+  console = { keyMap = "us"; };
+  nixpkgs = { config = { allowUnfree = true; }; };
   nix = {
     gc = {
       automatic = true;
@@ -26,6 +25,14 @@
     optimise = {
       automatic = true;
       dates = [ "weekly" ];
+    };
+    settings = {
+      substituters =
+        [ "https://cache.nixos.org/" "https://portothree.cachix.org" ];
+      trusted-public-keys = [
+        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+        "portothree.cachix.org-1:L4w3V/jrM+5cG0yEAypCPan94GLUxWYm8VFLB774J6I="
+      ];
     };
   };
 }
