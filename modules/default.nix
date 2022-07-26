@@ -1,5 +1,5 @@
 { pkgs, config, ... }:
 
 {
-  imports = [ ./tmux ];
+  imports = [ ./tmux ./nodejs ];
 }
