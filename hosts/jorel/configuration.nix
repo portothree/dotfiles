@@ -18,12 +18,11 @@
   };
   services = {
     openssh = { enable = true; };
+    blueman = { enable = true; };
     xserver = {
       enable = true;
       layout = "us";
-      displayManager = {
-        startx = { enable = true; };
-      };
+      displayManager = { startx = { enable = true; }; };
     };
   };
   users = {
@@ -41,7 +40,10 @@
   virtualisation = { docker = { enable = true; }; };
   fonts = { fonts = with pkgs; [ fira-code siji ]; };
   sound = { enable = true; };
-  hardware = { pulseaudio = { enable = true; }; };
+  hardware = {
+    bluetooth = { enable = true; };
+    pulseaudio = { enable = true; };
+  };
   nixpkgs = { config = { pulseaudio = true; }; };
   system = {
     stateVersion = "22.05";
