@@ -5,12 +5,14 @@ let cfg = config.modules.gcalcli;
 in {
   options.modules.gcalcli = { enable = mkEnableOption "gcalcli"; };
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ gcalcli ];
-    file.gcalclirc = {
-      target = ".gcalclirc";
-      text = ''
-        --lineart=ascii
-      '';
+    home = {
+      packages = with pkgs; [ gcalcli ];
+      file.gcalclirc = {
+        target = ".gcalclirc";
+        text = ''
+          --lineart=ascii
+        '';
+      };
     };
   };
 }
