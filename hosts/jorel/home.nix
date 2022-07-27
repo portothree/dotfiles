@@ -105,6 +105,7 @@
     windowManager = { };
   };
   services = {
+    mpris-proxy.enable = true;
     picom = { enable = true; };
     keynav = { enable = true; };
     unclutter = {
