@@ -1,15 +1,37 @@
-{ ... }:
+{ pkgs, lib, config, ... }:
 
-{
+with lib;
+let cfg = config.modules.sxhkd;
+in {
+  options.modules.sxhkd = {
+    enable = mkEnableOption "sxhkd";
+
+    terminal = mkOption {
+      type = types.str;
+      description =
+        "Name of terminal emulator to be called with 'super + Return'";
+      default = "alacritty";
+    };
+    rofi = mkOption {
+      type = types.bool;
+      description = "Enable rofi integration";
+      default = false;
+    };
+  };
+  config = mkIf cfg.enable {
     services.sxhkd = {
       enable = true;
       extraConfig = ''
         super + Return
-          st || alacritty
-        super + @space
-          rofi -show drun
-        alt + Tab
-          rofi -show window
+          ${cfg.terminal}
+
+        ${optionalString (cfg.rofi) ''
+          super + @space
+            rofi -show drun
+          alt + Tab
+              rofi -show window
+        ''}
+
         super + Escape
           pkill -USR1 -x sxhkd
         super + alt + {q,r}
@@ -58,4 +80,5 @@
           bspc node -v {-20 0,0 20,0 -20,20 0}
       '';
     };
+  };
 }

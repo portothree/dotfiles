@@ -34,7 +34,7 @@
     };
   };
   environment = {
-    systemPackages = with pkgs; [ wget ];
+    systemPackages = with pkgs; [ wget curl ];
     variables = { EDITOR = "nvim"; };
   };
   virtualisation = { docker = { enable = true; }; };
@@ -45,6 +45,14 @@
     pulseaudio = { enable = true; };
   };
   nixpkgs = { config = { pulseaudio = true; }; };
+  nix = {
+    enable = true;
+    package = pkgs.nixFlakes;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+    trustedUsers = [ "root" "porto" ];
+  };
   system = {
     stateVersion = "22.05";
     copySystemConfiguration = true;
