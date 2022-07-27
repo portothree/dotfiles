@@ -9,7 +9,6 @@
     ../../config/neovim.nix
     ../../config/ranger.nix
     ../../config/keynav.nix
-    ../../config/gcalcli.nix
     ../../config/conky.nix
   ];
   home = {

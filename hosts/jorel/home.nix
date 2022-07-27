@@ -45,7 +45,6 @@
       gh
       zathura
       python3
-      gcalcli
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
@@ -245,5 +244,6 @@
       rofi = true;
     };
     nodejs.enable = true;
+    gcalcli.enable = true;
   };
 }
