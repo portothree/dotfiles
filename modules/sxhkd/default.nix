@@ -24,12 +24,14 @@ in {
       extraConfig = ''
         super + Return
           ${cfg.terminal}
+
         ${optionalString (cfg.rofi) ''
           super + @space
             rofi -show drun
           alt + Tab
-            rofi -show window
+              rofi -show window
         ''}
+
         super + Escape
           pkill -USR1 -x sxhkd
         super + alt + {q,r}
