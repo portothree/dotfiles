@@ -22,6 +22,7 @@
     xserver = {
       enable = true;
       layout = "us";
+      videoDrivers = [ "nvidia" ];
       displayManager = { startx = { enable = true; }; };
     };
   };
@@ -41,10 +42,16 @@
   fonts = { fonts = with pkgs; [ fira-code siji ]; };
   sound = { enable = true; };
   hardware = {
+    nvidia = { package = config.boot.kernelPackages.nvidiaPackages.stable; };
     bluetooth = { enable = true; };
     pulseaudio = { enable = true; };
   };
-  nixpkgs = { config = { pulseaudio = true; }; };
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      pulseaudio = true;
+    };
+  };
   nix = {
     enable = true;
     package = pkgs.nixFlakes;
