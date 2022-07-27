@@ -3,17 +3,20 @@
 with lib;
 let cfg = config.modules.sxhkd;
 in {
-  options.modules.sxhkd = { enable = mkEnableOption "sxhkd"; };
-  terminal = mkOption {
-    type = types.string;
-    description =
-      "Name of terminal emulator to be called with 'super + Return'";
-    default = "alacritty";
-  };
-  rofi = mkOption {
-    type = types.bool;
-    description = "Enable rofi integration";
-    default = false;
+  options.modules.sxhkd = {
+    enable = mkEnableOption "sxhkd";
+
+    terminal = mkOption {
+      type = types.string;
+      description =
+        "Name of terminal emulator to be called with 'super + Return'";
+      default = "alacritty";
+    };
+    rofi = mkOption {
+      type = types.bool;
+      description = "Enable rofi integration";
+      default = false;
+    };
   };
   config = mkIf cfg.enable {
     services.sxhkd = {
