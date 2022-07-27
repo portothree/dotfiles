@@ -246,5 +246,6 @@
       gcalcli = true;
     };
     nodejs.enable = true;
+    gcalcli.enable = true;
   };
 }
