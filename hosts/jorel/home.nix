@@ -6,7 +6,6 @@
     ../../modules
     ../../config/git.nix
     ../../config/neovim.nix
-    ../../config/sxhkd.nix
     ../../config/ranger.nix
     ../../config/keynav.nix
     ../../config/xinit.nix
@@ -230,7 +229,7 @@
     };
   };
   modules = {
-    tmux = { enable = true; };
+    tmux.enable = true;
     alacritty.enable = true;
     bspwm = {
       enable = true;
@@ -238,6 +237,11 @@
         bspc monitor "DP-1" -d I II III
         bspc monitor "HDMI-1" -d IV V VI VII VIII IX X
       '';
+    };
+    sxhkd = {
+      enable = true;
+      terminal = "alacritty";
+      rofi = true;
     };
     nodejs.enable = true;
   };
