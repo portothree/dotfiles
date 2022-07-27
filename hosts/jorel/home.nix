@@ -40,6 +40,7 @@
       playerctl
       spotify-tui
       s-tui
+      nvtop
       mutt
       gh
       zathura
