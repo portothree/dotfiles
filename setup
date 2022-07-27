@@ -18,7 +18,9 @@ rebuild_nixos() {
 
 rebuild_home_manager() {
 	local hostname="$1"
-	nix build .#homeConfigurations.$hostname.activationPackage
+	nix build .#homeConfigurations.$hostname.activationPackage \
+		--extra-experimental-features nix-command \
+		--extra-experimental-features flakes
 	echo "Activating build result"
 	./result/activate
 }
