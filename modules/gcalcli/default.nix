@@ -14,5 +14,13 @@ in {
         '';
       };
     };
+
+    systemd.user.services.gcalcli-remind = {
+      serviceConfig = {
+        ExecStart = "${pkgs.gcalcli}/bin/gcacli remind";
+        Restart = "always";
+        RestartSec = 1;
+      };
+    };
   };
 }
