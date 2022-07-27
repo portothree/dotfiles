@@ -106,6 +106,7 @@
   services = {
     picom = { enable = true; };
     keynav = { enable = true; };
+    dunst = { enable = true; };
     unclutter = {
       enable = true;
       timeout = 1;
