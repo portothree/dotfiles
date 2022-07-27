@@ -43,8 +43,9 @@
   sound = { enable = true; };
   hardware = {
     nvidia = { package = config.boot.kernelPackages.nvidiaPackages.stable; };
-    bluetooth = { enable = true; };
-    pulseaudio = { enable = true; };
+    opengl.enable = true;
+    bluetooth.enable = true;
+    pulseaudio.enable = true;
   };
   nixpkgs = {
     config = {
