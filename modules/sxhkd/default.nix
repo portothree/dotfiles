@@ -7,7 +7,7 @@ in {
     enable = mkEnableOption "sxhkd";
 
     terminal = mkOption {
-      type = types.string;
+      type = types.str;
       description =
         "Name of terminal emulator to be called with 'super + Return'";
       default = "alacritty";
