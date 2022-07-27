@@ -21,7 +21,7 @@ in {
             bspc config border_width 0.5
             bspc config window_gap 2
             bspc config split_ratio 0.52
-            bspc config bordeless_monocle true
+            bspc config borderless_monocle true
             bspc config gapless_monocle true
             ${cfg.extraConfig}
           '';
