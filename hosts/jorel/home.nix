@@ -45,6 +45,7 @@
       gh
       zathura
       python3
+      gcalcli
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
