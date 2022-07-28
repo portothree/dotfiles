@@ -18,8 +18,9 @@ in {
     systemd.user.services.gcalcli-remind = {
       Install.WantedBy = [ "graphical-session.target" ];
       Service = {
-        ExecStart = "${pkgs.gcalcli}/bin/gcacli remind";
-        Restart = "aways";
+        ExecStart =
+          "while true; do ${pkgs.gcalcli}/bin/gcalcli remind; sleep 300; done";
+        Restart = "always";
       };
     };
   };
