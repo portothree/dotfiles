@@ -9,7 +9,6 @@
     ../../config/neovim.nix
     ../../config/ranger.nix
     ../../config/keynav.nix
-    ../../config/gcalcli.nix
     ../../config/conky.nix
   ];
   home = {
@@ -84,6 +83,7 @@
     };
   };
   services = {
+    dunst = { enable = true; };
     mpris-proxy.enable = true;
     keynav = { enable = true; };
     unclutter = {
@@ -248,5 +248,9 @@
       gcalcli = true;
     };
     nodejs.enable = true;
+    gcalcli = {
+      enable = true;
+      enableNotifications = true;
+    };
   };
 }
