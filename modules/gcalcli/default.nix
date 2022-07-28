@@ -16,10 +16,10 @@ in {
     };
 
     systemd.user.services.gcalcli-remind = {
-      serviceConfig = {
+      Install.WantedBy = [ "graphical-session.target" ];
+      Service = {
         ExecStart = "${pkgs.gcalcli}/bin/gcacli remind";
-        Restart = "always";
-        RestartSec = 1;
+        Restart = "aways";
       };
     };
   };
