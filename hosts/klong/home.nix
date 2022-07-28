@@ -248,6 +248,9 @@
       gcalcli = true;
     };
     nodejs.enable = true;
-    gcalcli.enable = true;
+    gcalcli = {
+      enable = true;
+      enableNotifications = true;
+    };
   };
 }
