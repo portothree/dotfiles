@@ -46,15 +46,19 @@
         mouse = { accelProfile = "flat"; };
         touchpad = { accelProfile = "flat"; };
       };
-      displayManager = {
-        startx = { enable = true; };
-      };
+      displayManager = { startx = { enable = true; }; };
     };
     blueman.enable = true;
   };
   sound.enable = true;
   hardware = {
-    pulseaudio.enable = true;
+    pulseaudio = {
+      enable = true;
+      package = pkgs.pulseaudioFull;
+      extraConfig = ''
+        load-module module-switch-on-connect
+      '';
+    };
     bluetooth.enable = true;
   };
   users = {
