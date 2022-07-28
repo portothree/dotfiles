@@ -17,11 +17,12 @@ in {
 
     systemd.user.services.gcalcli-remind = {
       Install.WantedBy = [ "graphical-session.target" ];
-      Service = {
-        ExecStart =
-          "while true; do ${pkgs.gcalcli}/bin/gcalcli remind; sleep 300; done";
-        Restart = "always";
-      };
+      Service = { ExecStart = "${pkgs.gcalcli}/bin/gcalcli remind"; };
+    };
+
+    systemd.user.timers.gcalcli-remind = {
+      Timer.OnCalendar = "*:0/5";
+      Timer.Unit = "gcalcli-remind.service";
     };
   };
 }
