@@ -83,6 +83,7 @@
     };
   };
   services = {
+    dunst = { enable = true; };
     keynav = { enable = true; };
     unclutter = {
       enable = true;
