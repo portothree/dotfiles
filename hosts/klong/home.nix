@@ -84,6 +84,7 @@
   };
   services = {
     dunst = { enable = true; };
+    mpris-proxy.enable = true;
     keynav = { enable = true; };
     unclutter = {
       enable = true;

@@ -45,7 +45,13 @@
     nvidia = { package = config.boot.kernelPackages.nvidiaPackages.stable; };
     opengl.enable = true;
     bluetooth.enable = true;
-    pulseaudio.enable = true;
+    pulseaudio = {
+      enable = true;
+      package = pkgs.pulseaudioFull;
+      extraConfig = ''
+        load-module module-switch-on-connect
+      '';
+    };
   };
   nixpkgs = {
     config = {

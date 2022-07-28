@@ -27,11 +27,15 @@
       dates = [ "weekly" ];
     };
     settings = {
-      substituters =
-        [ "https://cache.nixos.org/" "https://portothree.cachix.org" ];
+      substituters = [
+        "https://cache.nixos.org/"
+        "https://portothree.cachix.org"
+        "https://microvm.cachix.org"
+      ];
       trusted-public-keys = [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
         "portothree.cachix.org-1:L4w3V/jrM+5cG0yEAypCPan94GLUxWYm8VFLB774J6I="
+        "microvm.cachix.org-1:oXnBc6hRE3eX5rSYdRyMYXnfzcCxC7yKPTbZXALsqys="
       ];
     };
   };
