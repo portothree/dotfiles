@@ -8,7 +8,6 @@
     ../../config/neovim.nix
     ../../config/ranger.nix
     ../../config/keynav.nix
-    ../../config/xinit.nix
   ];
   home = {
     packages = with pkgs; [
@@ -213,6 +212,7 @@
     };
   };
   modules = {
+    xinit.enable = true;
     tmux.enable = true;
     alacritty.enable = true;
     bspwm = {
@@ -230,6 +230,5 @@
     nodejs.enable = true;
     gcalcli.enable = true;
     zsh.enable = true;
-    lemonbar.enable = true;
   };
 }

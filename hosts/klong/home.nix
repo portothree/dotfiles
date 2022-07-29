@@ -1,10 +1,9 @@
-{ shellScriptsPkgs, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
     ../../modules
     ../../home-manager
-    ../../config/xinit.nix
     ../../config/git.nix
     ../../config/neovim.nix
     ../../config/ranger.nix
@@ -162,12 +161,18 @@
     };
   };
   modules = {
+    xinit = {
+      enable = true;
+      autorandr = true;
+      sxhkd = true;
+      bspwm = true;
+      lemonbar = true;
+    };
     bspwm = {
       enable = true;
       extraConfig = ''
         bspc monitor "eDP-1" -d I II III
         bspc monitor "DP-2" -d IV V VI VII VIII IX X
-        bash ${shellScriptsPkgs.start-lemonbar}/bin/start-lemonbar
       '';
     };
     sxhkd = {
@@ -186,6 +191,5 @@
       enableNotifications = true;
     };
     zsh.enable = true;
-    lemonbar.enable = true;
   };
 }

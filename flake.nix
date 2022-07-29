@@ -20,7 +20,7 @@
       system = "x86_64-linux";
       username = "porto";
       homeDirectory = "/home/porto";
-      shellScriptsPkgs = scripts.packages.${system};
+      shellScriptPkgs = scripts.packages.${system};
 
       mkPkgs = pkgs:
         { overlays ? [ ], allowUnfree ? false }:
@@ -46,7 +46,7 @@
           inherit username;
           inherit homeDirectory;
           inherit pkgs;
-          extraSpecialArgs = { inherit shellScriptsPkgs; };
+          extraSpecialArgs = { inherit shellScriptPkgs; };
           configuration = import ./hosts/${hostName}/home.nix;
         };
 
