@@ -45,6 +45,7 @@ in {
         coc-eslint
         coc-prettier
         editorconfig-vim
+        vim-fugitive
       ];
       extraConfig = builtins.concatStringsSep "\n" [''
         lua << EOF
