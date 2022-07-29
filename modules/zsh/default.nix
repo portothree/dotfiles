@@ -10,7 +10,6 @@ in {
       enableAutosuggestions = true;
       enableCompletion = true;
       sessionVariables = {
-        PROMPT = "%(?.%F{green}.%F{red})λ%f %B%F{cyan}%~%f%b ";
         VISUAL = "nvim";
         EDITOR = "nvim";
         HISTTIMEFORMAT = "%F %T ";
@@ -19,7 +18,10 @@ in {
         size = 10000;
         path = "${config.xdg.dataHome}/zsh/history";
       };
-      localVariables = { MEMEX = "/home/porto/www/memex"; };
+      localVariables = {
+        LAMBDA = "λ";
+        MEMEX_PATH = "/home/porto/www/memex";
+      };
       shellAliases = {
         r = "ranger";
         rgf = "rg --files | rg";
