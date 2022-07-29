@@ -14,25 +14,12 @@
   ];
   home = {
     packages = with pkgs; [
-      sysz
-      ranger
-      pass
       bitwarden-cli
-      tig
       k9s
       kubectl
-      ripgrep
-      xclip
-      xsel
-      xdotool
       lemonbar
       rofi
       nixfmt
-      python3
-      python2
-      postgresql
-      gnumake
-      gcc
       glow
       weechat
       pgcli
@@ -46,7 +33,6 @@
       weechat
       pulsemixer
       nudoku
-      s-tui
       dijo
       mutt
       powertop
@@ -56,10 +42,6 @@
       lazydocker
       platformio
       nextdns
-      yank
-      jq
-      yq
-      cachix
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
