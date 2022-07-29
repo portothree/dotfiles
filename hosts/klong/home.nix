@@ -167,6 +167,7 @@
       extraConfig = ''
         bspc monitor "eDP-1" -d I II III
         bspc monitor "DP-2" -d IV V VI VII VIII IX X
+        bash ${inputs.lemonbar}/start-lemonbar
       '';
     };
     sxhkd = {

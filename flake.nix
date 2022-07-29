@@ -12,9 +12,10 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     nixgl.url = "github:guibou/nixGL";
+    lemonbar.url = "path:./bin/lemonbar";
   };
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager
-    , home-manager-unstable, nixgl, ... }@inputs:
+    , home-manager-unstable, nixgl, lemonbar, ... }@inputs:
     let
       system = "x86_64-linux";
       username = "porto";
