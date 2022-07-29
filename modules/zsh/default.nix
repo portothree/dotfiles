@@ -5,7 +5,7 @@ let cfg = config.modules.zsh;
 in {
   options.modules.zsh = { enable = mkEnableOption "zsh"; };
   config = mkIf cfg.enable {
-    home.programs.zsh = {
+    programs.zsh = {
       enable = true;
       enableAutosuggestions = true;
       enableCompletion = true;

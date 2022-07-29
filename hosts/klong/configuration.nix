@@ -66,6 +66,7 @@
       porto = {
         isNormalUser = true;
         extraGroups = [ "wheel" "docker" ];
+        shell = pkgs.zsh;
       };
     };
   };
