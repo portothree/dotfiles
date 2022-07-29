@@ -13,15 +13,8 @@
   home = {
     packages = with pkgs; [
       st
-      sysz
-      ranger
-      tig
       k9s
       kubectl
-      ripgrep
-      xclip
-      xdotool
-      rofi
       cava
       astyle
       shfmt
@@ -39,12 +32,11 @@
       nudoku
       playerctl
       spotify-tui
-      s-tui
       nvtop
       mutt
       gh
-      zathura
-      python3
+      lemonbar
+      ffmpeg
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
