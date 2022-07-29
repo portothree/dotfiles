@@ -139,16 +139,6 @@
       };
     };
     htop = { enable = true; };
-    zsh = {
-      enable = true;
-      enableAutosuggestions = true;
-      enableCompletion = true;
-      oh-my-zsh = {
-        enable = true;
-        plugins = [ "git" "git-auto-fetch" ];
-        theme = "robbyrussell";
-      };
-    };
     vim = {
       enable = true;
       settings = {

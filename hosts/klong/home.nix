@@ -107,56 +107,6 @@
       };
     };
     htop = { enable = true; };
-    zsh = {
-      enable = true;
-      enableAutosuggestions = true;
-      enableCompletion = true;
-      sessionVariables = {
-        PROMPT = "%(?.%F{green}.%F{red})λ%f %B%F{cyan}%~%f%b ";
-        VISUAL = "nvim";
-        EDITOR = "nvim";
-        HISTTIMEFORMAT = "%F %T ";
-        PATH =
-          "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/nix/var/nix/profiles/default/bin:/home/porto/nix-profile/bin";
-        NIX_PATH =
-          "/home/porto/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels";
-        LOCALE_ARCHIVE = "/usr/lib/locale/locale-archive";
-      };
-      localVariables = { MEMEX = "/home/porto/www/memex"; };
-      shellAliases = {
-        r = "ranger";
-        qutebrowser = "QT_XCB_GL_INTEGRATION=none qutebrowser";
-        rgf = "rg --files | rg";
-        ksns =
-          "kubectl api-resources --verbs=list --namespaced -o name | xargs -n1 kubectl get '$@' --show-kind --ignore-not-found";
-        krns =
-          "kubectl api-resources --namespaced=true --verbs=delete -o name | tr '' ',' | sed -e 's/,$//''";
-        kdns = "kubectl delete '$(krns)' --all";
-      };
-      initExtraFirst = ''
-        [[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
-
-        # Load crontab from .crontab file
-        if test -z $CRONTABCMD; then
-          export CRONTABCMD=$(which crontab)
-
-          crontab() {
-              if [[ $@ == "-e" ]]; then
-                  vim "$HOME/.crontab" && $CRONTABCMD "$HOME/.crontab"
-              else
-                  $CRONTABCMD $@
-              fi
-           }
-         
-          $CRONTABCMD "$HOME/.crontab"
-        fi
-      '';
-      oh-my-zsh = {
-        enable = true;
-        plugins = [ "git" "git-auto-fetch" ];
-        theme = "robbyrussell";
-      };
-    };
     gh = {
       enable = true;
       settings = {
@@ -234,5 +184,6 @@
       enable = true;
       enableNotifications = true;
     };
+    zsh.enable = true;
   };
 }
