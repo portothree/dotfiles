@@ -186,5 +186,6 @@
       enableNotifications = true;
     };
     zsh.enable = true;
+    lemonbar.enable = true;
   };
 }

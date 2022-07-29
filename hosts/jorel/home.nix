@@ -230,5 +230,6 @@
     nodejs.enable = true;
     gcalcli.enable = true;
     zsh.enable = true;
+    lemonbar.enable = true;
   };
 }
