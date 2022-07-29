@@ -44,10 +44,8 @@
           inherit system;
           inherit username;
           inherit homeDirectory;
-          configuration = import ./hosts/${hostName}/home.nix {
-            inherit pkgs;
-            inherit inputs;
-          };
+          extraSpecialArgs = { inherit lemonbar; };
+          configuration = import ./hosts/${hostName}/home.nix;
         };
 
     in {
