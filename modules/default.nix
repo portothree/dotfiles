@@ -1,5 +1,6 @@
 { inputs, pkgs, config, ... }:
 
 {
-  imports = [ ./zsh ./tmux ./bspwm ./sxhkd ./nodejs ./alacritty ./gcalcli ];
+  imports =
+    [ ./zsh ./tmux ./bspwm ./sxhkd ./nodejs ./alacritty ./gcalcli ./lemonbar ];
 }
