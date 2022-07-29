@@ -99,6 +99,7 @@
     mpris-proxy.enable = true;
     picom = { enable = true; };
     keynav = { enable = true; };
+    dunst = { enable = true; };
     unclutter = {
       enable = true;
       timeout = 1;
@@ -237,5 +238,6 @@
       rofi = true;
     };
     nodejs.enable = true;
+    gcalcli.enable = true;
   };
 }
