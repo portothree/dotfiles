@@ -9,6 +9,7 @@
     ripgrep
     xclip
     xdotool
+    xdo
     rofi
     tig
     s-tui
