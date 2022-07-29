@@ -36,6 +36,7 @@
       mutt
       gh
       lemonbar
+      ffmpeg
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
