@@ -20,6 +20,7 @@
       system = "x86_64-linux";
       username = "porto";
       homeDirectory = "/home/porto";
+      lemonbarPkg = lemonbar.defaultPackage.${system};
 
       mkPkgs = pkgs:
         { overlays ? [ ], allowUnfree ? false }:
@@ -44,8 +45,11 @@
           inherit system;
           inherit username;
           inherit homeDirectory;
-          extraSpecialArgs = { inherit lemonbar; };
-          configuration = import ./hosts/${hostName}/home.nix;
+          configuration = import ./hosts/${hostName}/home.nix {
+            inherit pkgs;
+            inherit inputs;
+            inherit lemonbarPkg;
+          };
         };
 
     in {
