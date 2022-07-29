@@ -12,15 +12,15 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     nixgl.url = "github:guibou/nixGL";
-    lemonbar.url = "path:./bin/lemonbar";
+    scripts.url = "path:./bin";
   };
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager
-    , home-manager-unstable, nixgl, lemonbar, ... }@inputs:
+    , home-manager-unstable, nixgl, scripts, ... }@inputs:
     let
       system = "x86_64-linux";
       username = "porto";
       homeDirectory = "/home/porto";
-      lemonbarPkg = lemonbar.defaultPackage.${system};
+      shellScriptsPkgs = scripts.packages.${system};
 
       mkPkgs = pkgs:
         { overlays ? [ ], allowUnfree ? false }:
@@ -41,15 +41,13 @@
         };
 
       mkHomeManager = pkgs: hm: hostName:
-        home-manager.lib.homeManagerConfiguration {
+        hm.lib.homeManagerConfiguration {
           inherit system;
           inherit username;
           inherit homeDirectory;
-          configuration = import ./hosts/${hostName}/home.nix {
-            inherit pkgs;
-            inherit inputs;
-            inherit lemonbarPkg;
-          };
+          inherit pkgs;
+          extraSpecialArgs = { inherit shellScriptsPkgs; };
+          configuration = import ./hosts/${hostName}/home.nix;
         };
 
     in {

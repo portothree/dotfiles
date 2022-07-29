@@ -1,4 +1,4 @@
-{ lemonbarPkg, pkgs, ... }:
+{ shellScriptsPkgs, pkgs, ... }:
 
 {
   imports = [
@@ -167,7 +167,7 @@
       extraConfig = ''
         bspc monitor "eDP-1" -d I II III
         bspc monitor "DP-2" -d IV V VI VII VIII IX X
-        bash ${lemonbarPkg}/bin/start-lemonbar
+        bash ${shellScriptsPkgs.start-lemonbar}/bin/start-lemonbar
       '';
     };
     sxhkd = {
