@@ -12,13 +12,15 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     nixgl.url = "github:guibou/nixGL";
+    scripts.url = "path:./bin";
   };
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager
-    , home-manager-unstable, nixgl, ... }@inputs:
+    , home-manager-unstable, nixgl, scripts, ... }@inputs:
     let
       system = "x86_64-linux";
       username = "porto";
       homeDirectory = "/home/porto";
+      shellScriptPkgs = scripts.packages.${system};
 
       mkPkgs = pkgs:
         { overlays ? [ ], allowUnfree ? false }:
@@ -39,14 +41,13 @@
         };
 
       mkHomeManager = pkgs: hm: hostName:
-        home-manager.lib.homeManagerConfiguration {
+        hm.lib.homeManagerConfiguration {
           inherit system;
           inherit username;
           inherit homeDirectory;
-          configuration = import ./hosts/${hostName}/home.nix {
-            inherit pkgs;
-            inherit inputs;
-          };
+          inherit pkgs;
+          extraSpecialArgs = { inherit shellScriptPkgs; };
+          configuration = import ./hosts/${hostName}/home.nix;
         };
 
     in {

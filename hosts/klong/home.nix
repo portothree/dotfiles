@@ -1,10 +1,9 @@
-{ inputs, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
     ../../modules
     ../../home-manager
-    ../../config/xinit.nix
     ../../config/git.nix
     ../../config/neovim.nix
     ../../config/ranger.nix
@@ -162,6 +161,13 @@
     };
   };
   modules = {
+    xinit = {
+      enable = true;
+      autorandr = true;
+      sxhkd = true;
+      bspwm = true;
+      lemonbar = true;
+    };
     bspwm = {
       enable = true;
       extraConfig = ''
