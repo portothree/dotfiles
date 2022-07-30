@@ -52,11 +52,11 @@
 
     in {
       nixosConfigurations = {
-        "jorel" = mkNixosSystem nixpkgs "jorel";
-        "juju" = mkNixosSystem nixpkgs "juju";
-        "danubio" = mkNixosSystem nixpkgs "danubio";
-        "nico" = mkNixosSystem nixpkgs "nico";
-        "klong" = mkNixosSystem nixpkgs "klong";
+        jorel = mkNixosSystem nixpkgs "jorel";
+        juju = mkNixosSystem nixpkgs "juju";
+        danubio = mkNixosSystem nixpkgs "danubio";
+        nico = mkNixosSystem nixpkgs "nico";
+        klong = mkNixosSystem nixpkgs "klong";
       };
       homeConfigurations = {
         jorel =

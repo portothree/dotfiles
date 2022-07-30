@@ -1,5 +1,5 @@
 {
-  description = "Script to start lemonbar";
+  description = "Collection of shell scripts";
   inputs = { nixpkgs = { url = "nixpkgs/nixos-unstable"; }; };
   outputs = { self, nixpkgs }:
     let
