@@ -25,6 +25,9 @@
         start-lemonbar =
           mkShellScript "start-lemonbar" ./lemonbar/start-lemonbar
           (with pkgs; [ lemonbar xdo bspwm ]);
+        bluetooth-connect =
+          mkShellScript "bluetooth-connect" ./bluetooth/bluetooth-connect
+          (with pkgs; [ bluez ]);
       };
     };
 }
