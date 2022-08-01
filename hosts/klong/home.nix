@@ -64,7 +64,6 @@
     };
   };
   services = {
-    dunst = { enable = true; };
     mpris-proxy.enable = true;
     keynav = { enable = true; };
     unclutter = {
@@ -161,6 +160,7 @@
     };
   };
   modules = {
+    dunst.enable = true;
     xinit = {
       enable = true;
       autorandr = true;
