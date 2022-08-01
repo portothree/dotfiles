@@ -98,7 +98,6 @@
     mpris-proxy.enable = true;
     picom = { enable = true; };
     keynav = { enable = true; };
-    dunst = { enable = true; };
     unclutter = {
       enable = true;
       timeout = 1;
@@ -212,6 +211,7 @@
     };
   };
   modules = {
+    dunst.enable = true;
     xinit.enable = true;
     tmux.enable = true;
     alacritty.enable = true;
