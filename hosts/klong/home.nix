@@ -160,7 +160,7 @@
     };
   };
   modules = {
-    ankin.enable = true;
+    anki.enable = true;
     dunst.enable = true;
     xinit = {
       enable = true;
