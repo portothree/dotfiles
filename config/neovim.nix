@@ -21,7 +21,6 @@ in {
         vim-polyglot
         vim-fugitive
         vim-prettier
-        vim-airline
         editorconfig-vim
         YouCompleteMe
         ale
