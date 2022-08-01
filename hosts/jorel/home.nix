@@ -211,6 +211,7 @@
     };
   };
   modules = {
+    ankin.enable = true;
     dunst.enable = true;
     xinit.enable = true;
     tmux.enable = true;

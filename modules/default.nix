@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./anki
     ./zsh
     ./tmux
     ./bspwm
