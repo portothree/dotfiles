@@ -237,5 +237,6 @@
     nodejs.enable = true;
     gcalcli.enable = true;
     zsh.enable = true;
+    dockerTools.enable = true;
   };
 }

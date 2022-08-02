@@ -3,10 +3,11 @@
 {
   imports = [
     ./anki
+    ./dunst
+    ./dockerTools
     ./zsh
     ./tmux
     ./bspwm
-    ./dunst
     ./sxhkd
     ./nodejs
     ./alacritty

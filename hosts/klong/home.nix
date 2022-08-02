@@ -37,7 +37,6 @@
       acpi
       brightnessctl
       ledger-live-desktop
-      lazydocker
       platformio
       nextdns
     ];
@@ -162,6 +161,7 @@
   modules = {
     anki.enable = true;
     dunst.enable = true;
+    dockerTools.enable = true;
     xinit = {
       enable = true;
       autorandr = true;
