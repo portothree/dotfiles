@@ -29,6 +29,7 @@ in {
     };
 
     systemd.user.timers.gcalcli-remind = mkIf cfg.enableNotifications {
+      Install.WantedBy = [ "default.target" ];
       Timer.OnCalendar = "*:0/5";
       Timer.Unit = "gcalcli-remind.service";
     };
