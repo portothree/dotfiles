@@ -212,7 +212,13 @@
   };
   modules = {
     dunst.enable = true;
-    xinit.enable = true;
+    xinit = {
+      enable = true;
+      autorandr = true;
+      sxhkd = true;
+      bspwm = true;
+      lemonbar = true;
+    };
     tmux.enable = true;
     alacritty.enable = true;
     bspwm = {
