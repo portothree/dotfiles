@@ -211,6 +211,7 @@
     };
   };
   modules = {
+    anki.enable = true;
     dunst.enable = true;
     xinit = {
       enable = true;
