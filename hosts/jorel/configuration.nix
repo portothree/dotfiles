@@ -43,7 +43,10 @@
   fonts = { fonts = with pkgs; [ fira-code siji ]; };
   sound = { enable = true; };
   hardware = {
-    nvidia = { package = config.boot.kernelPackages.nvidiaPackages.stable; };
+    nvidia = {
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      prime.nvidiaBusId = "PCI:27:0:0";
+    };
     opengl.enable = true;
     bluetooth.enable = true;
     pulseaudio = {
