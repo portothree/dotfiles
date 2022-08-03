@@ -11,11 +11,12 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    nixos-hardware.url = "github:NixOs/nixos-hardware/master";
     nixgl.url = "github:guibou/nixGL";
     scripts.url = "path:./bin";
   };
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager
-    , home-manager-unstable, nixgl, scripts, ... }@inputs:
+    , home-manager-unstable, nixos-hardware, nixgl, scripts, ... }@inputs:
     let
       system = "x86_64-linux";
       username = "porto";
@@ -30,14 +31,15 @@
           config.allowUnfree = allowUnfree;
         };
 
-      mkNixosSystem = pkgs: hostName:
+      mkNixosSystem = pkgs:
+        { hostName, extraModules ? [ ] }:
         pkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
           modules = [
             { networking = { inherit hostName; }; }
             ./hosts/${hostName}/configuration.nix
-          ];
+          ] ++ extraModules;
         };
 
       mkHomeManager = pkgs: hm: hostName:
@@ -52,11 +54,14 @@
 
     in {
       nixosConfigurations = {
-        jorel = mkNixosSystem nixpkgs "jorel";
-        juju = mkNixosSystem nixpkgs "juju";
-        danubio = mkNixosSystem nixpkgs "danubio";
-        nico = mkNixosSystem nixpkgs "nico";
-        klong = mkNixosSystem nixpkgs "klong";
+        jorel = mkNixosSystem nixpkgs {
+          hostName = "jorel";
+          extraModules = [ nixos-hardware.nixosModules.common-gpu-nvidia ];
+        };
+        juju = mkNixosSystem nixpkgs { hostName = "juju"; };
+        danubio = mkNixosSystem nixpkgs { hostName = "danubio"; };
+        nico = mkNixosSystem nixpkgs { hostName = "nico"; };
+        klong = mkNixosSystem nixpkgs { hostName = "klong"; };
       };
       homeConfigurations = {
         jorel =
