@@ -167,10 +167,10 @@
       autorandr = true;
       sxhkd = true;
       bspwm = true;
-      lemonbar = true;
     };
     bspwm = {
       enable = true;
+      lemonbar = true;
       extraConfig = ''
         bspc monitor "eDP-1" -d I II III
         bspc monitor "DP-2" -d IV V VI VII VIII IX X

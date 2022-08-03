@@ -1,10 +1,15 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, lib, config, shellScriptPkgs, ... }:
 
 with lib;
 let cfg = config.modules.bspwm;
 in {
   options.modules.bspwm = {
     enable = mkEnableOption "bspwm";
+    lemonbar = mkOption {
+      type = types.bool;
+      description = "If enabled, lemonbar for bspwm will be loaded";
+      default = false;
+    };
     extraConfig = mkOption {
       type = types.lines;
       description = "Additional configuration to be added to bspwmrc file";
@@ -24,6 +29,8 @@ in {
             bspc config borderless_monocle true
             bspc config gapless_monocle true
             ${cfg.extraConfig}
+            ${optionalString (cfg.lemonbar)
+            "${shellScriptPkgs.lemonbar-bspwm}/bin/lemonbar-bspwm &"}
           '';
         };
       };

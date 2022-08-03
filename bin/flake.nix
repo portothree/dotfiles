@@ -22,8 +22,8 @@
 
     in {
       packages.${system} = {
-        start-lemonbar =
-          mkShellScript "start-lemonbar" ./lemonbar/start-lemonbar
+        lemonbar-bspwm =
+          mkShellScript "lemonbar-bspwm" ./lemonbar/lemonbar-bspwm
           (with pkgs; [ lemonbar xdo bspwm ]);
         bluetooth-connect =
           mkShellScript "bluetooth-connect" ./bluetooth/bluetooth-connect
