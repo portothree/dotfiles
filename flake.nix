@@ -56,7 +56,7 @@
       nixosConfigurations = {
         jorel = mkNixosSystem nixpkgs {
           hostName = "jorel";
-          extraModules = [ nixos-hardware.nixosModules.common-gpu-nvidia ];
+          extraModules = [ nixos-hardware.nixosModules.common-cpu-amd ];
         };
         juju = mkNixosSystem nixpkgs { hostName = "juju"; };
         danubio = mkNixosSystem nixpkgs { hostName = "danubio"; };

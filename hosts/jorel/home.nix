@@ -96,7 +96,12 @@
   };
   services = {
     mpris-proxy.enable = true;
-    picom = { enable = true; };
+    picom = {
+      enable = true;
+      backend = "xrender";
+      vSync = true;
+      settings = { unredir-if-possible = false; };
+    };
     keynav = { enable = true; };
     unclutter = {
       enable = true;
