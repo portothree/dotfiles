@@ -100,7 +100,9 @@
       enable = true;
       backend = "xrender";
       vSync = true;
-      settings = { unredir-if-possible = false; };
+      extraOptions = ''
+        unredir-if-possible = false;
+      '';
     };
     keynav = { enable = true; };
     unclutter = {
