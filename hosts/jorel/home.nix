@@ -218,12 +218,12 @@
       autorandr = true;
       sxhkd = true;
       bspwm = true;
-      lemonbar = true;
     };
     tmux.enable = true;
     alacritty.enable = true;
     bspwm = {
       enable = true;
+      lemonbar = true;
       extraConfig = ''
         bspc monitor "DP-0" -d I II III
         bspc monitor "HDMI-0" -d IV V VI VII VIII IX X

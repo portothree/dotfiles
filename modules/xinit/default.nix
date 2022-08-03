@@ -1,4 +1,4 @@
-{ pkgs, lib, config, shellScriptPkgs, ... }:
+{ pkgs, lib, config, ... }:
 
 with lib;
 let cfg = config.modules.xinit;
@@ -14,10 +14,6 @@ in {
       default = false;
     };
     bspwm = mkOption {
-      type = types.bool;
-      default = false;
-    };
-    lemonbar = mkOption {
       type = types.bool;
       default = false;
     };
@@ -48,7 +44,6 @@ in {
 
           ${optionalString (cfg.autorandr) "${pkgs.autorandr}/bin/autorandr --change"}
           ${optionalString (cfg.sxhkd) "${pkgs.sxhkd}/bin/sxhkd &"}
-          ${optionalString (cfg.lemonbar) "${shellScriptPkgs.start-lemonbar}/bin/start-lemonbar &"}
           ${optionalString (cfg.bspwm) "exec ${pkgs.bspwm}/bin/bspwm"}
           ${cfg.extraConfig}
       '';
