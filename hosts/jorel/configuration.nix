@@ -1,14 +1,6 @@
 { config, pkgs, ... }:
 
-let
-  nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
-    export __NV_PRIME_RENDER_OFFLOAD=1
-    export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
-    export __GLX_VENDOR_LIBRARY_NAME=nvidia
-    export __VK_LAYER_NV_optimus=NVIDIA_only
-    exec "$@"
-  '';
-in {
+{
   imports = [ ../common.nix ./hardware-configuration.nix ];
   boot = {
     loader = {
@@ -32,6 +24,11 @@ in {
       layout = "us";
       videoDrivers = [ "nvidia" ];
       displayManager = { startx = { enable = true; }; };
+      screenSection = ''
+        Option         "metamodes" "nvidia-auto-select +0+0 {ForceFullCompositionPipeline=On}"
+        Option         "AllowIndirectGLXProtocol" "off"
+        Option         "TripleBuffer" "on"
+      '';
     };
   };
   users = {
@@ -44,21 +41,14 @@ in {
     };
   };
   environment = {
-    systemPackages = with pkgs; [ nvidia-offload wget curl ];
+    systemPackages = with pkgs; [ wget curl ];
     variables = { EDITOR = "nvim"; };
   };
   virtualisation = { docker = { enable = true; }; };
   fonts = { fonts = with pkgs; [ fira-code siji ]; };
   sound = { enable = true; };
   hardware = {
-    nvidia = {
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
-      prime = {
-        offload.enable = true;
-        nvidiaBusId =
-          "PCI:27:0:0"; # 27:00.0 VGA compatible controller: NVIDIA Corporation GP107 [GeForce GTX 1050 Ti] (rev a1)
-      };
-    };
+    nvidia = { package = config.boot.kernelPackages.nvidiaPackages.stable; };
     opengl.enable = true;
     bluetooth.enable = true;
     pulseaudio = {
