@@ -87,7 +87,6 @@
         testing-microvm = mkMicroVM nixpkgs {
           hostName = "testing";
           extraModules = [{
-
             users = { users = { root = { password = ""; }; }; };
           }];
         };

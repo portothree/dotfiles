@@ -32,6 +32,27 @@
       '';
     };
   };
+  systemd = {
+    network = {
+      netdevs = {
+        "10-microvm" = {
+          netdevConfig = {
+            Kind = "bridge";
+            Name = "microvm";
+          };
+        };
+      };
+      networks = {
+        "10-microvm" = {
+          matchConfig.Name = "microvm";
+          networkConfig = {
+            DHCPServer = true;
+            IPv6SendRA = true;
+          };
+        };
+      };
+    };
+  };
   users = {
     users = {
       porto = {
