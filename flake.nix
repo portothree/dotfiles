@@ -55,7 +55,14 @@
             microvm.nixosModules.microvm
             {
               networking = { inherit hostName; };
-              microvm = { hypervisor = "qemu"; };
+              microvm = {
+                hypervisor = "qemu";
+                interfaces = [{
+                  type = "user";
+                  id = "microvm-a1";
+                  mac = "02:00:00:00:00:01";
+                }];
+              };
             }
           ] ++ extraModules;
         };

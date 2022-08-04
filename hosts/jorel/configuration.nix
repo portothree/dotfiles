@@ -57,6 +57,11 @@
             DHCPServer = true;
             IPv6SendRA = true;
           };
+          addresses = [
+            { addressConfig.Address = "10.0.0.1/24"; }
+            { addressConfig.Address = "fd12:3456:789a::1/64"; }
+          ];
+          ipv6Prefixes = [{ ipv6PrefixConfig.Prefix = "fd12:3456:789a::/64"; }];
         };
         "11-microvm" = {
           matchConfig.Name = "vm-*";
