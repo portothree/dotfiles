@@ -36,6 +36,7 @@
       gh
       lemonbar
       ffmpeg
+      distrobox
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
