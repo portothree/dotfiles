@@ -15,6 +15,7 @@
   networking = {
     useDHCP = false;
     interfaces = { enp34s0 = { useDHCP = true; }; };
+    useNetworkd = true;
   };
   services = {
     openssh = { enable = true; };

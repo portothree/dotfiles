@@ -12,11 +12,16 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     nixos-hardware.url = "github:NixOs/nixos-hardware/master";
+    microvm = {
+      url = "github:astro/microvm.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixgl.url = "github:guibou/nixGL";
     scripts.url = "path:./bin";
   };
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager
-    , home-manager-unstable, nixos-hardware, nixgl, scripts, ... }@inputs:
+    , home-manager-unstable, nixos-hardware, microvm, nixgl, scripts, ...
+    }@inputs:
     let
       system = "x86_64-linux";
       username = "porto";
@@ -56,7 +61,11 @@
       nixosConfigurations = {
         jorel = mkNixosSystem nixpkgs {
           hostName = "jorel";
-          extraModules = [ nixos-hardware.nixosModules.common-cpu-amd ];
+          extraModules = [
+            nixos-hardware.nixosModules.common-cpu-amd
+            microvm.nixosModules.host
+            { microvm.autostart = [ ]; }
+          ];
         };
         juju = mkNixosSystem nixpkgs { hostName = "juju"; };
         danubio = mkNixosSystem nixpkgs { hostName = "danubio"; };
