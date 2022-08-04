@@ -16,6 +16,12 @@
     useDHCP = false;
     interfaces = { enp34s0 = { useDHCP = true; }; };
     useNetworkd = true;
+    nat = {
+      enable = true;
+      enableIPv6 = true;
+      externalInterface = "eth0";
+      internalInterfaces = [ "microvm" ];
+    };
   };
   services = {
     openssh = { enable = true; };
@@ -49,6 +55,10 @@
             DHCPServer = true;
             IPv6SendRA = true;
           };
+        };
+        "11-microvm" = {
+          matchConfig.Name = "vm-*";
+          networkConfig = { Bridge = "microvm"; };
         };
       };
     };
