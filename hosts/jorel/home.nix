@@ -220,6 +220,7 @@
   };
   modules = {
     anki.enable = true;
+    androidTools.enable = true;
     dunst.enable = true;
     xinit = {
       enable = true;
