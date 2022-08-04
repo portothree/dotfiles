@@ -77,7 +77,6 @@
           extraModules = [
             nixos-hardware.nixosModules.common-cpu-amd
             microvm.nixosModules.host
-            { microvm.autostart = [ "testing-microvm" ]; }
           ];
         };
         juju = mkNixosSystem nixpkgs { hostName = "juju"; };
@@ -86,9 +85,20 @@
         klong = mkNixosSystem nixpkgs { hostName = "klong"; };
         testing-microvm = mkMicroVM nixpkgs {
           hostName = "testing";
-          extraModules = [{
-            users = { users = { root = { password = ""; }; }; };
-          }];
+          extraModules = [
+            ({ config, pkgs, ... }: {
+              system.stateVersion = config.system.nixos.version;
+              users = { users = { root = { password = ""; }; }; };
+              nix = {
+                enable = true;
+                package = pkgs.nixFlakes;
+                extraOptions = ''
+                  experimental-features = nix-command flakes
+                '';
+                trustedUsers = [ "root" ];
+              };
+            })
+          ];
         };
       };
       homeConfigurations = {
