@@ -19,7 +19,10 @@
       nixosConfigurations.staging = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
+          microvm.nixosModules.microvm
           {
+            networking = { hostName = "staging"; };
+            users.users.root.password = "";
             nix = {
               enable = true;
               extraOptions = ''
@@ -27,11 +30,6 @@
               '';
               trustedUsers = [ "root" ];
             };
-          }
-          microvm.nixosModules.microvm
-          {
-            networking.hostName = "staging";
-            users.users.root.password = "";
             microvm = {
               volumes = [{
                 mountPoint = "/var";
@@ -50,6 +48,13 @@
               socket = "control.socket";
               # relevant for delarative MicroVM management
               hypervisor = "qemu";
+              interfaces = [{
+                type = "user";
+                # interface name on the host
+                id = "microvm-a1";
+                # Ethernet address of the MicroVM's interface, not the host's
+                mac = "02:00:00:00:00:01";
+              }];
             };
           }
         ];
