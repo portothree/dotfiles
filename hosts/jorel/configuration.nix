@@ -20,6 +20,7 @@
   services = {
     openssh = { enable = true; };
     blueman = { enable = true; };
+    udev = { packages = with pkgs; [ android-udev-rules ]; };
     xserver = {
       enable = true;
       layout = "us";
