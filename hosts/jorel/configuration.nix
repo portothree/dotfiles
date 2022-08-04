@@ -14,12 +14,12 @@
   };
   networking = {
     useDHCP = false;
-    interfaces = { enp34s0 = { useDHCP = true; }; };
     useNetworkd = true;
+    interfaces = { enp34s0 = { useDHCP = true; }; };
+    firewall = { allowedUDPPorts = [ 67 ]; };
     nat = {
       enable = true;
       enableIPv6 = true;
-      externalInterface = "eth0";
       internalInterfaces = [ "microvm" ];
     };
   };
@@ -40,6 +40,8 @@
   };
   systemd = {
     network = {
+      enable = true;
+      wait-online = { extraArgs = [ "--any" ]; };
       netdevs = {
         "10-microvm" = {
           netdevConfig = {

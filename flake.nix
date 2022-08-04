@@ -95,7 +95,7 @@
                 extraOptions = ''
                   experimental-features = nix-command flakes
                 '';
-                trustedUsers = [ "root" ];
+                registry = { nixpkgs.flake = nixpkgs; };
               };
             })
           ];
