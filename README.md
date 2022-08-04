@@ -2,7 +2,7 @@
 
 It uses [home-manager](https://github.com/nix-community/home-manager) to install and create programs configurations based off the `home.nix` file.
 
-![Current desk screenshot](https://i.imgur.com/ti2LDBF.png)
+![Current desk screenshot](./other/screenshot.png)
 
 [Home Manager Manual](https://nix-community.github.io/home-manager/)
 
