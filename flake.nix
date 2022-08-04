@@ -97,7 +97,7 @@
               system.stateVersion = config.system.nixos.version;
               users = { users = { root = { password = ""; }; }; };
               services = {
-                mingetty.helpLine = ''
+                getty.helpLine = ''
                   Log in as "root" with an empty password.
                   Type Ctrl-a c to switch to the qemu console
                   and `quit` to stop the VM.
