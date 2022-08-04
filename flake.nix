@@ -47,6 +47,19 @@
           ] ++ extraModules;
         };
 
+      mkMicroVM = pkgs:
+        { hostName }:
+        pkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            microvm.nixosModules.microvm
+            {
+              networking = { inherit hostName; };
+              microvm = { hypervisor = "qemu"; };
+            }
+          ];
+        };
+
       mkHomeManager = pkgs: hm: hostName:
         hm.lib.homeManagerConfiguration {
           inherit system;
@@ -71,6 +84,7 @@
         danubio = mkNixosSystem nixpkgs { hostName = "danubio"; };
         nico = mkNixosSystem nixpkgs { hostName = "nico"; };
         klong = mkNixosSystem nixpkgs { hostName = "klong"; };
+        testing-microvm = mkMicroVM nixpkgs { hostName = "testing"; };
       };
       homeConfigurations = {
         jorel =
