@@ -14,6 +14,7 @@
   };
   networking = {
     useDHCP = false;
+    useNetworkd = true;
     interfaces = { enp34s0 = { useDHCP = true; }; };
   };
   services = {
@@ -29,6 +30,12 @@
         Option         "AllowIndirectGLXProtocol" "off"
         Option         "TripleBuffer" "on"
       '';
+    };
+  };
+  systemd = {
+    network = {
+      enable = true;
+      wait-online = { extraArgs = [ "--any" ]; };
     };
   };
   users = {
