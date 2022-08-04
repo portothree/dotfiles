@@ -9,21 +9,21 @@
     let
       system = "x86_64-linux";
     in {
-      defaultPackage.${system} = self.packages.${system}.my-microvm;
+      defaultPackage.${system} = self.packages.${system}.staging;
 
-      packages.${system}.my-microvm =
+      packages.${system}.staging =
         let
-          inherit (self.nixosConfigurations.my-microvm) config;
+          inherit (self.nixosConfigurations.staging) config;
           # quickly build with another hypervisor if this MicroVM is built as a package
           hypervisor = "qemu";
         in config.microvm.runner.${hypervisor};
 
-      nixosConfigurations.my-microvm = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.staging = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
           microvm.nixosModules.microvm
           {
-            networking.hostName = "my-microvm";
+            networking.hostName = "staging";
             users.users.root.password = "";
             microvm = {
               volumes = [ {
