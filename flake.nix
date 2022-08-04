@@ -47,7 +47,7 @@
           ] ++ extraModules;
         };
 
-      mkMicroVM = pkgs:
+      mkQemuMicroVM = pkgs:
         { hostName, extraModules ? [ ] }:
         pkgs.lib.nixosSystem {
           inherit system;
@@ -90,12 +90,19 @@
         danubio = mkNixosSystem nixpkgs { hostName = "danubio"; };
         nico = mkNixosSystem nixpkgs { hostName = "nico"; };
         klong = mkNixosSystem nixpkgs { hostName = "klong"; };
-        testing-microvm = mkMicroVM nixpkgs {
+        testing-microvm = mkQemuMicroVM nixpkgs {
           hostName = "testing";
           extraModules = [
             ({ config, pkgs, ... }: {
               system.stateVersion = config.system.nixos.version;
               users = { users = { root = { password = ""; }; }; };
+              services = {
+                mingetty.helpLine = ''
+                  Log in as "root" with an empty password.
+                  Type Ctrl-a c to switch to the qemu console
+                  and `quit` to stop the VM.
+                '';
+              };
               nix = {
                 enable = true;
                 package = pkgs.nixFlakes;
