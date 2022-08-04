@@ -90,8 +90,8 @@
         danubio = mkNixosSystem nixpkgs { hostName = "danubio"; };
         nico = mkNixosSystem nixpkgs { hostName = "nico"; };
         klong = mkNixosSystem nixpkgs { hostName = "klong"; };
-        testing-microvm = mkQemuMicroVM nixpkgs {
-          hostName = "testing";
+        oraculo = mkQemuMicroVM nixpkgs {
+          hostName = "oraculo";
           extraModules = [
             ({ config, pkgs, ... }: {
               system.stateVersion = config.system.nixos.version;
