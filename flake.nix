@@ -77,7 +77,7 @@
           extraModules = [
             nixos-hardware.nixosModules.common-cpu-amd
             microvm.nixosModules.host
-            { microvm.autostart = [ ]; }
+            { microvm.autostart = [ "testing-microvm" ]; }
           ];
         };
         juju = mkNixosSystem nixpkgs { hostName = "juju"; };
