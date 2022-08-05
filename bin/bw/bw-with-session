@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 
+_checkdep() {
+	command -v "$1" > /dev/null || { echo "Missing dependency: $1"; exit 1; };
+};
+
+_checkdep bw
+
 bw login --apikey
 BW_SESSION=$(bw unlock --passwordenv BW_PASSWORD --raw)
-
 bw "$@" --session "$BW_SESSION"
