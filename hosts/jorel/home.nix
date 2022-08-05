@@ -39,6 +39,7 @@
       lemonbar
       ffmpeg
       distrobox
+      bitwarden-cli
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
@@ -243,6 +244,15 @@
       enable = true;
       terminal = "alacritty";
       rofi = true;
+    };
+    spotify = {
+      enable = true;
+      extraSpotifydSettings = {
+        global = {
+          username_cmd = "bw get username Spotify --session $BW_SESSION";
+          password_cmd = "bw get password Spotify --session $BW_SESSION";
+        };
+      };
     };
     nodejs.enable = true;
     gcalcli.enable = true;
