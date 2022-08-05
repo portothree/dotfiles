@@ -10,5 +10,6 @@ in mkShell {
   shellHook = ''
     export FLAKE="$(pwd)";
     export PATH="$FLAKE/bin:/${nixBin}/bin:$PATH"
+    source .env
   '';
 }
