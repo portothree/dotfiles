@@ -43,10 +43,10 @@ in {
       Unit = { Description = "spotify deamon"; };
       Install.WantedBy = [ "default.target" ];
       Service = {
-        # Necessary to load `bw` env vars
+        # Necessary to load $SPT_USERNAME and $SPT_PASSWORD env vars
         EnvironmentFile = "/etc/nixos/.env";
         ExecStart =
-          "${pkgs.spotifyd}/bin/spotifyd --no-daemon --config-path ${configFile}";
+          "${pkgs.spotifyd}/bin/spotifyd -u $SPT_USERNAME -p $SPT_PASSWORD --no-daemon --config-path ${configFile}";
         Restart = "always";
         RestartSec = 12;
       };
