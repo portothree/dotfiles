@@ -244,6 +244,7 @@
       terminal = "alacritty";
       rofi = true;
     };
+    spotify.enable = true;
     nodejs.enable = true;
     gcalcli.enable = true;
     zsh.enable = true;

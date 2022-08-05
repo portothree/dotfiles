@@ -9,6 +9,7 @@
     ./tmux
     ./bspwm
     ./sxhkd
+    ./spotify
     ./nodejs
     ./alacritty
     ./gcalcli
