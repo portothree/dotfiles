@@ -29,6 +29,7 @@
       weechat
       pulsemixer
       nudoku
+      steam-tui
       playerctl
       spotify-tui
       nvtop
