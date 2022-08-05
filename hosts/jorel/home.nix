@@ -249,8 +249,8 @@
       enable = true;
       extraSpotifydSettings = {
         global = {
-          username_cmd = "pass spotify-user";
-          password_cmd = "pass spotify-pw";
+          username_cmd = "bw get username Spotify --session $BW_SESSION";
+          password_cmd = "bw get password Spotify --session $BW_SESSION";
         };
       };
     };
