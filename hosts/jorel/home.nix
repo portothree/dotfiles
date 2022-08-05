@@ -29,6 +29,7 @@
       weechat
       pulsemixer
       nudoku
+      steamPackages.steamcmd
       steam-tui
       playerctl
       spotify-tui
