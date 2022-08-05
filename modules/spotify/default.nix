@@ -43,6 +43,8 @@ in {
       Unit = { Description = "spotify deamon"; };
       Install.WantedBy = [ "default.target" ];
       Service = {
+        # Needed to access the BW_SESSION env var in
+        # username_cmd and password_cmd with bitwarden-cli
         EnvironmentFile = "/etc/nixos/.env";
         ExecStart =
           "${pkgs.spotifyd}/bin/spotifyd --no-daemon --config-path ${configFile}";
