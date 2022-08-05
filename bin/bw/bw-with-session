@@ -6,6 +6,6 @@ _checkdep() {
 
 _checkdep bw
 
-bw login --apikey
+bw login --apikey --raw
 BW_SESSION=$(bw unlock --passwordenv BW_PASSWORD --raw)
 bw "$@" --session "$BW_SESSION"
