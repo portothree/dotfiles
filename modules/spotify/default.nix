@@ -39,7 +39,7 @@ in {
         lib.platforms.linux)
     ];
     home.packages = with pkgs; [ spotify-tui ];
-    systemd.user.services.spotifyd = {
+    systemd.user.services.spotifyd-custom = {
       Unit = { Description = "spotify deamon"; };
       Install.WantedBy = [ "default.target" ];
       Service = {
