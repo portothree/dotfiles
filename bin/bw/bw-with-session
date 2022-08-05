@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
-BW_SESSION=$(bw login --apikey --raw)
+bw login --apikey
+BW_SESSION=$(bw unlock --passwordenv BW_PASSWORD --raw)
 
 bw "$@" --session "$BW_SESSION"
