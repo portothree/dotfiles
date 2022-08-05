@@ -244,7 +244,10 @@
       terminal = "alacritty";
       rofi = true;
     };
-    spotify.enable = true;
+    spotify = {
+      enable = true;
+      extraSettings = { global = { password_cmd = "pass spotify"; }; };
+    };
     nodejs.enable = true;
     gcalcli.enable = true;
     zsh.enable = true;
