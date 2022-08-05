@@ -15,6 +15,13 @@ let
       device_type = "computer";
     };
   };
+
+  tomlFormat = pkgs.format.toml { };
+
+  configFile = tomlFormat.generate "spotifyd.conf" defaultSpotifydSettings
+    // cfg.extraSpotifydSettings;
+
+  pkg = pkgs.spotifyd;
 in {
   options.modules.spotify = {
     enable = mkEnableOption "spotify";
@@ -28,10 +35,17 @@ in {
     };
   };
   config = mkIf cfg.enable {
-    services.spotifyd = {
-      enable = true;
-      settings = defaultSpotifydSettings // cfg.extraSpotifydSettings;
-    };
     home.packages = with pkgs; [ spotify-tui ];
+    systemd.user.services.spotifyd = {
+      Unit = { Description = "spotify deamon"; };
+      Install.WantedBy = [ "default.target" ];
+      Service = {
+        EnvironmentFile = "/etc/nixos/.env";
+        ExecStart =
+          "${pkg}/bin/spotifyd --no-daemon --config-path ${configFile}";
+        Restart = "always";
+        RestartSec = 12;
+      };
+    };
   };
 }
