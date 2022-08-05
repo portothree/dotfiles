@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, shellScriptPkgs, ... }:
 
 {
   imports = [
@@ -249,8 +249,8 @@
       enable = true;
       extraSpotifydSettings = {
         global = {
-          username_cmd = "bw get username Spotify --session $BW_SESSION";
-          password_cmd = "bw get password Spotify --session $BW_SESSION";
+          username_cmd = "${shellScriptPkgs.bw-with-session}/bin/bw-with-session get username Spotify --session $BW_SESSION";
+          password_cmd = "${shellScriptPkgs.bw-with-session}/bin/bw-with-session get password Spotify --session $BW_SESSION";
         };
       };
     };

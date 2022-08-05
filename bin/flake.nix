@@ -28,6 +28,8 @@
         bluetooth-connect =
           mkShellScript "bluetooth-connect" ./bluetooth/bluetooth-connect
           (with pkgs; [ bluez ]);
+        bw-with-session = mkShellScript "bw-with-session" ./bw/bw-with-session
+          (with pkgs; [ bitwarden-cli ]);
       };
     };
 }
