@@ -18,9 +18,9 @@ let
 
   tomlFormat = pkgs.formats.toml { };
 
-  settings = (defaultSpotifydSettings // cfg.extraSpotifydSettings);
+  spotifydSettings = (defaultSpotifydSettings // cfg.extraSpotifydSettings);
 
-  configFile = tomlFormat.generate "spotifyd.conf" settings;
+  configFile = tomlFormat.generate "spotifyd.conf" spotifydSettings;
 in {
   options.modules.spotify = {
     enable = mkEnableOption "spotify";
