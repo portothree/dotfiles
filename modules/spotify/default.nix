@@ -3,7 +3,11 @@
 with lib;
 let
   cfg = config.modules.spotify;
-  defaultSettings = {
+
+  eitherStrBoolIntList = with types;
+    either str (either bool (either int (listOf str)));
+
+  defaultSpotifydSettings = {
     global = {
       backend = "pulseaudio";
       bitrate = 320;
@@ -14,19 +18,19 @@ let
 in {
   options.modules.spotify = {
     enable = mkEnableOption "spotify";
-    extraSettings = mkOption {
+    extraSpotifydSettings = mkOption {
       type = types.submodule {
         freeformType = with types; attrsOf (attrsOf eitherStrBoolIntList);
       };
       description =
         "Additional configuration to be added to spotifyd.conf file";
-      default = {};
+      default = { };
     };
   };
   config = mkIf cfg.enable {
     services.spotifyd = {
       enable = true;
-      settings = defaultSettings // cfg.extraSettings;
+      settings = defaultSpotifydSettings // cfg.extraSpotifydSettings;
     };
     home.packages = with pkgs; [ spotify-tui ];
   };
