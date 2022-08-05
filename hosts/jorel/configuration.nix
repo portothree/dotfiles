@@ -17,7 +17,6 @@
     useNetworkd = true;
     interfaces = { enp34s0 = { useDHCP = true; }; };
   };
-  programs.gnupg.agent.enable = true;
   services = {
     openssh = { enable = true; };
     blueman = { enable = true; };
