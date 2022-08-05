@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
+BW_SESSION=$(bw login --apikey --raw)
+
 bw "$@" --session "$BW_SESSION"
