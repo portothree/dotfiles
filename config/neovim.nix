@@ -1,12 +1,12 @@
 { pkgs, lib, ... }:
 let
-  pluginGitHub = ref: repo:
+  pluginGitHub = repo: version: rev:
     pkgs.vimUtils.buildVimPluginFrom2Nix {
       pname = "${lib.strings.sanitizeDerivationName repo}";
-      version = ref;
+      inherit version;
       src = builtins.fetchGit {
         url = "https://github.com/${repo}.git";
-        ref = ref;
+        inherit rev;
       };
     };
 in {
@@ -17,14 +17,16 @@ in {
       vimAlias = true;
       vimdiffAlias = true;
       withNodeJs = true;
-      plugins = with pkgs.vimPlugins; [
-        vim-polyglot
-        vim-fugitive
-        vim-prettier
-        editorconfig-vim
-        YouCompleteMe
-        ale
-      ];
+      plugins = with pkgs.vimPlugins;
+        [
+          vim-polyglot
+          vim-fugitive
+          vim-prettier
+          editorconfig-vim
+          copilot-vim
+          YouCompleteMe
+          ale
+        ];
       extraConfig = builtins.concatStringsSep "\n" [''
         lua << EOF
         ${lib.strings.fileContents ./neovim/init.lua}
