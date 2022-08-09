@@ -1,6 +1,6 @@
 { pkgs, lib, ... }:
 let
-  pluginGitHub =  repo: version: rev:
+  pluginGitHub = repo: version: rev:
     pkgs.vimUtils.buildVimPluginFrom2Nix {
       pname = "${lib.strings.sanitizeDerivationName repo}";
       inherit version;
@@ -9,7 +9,6 @@ let
         inherit rev;
       };
     };
-  vim-copilot = pluginGitHub "github/copilot.vim" "release" "6c5abda66350773ae2f8fade2e931b3beb51843f";
 in {
   programs = {
     neovim = {
@@ -23,10 +22,11 @@ in {
           vim-polyglot
           vim-fugitive
           vim-prettier
+          vim-copilot
           editorconfig-vim
           YouCompleteMe
           ale
-        ] ++ [ vim-copilot ];
+        ];
       extraConfig = builtins.concatStringsSep "\n" [''
         lua << EOF
         ${lib.strings.fileContents ./neovim/init.lua}
