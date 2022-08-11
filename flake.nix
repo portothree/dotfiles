@@ -75,7 +75,7 @@
         };
     in {
       checks = {
-        pre-commit-hooks = pre-commit-hooks.lib.${system}.run {
+        pre-commit-check = pre-commit-hooks.lib.${system}.run {
           src = ./.;
           hooks = {
             nixfmt = { enable = true; };
@@ -129,5 +129,6 @@
       };
       devShell."${system}" =
         import ./shell.nix { pkgs = mkPkgs nixpkgs-unstable { }; };
+      inherit (self.checks.${system}.pre-commit-check) shellHook;
     };
 }
