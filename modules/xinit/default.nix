@@ -42,7 +42,10 @@ in {
 
           systemctl --user start graphical-session.target
 
-          ${optionalString (cfg.autorandr) "${pkgs.autorandr}/bin/autorandr --change"}
+          ${
+            optionalString (cfg.autorandr)
+            "${pkgs.autorandr}/bin/autorandr --change"
+          }
           ${optionalString (cfg.sxhkd) "${pkgs.sxhkd}/bin/sxhkd &"}
           ${optionalString (cfg.bspwm) "exec ${pkgs.bspwm}/bin/bspwm"}
           ${cfg.extraConfig}

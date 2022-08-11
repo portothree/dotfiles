@@ -77,7 +77,10 @@
       checks.${system}.pre-commit-check = pre-commit-hooks.lib.${system}.run {
         src = ./.;
         hooks = {
-          nixfmt = { enable = true; };
+          nixfmt = {
+            enable = true;
+            excludes = [ "hardware-configuration.nix" ];
+          };
           shellcheck = { enable = true; };
         };
       };
@@ -89,9 +92,6 @@
             microvm.nixosModules.host
           ];
         };
-        juju = mkNixosSystem nixpkgs { hostName = "juju"; };
-        danubio = mkNixosSystem nixpkgs { hostName = "danubio"; };
-        nico = mkNixosSystem nixpkgs { hostName = "nico"; };
         klong = mkNixosSystem nixpkgs { hostName = "klong"; };
         oraculo = mkQemuMicroVM nixpkgs {
           hostName = "oraculo";

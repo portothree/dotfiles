@@ -3,19 +3,20 @@
 set -euC
 
 connect() {
-	local MAC=$(echo "$1" | cut -d ' ' -f2)
+	MAC=$(echo "$1" | cut -d ' ' -f2)
+	export MAC
 
 	bluetoothctl power on
-	bluetoothctl connect $MAC
+	bluetoothctl connect "$MAC"
 }
 
-devs=$(echo 'devices' | bluetoothctl | grep '^Device')
+devices="$(echo 'devices' | bluetoothctl | grep '^Device')"
 
 IFS="
 "
 
 if [ -n "${1:-}" ]; then
-	for dev in $(echo "$devs"); do
+	for dev in $devices; do
 		if echo "$dev" | grep -iq "$1$"; then
 			connect "$dev"
 			break
@@ -25,10 +26,10 @@ if [ -n "${1:-}" ]; then
 fi
 
 i=0
-for dev in $(echo "$devs" | cut -d ' ' -f3-); do
-	echo "$(( i=i+1 )) $dev"
+for dev in $(echo "$devices" | cut -d ' ' -f3-); do
+	echo "$((i = i + 1)) $dev"
 done
 
 printf "Device number: "
-read n
-connect $(echo "$devs" | sed "${n}p;d")
+read n -r
+connect "$(echo "$devices" | sed "${n}p;d")"
