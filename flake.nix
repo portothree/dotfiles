@@ -127,8 +127,9 @@
           mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; }) home-manager
           "klong";
       };
-      devShell."${system}" =
-        import ./shell.nix { pkgs = mkPkgs nixpkgs-unstable { }; };
-      inherit (self.checks.${system}.pre-commit-check) shellHook;
+      devShells.${system}.default = import ./shell.nix {
+        pkgs = mkPkgs nixpkgs-unstable { };
+        inherit (self.checks.${system}.pre-commit-check) shellHook;
+      };
     };
 }
