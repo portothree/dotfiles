@@ -17,17 +17,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixgl.url = "github:guibou/nixGL";
+    pre-commit-hooks = { url = "github:cachix/pre-commit-hooks.nix"; };
     scripts.url = "path:./bin";
   };
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager
-    , home-manager-unstable, nixos-hardware, microvm, nixgl, scripts, ...
-    }@inputs:
+    , home-manager-unstable, nixos-hardware, microvm, nixgl, pre-commit-hooks
+    , scripts, ... }@inputs:
     let
       system = "x86_64-linux";
       username = "porto";
       homeDirectory = "/home/porto";
       shellScriptPkgs = scripts.packages.${system};
-
       mkPkgs = pkgs:
         { overlays ? [ ], allowUnfree ? false }:
         import pkgs {
@@ -35,7 +35,6 @@
           inherit overlays;
           config.allowUnfree = allowUnfree;
         };
-
       mkNixosSystem = pkgs:
         { hostName, extraModules ? [ ] }:
         pkgs.lib.nixosSystem {
@@ -46,7 +45,6 @@
             ./hosts/${hostName}/configuration.nix
           ] ++ extraModules;
         };
-
       mkQemuMicroVM = pkgs:
         { hostName, extraModules ? [ ] }:
         pkgs.lib.nixosSystem {
@@ -66,7 +64,6 @@
             }
           ] ++ extraModules;
         };
-
       mkHomeManager = pkgs: hm: hostName:
         hm.lib.homeManagerConfiguration {
           inherit system;
@@ -76,8 +73,16 @@
           extraSpecialArgs = { inherit shellScriptPkgs; };
           configuration = import ./hosts/${hostName}/home.nix;
         };
-
     in {
+      checks = {
+        pre-commit-hooks = pre-commit-hooks.lib.${system}.run {
+          src = ./.;
+          hooks = {
+            nixfmt = { enable = true; };
+            shellcheck = { enable = true; };
+          };
+        };
+      };
       nixosConfigurations = {
         jorel = mkNixosSystem nixpkgs {
           hostName = "jorel";
