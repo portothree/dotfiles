@@ -18,6 +18,16 @@
     interfaces = { enp34s0 = { useDHCP = true; }; };
   };
   services = {
+    clight = {
+      enable = true;
+      settings = {
+        daytime = {
+          # Lisbon, Portugal
+          latitude = 38.736946;
+          longitude = -9.142685;
+        };
+      };
+    };
     openssh = { enable = true; };
     blueman = { enable = true; };
     xserver = {
