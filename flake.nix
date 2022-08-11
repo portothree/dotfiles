@@ -74,13 +74,11 @@
           configuration = import ./hosts/${hostName}/home.nix;
         };
     in {
-      checks = {
-        pre-commit-check = pre-commit-hooks.lib.${system}.run {
-          src = ./.;
-          hooks = {
-            nixfmt = { enable = true; };
-            shellcheck = { enable = true; };
-          };
+      checks.${system}.pre-commit-check = pre-commit-hooks.lib.${system}.run {
+        src = ./.;
+        hooks = {
+          nixfmt = { enable = true; };
+          shellcheck = { enable = true; };
         };
       };
       nixosConfigurations = {
