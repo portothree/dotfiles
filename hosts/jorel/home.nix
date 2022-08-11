@@ -250,8 +250,10 @@
       enable = true;
       extraSpotifydSettings = {
         global = {
-          username_cmd = "${shellScriptPkgs.bw-with-session}/bin/bw-with-session get username Spotify";
-          password_cmd = "${shellScriptPkgs.bw-with-session}/bin/bw-with-session get password Spotify";
+          username_cmd =
+            "${shellScriptPkgs.bw-with-session}/bin/bw-with-session get username Spotify";
+          password_cmd =
+            "${shellScriptPkgs.bw-with-session}/bin/bw-with-session get password Spotify";
         };
       };
     };

@@ -16,7 +16,7 @@ XEPHYR_SIZE="${XEPHYR_SIZE:=1024x1028}"
 #  -ac      Disable access control restrictions.
 #  -kb      Disable the X Keyboard Extension
 #  +kb      Enable  the X Keyboard Extension
-#  -reset   Reset after the last client exits.     
+#  -reset   Reset after the last client exits.
 #  -noreset
 #  -terminate Terminate at server reset
 #  -once      Terminate server after one session
@@ -27,10 +27,8 @@ LOGFILE="${RUNDIR}/xephyr${DISPLAY}.log"
 PIDFILE="${RUNDIR}/xephyr${DISPLAY}.pid"
 ERRFILE="${RUNDIR}/xephyr${DISPLAY}-session.log"
 
-MAX_WAIT=5
-
-function usage () {
-    cat <<EOF
+function usage() {
+	cat <<EOF
 $0 [client] [client args]
 
 If client is given, it is started after the window manager.
@@ -44,66 +42,63 @@ XEPHYR_WM is the window manager to run (currently ${XEPHYR_WM})
 EOF
 }
 
-function server_start ()
-{
-    Xephyr $XEPHYR_DISPLAY $XEPHYR_OPTIONS &> "$LOGFILE" &
-    SERVER_PID=$!
-    echo -n "$SERVER_PID" > "$PIDFILE"
+function server_start() {
+	Xephyr "$XEPHYR_DISPLAY $XEPHYR_OPTIONS" &>"$LOGFILE" &
+	SERVER_PID=$!
+	echo -n "$SERVER_PID" >"$PIDFILE"
 }
 
-function check_display () {
-    xdpyinfo -display $XEPHYR_DISPLAY &> /dev/null || return 2
+function check_display() {
+	xdpyinfo -display $XEPHYR_DISPLAY &>/dev/null || return 2
 }
 
 # Returns:
 # 0 on success
 # 1 if process is dead
 # 2 otherwise
-function display_success ()
-{
-    test -a /proc/${SERVER_PID} || return 1
-    check_display && return 0
-    echo "Can't connect yet, waiting."
-    for i in $(seq 5 -1 1) ; do
-        echo -n "$i... "
-        sleep 1
-        test -a /proc/${SERVER_PID} || return 1
-        check_display && echo ok. && return 0
-    done
-    echo "giving up on ${XEPHYR_DISPLAY}"
-    return 2
+function display_success() {
+	test -a /proc/${SERVER_PID} || return 1
+	check_display && return 0
+	echo "Can't connect yet, waiting."
+	for i in $(seq 5 -1 1); do
+		echo -n "$i... "
+		sleep 1
+		test -a /proc/${SERVER_PID} || return 1
+		check_display && echo ok. && return 0
+	done
+	echo "giving up on ${XEPHYR_DISPLAY}"
+	return 2
 }
 
-function client_start ()
-{
-    DISPLAY=$XEPHYR_DISPLAY $XEPHYR_WM &> "$ERRFILE" &
-    if [ -n $1 ] ; then
-        DISPLAY=$XEPHYR_DISPLAY "$@" >> "$ERRFILE" &
-    fi
+function client_start() {
+	DISPLAY=$XEPHYR_DISPLAY $XEPHYR_WM &>"$ERRFILE" &
+	if [ -n "$1" ]; then
+		DISPLAY=$XEPHYR_DISPLAY "$@" >>"$ERRFILE" &
+	fi
 }
 
 case "$1" in
-    --help|-h)
-        usage
-        exit 0
-        ;;
+--help | -h)
+	usage
+	exit 0
+	;;
 esac
 
 mkdir -p "$RUNDIR"
 
-if check_display ; then
-    cat <<EOF
+if check_display; then
+	cat <<EOF
 Something is already running on ${XEPHYR_DISPLAY}.
 Set XEPHYR_DISPLAY variable to something else.
 EOF
-    exit 1
- fi
+	exit 1
+fi
 
 server_start
-if display_success ; then
-    echo "Xephyr started on DISPLAY=${XEPHYR_DISPLAY}"
-    client_start "$@"
+if display_success; then
+	echo "Xephyr started on DISPLAY=${XEPHYR_DISPLAY}"
+	client_start "$@"
 else
-    echo "Couldn't connect to Xephyr display ${XEPHYR_DISPLAY}, server log follows:"
-    exec tail -n +0 -f $LOGFILE
+	echo "Couldn't connect to Xephyr display ${XEPHYR_DISPLAY}, server log follows:"
+	exec tail -n +0 -f "$LOGFILE"
 fi

@@ -5,12 +5,12 @@ set -ueo pipefail
 
 open-port() {
   local port=$1
-  iptables -A INPUT -p tcp --dport $port -j ACCEPT
+  iptables -A INPUT -p tcp --dport "$port" -j ACCEPT
 }
 
 close-port() {
   local port=${1:-0}
-  iptables -D INPUT -p tcp --dport $port -j ACCEPT
+  iptables -D INPUT -p tcp --dport "$port" -j ACCEPT
 }
 
 
@@ -27,10 +27,10 @@ if [[ 0 -eq $# ]]; then
   exit 1
 fi
 
-open-port $PORT
+open-port "$PORT"
 
 # Ensure port closes if error occurs.
-trap "close-port $PORT" EXIT
+trap 'close-port $PORT' EXIT
 
 # Run the command as user, not root.
-runuser -u $SUDO_USER -- "$@"
+runuser -u "$SUDO_USER" -- "$@"
