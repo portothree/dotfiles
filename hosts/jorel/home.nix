@@ -103,7 +103,7 @@
     mpris-proxy.enable = true;
     picom = {
       enable = true;
-      backend = "xrender";
+      backend = "glx";
       vSync = true;
       extraOptions = ''
         unredir-if-possible = false;

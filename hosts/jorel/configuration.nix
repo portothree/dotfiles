@@ -54,7 +54,7 @@
     };
   };
   environment = {
-    systemPackages = with pkgs; [ wget curl ];
+    systemPackages = with pkgs; [ wget curl xsecurelock ];
     variables = { EDITOR = "nvim"; };
   };
   virtualisation = { docker = { enable = true; }; };
