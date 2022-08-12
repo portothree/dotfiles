@@ -40,6 +40,7 @@
       ffmpeg
       distrobox
       bitwarden-cli
+      v4l-utils
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {

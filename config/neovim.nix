@@ -1,12 +1,12 @@
 { pkgs, lib, ... }:
 let
-  pluginGitHub = ref: repo:
+  pluginGitHub = repo: version: rev:
     pkgs.vimUtils.buildVimPluginFrom2Nix {
       pname = "${lib.strings.sanitizeDerivationName repo}";
-      version = ref;
+      inherit version;
       src = builtins.fetchGit {
         url = "https://github.com/${repo}.git";
-        ref = ref;
+        inherit rev;
       };
     };
 in {
@@ -22,6 +22,7 @@ in {
         vim-fugitive
         vim-prettier
         editorconfig-vim
+        copilot-vim
         YouCompleteMe
         ale
       ];
