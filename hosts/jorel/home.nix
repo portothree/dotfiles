@@ -115,8 +115,6 @@
       timeout = 1;
       extraOptions = [ "root" ];
     };
-    spotifyd = { enable = true; };
-
   };
   programs = {
     autorandr = {
