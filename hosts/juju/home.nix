@@ -1,10 +1,12 @@
 { pkgs, ... }:
 
 {
-  home = {
-    packages = with pkgs; [ gnome.gnome-tweaks ];
-  };
+  home = { packages = with pkgs; [ gnome.gnome-tweaks ]; };
   xdg = { enable = true; };
+  gtk = {
+    enable = true;
+    theme = pkgs.whitesur-gtk-theme;
+  };
   programs = {
     home-manager = { enable = true; };
     zathura = {
