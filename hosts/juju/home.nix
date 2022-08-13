@@ -5,7 +5,10 @@
   xdg = { enable = true; };
   gtk = {
     enable = true;
-    theme = { package = pkgs.whitesur-gtk-theme; };
+    theme = {
+      name = "White Sur";
+      package = pkgs.whitesur-gtk-theme;
+    };
   };
   programs = {
     home-manager = { enable = true; };
