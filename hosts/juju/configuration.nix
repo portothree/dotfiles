@@ -45,7 +45,7 @@
         touchpad = { accelProfile = "flat"; };
       };
       displayManager = { gdm = { enable = true; }; };
-      windowManager = { bspwm = { enable = true; }; };
+      desktopManager = { gnome = { enable = true; }; };
     };
     blueman.enable = true;
   };
