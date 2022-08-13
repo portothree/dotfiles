@@ -36,7 +36,6 @@
       nvtop
       mutt
       gh
-      lemonbar
       ffmpeg
       distrobox
       bitwarden-cli

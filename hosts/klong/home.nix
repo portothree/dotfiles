@@ -15,7 +15,6 @@
       bitwarden-cli
       k9s
       kubectl
-      lemonbar
       rofi
       nixfmt
       glow
