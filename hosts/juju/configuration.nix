@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ../common.nix ../../home-manager ./hardware-configuration.nix ];
+  imports = [ ../common.nix ./hardware-configuration.nix ];
   boot = {
     loader = {
       systemd-boot.enable = true;
