@@ -54,7 +54,7 @@
       };
     };
   };
-  environment.systemPackages = with pkgs; [ wget curl ];
+  environment.systemPackages = with pkgs; [ git wget curl ];
   virtualisation = { docker = { enable = true; }; };
   fonts.fonts = with pkgs; [ fira-code siji ];
   # Open ports in the firewall.
