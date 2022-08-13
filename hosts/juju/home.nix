@@ -1,6 +1,9 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
+  home = {
+    packages = with pkgs; [ gnome.gnome-tweaks ];
+  };
   xdg = { enable = true; };
   programs = {
     home-manager = { enable = true; };
