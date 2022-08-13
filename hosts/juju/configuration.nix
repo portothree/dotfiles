@@ -1,15 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ../common.nix
-    ../../home-manager
-    ../../modules
-    ./hardware-configuration.nix
-    ./ledger.nix
-    ./platformio.nix
-    ./android.nix
-  ];
+  imports = [ ../common.nix ../../home-manager ./hardware-configuration.nix ];
   boot = {
     loader = {
       systemd-boot.enable = true;
@@ -52,10 +44,7 @@
         mouse = { accelProfile = "flat"; };
         touchpad = { accelProfile = "flat"; };
       };
-      displayManager = {
-        startx = { enable = true; };
-        defaultSession = "none+bspwm";
-      };
+      displayManager = { gdm = { enable = true; }; };
       windowManager = { bspwm = { enable = true; }; };
     };
     blueman.enable = true;
@@ -96,11 +85,5 @@
     trustedUsers = [ "root" "porto" ];
   };
   system.stateVersion = "21.11";
-  modules = {
-    tmux = {
-      enable = true;
-      gcalcli = true;
-    };
-  };
 }
 
