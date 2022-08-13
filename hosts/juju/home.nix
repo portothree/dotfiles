@@ -6,7 +6,7 @@
   gtk = {
     enable = true;
     theme = {
-      name = "White Sur";
+      name = "whitesur-gtk-theme";
       package = pkgs.whitesur-gtk-theme;
     };
   };
