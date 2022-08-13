@@ -17,21 +17,7 @@
   networking = {
     useDHCP = false;
     interfaces = { wlp1s0 = { useDHCP = true; }; };
-    nameservers = [ "192.168.1.106" "208.67.222.222" "208.67.220.220" ];
-    wireless = {
-      enable = true;
-      userControlled.enable = true;
-      environmentFile = "/etc/nixos/.env";
-      networks = {
-        "@WIRELESS_SSID_HOME@" = {
-          hidden = true;
-          pskRaw = "@WIRELESS_PSKRAW_HOME@";
-        };
-        "@WIRELESS_SSID_WOO@" = { pskRaw = "@WIRELESS_PSKRAW_WOO@"; };
-        "@WIRELESS_SSID_YLD@" = { pskRaw = "@WIRELESS_PSKRAW_YLD@"; };
-        "@WIRELESS_SSID_NKOOWOORK@" = { psk = "@WIRELESS_PSK_NKOOWOORK@"; };
-      };
-    };
+    nameservers = [ "208.67.222.222" "208.67.220.220" ];
   };
   services = {
     openssh = { enable = true; };
