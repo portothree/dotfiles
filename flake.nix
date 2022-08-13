@@ -93,6 +93,7 @@
           ];
         };
         klong = mkNixosSystem nixpkgs { hostName = "klong"; };
+        juju = mkNixosSystem nixpkgs { hostName = "juju"; };
         oraculo = mkQemuMicroVM nixpkgs {
           hostName = "oraculo";
           extraModules = [
@@ -124,6 +125,9 @@
         klong =
           mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; }) home-manager
           "klong";
+        juju =
+          mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; }) home-manager
+          "juju";
       };
       devShells.${system}.default = import ./shell.nix {
         pkgs = mkPkgs nixpkgs-unstable { };
