@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  home = { packages = with pkgs; [ gnome.gnome-tweaks ]; };
+  home = { packages = with pkgs; [ ]; };
   xdg = { enable = true; };
   gtk = {
     enable = true;
