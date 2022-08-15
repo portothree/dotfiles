@@ -41,6 +41,7 @@
       distrobox
       bitwarden-cli
       v4l-utils
+      nextdns
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
