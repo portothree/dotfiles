@@ -3,7 +3,7 @@
 {
   imports = [
     ../../home-manager
-    ../../modules
+    ../../modules/home/programs
     ../../config/git.nix
     ../../config/neovim.nix
     ../../config/ranger.nix
@@ -41,6 +41,7 @@
       distrobox
       bitwarden-cli
       v4l-utils
+      nextdns
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
