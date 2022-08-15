@@ -209,13 +209,13 @@
     };
     taskwarrior = {
       enable = true;
-      dataLocation = "/home/porto/www/memex/trails/tasks/.task";
+      dataLocation = "/home/porto/www/portothree/memex/trails/tasks/.task";
     };
     qutebrowser = {
       enable = true;
       loadAutoconfig = true;
       extraConfig = ''
-        home_page = "/home/porto/www/memex/packages/web/index.html"
+        home_page = "/home/porto/www/portothree/memex/packages/web/index.html"
         c.url.default_page = home_page
         c.url.start_pages = [ home_page ]
       '';
