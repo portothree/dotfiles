@@ -31,10 +31,7 @@
     clight = { enable = true; };
     openssh = { enable = true; };
     blueman = { enable = true; };
-    nextdns = {
-      enable = true;
-      arguments = [ "-listen" "0.0.0.0:53" ];
-    };
+    nextdns = { enable = true; };
     xserver = {
       enable = true;
       layout = "us";
