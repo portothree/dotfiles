@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ../common.nix ./hardware-configuration.nix ];
+  imports = [ ../../modules/services ../common.nix ./hardware-configuration.nix ];
   boot = {
     loader = {
       systemd-boot = { enable = true; };
@@ -31,7 +31,7 @@
     clight = { enable = true; };
     openssh = { enable = true; };
     blueman = { enable = true; };
-    nextdns = { enable = true; };
+    nextdnsc = { enable = true; };
     xserver = {
       enable = true;
       layout = "us";
