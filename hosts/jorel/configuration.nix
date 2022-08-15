@@ -16,6 +16,7 @@
     useDHCP = false;
     useNetworkd = true;
     interfaces = { enp34s0 = { useDHCP = true; }; };
+    nameservers = [ "45.90.28.156" "45.90.30.156" ];
   };
   location = {
     # Lisbon, Portugal
