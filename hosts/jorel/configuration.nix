@@ -16,6 +16,10 @@
     useDHCP = false;
     useNetworkd = true;
     interfaces = { enp34s0 = { useDHCP = true; }; };
+    firewall = {
+      allowedTCPPorts = [ 53 ];
+      allowedUDPPorts = [ 53 ];
+    };
     nameservers = [ "45.90.28.156" "45.90.30.156" ];
   };
   location = {
@@ -27,6 +31,7 @@
     clight = { enable = true; };
     openssh = { enable = true; };
     blueman = { enable = true; };
+    nextdns = { enable = true; };
     xserver = {
       enable = true;
       layout = "us";
