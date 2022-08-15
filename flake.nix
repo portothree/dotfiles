@@ -17,17 +17,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixgl.url = "github:guibou/nixGL";
+    pre-commit-hooks = { url = "github:cachix/pre-commit-hooks.nix"; };
     scripts.url = "path:./bin";
   };
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager
-    , home-manager-unstable, nixos-hardware, microvm, nixgl, scripts, ...
-    }@inputs:
+    , home-manager-unstable, nixos-hardware, microvm, nixgl, pre-commit-hooks
+    , scripts, ... }@inputs:
     let
       system = "x86_64-linux";
       username = "porto";
       homeDirectory = "/home/porto";
       shellScriptPkgs = scripts.packages.${system};
-
       mkPkgs = pkgs:
         { overlays ? [ ], allowUnfree ? false }:
         import pkgs {
@@ -35,7 +35,6 @@
           inherit overlays;
           config.allowUnfree = allowUnfree;
         };
-
       mkNixosSystem = pkgs:
         { hostName, extraModules ? [ ] }:
         pkgs.lib.nixosSystem {
@@ -46,7 +45,6 @@
             ./hosts/${hostName}/configuration.nix
           ] ++ extraModules;
         };
-
       mkQemuMicroVM = pkgs:
         { hostName, extraModules ? [ ] }:
         pkgs.lib.nixosSystem {
@@ -66,7 +64,6 @@
             }
           ] ++ extraModules;
         };
-
       mkHomeManager = pkgs: hm: hostName:
         hm.lib.homeManagerConfiguration {
           inherit system;
@@ -76,8 +73,17 @@
           extraSpecialArgs = { inherit shellScriptPkgs; };
           configuration = import ./hosts/${hostName}/home.nix;
         };
-
     in {
+      checks.${system}.pre-commit-check = pre-commit-hooks.lib.${system}.run {
+        src = ./.;
+        hooks = {
+          nixfmt = {
+            enable = true;
+            excludes = [ "hardware-configuration.nix" ];
+          };
+          shellcheck = { enable = true; };
+        };
+      };
       nixosConfigurations = {
         jorel = mkNixosSystem nixpkgs {
           hostName = "jorel";
@@ -86,9 +92,6 @@
             microvm.nixosModules.host
           ];
         };
-        juju = mkNixosSystem nixpkgs { hostName = "juju"; };
-        danubio = mkNixosSystem nixpkgs { hostName = "danubio"; };
-        nico = mkNixosSystem nixpkgs { hostName = "nico"; };
         klong = mkNixosSystem nixpkgs { hostName = "klong"; };
         oraculo = mkQemuMicroVM nixpkgs {
           hostName = "oraculo";
@@ -122,7 +125,9 @@
           mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; }) home-manager
           "klong";
       };
-      devShell."${system}" =
-        import ./shell.nix { pkgs = mkPkgs nixpkgs-unstable { }; };
+      devShells.${system}.default = import ./shell.nix {
+        pkgs = mkPkgs nixpkgs-unstable { };
+        inherit (self.checks.${system}.pre-commit-check) shellHook;
+      };
     };
 }

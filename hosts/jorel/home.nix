@@ -40,6 +40,7 @@
       ffmpeg
       distrobox
       bitwarden-cli
+      v4l-utils
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
@@ -102,7 +103,7 @@
     mpris-proxy.enable = true;
     picom = {
       enable = true;
-      backend = "xrender";
+      backend = "glx";
       vSync = true;
       extraOptions = ''
         unredir-if-possible = false;
@@ -114,8 +115,6 @@
       timeout = 1;
       extraOptions = [ "root" ];
     };
-    spotifyd = { enable = true; };
-
   };
   programs = {
     autorandr = {
@@ -247,12 +246,6 @@
     };
     spotify = {
       enable = true;
-      extraSpotifydSettings = {
-        global = {
-          username_cmd = "${shellScriptPkgs.bw-with-session}/bin/bw-with-session get username Spotify";
-          password_cmd = "${shellScriptPkgs.bw-with-session}/bin/bw-with-session get password Spotify";
-        };
-      };
     };
     nodejs.enable = true;
     gcalcli.enable = true;

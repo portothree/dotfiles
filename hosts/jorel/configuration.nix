@@ -17,7 +17,13 @@
     useNetworkd = true;
     interfaces = { enp34s0 = { useDHCP = true; }; };
   };
+  location = {
+    # Lisbon, Portugal
+    latitude = 38.736946;
+    longitude = -9.142685;
+  };
   services = {
+    clight = { enable = true; };
     openssh = { enable = true; };
     blueman = { enable = true; };
     xserver = {
@@ -48,7 +54,7 @@
     };
   };
   environment = {
-    systemPackages = with pkgs; [ wget curl ];
+    systemPackages = with pkgs; [ wget curl xsecurelock ];
     variables = { EDITOR = "nvim"; };
   };
   virtualisation = { docker = { enable = true; }; };
