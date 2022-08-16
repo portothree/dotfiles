@@ -147,8 +147,7 @@ _keyboard() {
 		kb_caps="%{B$bg_alt}%{U$fg_main}%{+u} CAPS %{-u}%{U-}%{B-}"
 	fi
 
-	# Print the indicators next each other in the given order.
-	printf "%s %s" "$kb_layout" "$kb_caps"
+	printf "%s" "$kb_caps"
 }
 
 _datetime() {
@@ -213,7 +212,7 @@ _bar() {
 			date="${line#?}"
 			;;
 		K*)
-			# keyboard layout (en or gr)
+			# keyboard layout
 			key="${line#?}"
 			;;
 		V*)
