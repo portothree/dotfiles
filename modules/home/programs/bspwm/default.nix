@@ -30,7 +30,7 @@ in {
             bspc config gapless_monocle true
             ${cfg.extraConfig}
             ${optionalString (cfg.bar)
-            "${shellScriptPkgs.bspwm-bar}/bin/bspwm/bar &"}
+            "${shellScriptPkgs.bspwm-bar}/bin/bspwm-bar &"}
           '';
         };
       };
