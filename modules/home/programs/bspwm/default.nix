@@ -5,7 +5,7 @@ let cfg = config.modules.bspwm;
 in {
   options.modules.bspwm = {
     enable = mkEnableOption "bspwm";
-    lemonbar = mkOption {
+    bar = mkOption {
       type = types.bool;
       description = "If enabled, lemonbar for bspwm will be loaded";
       default = false;
@@ -30,7 +30,7 @@ in {
             bspc config gapless_monocle true
             ${cfg.extraConfig}
             ${optionalString (cfg.lemonbar)
-            "${shellScriptPkgs.lemonbar-bspwm}/bin/lemonbar-bspwm &"}
+            "${shellScriptPkgs.bspwm-bar}/bin/bspwm/bar &"}
           '';
         };
       };
