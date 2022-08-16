@@ -223,6 +223,7 @@ _bar() {
 			# bspwm's state
 			wm=
 			IFS=':'
+			# shellcheck disable=SC2086
 			set -- ${line#?}
 			while [ "$#" -gt 0 ]; do
 				item="$1"
