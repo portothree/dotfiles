@@ -18,6 +18,7 @@
       astyle
       shfmt
       nixfmt
+      shellcheck
       glow
       weechat
       pgcli
