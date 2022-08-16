@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../../modules
+    ../../modules/home
     ../../home-manager
     ../../config/git.nix
     ../../config/neovim.nix

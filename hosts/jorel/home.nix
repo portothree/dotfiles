@@ -3,7 +3,7 @@
 {
   imports = [
     ../../home-manager
-    ../../modules
+    ../../modules/home/programs
     ../../config/git.nix
     ../../config/neovim.nix
     ../../config/ranger.nix
@@ -40,6 +40,7 @@
       distrobox
       bitwarden-cli
       v4l-utils
+      nextdns
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
@@ -114,8 +115,6 @@
       timeout = 1;
       extraOptions = [ "root" ];
     };
-    spotifyd = { enable = true; };
-
   };
   programs = {
     autorandr = {
@@ -209,13 +208,13 @@
     };
     taskwarrior = {
       enable = true;
-      dataLocation = "/home/porto/www/memex/trails/tasks/.task";
+      dataLocation = "/home/porto/www/portothree/memex/trails/tasks/.task";
     };
     qutebrowser = {
       enable = true;
       loadAutoconfig = true;
       extraConfig = ''
-        home_page = "/home/porto/www/memex/packages/web/index.html"
+        home_page = "/home/porto/www/portothree/memex/packages/web/index.html"
         c.url.default_page = home_page
         c.url.start_pages = [ home_page ]
       '';
@@ -247,14 +246,6 @@
     };
     spotify = {
       enable = true;
-      extraSpotifydSettings = {
-        global = {
-          username_cmd =
-            "${shellScriptPkgs.bw-with-session}/bin/bw-with-session get username Spotify";
-          password_cmd =
-            "${shellScriptPkgs.bw-with-session}/bin/bw-with-session get password Spotify";
-        };
-      };
     };
     nodejs.enable = true;
     gcalcli.enable = true;

@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ../common.nix ./hardware-configuration.nix ];
+  imports = [ ../../modules/system ../common.nix ./hardware-configuration.nix ];
   boot = {
     loader = {
       systemd-boot = { enable = true; };
@@ -16,6 +16,11 @@
     useDHCP = false;
     useNetworkd = true;
     interfaces = { enp34s0 = { useDHCP = true; }; };
+    firewall = {
+      allowedTCPPorts = [ 53 ];
+      allowedUDPPorts = [ 53 ];
+    };
+    nameservers = [ "45.90.28.156" "45.90.30.156" ];
   };
   location = {
     # Lisbon, Portugal
@@ -26,6 +31,7 @@
     clight = { enable = true; };
     openssh = { enable = true; };
     blueman = { enable = true; };
+    nextdnsc = { enable = true; };
     xserver = {
       enable = true;
       layout = "us";
