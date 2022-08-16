@@ -224,7 +224,7 @@ _bar() {
 			# bspwm's state
 			wm=
 			IFS=':'
-			set -- "${line#?}"
+			set -- ${line#?}
 			while [ "$#" -gt 0 ]; do
 				item="$1"
 				name="${item#?}"
