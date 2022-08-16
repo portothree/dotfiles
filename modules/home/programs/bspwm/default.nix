@@ -7,7 +7,7 @@ in {
     enable = mkEnableOption "bspwm";
     bar = mkOption {
       type = types.bool;
-      description = "If enabled, lemonbar for bspwm will be loaded";
+      description = "If enabled, a bar using lemonbar will be loaded";
       default = false;
     };
     extraConfig = mkOption {
@@ -29,7 +29,7 @@ in {
             bspc config borderless_monocle true
             bspc config gapless_monocle true
             ${cfg.extraConfig}
-            ${optionalString (cfg.lemonbar)
+            ${optionalString (cfg.bar)
             "${shellScriptPkgs.bspwm-bar}/bin/bspwm/bar &"}
           '';
         };
