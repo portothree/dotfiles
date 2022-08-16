@@ -305,7 +305,7 @@ _bar() {
 _bar <"$bar_fifo" |
 	lemonbar -b -u 1 -p -g "x${bar_height}" \
 		-F "$fg_main" -B "#ff${bg_main:1}" \
-		-f "$fontmain" -f "$fontbold" -n "Melonpanel" &
+		-f "$fontmain" -f "$fontbold" -n "bspwm-bar" &
 
 # Hide panel when windows are in full screen mode.  This does not work
 # all the time, especially with lower `sleep` values, requiring a
@@ -313,7 +313,7 @@ _bar <"$bar_fifo" |
 #
 # Source of this snippet (with minor adapatations by me):
 # https://github.com/baskerville/bspwm/issues/484
-until bar_id=$(xdo id -a 'Melonpanel'); do
+until bar_id=$(xdo id -a 'bspwm-bar'); do
 	sleep 0.1s
 done
 
