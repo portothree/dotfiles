@@ -1,7 +1,5 @@
 { inputs, pkgs, config, shellScriptPkgs, ... }:
 
 {
-  imports = [
-    ./programs
-  ];
+  imports = [ ./programs ];
 }

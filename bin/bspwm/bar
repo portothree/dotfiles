@@ -18,13 +18,10 @@ _checkdep xdo
 # Kill any running lemonbar
 pgrep -x lemonbar >/dev/null && pkill -x lemonbar &
 
-# DO NOT EDIT the name of this parameter (checked by other scripts).
-melonpanel_height=22
+bar_height=22
 
 # Colours
 # -------
-# Taken from my Modus Vivendi (Modus themes for Emacs):
-# https://gitlab.com/protesilaos/modus-themes
 bg_main="#000000"
 bg_alt="#181a20"
 fg_main="#ffffff"
@@ -142,24 +139,15 @@ _volume() {
 	esac
 }
 
-# Keyboard indicators.
 _keyboard() {
 	local kb_caps
-
-	# Checks if the current layout is set to Greek (adjust accordingly).
-	# If yes, the indicator will be displayed, else it is assumed that
-	# English is being used.
-	if [ "$(setxkbmap -query | sed '/^l/!d ; s,.*:[\ ]*,,g')" = 'gr' ]; then
-		kb_layout="%{B$bg_alt}%{U$fg_main}%{+u} EL %{-u}%{U-}%{B-}"
-	fi
 
 	# Show an indicator if Caps Lock is on.
 	if [ "$(xset -q | awk '/Caps/ { print $4 }')" = 'on' ]; then
 		kb_caps="%{B$bg_alt}%{U$fg_main}%{+u} CAPS %{-u}%{U-}%{B-}"
 	fi
 
-	# Print the indicators next each other in the given order.
-	printf "%s %s" "$kb_layout" "$kb_caps"
+	printf "%s" "$kb_caps"
 }
 
 _datetime() {
@@ -192,23 +180,23 @@ _modules() {
 # examples provided by upstream bspwm.
 
 # set path to named pipe used to store process data for these operations
-melonpanel_fifo='/tmp/melonpanel.fifo'
+bar_fifo='/tmp/bar.fifo'
 
 # make sure you delete any existing named pipe
-[ -e "$melonpanel_fifo" ] && rm "$melonpanel_fifo"
+[ -e "$bar_fifo" ] && rm "$bar_fifo"
 
 # create a new named pipe
-mkfifo "$melonpanel_fifo"
+mkfifo "$bar_fifo"
 
 # pipe the output of the modules to the fifo
-_modules >"$melonpanel_fifo" &
-bspc subscribe report >"$melonpanel_fifo" &
+_modules >"$bar_fifo" &
+bspc subscribe report >"$bar_fifo" &
 
 # Read the content of the fifo file.  We differentiate between modules
-# based on the majuscule (letter A-Z) they piped into melonpanel_fifo
+# based on the majuscule (letter A-Z) they piped into bar_fifo
 # (see modules above).  Here we just add a shorter variable to each
 # module, which helps position it on the panel (the last printf).
-_melonpanel() {
+_bar() {
 	while read -r line; do
 		case $line in
 		B*)
@@ -224,7 +212,7 @@ _melonpanel() {
 			date="${line#?}"
 			;;
 		K*)
-			# keyboard layout (en or gr)
+			# keyboard layout
 			key="${line#?}"
 			;;
 		V*)
@@ -235,7 +223,8 @@ _melonpanel() {
 			# bspwm's state
 			wm=
 			IFS=':'
-			set -- "${line#?}"
+			# shellcheck disable=SC2086
+			set -- ${line#?}
 			while [ "$#" -gt 0 ]; do
 				item="$1"
 				name="${item#?}"
@@ -313,19 +302,18 @@ _melonpanel() {
 # NOTE the syntax for the background value.  If you want transparency,
 # just replace "ff" with a lower value: "00" means no opacity.  This is
 # hexadecimal notation: 0-9, a-f, A-F.
-_melonpanel <"$melonpanel_fifo" |
-	lemonbar -b -u 1 -p -g "x${melonpanel_height}" \
+_bar <"$bar_fifo" |
+	lemonbar -b -u 1 -p -g "x${bar_height}" \
 		-F "$fg_main" -B "#ff${bg_main:1}" \
-		-f "$fontmain" -f "$fontbold" -n "Melonpanel" &
+		-f "$fontmain" -f "$fontbold" -n "bspwm-bar" &
 
 # Hide panel when windows are in full screen mode.  This does not work
 # all the time, especially with lower `sleep` values, requiring a
-# re-launch of melonpanel (pkill -x melonpanel && melonpanel).  I have
-# yet to find a robust solution.
+# re-launch of bar (pkill -x bar && bar).
 #
 # Source of this snippet (with minor adapatations by me):
 # https://github.com/baskerville/bspwm/issues/484
-until bar_id=$(xdo id -a 'Melonpanel'); do
+until bar_id=$(xdo id -a 'bspwm-bar'); do
 	sleep 0.1s
 done
 
