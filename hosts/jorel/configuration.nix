@@ -1,7 +1,12 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ../../modules/system ../common.nix ./hardware-configuration.nix ];
+  imports = [
+    ../../modules/system
+    ../common.nix
+    ../platformio.nix
+    ./hardware-configuration.nix
+  ];
   boot = {
     loader = {
       systemd-boot = { enable = true; };
