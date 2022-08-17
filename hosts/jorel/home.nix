@@ -215,7 +215,7 @@
       enable = true;
       loadAutoconfig = true;
       extraConfig = ''
-        home_page = "/home/porto/www/portothree/memex/packages/web/index.html"
+        home_page = "/home/porto/www/portothree/memex/services/web/index.html"
         c.url.default_page = home_page
         c.url.start_pages = [ home_page ]
       '';
