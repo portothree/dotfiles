@@ -120,7 +120,7 @@
       };
       homeConfigurations = {
         jorel = mkHomeManager (mkPkgs nixpkgs-unstable { allowUnfree = true; })
-          home-manager "jorel";
+          home-manager-unstable "jorel";
         klong =
           mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; }) home-manager
           "klong";
