@@ -33,7 +33,7 @@
     longitude = -9.142685;
   };
   services = {
-    clight = { enable = true; };
+    clight = { enable = false; };
     openssh = { enable = true; };
     blueman = { enable = true; };
     udev = { packages = with pkgs; [ android-udev-rules ]; };
