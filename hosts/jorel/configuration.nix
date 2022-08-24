@@ -1,7 +1,12 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ../common.nix ./hardware-configuration.nix ];
+  imports = [
+    ../../modules/system
+    ../common.nix
+    ../platformio.nix
+    ./hardware-configuration.nix
+  ];
   boot = {
     loader = {
       systemd-boot = { enable = true; };
@@ -16,11 +21,23 @@
     useDHCP = false;
     useNetworkd = true;
     interfaces = { enp34s0 = { useDHCP = true; }; };
+    firewall = {
+      allowedTCPPorts = [ 53 ];
+      allowedUDPPorts = [ 53 ];
+    };
+    nameservers = [ "45.90.28.156" "45.90.30.156" ];
+  };
+  location = {
+    # Lisbon, Portugal
+    latitude = 38.736946;
+    longitude = -9.142685;
   };
   services = {
+    clight = { enable = true; };
     openssh = { enable = true; };
     blueman = { enable = true; };
     udev = { packages = with pkgs; [ android-udev-rules ]; };
+    nextdnsc = { enable = true; };
     xserver = {
       enable = true;
       layout = "us";
@@ -43,13 +60,13 @@
     users = {
       porto = {
         isNormalUser = true;
-        extraGroups = [ "wheel" "audio" "docker" ];
+        extraGroups = [ "wheel" "audio" "dialout" "docker" ];
         shell = pkgs.zsh;
       };
     };
   };
   environment = {
-    systemPackages = with pkgs; [ wget curl ];
+    systemPackages = with pkgs; [ wget curl xsecurelock ];
     variables = { EDITOR = "nvim"; };
   };
   virtualisation = { docker = { enable = true; }; };

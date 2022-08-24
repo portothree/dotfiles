@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> { } }:
+{ pkgs ? import <nixpkgs> { }, shellHook ? "" }:
 
 with pkgs;
 let
@@ -7,8 +7,9 @@ let
   '';
 in mkShell {
   buildInputs = [ git ];
-  shellHook = ''
+  shellHook = pkgs.lib.concatStringsSep "\n" [''
     export FLAKE="$(pwd)";
     export PATH="$FLAKE/bin:/${nixBin}/bin:$PATH"
-  '';
+    source "$FLAKE/.env"
+  ''];
 }

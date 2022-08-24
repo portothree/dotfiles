@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../../modules
+    ../../modules/home
     ../../home-manager
     ../../config/git.nix
     ../../config/neovim.nix
@@ -15,7 +15,6 @@
       bitwarden-cli
       k9s
       kubectl
-      lemonbar
       rofi
       nixfmt
       glow
@@ -170,7 +169,7 @@
     };
     bspwm = {
       enable = true;
-      lemonbar = true;
+      bar = true;
       extraConfig = ''
         bspc monitor "eDP-1" -d I II III
         bspc monitor "DP-2" -d IV V VI VII VIII IX X

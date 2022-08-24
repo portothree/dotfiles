@@ -2,46 +2,39 @@
 
 HOST=$2
 VALID_ARGS=$(getopt -o SRr --long setup-nixos,rebuild-nixos,rebuild-home -- "$@")
-if [[ $? -ne 0 ]]; then
-    exit 1;
-fi
 
 setup_nixos() {
 	local hostname="$1"
-	sudo nixos-rebuild switch --flake .#$hostname -I nixos-config=hosts/$hostname/configuration.nix
+	sudo nixos-rebuild switch --flake .#"$hostname" -I nixos-config=hosts/"$hostname"/configuration.nix
 }
 
 rebuild_nixos() {
 	local hostname="$1"
-	sudo nixos-rebuild switch --flake .#$hostname
+	sudo nixos-rebuild switch --flake .#"$hostname"
 }
 
 rebuild_home_manager() {
 	local hostname="$1"
-	nix build .#homeConfigurations.$hostname.activationPackage \
-		--extra-experimental-features nix-command \
-		--extra-experimental-features flakes
-	echo "Activating build result"
-	./result/activate
+	home-manager switch --flake .#"$hostname"
 }
 
 
 eval set -- "$VALID_ARGS"
-while [ : ]; do
+while true; do
   case "$1" in
     -S | --setup-nixos)
         echo "Initial NixOS setup for host $HOST"
-	setup_nixos $HOST
+        setup_nixos "$HOST"
         shift
         ;;
     -R | --rebuild-nixos)
         echo "Rebuilding NixOS for host $HOST"
-        rebuild_nixos $HOST
+        rebuild_nixos "$HOST"
         shift
         ;;
     -r | --rebuild-home)
         echo "Rebuilding home-manager for host $HOST"
-        rebuild_home_manager $HOST
+        rebuild_home_manager "$HOST"
         shift
         ;;
     --) shift;

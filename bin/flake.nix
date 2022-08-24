@@ -22,12 +22,13 @@
 
     in {
       packages.${system} = {
-        lemonbar-bspwm =
-          mkShellScript "lemonbar-bspwm" ./lemonbar/lemonbar-bspwm
+        bspwm-bar = mkShellScript "bspwm-bar" ./bspwm/bar
           (with pkgs; [ lemonbar xdo bspwm ]);
         bluetooth-connect =
           mkShellScript "bluetooth-connect" ./bluetooth/bluetooth-connect
           (with pkgs; [ bluez ]);
+        bw-with-session = mkShellScript "bw-with-session" ./bw/bw-with-session
+          (with pkgs; [ bitwarden-cli ]);
       };
     };
 }

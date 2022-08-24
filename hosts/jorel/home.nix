@@ -1,9 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, shellScriptPkgs, ... }:
 
 {
   imports = [
     ../../home-manager
-    ../../modules
+    ../../modules/home/programs
     ../../config/git.nix
     ../../config/neovim.nix
     ../../config/ranger.nix
@@ -18,6 +18,7 @@
       astyle
       shfmt
       nixfmt
+      shellcheck
       glow
       weechat
       pgcli
@@ -29,14 +30,18 @@
       weechat
       pulsemixer
       nudoku
+      steamPackages.steamcmd
+      steam-tui
       playerctl
       spotify-tui
       nvtop
       mutt
       gh
-      lemonbar
       ffmpeg
       distrobox
+      bitwarden-cli
+      v4l-utils
+      nextdns
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
@@ -99,7 +104,7 @@
     mpris-proxy.enable = true;
     picom = {
       enable = true;
-      backend = "xrender";
+      backend = "glx";
       vSync = true;
       extraOptions = ''
         unredir-if-possible = false;
@@ -111,8 +116,6 @@
       timeout = 1;
       extraOptions = [ "root" ];
     };
-    spotifyd = { enable = true; };
-
   };
   programs = {
     autorandr = {
@@ -206,13 +209,13 @@
     };
     taskwarrior = {
       enable = true;
-      dataLocation = "/home/porto/www/memex/trails/tasks/.task";
+      dataLocation = "/home/porto/www/portothree/memex/trails/tasks/.task";
     };
     qutebrowser = {
       enable = true;
       loadAutoconfig = true;
       extraConfig = ''
-        home_page = "/home/porto/www/memex/packages/web/index.html"
+        home_page = "/home/porto/www/portothree/memex/services/web/index.html"
         c.url.default_page = home_page
         c.url.start_pages = [ home_page ]
       '';
@@ -232,7 +235,7 @@
     alacritty.enable = true;
     bspwm = {
       enable = true;
-      lemonbar = true;
+      bar = true;
       extraConfig = ''
         bspc monitor "DP-0" -d I II III
         bspc monitor "HDMI-0" -d IV V VI VII VIII IX X
@@ -243,6 +246,7 @@
       terminal = "alacritty";
       rofi = true;
     };
+    spotify = { enable = true; };
     nodejs.enable = true;
     gcalcli.enable = true;
     zsh.enable = true;

@@ -1,5 +1,5 @@
 { inputs, pkgs, config, shellScriptPkgs, ... }:
 
 {
-  imports = [ ./home ./system ];
+  imports = [ ./programs ];
 }
