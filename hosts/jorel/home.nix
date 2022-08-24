@@ -253,7 +253,8 @@
     dockerTools.enable = true;
     jrnl = {
       enable = true;
-      journalPath = "/home/porto/www/portothree/memex/trails/jrnl/journal.txt";
+      journalPath = builtins.toString
+        /home/porto/www/portothree/memex/trails/jrnl/journal.txt;
       editor = "nvim";
     };
   };
