@@ -3,6 +3,7 @@
 {
   imports = [
     ./anki
+    ./androidTools
     ./dunst
     ./dockerTools
     ./zsh
