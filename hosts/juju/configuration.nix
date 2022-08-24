@@ -1,15 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ../common.nix
-    ../../home-manager
-    ../../modules
-    ./hardware-configuration.nix
-    ./ledger.nix
-    ./platformio.nix
-    ./android.nix
-  ];
+  imports = [ ../common.nix ./hardware-configuration.nix ];
   boot = {
     loader = {
       systemd-boot.enable = true;
@@ -25,21 +17,7 @@
   networking = {
     useDHCP = false;
     interfaces = { wlp1s0 = { useDHCP = true; }; };
-    nameservers = [ "192.168.1.106" "208.67.222.222" "208.67.220.220" ];
-    wireless = {
-      enable = true;
-      userControlled.enable = true;
-      environmentFile = "/etc/nixos/.env";
-      networks = {
-        "@WIRELESS_SSID_HOME@" = {
-          hidden = true;
-          pskRaw = "@WIRELESS_PSKRAW_HOME@";
-        };
-        "@WIRELESS_SSID_WOO@" = { pskRaw = "@WIRELESS_PSKRAW_WOO@"; };
-        "@WIRELESS_SSID_YLD@" = { pskRaw = "@WIRELESS_PSKRAW_YLD@"; };
-        "@WIRELESS_SSID_NKOOWOORK@" = { psk = "@WIRELESS_PSK_NKOOWOORK@"; };
-      };
-    };
+    nameservers = [ "208.67.222.222" "208.67.220.220" ];
   };
   services = {
     openssh = { enable = true; };
@@ -52,11 +30,8 @@
         mouse = { accelProfile = "flat"; };
         touchpad = { accelProfile = "flat"; };
       };
-      displayManager = {
-        startx = { enable = true; };
-        defaultSession = "none+bspwm";
-      };
-      windowManager = { bspwm = { enable = true; }; };
+      displayManager = { gdm = { enable = true; }; };
+      desktopManager = { gnome = { enable = true; }; };
     };
     blueman.enable = true;
   };
@@ -79,7 +54,7 @@
       };
     };
   };
-  environment.systemPackages = with pkgs; [ wget curl ];
+  environment.systemPackages = with pkgs; [ git wget curl ];
   virtualisation = { docker = { enable = true; }; };
   fonts.fonts = with pkgs; [ fira-code siji ];
   # Open ports in the firewall.
@@ -96,11 +71,5 @@
     trustedUsers = [ "root" "porto" ];
   };
   system.stateVersion = "21.11";
-  modules = {
-    tmux = {
-      enable = true;
-      gcalcli = true;
-    };
-  };
 }
 
