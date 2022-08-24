@@ -15,5 +15,6 @@
     ./alacritty
     ./gcalcli
     ./xinit
+    ./jrnl
   ];
 }
