@@ -150,10 +150,9 @@
       enable = true;
       loadAutoconfig = true;
       extraConfig = ''
-        home_page = "/home/porto/www/memex/packages/web/index.html"
-
-        c.url.default_page = home_page
-        c.url.start_pages = [ home_page ]
+        start_page = "/home/porto/www/startpage/index.html"
+        c.url.default_page = start_page 
+        c.url.start_pages = [ start_page ]
       '';
     };
   };
