@@ -74,6 +74,15 @@
           configuration = import ./hosts/${hostName}/home.nix;
         };
     in {
+      herculesCI = { ... }: {
+        onPush = {
+          default = {
+            outputs = { ... }:
+              let pkgs = mkPkgs nixpkgs { };
+              in { hello = pkgs.hello; };
+          };
+        };
+      };
       checks.${system}.pre-commit-check = pre-commit-hooks.lib.${system}.run {
         src = ./.;
         hooks = {
@@ -120,8 +129,9 @@
         };
       };
       homeConfigurations = {
-        jorel = mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; })
-          home-manager "jorel";
+        jorel =
+          mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; }) home-manager
+          "jorel";
         klong =
           mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; }) home-manager
           "klong";
