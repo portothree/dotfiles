@@ -38,7 +38,6 @@
       ledger-live-desktop
       platformio
       nextdns
-      xournalpp
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
@@ -190,6 +189,7 @@
       enable = true;
       enableNotifications = true;
     };
+    xournalpp.enable = true;
     zsh.enable = true;
   };
 }

@@ -42,7 +42,6 @@
       bitwarden-cli
       v4l-utils
       nextdns
-      xornalpp
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
@@ -250,7 +249,6 @@
     spotify = { enable = true; };
     nodejs.enable = true;
     gcalcli.enable = true;
-    zsh.enable = true;
     dockerTools.enable = true;
     jrnl = {
       enable = true;
@@ -258,5 +256,7 @@
         /home/porto/www/portothree/memex/trails/jrnl/journal.txt;
       editor = "nvim";
     };
+    xournalpp.enable = true;
+    zsh.enable = true;
   };
 }
