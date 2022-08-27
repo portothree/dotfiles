@@ -68,7 +68,7 @@
   environment = {
     systemPackages = with pkgs; [ wget curl xsecurelock ];
     variables = { EDITOR = "nvim"; };
-    pathsToLink = [ "/share/icons" "/share/mime" ];
+    pathsToLink = [ "/share/icons" "/share/mime" "/share/zsh" ];
   };
   virtualisation = { docker = { enable = true; }; };
   fonts = { fonts = with pkgs; [ fira-code siji ]; };
