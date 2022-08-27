@@ -38,6 +38,7 @@
       ledger-live-desktop
       platformio
       nextdns
+      xournalpp
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {

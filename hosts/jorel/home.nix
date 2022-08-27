@@ -42,6 +42,7 @@
       bitwarden-cli
       v4l-utils
       nextdns
+      xornalpp
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
