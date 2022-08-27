@@ -35,6 +35,7 @@
   environment = {
     systemPackages = with pkgs; [ wget curl xsecurelock ];
     variables = { EDITOR = "nvim"; };
+    pathsToLink = [ "/share/icons" "/share/mime" ];
   };
   services = {
     openssh = { enable = true; };

@@ -189,6 +189,7 @@
       enable = true;
       enableNotifications = true;
     };
+    xournalpp.enable = true;
     zsh.enable = true;
   };
 }

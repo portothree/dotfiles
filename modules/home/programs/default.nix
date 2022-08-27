@@ -6,7 +6,6 @@
     ./androidTools
     ./dunst
     ./dockerTools
-    ./zsh
     ./tmux
     ./bspwm
     ./sxhkd
@@ -14,7 +13,9 @@
     ./nodejs
     ./alacritty
     ./gcalcli
-    ./xinit
     ./jrnl
+    ./xinit
+    ./xournalpp
+    ./zsh
   ];
 }
