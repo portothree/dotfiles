@@ -5,7 +5,6 @@
     ../../modules/home
     ../../home-manager
     ../../config/git.nix
-    ../../config/neovim.nix
     ../../config/ranger.nix
     ../../config/keynav.nix
     ../../config/conky.nix
@@ -16,7 +15,6 @@
       k9s
       kubectl
       rofi
-      nixfmt
       glow
       weechat
       pgcli
@@ -182,8 +180,9 @@
     alacritty.enable = true;
     tmux = {
       enable = true;
-      gcalcli = true;
+      gcalcli = false;
     };
+    neovim.enable = true;
     nodejs.enable = true;
     gcalcli = {
       enable = true;

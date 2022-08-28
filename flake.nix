@@ -123,7 +123,7 @@
         jorel = mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; })
           home-manager "jorel";
         klong =
-          mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; }) home-manager
+          mkHomeManager (mkPkgs nixpkgs-unstable { allowUnfree = true; }) home-manager
           "klong";
         juju =
           mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; }) home-manager
