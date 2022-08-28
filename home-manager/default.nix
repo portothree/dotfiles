@@ -2,6 +2,7 @@
 
 {
   home.packages = with pkgs; [
+    astyle
     sysz
     gnumake
     gcc
@@ -10,6 +11,10 @@
     xclip
     xdotool
     xdo
+    stylua
+    nixfmt
+    shfmt
+    shellcheck
     rofi
     tig
     s-tui

@@ -15,7 +15,6 @@
       k9s
       kubectl
       rofi
-      nixfmt
       glow
       weechat
       pgcli
