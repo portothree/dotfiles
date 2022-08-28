@@ -11,6 +11,7 @@
     ./sxhkd
     ./spotify
     ./nodejs
+    ./neovim
     ./alacritty
     ./gcalcli
     ./jrnl

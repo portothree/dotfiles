@@ -5,7 +5,6 @@
     ../../home-manager
     ../../modules/home/programs
     ../../config/git.nix
-    ../../config/neovim.nix
     ../../config/ranger.nix
     ../../config/keynav.nix
   ];
@@ -248,6 +247,7 @@
     };
     spotify = { enable = true; };
     nodejs.enable = true;
+    neovim.enable = true;
     gcalcli.enable = true;
     dockerTools.enable = true;
     jrnl = {
