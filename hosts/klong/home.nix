@@ -30,6 +30,7 @@
       nudoku
       dijo
       mutt
+      mpv
       powertop
       acpi
       brightnessctl
