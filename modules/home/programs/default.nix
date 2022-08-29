@@ -4,6 +4,7 @@
   imports = [
     ./anki
     ./androidTools
+    ./bun
     ./dunst
     ./dockerTools
     ./tmux
