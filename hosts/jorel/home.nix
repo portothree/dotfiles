@@ -243,6 +243,7 @@
       enable = true;
       terminal = "alacritty";
       rofi = true;
+      dunst = true;
     };
     spotify = { enable = true; };
     nodejs.enable = true;

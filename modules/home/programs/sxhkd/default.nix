@@ -38,8 +38,8 @@ in {
         ''}
 
         ${optionalString (cfg.dunst) ''
-          super + ctrl + @space
-            dunstcl close
+          ctrl + @space
+            dunstctl close
         ''}
 
         super + Escape
