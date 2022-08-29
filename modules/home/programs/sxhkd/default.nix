@@ -17,6 +17,11 @@ in {
       description = "Enable rofi integration";
       default = false;
     };
+    dunst = mkOption {
+      type = types.bool;
+      description = "Enable dunst integration";
+      default = false;
+    };
   };
   config = mkIf cfg.enable {
     services.sxhkd = {
@@ -30,6 +35,11 @@ in {
             rofi -show drun
           alt + Tab
               rofi -show window
+        ''}
+
+        ${optionalString (cfg.dunst) ''
+          super + ctrl + @space
+            dunstcl close
         ''}
 
         super + Escape
