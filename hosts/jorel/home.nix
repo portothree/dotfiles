@@ -32,6 +32,7 @@
       spotify-tui
       nvtop
       mutt
+      mpv
       gh
       ffmpeg
       distrobox
