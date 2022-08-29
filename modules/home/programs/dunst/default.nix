@@ -1,14 +1,7 @@
 { pkgs, lib, config, ... }:
 
 with lib;
-let
-  cfg = config.modules.dunst;
-  defaultSettings = {
-    shortcuts = {
-      close = "ctrl+space";
-      close_all = "ctrl+shift+space";
-    };
-  };
+let cfg = config.modules.dunst;
 in {
   options.modules.dunst = {
     enable = mkEnableOption "dunst";
@@ -23,7 +16,7 @@ in {
   config = mkIf cfg.enable {
     services.dunst = {
       enable = true;
-      settings = defaultSettings // cfg.extraSettings;
+      settings = cfg.extraSettings;
     };
   };
 }
