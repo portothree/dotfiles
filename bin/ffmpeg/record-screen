@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+VIDEO_SIZE="1920x1080"
+FRAME_RATE="25"
+OUTPUT_NAME="output.mp4"
+
+ffmpeg -video_size $VIDEO_SIZE -framerate $FRAME_RATE -f x11grab -i :0.0 $OUTPUT_NAME

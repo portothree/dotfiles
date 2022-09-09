@@ -4,3 +4,5 @@
 result
 result-*
 
+# microvm.nix
+*.img

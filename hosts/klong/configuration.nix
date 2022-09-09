@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [ ./hardware-configuration.nix ../common.nix ];
@@ -17,7 +17,6 @@
   networking = {
     useDHCP = false;
     interfaces = { wlp0s20f3 = { useDHCP = true; }; };
-    hostName = "klong";
     nameservers = [ "192.168.1.106" "208.67.222.222" "208.67.220.220" ];
     wireless = {
       enable = true;
@@ -29,8 +28,14 @@
           pskRaw = "@WIRELESS_PSKRAW_HOME@";
         };
         "@WIRELESS_SSID_WOO@" = { pskRaw = "@WIRELESS_PSKRAW_WOO@"; };
+        "@WIRELESS_SSID_NKOOWOORK@" = { psk = "@WIRELESS_PSK_NKOOWOORK@"; };
       };
     };
+  };
+  environment = {
+    systemPackages = with pkgs; [ wget curl xsecurelock ];
+    variables = { EDITOR = "nvim"; };
+    pathsToLink = [ "/share/icons" "/share/mime" "/share/zsh" ];
   };
   services = {
     openssh = { enable = true; };
@@ -42,17 +47,19 @@
         mouse = { accelProfile = "flat"; };
         touchpad = { accelProfile = "flat"; };
       };
-      displayManager = {
-        startx = { enable = true; };
-        defaultSession = "none+bspwm";
-      };
-      windowManager = { bspwm = { enable = true; }; };
+      displayManager = { startx = { enable = true; }; };
     };
     blueman.enable = true;
   };
   sound.enable = true;
   hardware = {
-    pulseaudio.enable = true;
+    pulseaudio = {
+      enable = true;
+      package = pkgs.pulseaudioFull;
+      extraConfig = ''
+        load-module module-switch-on-connect
+      '';
+    };
     bluetooth.enable = true;
   };
   users = {
@@ -60,10 +67,10 @@
       porto = {
         isNormalUser = true;
         extraGroups = [ "wheel" "docker" ];
+        shell = pkgs.zsh;
       };
     };
   };
-  environment.systemPackages = with pkgs; [ wget curl ];
   virtualisation = { docker = { enable = true; }; };
   fonts.fonts = with pkgs; [ fira-code siji ];
   nix = {

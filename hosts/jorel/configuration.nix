@@ -1,54 +1,106 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ../common.nix ./hardware-configuration.nix <home-manager/nixos> ];
+  imports = [
+    ../../modules/system
+    ../common.nix
+    ../platformio.nix
+    ./hardware-configuration.nix
+  ];
   boot = {
     loader = {
-      grub = {
-        enable = true;
-        version = 2;
-        device = "/dev/sda";
-      };
+      systemd-boot = { enable = true; };
+      efi = { canTouchEfiVariables = true; };
     };
   };
+  fileSystems."/home" = {
+    device = "/dev/pool/home";
+    fsType = "ext4";
+  };
   networking = {
-    hostName = "jorel";
     useDHCP = false;
-    interfaces = { ens18 = { useDHCP = true; }; };
+    useNetworkd = true;
+    interfaces = { enp34s0 = { useDHCP = true; }; };
+    firewall = {
+      allowedTCPPorts = [ 53 ];
+      allowedUDPPorts = [ 53 ];
+    };
+    nameservers = [ "45.90.28.156" "45.90.30.156" ];
+  };
+  location = {
+    # Lisbon, Portugal
+    latitude = 38.736946;
+    longitude = -9.142685;
   };
   services = {
+    clight = { enable = false; };
     openssh = { enable = true; };
+    blueman = { enable = true; };
+    udev = { packages = with pkgs; [ android-udev-rules ]; };
+    nextdnsc = { enable = true; };
     xserver = {
       enable = true;
       layout = "us";
-      displayManager = {
-        defaultSession = "none+bspwm";
-      };
-      windowManager = {
-        bspwm = {
-          enable = true;
-        };
-      };
+      videoDrivers = [ "nvidia" ];
+      displayManager = { startx = { enable = true; }; };
+      screenSection = ''
+        Option         "metamodes" "nvidia-auto-select +0+0 {ForceFullCompositionPipeline=On}"
+        Option         "AllowIndirectGLXProtocol" "off"
+        Option         "TripleBuffer" "on"
+      '';
+    };
+  };
+  systemd = {
+    network = {
+      enable = true;
+      wait-online = { extraArgs = [ "--any" ]; };
     };
   };
   users = {
     users = {
       porto = {
         isNormalUser = true;
-        extraGroups = [ "wheel" "audio" ];
+        extraGroups = [ "wheel" "audio" "dialout" "docker" ];
+        shell = pkgs.zsh;
       };
     };
   };
-  environment = { systemPackages = with pkgs; [ wget ]; };
+  environment = {
+    systemPackages = with pkgs; [ wget curl xsecurelock ];
+    variables = { EDITOR = "nvim"; };
+    pathsToLink = [ "/share/icons" "/share/mime" "/share/zsh" ];
+  };
+  virtualisation = { docker = { enable = true; }; };
+  fonts = { fonts = with pkgs; [ fira-code siji ]; };
   sound = { enable = true; };
-  hardware = { pulseaudio = { enable = true; }; };
+  hardware = {
+    nvidia = { package = config.boot.kernelPackages.nvidiaPackages.stable; };
+    opengl.enable = true;
+    bluetooth.enable = true;
+    pulseaudio = {
+      enable = true;
+      package = pkgs.pulseaudioFull;
+      extraConfig = ''
+        load-module module-switch-on-connect
+      '';
+    };
+  };
   nixpkgs = {
     config = {
+      allowUnfree = true;
       pulseaudio = true;
     };
   };
-  home-manager = {
-    users = { porto = import ./home.nix { inherit config pkgs; }; };
+  nix = {
+    enable = true;
+    package = pkgs.nixFlakes;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+    trustedUsers = [ "root" "porto" ];
   };
-  system = { stateVersion = "21.11"; };
+  system = {
+    stateVersion = "22.05";
+    copySystemConfiguration = true;
+  };
 }

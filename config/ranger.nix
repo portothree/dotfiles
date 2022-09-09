@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ ... }:
 
 {
 
@@ -11,7 +11,7 @@
         set hidden_filter ^\.|\.(?:pyc|pyo|bak|swp)$|^lost\+found$|^__(py)?cache__$
         set show_hidden true
         set confirm_on_delete multiple
-        set use_preview_script true
+        set use_preview_script false
         set automatically_count_files true
         set open_all_images true
         set vcs_aware false

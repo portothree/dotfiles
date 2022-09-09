@@ -1,38 +1,21 @@
-{ config, pkgs, ... }:
+{ pkgs, shellScriptPkgs, ... }:
 
 {
   imports = [
-    ../../config/home-manager/common.nix
+    ../../home-manager
+    ../../modules/home/programs
     ../../config/git.nix
-    ../../config/sxhkd.nix
+    ../../config/ranger.nix
+    ../../config/keynav.nix
   ];
   home = {
-    stateVersion = "22.05";
     packages = with pkgs; [
-      xpra
       st
-      sysz
-      ranger
-      tig
-      google-cloud-sdk
       k9s
       kubectl
-      ripgrep
-      xclip
-      xdotool
-      lemonbar
-      rofi
-      pywal
-      mopidy
-      mopidy-iris
       cava
       astyle
-      shfmt
-      nixfmt
       glow
-      unifont
-      fira-code
-      siji
       weechat
       pgcli
       mycli
@@ -43,17 +26,57 @@
       weechat
       pulsemixer
       nudoku
+      steamPackages.steamcmd
+      steam-tui
       playerctl
       spotify-tui
-      s-tui
-      dijo
-      cmake
-      lua
-      docui
+      nvtop
       mutt
+      mpv
+      gh
+      ffmpeg
+      distrobox
+      bitwarden-cli
+      v4l-utils
+      nextdns
     ];
-    sessionVariables = { EDITOR = "vim"; };
+    sessionVariables = { EDITOR = "nvim"; };
     file = {
+      bugwarrior = {
+        target = ".config/bugwarrior/bugwarriorrc";
+        text = ''
+          [general]
+          taskrc = ~/.config/task/taskrc
+          targets = github_portothree
+          shorten = False
+          inline_links = False
+          annotation_links = True
+          annotation_comments = True
+          legacy_matching = False
+          log.level = DEBUG
+          annotation_length = 45
+
+          [github_portothree]
+          service = github
+          github.default_priority = H
+          github.add_tags = open_source
+          github.username = portothree 
+          github.exclude_pull_requests = True
+          github.include_repos = dotfiles,memex,homelab,plain-text-anything,spaced-repetition
+          github.login = portothree 
+          github.token = @oracle:eval:pass GitHub/portothree
+        '';
+      };
+      vit = {
+        target = ".vit/config.ini";
+        text = ''
+          [taskwarrior]
+          taskrc = ~/.config/task/taskrc
+
+          [vit]
+          default_keybindings = vi
+        '';
+      };
       dijo = {
         target = ".config/dijo/config.toml";
         text = ''
@@ -70,60 +93,58 @@
       };
     };
   };
-  services = { spotifyd = { enable = true; }; };
-  programs = {
-    alacritty = { enable = true; };
-    htop = { enable = true; };
-    zsh = {
+  xsession = {
+    enable = true;
+    windowManager = { };
+  };
+  services = {
+    mpris-proxy.enable = true;
+    picom = {
       enable = true;
-      enableAutosuggestions = true;
-      enableCompletion = true;
-      sessionVariables = {
-        PROMPT = "%(?.%F{green}.%F{red})λ%f %B%F{cyan}%~%f%b ";
-        VISUAL = "vim";
-        EDITOR = "vim";
-        HISTTIMEFORMAT = "%F %T ";
-        PATH =
-          "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/nix/var/nix/profiles/default/bin:/home/porto/nix-profile/bin";
-        NIX_PATH =
-          "/home/porto/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels";
-        LOCALE_ARCHIVE = "/usr/lib/locale/locale-archive";
-      };
-      localVariables = { MEMEX = "/home/porto/www/memex"; };
-      shellAliases = {
-        r = "ranger";
-        qutebrowser = "QT_XCB_GL_INTEGRATION=none qutebrowser";
-        rgf = "rg --files | rg";
-        ksns =
-          "kubectl api-resources --verbs=list --namespaced -o name | xargs -n1 kubectl get '$@' --show-kind --ignore-not-found";
-        krns =
-          "kubectl api-resources --namespaced=true --verbs=delete -o name | tr '' ',' | sed -e 's/,$//''";
-        kdns = "kubectl delete '$(krns)' --all";
-      };
-      initExtraFirst = ''
-        [[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
-
-        # Load crontab from .crontab file
-        if test -z $CRONTABCMD; then
-          export CRONTABCMD=$(which crontab)
-
-          crontab() {
-              if [[ $@ == "-e" ]]; then
-                  vim "$HOME/.crontab" && $CRONTABCMD "$HOME/.crontab"
-              else
-                  $CRONTABCMD $@
-              fi
-           }
-         
-          $CRONTABCMD "$HOME/.crontab"
-        fi
+      backend = "glx";
+      vSync = true;
+      extraOptions = ''
+        unredir-if-possible = false;
       '';
-      oh-my-zsh = {
-        enable = true;
-        plugins = [ "git" "git-auto-fetch" ];
-        theme = "robbyrussell";
+    };
+    keynav = { enable = true; };
+    unclutter = {
+      enable = true;
+      timeout = 1;
+      extraOptions = [ "root" ];
+    };
+  };
+  programs = {
+    autorandr = {
+      enable = true;
+      profiles = {
+        "normal-dual" = {
+          fingerprint = {
+            "DP-0" =
+              "00ffffffffffff0009d1e77845540000191e0104a5351e783a0565a756529c270f5054a56b80d1c0b300a9c08180810081c001010101023a801871382d40582c45000f282100001e000000ff004b364c30313837323031510a20000000fd00324c1e5311010a202020202020000000fc0042656e51204757323438300a20016702031cf14f901f041303120211011406071516052309070783010000023a801871382d40582c45000f282100001f011d8018711c1620582c25000f282100009f011d007251d01e206e2855000f282100001e8c0ad08a20e02d10103e96000f28210000180000000000000000000000000000000000000000000000000000008d";
+            "HDMI-0" =
+              "00ffffffffffff0009d1e778455400002a1f010380351e782e0565a756529c270f5054a56b80d1c0b300a9c08180810081c001010101023a801871382d40582c45000f282100001e000000ff0050414d30313138363031510a20000000fd00324c1e5311000a202020202020000000fc0042656e51204757323438300a200179020322f14f901f04130312021101140607151605230907078301000065030c001000023a801871382d40582c45000f282100001f011d8018711c1620582c25000f282100009f011d007251d01e206e2855000f282100001e8c0ad08a20e02d10103e96000f282100001800000000000000000000000000000000000000000003";
+          };
+          config = {
+            "DP-0" = {
+              enable = true;
+              primary = true;
+              position = "0x0";
+              mode = "1920x1080";
+              rotate = "normal";
+            };
+            "HDMI-0" = {
+              enable = true;
+              primary = false;
+              position = "1920x0";
+              mode = "1920x1080";
+              rotate = "normal";
+            };
+          };
+        };
       };
     };
+    htop = { enable = true; };
     vim = {
       enable = true;
       settings = {
@@ -156,21 +177,9 @@
         browser = "qutebrowser";
       };
     };
-    tmux = {
-      enable = true;
-      clock24 = true;
-      keyMode = "vi";
-      plugins = with pkgs.tmuxPlugins; [ sensible yank ];
-      extraConfig = ''
-        set -g mouse off 
-        bind h select-pane -L
-        bind j select-pane -D
-        bind k select-pane -U
-        bind l select-pane -R
-      '';
-    };
     direnv = {
       enable = true;
+      nix-direnv = { enable = true; };
       enableZshIntegration = true;
     };
     fzf = {
@@ -197,310 +206,57 @@
     };
     taskwarrior = {
       enable = true;
-      dataLocation = "/home/porto/www/memex/trails/tasks/.task";
+      dataLocation = "/home/porto/www/portothree/memex/trails/tasks/.task";
     };
     qutebrowser = {
       enable = true;
       loadAutoconfig = true;
       extraConfig = ''
-        default_page = "/home/porto/www/memex/packages/web/index.html"
-
-        c.url_default_page = default_page
-
-        # Colorscheme
-        def blood(c, options = {}):
-            palette = {
-                'background': '#282a36',
-                'background-alt': '#282a36', 
-                'background-attention': '#181920',
-                'border': '#282a36',
-                'current-line': '#44475a',
-                'selection': '#44475a',
-                'foreground': '#f8f8f2',
-                'foreground-alt': '#e0e0e0',
-                'foreground-attention': '#ffffff',
-                'comment': '#6272a4',
-                'cyan': '#8be9fd',
-                'green': '#50fa7b',
-                'orange': '#ffb86c',
-                'pink': '#ff79c6',
-                'purple': '#bd93f9',
-                'red': '#ff5555',
-                'yellow': '#f1fa8c'
-            }   
-
-            spacing = options.get('spacing', {
-                'vertical': 5,
-                'horizontal': 5
-            })
-
-            padding = options.get('padding', {
-                'top': spacing['vertical'],
-                'right': spacing['horizontal'],
-                'bottom': spacing['vertical'],
-                'left': spacing['horizontal']
-            })
-
-            ## Background color of the completion widget category headers.
-            c.colors.completion.category.bg = palette['background']
-
-            ## Bottom border color of the completion widget category headers.
-            c.colors.completion.category.border.bottom = palette['border']
-
-            ## Top border color of the completion widget category headers.
-            c.colors.completion.category.border.top = palette['border']
-
-            ## Foreground color of completion widget category headers.
-            c.colors.completion.category.fg = palette['foreground']
-
-            ## Background color of the completion widget for even rows.
-            c.colors.completion.even.bg = palette['background']
-
-            ## Background color of the completion widget for odd rows.
-            c.colors.completion.odd.bg = palette['background-alt']
-
-            ## Text color of the completion widget.
-            c.colors.completion.fg = palette['foreground']
-
-            ## Background color of the selected completion item.
-            c.colors.completion.item.selected.bg = palette['selection']
-
-            ## Bottom border color of the selected completion item.
-            c.colors.completion.item.selected.border.bottom = palette['selection']
-
-            ## Top border color of the completion widget category headers.
-            c.colors.completion.item.selected.border.top = palette['selection']
-
-            ## Foreground color of the selected completion item.
-            c.colors.completion.item.selected.fg = palette['foreground']
-
-            ## Foreground color of the matched text in the completion.
-            c.colors.completion.match.fg = palette['orange']
-
-            ## Color of the scrollbar in completion view
-            c.colors.completion.scrollbar.bg = palette['background']
-
-            ## Color of the scrollbar handle in completion view.
-            c.colors.completion.scrollbar.fg = palette['foreground']
-
-            ## Background color for the download bar.
-            c.colors.downloads.bar.bg = palette['background']
-
-            ## Background color for downloads with errors.
-            c.colors.downloads.error.bg = palette['background']
-
-            ## Foreground color for downloads with errors.
-            c.colors.downloads.error.fg = palette['red']
-
-            ## Color gradient stop for download backgrounds.
-            c.colors.downloads.stop.bg = palette['background']
-
-            ## Color gradient interpolation system for download backgrounds.
-            ## Type: ColorSystem
-            ## Valid values:
-            ##   - rgb: Interpolate in the RGB color system.
-            ##   - hsv: Interpolate in the HSV color system.
-            ##   - hsl: Interpolate in the HSL color system.
-            ##   - none: Don't show a gradient.
-            c.colors.downloads.system.bg = 'none'
-
-            ## Background color for hints. Note that you can use a `rgba(...)` value
-            ## for transparency.
-            c.colors.hints.bg = palette['background']
-
-            ## Font color for hints.
-            c.colors.hints.fg = palette['purple']
-
-            ## Hints
-            c.hints.border = '1px solid ' + palette['background-alt']
-
-            ## Font color for the matched part of hints.
-            c.colors.hints.match.fg = palette['foreground-alt']
-
-            ## Background color of the keyhint widget.
-            c.colors.keyhint.bg = palette['background']
-
-            ## Text color for the keyhint widget.
-            c.colors.keyhint.fg = palette['purple']
-
-            ## Highlight color for keys to complete the current keychain.
-            c.colors.keyhint.suffix.fg = palette['selection']
-
-            ## Background color of an error message.
-            c.colors.messages.error.bg = palette['background']
-
-            ## Border color of an error message.
-            c.colors.messages.error.border = palette['background-alt']
-
-            ## Foreground color of an error message.
-            c.colors.messages.error.fg = palette['red']
-
-            ## Background color of an info message.
-            c.colors.messages.info.bg = palette['background']
-
-            ## Border color of an info message.
-            c.colors.messages.info.border = palette['background-alt']
-
-            ## Foreground color an info message.
-            c.colors.messages.info.fg = palette['comment']
-
-            ## Background color of a warning message.
-            c.colors.messages.warning.bg = palette['background']
-
-            ## Border color of a warning message.
-            c.colors.messages.warning.border = palette['background-alt']
-
-            ## Foreground color a warning message.
-            c.colors.messages.warning.fg = palette['red']
-
-            ## Background color for prompts.
-            c.colors.prompts.bg = palette['background']
-
-            # ## Border used around UI elements in prompts.
-            c.colors.prompts.border = '1px solid ' + palette['background-alt']
-
-            ## Foreground color for prompts.
-            c.colors.prompts.fg = palette['cyan']
-
-            ## Background color for the selected item in filename prompts.
-            c.colors.prompts.selected.bg = palette['selection']
-
-            ## Background color of the statusbar in caret mode.
-            c.colors.statusbar.caret.bg = palette['background']
-
-            ## Foreground color of the statusbar in caret mode.
-            c.colors.statusbar.caret.fg = palette['orange']
-
-            ## Background color of the statusbar in caret mode with a selection.
-            c.colors.statusbar.caret.selection.bg = palette['background']
-
-            ## Foreground color of the statusbar in caret mode with a selection.
-            c.colors.statusbar.caret.selection.fg = palette['orange']
-
-            ## Background color of the statusbar in command mode.
-            c.colors.statusbar.command.bg = palette['background']
-
-            ## Foreground color of the statusbar in command mode.
-            c.colors.statusbar.command.fg = palette['pink']
-
-            ## Background color of the statusbar in private browsing + command mode.
-            c.colors.statusbar.command.private.bg = palette['background']
-
-            ## Foreground color of the statusbar in private browsing + command mode.
-            c.colors.statusbar.command.private.fg = palette['foreground-alt']
-
-            ## Background color of the statusbar in insert mode.
-            c.colors.statusbar.insert.bg = palette['background-attention']
-
-            ## Foreground color of the statusbar in insert mode.
-            c.colors.statusbar.insert.fg = palette['foreground-attention']
-
-            ## Background color of the statusbar.
-            c.colors.statusbar.normal.bg = palette['background']
-
-            ## Foreground color of the statusbar.
-            c.colors.statusbar.normal.fg = palette['foreground']
-
-            ## Background color of the statusbar in passthrough mode.
-            c.colors.statusbar.passthrough.bg = palette['background']
-
-            ## Foreground color of the statusbar in passthrough mode.
-            c.colors.statusbar.passthrough.fg = palette['orange']
-
-            ## Background color of the statusbar in private browsing mode.
-            c.colors.statusbar.private.bg = palette['background-alt']
-
-            ## Foreground color of the statusbar in private browsing mode.
-            c.colors.statusbar.private.fg = palette['foreground-alt']
-
-            ## Background color of the progress bar.
-            c.colors.statusbar.progress.bg = palette['background']
-
-            ## Foreground color of the URL in the statusbar on error.
-            c.colors.statusbar.url.error.fg = palette['red']
-
-            ## Default foreground color of the URL in the statusbar.
-            c.colors.statusbar.url.fg = palette['foreground']
-
-            ## Foreground color of the URL in the statusbar for hovered links.
-            c.colors.statusbar.url.hover.fg = palette['cyan']
-
-            ## Foreground color of the URL in the statusbar on successful load
-            c.colors.statusbar.url.success.http.fg = palette['green']
-
-            ## Foreground color of the URL in the statusbar on successful load
-            c.colors.statusbar.url.success.https.fg = palette['green']
-
-            ## Foreground color of the URL in the statusbar when there's a warning.
-            c.colors.statusbar.url.warn.fg = palette['yellow']
-
-            ## Status bar padding
-            c.statusbar.padding = padding
-
-            ## Background color of the tab bar.
-            ## Type: QtColor
-            c.colors.tabs.bar.bg = palette['selection']
-
-            ## Background color of unselected even tabs.
-            ## Type: QtColor
-            c.colors.tabs.even.bg = palette['selection']
-
-            ## Foreground color of unselected even tabs.
-            ## Type: QtColor
-            c.colors.tabs.even.fg = palette['foreground']
-
-            ## Color for the tab indicator on errors.
-            ## Type: QtColor
-            c.colors.tabs.indicator.error = palette['red']
-
-            ## Color gradient start for the tab indicator.
-            ## Type: QtColor
-            c.colors.tabs.indicator.start = palette['orange']
-
-            ## Color gradient end for the tab indicator.
-            ## Type: QtColor
-            c.colors.tabs.indicator.stop = palette['green']
-
-            ## Color gradient interpolation system for the tab indicator.
-            ## Type: ColorSystem
-            ## Valid values:
-            ##   - rgb: Interpolate in the RGB color system.
-            ##   - hsv: Interpolate in the HSV color system.
-            ##   - hsl: Interpolate in the HSL color system.
-            ##   - none: Don't show a gradient.
-            c.colors.tabs.indicator.system = 'none'
-
-            ## Background color of unselected odd tabs.
-            ## Type: QtColor
-            c.colors.tabs.odd.bg = palette['selection']
-
-            ## Foreground color of unselected odd tabs.
-            ## Type: QtColor
-            c.colors.tabs.odd.fg = palette['foreground']
-
-            # ## Background color of selected even tabs.
-            # ## Type: QtColor
-            c.colors.tabs.selected.even.bg = palette['background']
-
-            # ## Foreground color of selected even tabs.
-            # ## Type: QtColor
-            c.colors.tabs.selected.even.fg = palette['foreground']
-
-            # ## Background color of selected odd tabs.
-            # ## Type: QtColor
-            c.colors.tabs.selected.odd.bg = palette['background']
-
-            # ## Foreground color of selected odd tabs.
-            # ## Type: QtColor
-            c.colors.tabs.selected.odd.fg = palette['foreground']
-
-            ## Tab padding
-            c.tabs.padding = padding
-            c.tabs.indicator.width = 1
-            c.tabs.favicons.scale = 1
-
-            dracula.draw.blood(c, { "spacing": { "vertical": 6, "horizontal": 8 } })
+        start_page = "/home/porto/www/startpage/index.html"
+        c.url.default_page = start_page 
+        c.url.start_pages = [ start_page ]
       '';
     };
+  };
+  modules = {
+    anki.enable = true;
+    androidTools.enable = true;
+    bun.enable = true;
+    dunst.enable = true;
+    xinit = {
+      enable = true;
+      autorandr = true;
+      sxhkd = true;
+      bspwm = true;
+    };
+    tmux.enable = true;
+    alacritty.enable = true;
+    bspwm = {
+      enable = true;
+      bar = true;
+      extraConfig = ''
+        bspc monitor "DP-0" -d I II III
+        bspc monitor "HDMI-0" -d IV V VI VII VIII IX X
+      '';
+    };
+    sxhkd = {
+      enable = true;
+      terminal = "alacritty";
+      rofi = true;
+      dunst = true;
+    };
+    spotify = { enable = true; };
+    nodejs.enable = true;
+    neovim.enable = true;
+    gcalcli.enable = true;
+    dockerTools.enable = true;
+    jrnl = {
+      enable = true;
+      journalPath = builtins.toString
+        /home/porto/www/portothree/memex/trails/jrnl/journal.txt;
+      editor = "nvim";
+    };
+    xournalpp.enable = true;
+    zsh.enable = true;
   };
 }

@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# Load crontab from .crontab file
+if test -z "$CRONTABCMD"; then
+	CRONTABCMD=$(which crontab)
+  export CRONTABCMD
+
+	crontab() {
+		if [[ $* == "-e" ]]; then
+			vim "$HOME/.crontab" && "$CRONTABCMD" "$HOME/.crontab"
+		else
+			"$CRONTABCMD" "$@"
+		fi
+	}
+
+	"$CRONTABCMD" "$HOME/.crontab"
+fi
