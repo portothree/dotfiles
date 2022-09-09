@@ -7,7 +7,7 @@
       target = ".config/ranger/rc.conf";
       text = ''
         set viewmode miller
-        set column_ratios 1,3,4
+        set column_ratios 1,2,1
         set hidden_filter ^\.|\.(?:pyc|pyo|bak|swp)$|^lost\+found$|^__(py)?cache__$
         set show_hidden true
         set confirm_on_delete multiple
