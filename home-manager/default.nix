@@ -18,6 +18,7 @@
     rofi
     tig
     s-tui
+    duf
     python3
     zathura
     maim
@@ -25,6 +26,8 @@
     yank
     jq
     yq
+    sd
+    fd
     cachix
   ];
   programs = { home-manager = { enable = true; }; };

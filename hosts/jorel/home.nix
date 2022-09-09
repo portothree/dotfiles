@@ -32,6 +32,7 @@
       spotify-tui
       nvtop
       mutt
+      mpv
       gh
       ffmpeg
       distrobox
@@ -220,6 +221,7 @@
   modules = {
     anki.enable = true;
     androidTools.enable = true;
+    bun.enable = true;
     dunst.enable = true;
     xinit = {
       enable = true;
@@ -241,6 +243,7 @@
       enable = true;
       terminal = "alacritty";
       rofi = true;
+      dunst = true;
     };
     spotify = { enable = true; };
     nodejs.enable = true;

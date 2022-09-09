@@ -30,6 +30,7 @@
       nudoku
       dijo
       mutt
+      mpv
       powertop
       acpi
       brightnessctl
@@ -156,6 +157,7 @@
   };
   modules = {
     anki.enable = true;
+    bun.enable = true;
     dunst.enable = true;
     dockerTools.enable = true;
     xinit = {

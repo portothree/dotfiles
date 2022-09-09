@@ -17,6 +17,11 @@ in {
       description = "Enable rofi integration";
       default = false;
     };
+    dunst = mkOption {
+      type = types.bool;
+      description = "Enable dunst integration";
+      default = false;
+    };
   };
   config = mkIf cfg.enable {
     services.sxhkd = {
@@ -32,6 +37,13 @@ in {
               rofi -show window
         ''}
 
+        ${optionalString (cfg.dunst) ''
+          ctrl + @space
+            dunstctl close
+        ''}
+
+        super + p
+          maim -i $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
         super + Escape
           pkill -USR1 -x sxhkd
         super + alt + {q,r}
