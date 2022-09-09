@@ -8,13 +8,13 @@
     ../../config/ranger.nix
     ../../config/keynav.nix
     ../../config/conky.nix
+    ../../config/rofi.nix
   ];
   home = {
     packages = with pkgs; [
       bitwarden-cli
       k9s
       kubectl
-      rofi
       glow
       weechat
       pgcli
