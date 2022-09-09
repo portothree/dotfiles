@@ -42,6 +42,8 @@ in {
             dunstctl close
         ''}
 
+        super + p
+          maim -i $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
         super + Escape
           pkill -USR1 -x sxhkd
         super + alt + {q,r}
