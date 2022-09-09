@@ -7,6 +7,7 @@
     ../../config/git.nix
     ../../config/ranger.nix
     ../../config/keynav.nix
+    ../../config/rofi.nix
   ];
   home = {
     packages = with pkgs; [
