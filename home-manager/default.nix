@@ -15,7 +15,6 @@
     nixfmt
     shfmt
     shellcheck
-    rofi
     tig
     s-tui
     duf
