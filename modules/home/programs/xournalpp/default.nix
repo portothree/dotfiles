@@ -13,7 +13,7 @@ in {
         shared-mime-info
       ];
       file.xournalpp = {
-        target = ".xournalpp/toolbar.ini";
+        target = ".config/xournalpp/toolbar.ini";
         text = ''
           [Dracula]
           toolbarTop1=SAVE,NEW,SEPARATOR,OPEN,CUT,COPY,PASTE,SEPARATOR,UNDO,REDO,SEPARATOR,SEPARATOR,SEPARATOR,INSERT_NEW_PAGE,DELETE_CURRENT_PAGE,SEPARATOR,GOTO_BACK,GOTO_NEXT,SEPARATOR,FULLSCREEN,SEPARATOR,IMAGE,TEXT
