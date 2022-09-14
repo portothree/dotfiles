@@ -12,7 +12,7 @@ in {
         gnome.adwaita-icon-theme
         shared-mime-info
       ];
-      file.xournalpp = {
+      file.xournalpp-toolbar = {
         target = ".config/xournalpp/toolbar.ini";
         text = ''
           [Dracula]
