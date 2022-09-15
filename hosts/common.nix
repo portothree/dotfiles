@@ -30,16 +30,16 @@ in {
     };
     settings = {
       substituters = [
-        "https://cache.nixos.org/"
+        "https://cache.garnix.io"
+        "https://cache.nixos.org"
         "https://portothree.cachix.org"
         "https://microvm.cachix.org"
-        "https://cache.garnix.io"
       ];
       trusted-public-keys = [
+        "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
         "portothree.cachix.org-1:L4w3V/jrM+5cG0yEAypCPan94GLUxWYm8VFLB774J6I="
         "microvm.cachix.org-1:oXnBc6hRE3eX5rSYdRyMYXnfzcCxC7yKPTbZXALsqys="
-        "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
       ];
     };
   };
