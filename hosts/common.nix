@@ -17,6 +17,9 @@
   console = { keyMap = "us"; };
   nixpkgs = { config = { allowUnfree = true; }; };
   nix = {
+    registry = {
+      n.flake = pkgs;
+    };
     gc = {
       automatic = true;
       dates = "weekly";
