@@ -19,11 +19,11 @@
     nixgl.url = "github:guibou/nixGL";
     pre-commit-hooks = { url = "github:cachix/pre-commit-hooks.nix"; };
     scripts.url = "path:./bin";
-    namecoin.url = "github:jurraca/namecoin-core/flake";
+    namecoin-core.url = "github:portothree/namecoin-core/flake";
   };
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager
     , home-manager-unstable, nixos-hardware, microvm, nixgl, pre-commit-hooks
-    , scripts, namecoin, ... }@inputs:
+    , scripts, namecoin-core, ... }@inputs:
     let
       system = "x86_64-linux";
       username = "porto";
@@ -94,7 +94,7 @@
           extraModules = [
             nixos-hardware.nixosModules.common-cpu-amd
             microvm.nixosModules.host
-            namecoin.nixosModules.namecoin-core
+            namecoin-core.nixosModules.namecoin-core
           ];
         };
         klong = mkNixosSystem nixpkgs { hostName = "klong"; };
