@@ -1,7 +1,6 @@
 { inputs, pkgs, lib, ... }:
 
-let inherit (inputs) nixpkgs;
-in {
+{
   time = { timeZone = "Europe/Lisbon"; };
   networking = {
     extraHosts = ''
@@ -18,7 +17,6 @@ in {
   console = { keyMap = "us"; };
   nixpkgs = { config = { allowUnfree = true; }; };
   nix = {
-    registry = { n.flake = nixpkgs; };
     gc = {
       automatic = true;
       dates = "weekly";
