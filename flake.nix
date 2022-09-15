@@ -19,7 +19,10 @@
     nixgl.url = "github:guibou/nixGL";
     pre-commit-hooks = { url = "github:cachix/pre-commit-hooks.nix"; };
     scripts.url = "path:./bin";
-    namecoin-core.url = "github:portothree/namecoin-core/flake";
+    namecoin-core = {
+      url = "github:portothree/namecoin-core/flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager
     , home-manager-unstable, nixos-hardware, microvm, nixgl, pre-commit-hooks
