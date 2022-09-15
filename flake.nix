@@ -41,7 +41,10 @@
           inherit system;
           specialArgs = { inherit inputs; };
           modules = [
-            { networking = { inherit hostName; }; }
+            {
+              nix.registry.n.flake = pkgs;
+              networking = { inherit hostName; };
+            }
             ./hosts/${hostName}/configuration.nix
           ] ++ extraModules;
         };
@@ -122,9 +125,8 @@
       homeConfigurations = {
         jorel = mkHomeManager (mkPkgs nixpkgs-unstable { allowUnfree = true; })
           home-manager "jorel";
-        klong =
-          mkHomeManager (mkPkgs nixpkgs-unstable { allowUnfree = true; }) home-manager
-          "klong";
+        klong = mkHomeManager (mkPkgs nixpkgs-unstable { allowUnfree = true; })
+          home-manager "klong";
         juju =
           mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; }) home-manager
           "juju";
