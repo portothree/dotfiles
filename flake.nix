@@ -53,7 +53,7 @@
         { hostName, extraModules ? [ ] }:
         pkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs; };
+          specialArgs = { inherit inputs self; };
           modules = [
             {
               nix.registry.n.flake = pkgs;

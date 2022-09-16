@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, self, ... }:
 
 {
   imports = [
@@ -7,6 +7,14 @@
     ../platformio.nix
     ./hardware-configuration.nix
   ];
+  microvm = {
+    vms = {
+      oraculo = {
+        flake = self;
+        updateFlake = "microvm";
+      };
+    };
+  };
   boot = {
     loader = {
       systemd-boot = { enable = true; };
