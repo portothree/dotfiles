@@ -54,7 +54,7 @@
         { hostName, extraModules ? [ ] }:
         pkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs; };
+          specialArgs = { inherit inputs self; };
           modules = [
             {
               nix.registry.n.flake = pkgs;
@@ -108,21 +108,6 @@
           extraModules = [
             nixos-hardware.nixosModules.common-cpu-amd
             microvm.nixosModules.host
-            {
-              microvm = {
-                volumes = [{
-                  mountPoint = "/var";
-                  image = "/tmp/${volumeName}.img";
-                  size = 2048;
-                }];
-                vms = {
-                  "staging" = {
-                    flake = self;
-                    updateFlake = "microvm";
-                  };
-                };
-              };
-            }
           ];
         };
         klong = mkNixosSystem nixpkgs { hostName = "klong"; };

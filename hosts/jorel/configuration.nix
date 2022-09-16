@@ -5,6 +5,7 @@
     ../../modules/system
     ../common.nix
     ../platformio.nix
+    ./microvm.nix
     ./hardware-configuration.nix
   ];
   boot = {
