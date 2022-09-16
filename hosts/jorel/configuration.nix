@@ -1,7 +1,6 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, self, ... }:
 
-let inherit (inputs) jorel-microvm;
-in {
+{
   imports = [
     ../../modules/system
     ../common.nix
@@ -10,8 +9,8 @@ in {
   ];
   microvm = {
     vms = {
-      jorel = {
-        flake = jorel-microvm;
+      oraculo = {
+        flake = self;
         updateFlake = "microvm";
       };
     };

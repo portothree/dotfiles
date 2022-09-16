@@ -33,11 +33,10 @@
     nixgl.url = "github:guibou/nixGL";
     pre-commit-hooks = { url = "github:cachix/pre-commit-hooks.nix"; };
     scripts.url = "path:./bin";
-    jorel-microvm.url = "path:./hosts/jorel/microvm";
   };
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager
     , home-manager-unstable, nixos-hardware, microvm, nixgl, pre-commit-hooks
-    , scripts, jorel-microvm, ... }@inputs:
+    , scripts, ... }@inputs:
     let
       system = "x86_64-linux";
       username = "porto";
