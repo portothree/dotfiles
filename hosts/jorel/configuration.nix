@@ -1,13 +1,21 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
-{
+let inherit (inputs) jorel-microvm;
+in {
   imports = [
     ../../modules/system
     ../common.nix
     ../platformio.nix
-    ./microvm.nix
     ./hardware-configuration.nix
   ];
+  microvm = {
+    vms = {
+      jorel = {
+        flake = jorel-microvm;
+        updateFlake = "microvm";
+      };
+    };
+  };
   boot = {
     loader = {
       systemd-boot = { enable = true; };
