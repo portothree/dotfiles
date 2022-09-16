@@ -42,6 +42,7 @@
       username = "porto";
       homeDirectory = "/home/porto";
       shellScriptPkgs = scripts.packages.${system};
+      volumeName = builtins.baseNameOf ./.;
       mkPkgs = pkgs:
         { overlays ? [ ], allowUnfree ? false }:
         import pkgs {
@@ -107,6 +108,21 @@
           extraModules = [
             nixos-hardware.nixosModules.common-cpu-amd
             microvm.nixosModules.host
+            {
+              microvm = {
+                volumes = [{
+                  mountPoint = "/var";
+                  image = "/tmp/${volumeName}.img";
+                  size = 2048;
+                }];
+                vms = {
+                  "staging" = {
+                    flake = self;
+                    updateFlake = "microvm";
+                  };
+                };
+              };
+            }
           ];
         };
         klong = mkNixosSystem nixpkgs { hostName = "klong"; };
