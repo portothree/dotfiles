@@ -100,7 +100,10 @@
             namecoin-core.nixosModules.namecoin-core
           ];
         };
-        klong = mkNixosSystem nixpkgs { hostName = "klong"; };
+        klong = mkNixosSystem nixpkgs {
+          hostName = "klong";
+          extraModules = [ namecoin-core.nixosModules.namecoin-core ];
+        };
         juju = mkNixosSystem nixpkgs { hostName = "juju"; };
         oraculo = mkQemuMicroVM nixpkgs {
           hostName = "oraculo";
