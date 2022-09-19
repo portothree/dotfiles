@@ -38,6 +38,7 @@
     pathsToLink = [ "/share/icons" "/share/mime" "/share/zsh" ];
   };
   services = {
+    namecoin-core.enable = true;
     openssh = { enable = true; };
     xserver = {
       enable = true;

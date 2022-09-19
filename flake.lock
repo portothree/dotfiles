@@ -114,11 +114,11 @@
         "utils": "utils_2"
       },
       "locked": {
-        "lastModified": 1663583043,
-        "narHash": "sha256-iqac4swSjeNLCwGTe47m+27YRS6FbR/jqHN/63u9pA0=",
+        "lastModified": 1663585305,
+        "narHash": "sha256-dT9OHMJRoEaaNWJefy4gqUV9xFRxFIQVUbR3aLy6Ppc=",
         "owner": "portothree",
         "repo": "namecoin-core",
-        "rev": "d2b3d246b37a52c6c44b5ed7f18307a480d59205",
+        "rev": "4148bfaa70f0ec9d24ecda56fad426b1dfee62fc",
         "type": "github"
       },
       "original": {
