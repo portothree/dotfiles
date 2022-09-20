@@ -50,13 +50,14 @@
           config.allowUnfree = allowUnfree;
         };
       mkNixosSystem = pkgs:
-        { hostName, extraModules ? [ ] }:
+        { hostName, allowUnfree ? false, extraModules ? [ ] }:
         pkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs self; };
           modules = [
             {
               nix.registry.n.flake = pkgs;
+              nixpkgs.config.allowUnfree = allowUnfree;
               networking = { inherit hostName; };
             }
             ./hosts/${hostName}/configuration.nix
@@ -104,6 +105,7 @@
       nixosConfigurations = {
         jorel = mkNixosSystem nixpkgs {
           hostName = "jorel";
+          allowUnfree = true;
           extraModules = [
             nixos-hardware.nixosModules.common-cpu-amd
             microvm.nixosModules.host
