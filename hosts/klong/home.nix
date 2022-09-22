@@ -35,7 +35,6 @@
       acpi
       brightnessctl
       ledger-live-desktop
-      platformio
       nextdns
     ];
     sessionVariables = { EDITOR = "nvim"; };

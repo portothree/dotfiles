@@ -3,8 +3,8 @@
 {
   imports = [
     ../../modules/system
+    ../../config/platformio.nix
     ../common.nix
-    ../platformio.nix
     ./hardware-configuration.nix
   ];
   microvm = {
@@ -93,11 +93,7 @@
       '';
     };
   };
-  nixpkgs = {
-    config = {
-      pulseaudio = true;
-    };
-  };
+  nixpkgs = { config = { pulseaudio = true; }; };
   nix = {
     enable = true;
     package = pkgs.nixFlakes;
