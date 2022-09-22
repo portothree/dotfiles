@@ -1,7 +1,8 @@
 { pkgs, ... }:
 
 {
-  imports = [ ./hardware-configuration.nix ../common.nix ];
+  imports =
+    [ ./hardware-configuration.nix ../common.nix ../../config/platformio.nix ];
   boot = {
     loader = {
       efi = {
