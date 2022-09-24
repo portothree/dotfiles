@@ -31,12 +31,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixgl.url = "github:guibou/nixGL";
-    pre-commit-hooks = { url = "github:cachix/pre-commit-hooks.nix"; };
+    pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
+    netkit.url = "github:icebox-nix/netkit.nix";
     scripts.url = "path:./bin";
   };
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager
     , home-manager-unstable, nixos-hardware, microvm, nixgl, pre-commit-hooks
-    , scripts, ... }@inputs:
+    , netkit, scripts, ... }@inputs:
     let
       system = "x86_64-linux";
       username = "porto";
@@ -111,7 +112,10 @@
             microvm.nixosModules.host
           ];
         };
-        klong = mkNixosSystem nixpkgs { hostName = "klong"; };
+        klong = mkNixosSystem nixpkgs {
+          hostName = "klong";
+          extraModules = [ netkit.nixosModule ];
+        };
         juju = mkNixosSystem nixpkgs { hostName = "juju"; };
         oraculo = mkQemuMicroVM nixpkgs {
           hostName = "oraculo";

@@ -33,6 +33,20 @@
       };
     };
   };
+  netkit = {
+    xmm7360 = {
+      enable = true;
+      autoStart = true;
+      config = {
+        mycard = {
+          apn = "umts";
+          nodefaultroute = false;
+          noresolv = true;
+        };
+      };
+      package = pkgs.xmm7360-pci_5_7;
+    };
+  };
   environment = {
     systemPackages = with pkgs; [ wget curl xsecurelock ];
     variables = { EDITOR = "nvim"; };
