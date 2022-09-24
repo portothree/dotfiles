@@ -297,7 +297,8 @@
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "pre-commit-hooks": "pre-commit-hooks",
-        "scripts": "scripts"
+        "scripts": "scripts",
+        "std": "std"
       }
     },
     "scripts": {
@@ -313,6 +314,21 @@
       "original": {
         "path": "./bin",
         "type": "path"
+      }
+    },
+    "std": {
+      "locked": {
+        "lastModified": 1602140592,
+        "narHash": "sha256-XRFv8L7axOuFf2pCsX/YNQ4Y7VwMuhZ8kjbHyNOs0wI=",
+        "owner": "icebox-nix",
+        "repo": "std",
+        "rev": "86d9e8966205afdb940abf46f1f9cff6d03a3f5c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "icebox-nix",
+        "repo": "std",
+        "type": "github"
       }
     },
     "utils": {

@@ -32,12 +32,13 @@
     };
     nixgl.url = "github:guibou/nixGL";
     pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
+    std.url = "github:icebox-nix/std";
     netkit.url = "github:icebox-nix/netkit.nix";
     scripts.url = "path:./bin";
   };
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager
     , home-manager-unstable, nixos-hardware, microvm, nixgl, pre-commit-hooks
-    , netkit, scripts, ... }@inputs:
+    , std, netkit, scripts, ... }@inputs:
     let
       system = "x86_64-linux";
       username = "porto";
@@ -51,14 +52,17 @@
           config.allowUnfree = allowUnfree;
         };
       mkNixosSystem = pkgs:
-        { hostName, allowUnfree ? false, extraModules ? [ ] }:
+        { hostName, allowUnfree ? false, extraModules ? [ ], overlays ? [ ] }:
         pkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs self; };
           modules = [
             {
               nix.registry.n.flake = pkgs;
-              nixpkgs.config.allowUnfree = allowUnfree;
+              nixpkgs = {
+                config.allowUnfree = allowUnfree;
+                inherit overlays;
+              };
               networking = { inherit hostName; };
             }
             ./hosts/${hostName}/configuration.nix
@@ -114,7 +118,8 @@
         };
         klong = mkNixosSystem nixpkgs {
           hostName = "klong";
-          extraModules = [ netkit.nixosModule ];
+          extraModules = [ std.nixosModule netkit.nixosModule ];
+          overlays = [ netkit.overlay ];
         };
         juju = mkNixosSystem nixpkgs { hostName = "juju"; };
         oraculo = mkQemuMicroVM nixpkgs {
