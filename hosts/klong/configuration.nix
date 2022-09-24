@@ -38,11 +38,9 @@
       enable = true;
       autoStart = true;
       config = {
-        mycard = {
-          apn = "umts";
-          nodefaultroute = false;
-          noresolv = true;
-        };
+        apn = "umts";
+        nodefaultroute = false;
+        noresolv = true;
       };
       package = pkgs.netkit.xmm7360-pci_latest;
     };
