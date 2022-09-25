@@ -24,7 +24,6 @@
       ledger
       tasksh
       vit
-      timewarrior
       weechat
       pulsemixer
       nudoku
@@ -183,6 +182,7 @@
       enable = true;
       gcalcli = false;
     };
+    timewarrior.enable = true;
     neovim.enable = true;
     nodejs.enable = true;
     gcalcli = {
