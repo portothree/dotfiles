@@ -5,6 +5,7 @@
     ./anki
     ./androidTools
     ./bun
+    ./bspwm
     ./dunst
     ./dockerTools
     ./tmux
@@ -14,6 +15,8 @@
     ./alacritty
     ./gcalcli
     ./jrnl
+    ./sxhkd
+    ./spotify
     ./xinit
     ./xournalpp
     ./zsh
