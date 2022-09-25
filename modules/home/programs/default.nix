@@ -8,9 +8,7 @@
     ./dunst
     ./dockerTools
     ./tmux
-    ./bspwm
-    ./sxhkd
-    ./spotify
+    ./timewarrior
     ./nodejs
     ./neovim
     ./alacritty
