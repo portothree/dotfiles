@@ -28,6 +28,7 @@
     sd
     fd
     cachix
+    stow
   ];
   programs = { home-manager = { enable = true; }; };
   xdg = { enable = true; };
