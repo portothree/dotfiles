@@ -250,6 +250,7 @@
     nodejs.enable = true;
     neovim.enable = true;
     gcalcli.enable = true;
+    timewarrior.enable = true;
     dockerTools.enable = true;
     jrnl = {
       enable = true;

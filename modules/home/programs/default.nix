@@ -5,17 +5,18 @@
     ./anki
     ./androidTools
     ./bun
+    ./bspwm
     ./dunst
     ./dockerTools
     ./tmux
-    ./bspwm
-    ./sxhkd
-    ./spotify
+    ./timewarrior
     ./nodejs
     ./neovim
     ./alacritty
     ./gcalcli
     ./jrnl
+    ./sxhkd
+    ./spotify
     ./xinit
     ./xournalpp
     ./zsh

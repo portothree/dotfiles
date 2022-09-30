@@ -1,12 +1,20 @@
-{ config, pkgs, ... }:
+{ config, pkgs, self, ... }:
 
 {
   imports = [
     ../../modules/system
+    ../../config/platformio.nix
     ../common.nix
-    ../platformio.nix
     ./hardware-configuration.nix
   ];
+  microvm = {
+    vms = {
+      oraculo = {
+        flake = self;
+        updateFlake = "microvm";
+      };
+    };
+  };
   boot = {
     loader = {
       systemd-boot = { enable = true; };
@@ -85,12 +93,7 @@
       '';
     };
   };
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-      pulseaudio = true;
-    };
-  };
+  nixpkgs = { config = { pulseaudio = true; }; };
   nix = {
     enable = true;
     package = pkgs.nixFlakes;

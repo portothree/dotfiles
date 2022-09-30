@@ -24,7 +24,6 @@
       ledger
       tasksh
       vit
-      timewarrior
       weechat
       pulsemixer
       nudoku
@@ -35,7 +34,6 @@
       acpi
       brightnessctl
       ledger-live-desktop
-      platformio
       nextdns
     ];
     sessionVariables = { EDITOR = "nvim"; };
@@ -184,6 +182,7 @@
       enable = true;
       gcalcli = false;
     };
+    timewarrior.enable = true;
     neovim.enable = true;
     nodejs.enable = true;
     gcalcli = {

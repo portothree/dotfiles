@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+nix develop --profile dev-profile
+cachix push portothree dev-profile
