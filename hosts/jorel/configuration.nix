@@ -46,6 +46,7 @@
     blueman = { enable = true; };
     udev = { packages = with pkgs; [ android-udev-rules ]; };
     nextdnsc = { enable = true; };
+    cachix-agent = { enable = true; };
     xserver = {
       enable = true;
       layout = "us";
