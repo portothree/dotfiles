@@ -1,12 +1,32 @@
 { pkgs, lib, config, ... }:
 
 with lib;
-let cfg = config.modules.weechat;
+let
+  cfg = config.modules.weechat;
+  scripts = cfg.scripts;
 in {
-  options.modules.weechat = { enable = mkEnableOption "weechat"; };
+  options.modules.weechat = {
+    enable = mkEnableOption "weechat";
+    scripts = mkOption {
+      type = types.listOf types.package;
+      default = [ ];
+      description = "List of weechat scripts to install.";
+    };
+  };
   config = mkIf cfg.enable {
     home = {
-      packages = with pkgs; [ weechat weechatScripts.wee-slack ];
+      packages = [
+        (pkgs.weechat.override {
+          configure = { availablePlugins, ... }: {
+            plugins = with availablePlugins; [
+              lua
+              perl
+              (python.withPackages (p: with p; [ websocket-client ]))
+            ];
+            scripts = cfg.scripts;
+          };
+        })
+      ];
       file.".weechat".source = pkgs.writeText "weechat.conf" ''
         /set relay.network.ssl on
         /set relay.network.ssl_verify off
