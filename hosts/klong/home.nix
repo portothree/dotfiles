@@ -16,7 +16,6 @@
       k9s
       kubectl
       glow
-      weechat
       pgcli
       mycli
       wuzz
@@ -24,7 +23,6 @@
       ledger
       tasksh
       vit
-      weechat
       pulsemixer
       nudoku
       dijo

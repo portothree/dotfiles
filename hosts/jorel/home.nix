@@ -17,14 +17,12 @@
       cava
       astyle
       glow
-      weechat
       pgcli
       mycli
       wuzz
       websocat
       tasksh
       vit
-      weechat
       pulsemixer
       nudoku
       steamPackages.steamcmd
@@ -258,6 +256,7 @@
         /home/porto/www/portothree/memex/trails/jrnl/journal.txt;
       editor = "nvim";
     };
+    weechat.enable = true;
     xournalpp.enable = true;
     zsh.enable = true;
   };
