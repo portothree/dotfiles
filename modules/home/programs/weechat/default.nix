@@ -29,8 +29,8 @@ in {
       ];
       file.".weechat/weechat.conf".source =
         ../../../../config/weechat/weechat.conf;
-      file.".weechat/scripts/theme.py".source =
-        ../../../../config/weechat/scripts/theme.py;
+      file.".weechat/python/theme.py".source =
+        ../../../../config/python/scripts/theme.py;
       file.".weechat/themes/flashcode.theme".source =
         ../../../../config/weechat/themes/flashcode.theme;
     };
