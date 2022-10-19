@@ -27,11 +27,11 @@ in {
           };
         })
       ];
-      file.".weechat/weechat.conf".source =
+      file.".config/weechat/weechat.conf".source =
         ../../../../config/weechat/weechat.conf;
-      file.".weechat/python/theme.py".source =
+      file.".config/weechat/python/theme.py".source =
         ../../../../config/weechat/python/theme.py;
-      file.".weechat/themes/flashcode.theme".source =
+      file.".config/weechat/themes/flashcode.theme".source =
         ../../../../config/weechat/themes/flashcode.theme;
     };
   };
