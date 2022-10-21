@@ -1,8 +1,12 @@
 { pkgs, ... }:
 
 {
-  imports =
-    [ ./hardware-configuration.nix ../common.nix ../../config/platformio.nix ];
+  imports = [
+    ./hardware-configuration.nix
+    ../common.nix
+    ../../config/platformio.nix
+    ../../modules/system
+  ];
   boot = {
     loader = {
       efi = {
@@ -50,6 +54,7 @@
       };
       displayManager = { startx = { enable = true; }; };
     };
+    nextdnsc = { enable = true; };
     blueman.enable = true;
   };
   sound.enable = true;
