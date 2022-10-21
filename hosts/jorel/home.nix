@@ -258,11 +258,7 @@
     };
     weechat = {
       enable = true;
-      scripts = with pkgs.weechatScripts; [
-        wee-slack
-        weechat-autosort
-        url_hint
-      ];
+      scripts = with pkgs.weechatScripts; [ wee-slack ];
     };
     xournalpp.enable = true;
     zsh.enable = true;
