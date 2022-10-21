@@ -50,6 +50,7 @@
       };
       displayManager = { startx = { enable = true; }; };
     };
+    nextdnsc = { enable = true; };
     blueman.enable = true;
   };
   sound.enable = true;
