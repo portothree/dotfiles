@@ -18,6 +18,7 @@
     ./sxhkd
     ./spotify
     ./xinit
+    ./wally
     ./weechat
     ./xournalpp
     ./zsh
