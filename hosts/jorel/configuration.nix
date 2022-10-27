@@ -45,9 +45,7 @@
     clight = { enable = false; };
     openssh = { enable = true; };
     blueman = { enable = true; };
-    udev = {
-      packages = with pkgs; [ android-udev-rules ];
-    };
+    udev = { packages = with pkgs; [ android-udev-rules ]; };
     nextdnsc = { enable = true; };
     xserver = {
       enable = true;
