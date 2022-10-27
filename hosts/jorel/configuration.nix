@@ -4,6 +4,7 @@
   imports = [
     ../../modules/system
     ../../config/platformio.nix
+    ../../config/zsa.nix
     ../common.nix
     ./hardware-configuration.nix
   ];
@@ -68,7 +69,7 @@
     users = {
       porto = {
         isNormalUser = true;
-        extraGroups = [ "wheel" "audio" "dialout" "docker" ];
+        extraGroups = [ "wheel" "audio" "dialout" "docker" "plugdev" ];
         shell = pkgs.zsh;
       };
     };

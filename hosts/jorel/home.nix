@@ -256,6 +256,7 @@
         /home/porto/www/portothree/memex/trails/jrnl/journal.txt;
       editor = "nvim";
     };
+    wally.enable = true;
     weechat = {
       enable = true;
       scripts = with pkgs.weechatScripts; [ wee-slack ];
