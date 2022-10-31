@@ -38,12 +38,12 @@
     };
   };
   environment = {
-    systemPackages = with pkgs; [ wget curl xsecurelock ];
+    systemPackages = with pkgs; [ wget curl xsecurelock tailscale ];
     variables = { EDITOR = "nvim"; };
     pathsToLink = [ "/share/icons" "/share/mime" "/share/zsh" ];
   };
   services = {
-    openssh = { enable = true; };
+    openssh.enable = true;
     xserver = {
       enable = true;
       layout = "us";
@@ -54,7 +54,8 @@
       };
       displayManager = { startx = { enable = true; }; };
     };
-    nextdnsc = { enable = true; };
+    nextdnsc.enable = true;
+    tailscale.enable = true;
     blueman.enable = true;
   };
   sound.enable = true;

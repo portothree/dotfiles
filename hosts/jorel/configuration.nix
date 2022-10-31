@@ -77,7 +77,7 @@
     };
   };
   environment = {
-    systemPackages = with pkgs; [ wget curl xsecurelock ];
+    systemPackages = with pkgs; [ wget curl xsecurelock tailscale ];
     variables = { EDITOR = "nvim"; };
     pathsToLink = [ "/share/icons" "/share/mime" "/share/zsh" ];
   };
