@@ -33,6 +33,7 @@
     firewall = {
       allowedTCPPorts = [ 53 ];
       allowedUDPPorts = [ 53 ];
+      checkReversePath = false;
     };
     nameservers = [ "45.90.28.156" "45.90.30.156" ];
   };
@@ -47,6 +48,7 @@
     blueman = { enable = true; };
     udev = { packages = with pkgs; [ android-udev-rules ]; };
     nextdnsc = { enable = true; };
+    tailscale = { enable = true; };
     xserver = {
       enable = true;
       layout = "us";
@@ -75,7 +77,7 @@
     };
   };
   environment = {
-    systemPackages = with pkgs; [ wget curl xsecurelock ];
+    systemPackages = with pkgs; [ wget curl xsecurelock tailscale ];
     variables = { EDITOR = "nvim"; };
     pathsToLink = [ "/share/icons" "/share/mime" "/share/zsh" ];
   };

@@ -23,6 +23,11 @@
     useDHCP = false;
     interfaces = { wlp0s20f3 = { useDHCP = true; }; };
     nameservers = [ "192.168.1.106" "208.67.222.222" "208.67.220.220" ];
+    firewall = {
+      allowedTCPPorts = [ 53 ];
+      allowedUDPPorts = [ 53 ];
+      checkReversePath = false;
+    };
     wireless = {
       enable = true;
       userControlled.enable = true;
@@ -38,12 +43,12 @@
     };
   };
   environment = {
-    systemPackages = with pkgs; [ wget curl xsecurelock ];
+    systemPackages = with pkgs; [ wget curl xsecurelock tailscale ];
     variables = { EDITOR = "nvim"; };
     pathsToLink = [ "/share/icons" "/share/mime" "/share/zsh" ];
   };
   services = {
-    openssh = { enable = true; };
+    openssh.enable = true;
     xserver = {
       enable = true;
       layout = "us";
@@ -54,7 +59,8 @@
       };
       displayManager = { startx = { enable = true; }; };
     };
-    nextdnsc = { enable = true; };
+    nextdnsc.enable = true;
+    tailscale.enable = true;
     blueman.enable = true;
   };
   sound.enable = true;
