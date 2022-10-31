@@ -23,6 +23,7 @@
     useDHCP = false;
     interfaces = { wlp0s20f3 = { useDHCP = true; }; };
     nameservers = [ "192.168.1.106" "208.67.222.222" "208.67.220.220" ];
+    firewall = { checkReversePath = false; };
     wireless = {
       enable = true;
       userControlled.enable = true;
