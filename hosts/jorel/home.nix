@@ -38,6 +38,7 @@
       bitwarden-cli
       v4l-utils
       nextdns
+      tailscale
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
