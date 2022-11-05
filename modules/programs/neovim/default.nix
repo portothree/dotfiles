@@ -32,10 +32,10 @@ in {
       ];
       extraConfig = builtins.concatStringsSep "\n" [''
         lua << EOF
-        ${lib.strings.fileContents ../../../../config/neovim/init.lua}
-        ${lib.strings.fileContents ../../../../config/neovim/utils.lua}
-        ${lib.strings.fileContents ../../../../config/neovim/settings.lua}
-        ${lib.strings.fileContents ../../../../config/neovim/maps.lua}
+        ${lib.strings.fileContents ../../../config/neovim/init.lua}
+        ${lib.strings.fileContents ../../../config/neovim/utils.lua}
+        ${lib.strings.fileContents ../../../config/neovim/settings.lua}
+        ${lib.strings.fileContents ../../../config/neovim/maps.lua}
         EOF
       ''];
     };
