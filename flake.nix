@@ -50,7 +50,7 @@
           inherit homeDirectory;
           inherit pkgs;
           extraSpecialArgs = { inherit shellScriptPkgs; };
-          configuration = import ./hosts/${hostName}/home.nix;
+          configuration = import ./profiles/${hostName}/home.nix;
         };
     in {
       checks.${system}.pre-commit-check = pre-commit-hooks.lib.${system}.run {
