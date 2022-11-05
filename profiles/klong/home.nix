@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../../modules/home
+    ../../modules
     ../../home-manager
     ../../config/git.nix
     ../../config/ranger.nix
