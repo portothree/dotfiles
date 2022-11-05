@@ -1,5 +1,8 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, config, ... }:
+
+with lib;
 let
+  cfg = config.modules.neovim;
   pluginGitHub = repo: version: rev:
     pkgs.vimUtils.buildVimPluginFrom2Nix {
       pname = "${lib.strings.sanitizeDerivationName repo}";
@@ -10,8 +13,9 @@ let
       };
     };
 in {
-  programs = {
-    neovim = {
+  options.modules.neovim = { enable = mkEnableOption "neovim"; };
+  config = mkIf cfg.enable {
+    programs.neovim = {
       enable = true;
       viAlias = true;
       vimAlias = true;
@@ -19,19 +23,19 @@ in {
       withNodeJs = true;
       plugins = with pkgs.vimPlugins; [
         vim-polyglot
-        vim-fugitive
-        vim-prettier
         editorconfig-vim
         copilot-vim
         YouCompleteMe
         ale
+        onedarkpro-nvim
+        nvim-treesitter
       ];
       extraConfig = builtins.concatStringsSep "\n" [''
         lua << EOF
-        ${lib.strings.fileContents ./neovim/init.lua}
-        ${lib.strings.fileContents ./neovim/utils.lua}
-        ${lib.strings.fileContents ./neovim/settings.lua}
-        ${lib.strings.fileContents ./neovim/maps.lua}
+        ${lib.strings.fileContents ../../../config/neovim/init.lua}
+        ${lib.strings.fileContents ../../../config/neovim/utils.lua}
+        ${lib.strings.fileContents ../../../config/neovim/settings.lua}
+        ${lib.strings.fileContents ../../../config/neovim/maps.lua}
         EOF
       ''];
     };

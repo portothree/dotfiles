@@ -3,7 +3,7 @@
 {
   imports = [
     ../../home-manager
-    ../../modules/home/programs
+    ../../modules
     ../../config/git.nix
     ../../config/ranger.nix
     ../../config/keynav.nix

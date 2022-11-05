@@ -45,11 +45,11 @@ in {
         })
       ];
       file.".config/weechat/weechat.conf".source =
-        ../../../../config/weechat/weechat.conf;
+        ../../../config/weechat/weechat.conf;
       file.".local/share/weechat/python/autoload/theme.py".source =
-        ../../../../config/weechat/python/theme.py;
+        ../../../config/weechat/python/theme.py;
       file.".config/weechat/themes/flashcode.theme".source =
-        ../../../../config/weechat/themes/flashcode.theme;
+        ../../../config/weechat/themes/flashcode.theme;
     };
   };
 }
