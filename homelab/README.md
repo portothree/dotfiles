@@ -52,8 +52,25 @@ In [layer 2](https://metallb.org/concepts/layer2/) mode and ip pool of `192.168.
 
 The VM with id `102` have a Nvidia 3060 Ti GPU allocated that is being used to mine Ethereum and Ton using [lolminer](https://github.com/Lolliedieb/lolMiner-releases)
 
+## NixOs
+
+```
+mkdir -p /mnt/etc/nixos
+nix-shell '<nixpkgs>' -p git vim
+git clone https://github.com/portothree/nixos-configs /mnt/etc/nixos
+
+
+nix-channel --add https://github.com/nix-community/home-manager/archive/release-21.11.tar.gz home-manager
+nix-channel --update
+
+nixos-generate-config --show-hardware-config >> /mnt/etc/nixos/hosts/<host>/hardware-configuration.nix
+nixos-install -I nixos-config=/mnt/etc/nixos/hosts/<host>/hardware-configuration.nix
+reboot
+```
+
 ## Resources
 
 - https://github.com/0dragosh/homelab-k3s
 - https://github.com/TUM-DSE/doctor-cluster-config/tree/master/modules/k3s
 - https://github.com/fluxcd/flux2-kustomize-helm-example
+

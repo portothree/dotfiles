@@ -1,0 +1,5 @@
+{ pkgs, config, ... }:
+
+{
+  imports = [ ./nextdns ];
+}
