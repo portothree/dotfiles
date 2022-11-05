@@ -1,5 +1,5 @@
 {
-  description = "@portothree nixos-configs";
+  description = "@portothree homelab";
   nixConfig = {
     extra-substituters = [
       "https://cache.garnix.io"
