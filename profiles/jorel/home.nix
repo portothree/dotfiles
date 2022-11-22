@@ -34,6 +34,7 @@
       bitwarden-cli
       v4l-utils
       nextdns
+      llama
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
