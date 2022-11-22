@@ -19,14 +19,10 @@
       glow
       pgcli
       mycli
-      wuzz
-      websocat
       tasksh
       vit
       pulsemixer
       nudoku
-      steamPackages.steamcmd
-      steam-tui
       playerctl
       spotify-tui
       nvtop

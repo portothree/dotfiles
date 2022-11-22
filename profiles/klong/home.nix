@@ -18,8 +18,6 @@
       glow
       pgcli
       mycli
-      wuzz
-      websocat
       ledger
       tasksh
       vit
