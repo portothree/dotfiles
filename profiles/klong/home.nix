@@ -31,6 +31,7 @@
       brightnessctl
       ledger-live-desktop
       nextdns
+      llama
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
