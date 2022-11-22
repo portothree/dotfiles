@@ -64,9 +64,8 @@
         };
       };
       homeConfigurations = {
-        jorel =
-          mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; }) home-manager
-          "jorel";
+        jorel = mkHomeManager (mkPkgs nixpkgs-unstable { allowUnfree = true; })
+          home-manager "jorel";
         klong = mkHomeManager (mkPkgs nixpkgs-unstable { allowUnfree = true; })
           home-manager "klong";
         juju =
