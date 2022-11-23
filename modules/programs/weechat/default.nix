@@ -38,18 +38,12 @@ in {
               /alias add open_url /url_hint_replace /exec -bg tmux new-window elinks {url$1}
               /key bind meta2-11~ /open_url 1
               /key bind meta2-12~ /open_url 2
-
-              /script load theme.py
             '';
           };
         })
       ];
       file.".config/weechat/weechat.conf".source =
         ../../../config/weechat/weechat.conf;
-      file.".local/share/weechat/python/autoload/theme.py".source =
-        ../../../config/weechat/python/theme.py;
-      file.".config/weechat/themes/flashcode.theme".source =
-        ../../../config/weechat/themes/flashcode.theme;
     };
   };
 }
