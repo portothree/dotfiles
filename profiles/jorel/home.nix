@@ -256,7 +256,14 @@
     wally.enable = true;
     weechat = {
       enable = true;
-      scripts = with pkgs.weechatScripts; [ wee-slack ];
+      scripts = with pkgs.weechatScripts; [
+        wee-slack
+        url_hint
+        weechat-autosort
+        buffer_autoset
+        multiline
+        weechat-go
+      ];
     };
     xournalpp.enable = true;
     zsh.enable = true;
