@@ -260,8 +260,6 @@
         wee-slack
         url_hint
         weechat-autosort
-        buffer_autoset
-        multiline
         weechat-go
       ];
     };
