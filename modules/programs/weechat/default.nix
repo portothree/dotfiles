@@ -29,7 +29,7 @@ in {
               /set plugins.var.python.slack.files_download_location "~/Downloads/"
               /set weechat.bar.buflist.size 30
 
-              /alias add open_url /url_hint_replace /exec -bg tmux new-window elinks {url$1}
+              /alias add open_url /url_hint_replace /exec -bg xdg-open {url$1}
               /key bind meta2-11~ /open_url 1
               /key bind meta2-12~ /open_url 2
             '';
