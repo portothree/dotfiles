@@ -186,6 +186,15 @@
       enable = true;
       enableNotifications = true;
     };
+    weechat = {
+      enable = true;
+      scripts = with pkgs.weechatScripts; [
+        wee-slack
+        url_hint
+        weechat-autosort
+        weechat-go
+      ];
+    };
     xournalpp.enable = true;
     zsh.enable = true;
   };
