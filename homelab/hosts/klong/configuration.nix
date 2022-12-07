@@ -5,7 +5,7 @@
     ./hardware-configuration.nix
     ../common.nix
     ../ledger.nix
-    ../../modules/system
+    ../../modules
   ];
   boot = {
     loader = {
