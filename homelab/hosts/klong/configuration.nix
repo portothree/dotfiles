@@ -59,7 +59,6 @@
       };
       displayManager = { startx = { enable = true; }; };
     };
-    nextdnsc.enable = true;
     tailscale.enable = true;
     blueman.enable = true;
   };
