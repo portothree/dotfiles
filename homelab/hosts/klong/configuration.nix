@@ -4,7 +4,7 @@
   imports = [
     ./hardware-configuration.nix
     ../common.nix
-    ../../config/platformio.nix
+    ../ledger.nix
     ../../modules/system
   ];
   boot = {
