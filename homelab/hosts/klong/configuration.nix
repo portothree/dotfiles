@@ -1,12 +1,7 @@
 { pkgs, ... }:
 
 {
-  imports = [
-    ./hardware-configuration.nix
-    ../common.nix
-    ../ledger.nix
-    ../../modules
-  ];
+  imports = [ ./hardware-configuration.nix ../common.nix ../../modules ];
   boot = {
     loader = {
       efi = {
@@ -49,6 +44,7 @@
   };
   services = {
     openssh.enable = true;
+    udev = { packages = with pkgs; [ ledger-udev-rules ]; };
     xserver = {
       enable = true;
       layout = "us";
