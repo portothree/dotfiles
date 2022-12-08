@@ -2,9 +2,9 @@
 
 {
   imports = [
-    ../../modules/system
-    ../../config/platformio.nix
-    ../../config/zsa.nix
+    ../../modules
+    ../platformio.nix
+    ../zsa.nix
     ../common.nix
     ./hardware-configuration.nix
   ];
@@ -46,7 +46,7 @@
     clight = { enable = false; };
     openssh = { enable = true; };
     blueman = { enable = true; };
-    udev = { packages = with pkgs; [ android-udev-rules ]; };
+    udev = { packages = with pkgs; [ ledger-udev-rules android-udev-rules ]; };
     nextdnsc = { enable = true; };
     tailscale = { enable = true; };
     xserver = {
