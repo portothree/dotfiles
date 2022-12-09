@@ -47,7 +47,6 @@
     openssh = { enable = true; };
     blueman = { enable = true; };
     udev = { packages = with pkgs; [ ledger-udev-rules android-udev-rules ]; };
-    nextdnsc = { enable = true; };
     tailscale = { enable = true; };
     xserver = {
       enable = true;
