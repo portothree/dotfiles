@@ -23,9 +23,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     pre-commit-hooks = { url = "github:cachix/pre-commit-hooks.nix"; };
+    k1x = { url = "github:p8sco/k1x"; };
   };
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nixos-hardware
-    , microvm, pre-commit-hooks, ... }@inputs:
+    , microvm, pre-commit-hooks, k1x, ... }@inputs:
     let
       system = "x86_64-linux";
       username = "porto";
@@ -119,6 +120,7 @@
       };
       devShells.${system}.default = import ./shell.nix {
         pkgs = mkPkgs nixpkgs-unstable { };
+        packages = [ k1x.packages.${system}.default ];
         inherit (self.checks.${system}.pre-commit-check) shellHook;
       };
     };
