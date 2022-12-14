@@ -208,7 +208,7 @@
       enable = true;
       loadAutoconfig = true;
       extraConfig = ''
-        start_page = "/home/porto/www/startpage/index.html"
+        start_page = "https://cs.github.com"
         c.url.default_page = start_page 
         c.url.start_pages = [ start_page ]
       '';
