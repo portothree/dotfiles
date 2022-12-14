@@ -96,11 +96,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1669740584,
-        "narHash": "sha256-rHxz/olYeCx9GHjJTZElkVCVo4aXaP9FNaQ8oyCLz9A=",
+        "lastModified": 1670970889,
+        "narHash": "sha256-TWJo3/X3Q3r+HeX16QN4FE6ddBpGtAboymSEF+4Nnc0=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "3b0a446bbf29cfeb78e0d1a8210bdf6fae8efccd",
+        "rev": "e412025fffdcd6219ddd21c65d9a1b90005ce508",
         "type": "github"
       },
       "original": {
@@ -161,11 +161,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1669542132,
-        "narHash": "sha256-DRlg++NJAwPh8io3ExBJdNW7Djs3plVI5jgYQ+iXAZQ=",
+        "lastModified": 1670929434,
+        "narHash": "sha256-n5UBO6XBV4h3TB7FYu2yAuNQMEYOrQyKeODUwKe06ow=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "a115bb9bd56831941be3776c8a94005867f316a7",
+        "rev": "1710ed1f6f8ceb75cf7d1cf55ee0cc21760e1c7a",
         "type": "github"
       },
       "original": {
@@ -176,11 +176,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1669546925,
-        "narHash": "sha256-Gvtk9agz88tBgqmCdHl5U7gYttTkiuEd8/Rq1Im0pTg=",
+        "lastModified": 1670700605,
+        "narHash": "sha256-5dlpATkcyITpdtMflhltuD+A3RNpsVI1Mb+dtKkll6Y=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "fecf05d4861f3985e8dee73f08bc82668ef75125",
+        "rev": "7b9eeb856cbf976482fa8d1cb295ea03fb3e1277",
         "type": "github"
       },
       "original": {
@@ -229,11 +229,11 @@
         "nixpkgs-stable": "nixpkgs-stable"
       },
       "locked": {
-        "lastModified": 1669152228,
-        "narHash": "sha256-FEDReoTLWJHXcNso7aaAlAUU7uOqIR6Hc/C/nqlfooE=",
+        "lastModified": 1670413394,
+        "narHash": "sha256-M7sWqrKtOqUv9euX1t3HCxis8cPy9MNiZxQmUf0KF1o=",
         "owner": "cachix",
         "repo": "pre-commit-hooks.nix",
-        "rev": "078b0dee35e2da01334af682ec347463b70a9986",
+        "rev": "1303a1a76e9eb074075bfe566518c413f6fc104e",
         "type": "github"
       },
       "original": {
@@ -259,7 +259,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-58xsUkvVCmtd/M4SVNGgvr6Bu89HonOCkw2uGk8C/78=",
+        "narHash": "sha256-ITW/EuMSU6WuxQ7MtBSR1TWxhy7gfhEnkU37WEH4Wzg=",
         "path": "./bin",
         "type": "path"
       },
