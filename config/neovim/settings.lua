@@ -1,4 +1,4 @@
 vim.cmd('syntax on')
 vim.cmd('set number')
-vim.cmd('colorscheme onedarkpro')
+vim.cmd('colorscheme onedark_dark')
 
