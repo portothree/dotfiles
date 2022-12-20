@@ -145,11 +145,11 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "lastModified": 1671566216,
-        "narHash": "sha256-bQW+ANtnp3luKtzj231EEcyCyHifZgTLPxpmPaYPRCc=",
+        "lastModified": 1671566473,
+        "narHash": "sha256-uOE72uKI5rIEURyux5UetF5UemOaHnHLlctFjOs0NIs=",
         "owner": "p8sco",
         "repo": "k1x",
-        "rev": "b48e7e6a3195e85ff6da40354dc7b11d8051b35c",
+        "rev": "958d1c06dcc60967ba4c26edfe420dfef3a7a2e4",
         "type": "github"
       },
       "original": {
