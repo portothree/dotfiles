@@ -127,7 +127,7 @@
               primary = true;
               position = "0x0";
               mode = "1920x1080";
-              rotate = "normal";
+              rotate = "left";
             };
             "HDMI-0" = {
               enable = true;
