@@ -134,7 +134,7 @@
               primary = false;
               position = "1920x0";
               mode = "1920x1080";
-              rotate = "normal";
+              rotate = "right";
             };
           };
         };
