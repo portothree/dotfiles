@@ -15,10 +15,10 @@
     ];
   };
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-22.05";
+    nixpkgs.url = "nixpkgs/nixos-22.11";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-22.05";
+      url = "github:nix-community/home-manager/release-22.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager-unstable = {
@@ -33,8 +33,6 @@
     , home-manager-unstable, nixgl, pre-commit-hooks, scripts, ... }@inputs:
     let
       system = "x86_64-linux";
-      username = "porto";
-      homeDirectory = "/home/porto";
       shellScriptPkgs = scripts.packages.${system};
       mkPkgs = pkgs:
         { overlays ? [ ], allowUnfree ? false }:
@@ -45,12 +43,10 @@
         };
       mkHomeManager = pkgs: hm: hostName:
         hm.lib.homeManagerConfiguration {
-          inherit system;
-          inherit username;
-          inherit homeDirectory;
           inherit pkgs;
+          modules = [ ./profiles/${hostName}/home.nix ];
           extraSpecialArgs = { inherit shellScriptPkgs; };
-          configuration = import ./profiles/${hostName}/home.nix;
+
         };
     in {
       checks.${system}.pre-commit-check = pre-commit-hooks.lib.${system}.run {
