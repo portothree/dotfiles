@@ -10,6 +10,9 @@
     ../../config/rofi.nix
   ];
   home = {
+    stateVersion = "22.11";
+    username = "porto";
+    homeDirectory = "/home/porto";
     packages = with pkgs; [
       st
       k9s
@@ -99,9 +102,6 @@
       enable = true;
       backend = "glx";
       vSync = true;
-      extraOptions = ''
-        unredir-if-possible = false;
-      '';
     };
     keynav = { enable = true; };
     unclutter = {
