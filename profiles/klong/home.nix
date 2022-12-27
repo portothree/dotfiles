@@ -11,6 +11,9 @@
     ../../config/rofi.nix
   ];
   home = {
+    stateVersion = "22.11";
+    username = "porto";
+    homeDirectory = "/home/porto";
     packages = with pkgs; [
       bitwarden-cli
       k9s
@@ -30,6 +33,8 @@
       acpi
       brightnessctl
       ledger-live-desktop
+      monero-gui
+      monero-cli
       nextdns
       llama
     ];
