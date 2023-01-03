@@ -38,6 +38,7 @@
       v4l-utils
       nextdns
       llama
+      rescuetime
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
