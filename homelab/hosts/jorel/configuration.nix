@@ -35,7 +35,8 @@
       allowedUDPPorts = [ 53 ];
       checkReversePath = false;
     };
-    nameservers = [ "45.90.28.156" "45.90.30.156" ];
+    nameservers = [ "100.100.100.100" ];
+    search = [ "tailea386.ts.net" ];
   };
   location = {
     # Lisbon, Portugal
