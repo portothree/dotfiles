@@ -7,3 +7,8 @@
 .k1x*
 
 .env
+
+# Devenv
+.devenv*
+devenv.local.nix
+
