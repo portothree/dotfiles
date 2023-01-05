@@ -24,9 +24,10 @@
     };
     pre-commit-hooks = { url = "github:cachix/pre-commit-hooks.nix"; };
     k1x = { url = "github:p8sco/k1x"; };
+    devenv = { url = "github:cachix/devenv/v0.5"; };
   };
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nixos-hardware
-    , microvm, pre-commit-hooks, k1x, ... }@inputs:
+    , microvm, pre-commit-hooks, k1x, devenv, ... }@inputs:
     let
       system = "x86_64-linux";
       username = "porto";
@@ -82,6 +83,10 @@
           shellcheck = { enable = true; };
         };
       };
+      packages.${system} = {
+        k1x = k1x.packages.${system}.default;
+        devenv = devenv.packages.${system}.devenv;
+      };
       nixosConfigurations = {
         jorel = mkNixosSystem nixpkgs {
           hostName = "jorel";
@@ -117,11 +122,6 @@
             })
           ];
         };
-      };
-      devShells.${system}.default = import ./shell.nix {
-        pkgs = mkPkgs nixpkgs-unstable { };
-        packages = [ k1x.packages.${system}.default ];
-        inherit (self.checks.${system}.pre-commit-check) shellHook;
       };
     };
 }
