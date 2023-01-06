@@ -49,6 +49,7 @@ in {
     openssh = {
       enable = true;
       openFirewall = false;
+      permitRootLogin = "no";
     };
     blueman = { enable = true; };
     udev = { packages = with pkgs; [ ledger-udev-rules android-udev-rules ]; };
