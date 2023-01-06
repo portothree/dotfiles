@@ -149,7 +149,7 @@
       enable = true;
       loadAutoconfig = true;
       extraConfig = ''
-        start_page = "https://cs.github.com"
+        start_page = "https://github.com/search"
         c.url.default_page = start_page 
         c.url.start_pages = [ start_page ]
       '';
