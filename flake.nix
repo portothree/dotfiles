@@ -46,7 +46,6 @@
           inherit pkgs;
           modules = [ ./profiles/${hostName}/home.nix ];
           extraSpecialArgs = { inherit shellScriptPkgs; };
-
         };
     in {
       checks.${system}.pre-commit-check = pre-commit-hooks.lib.${system}.run {
@@ -59,6 +58,7 @@
           shellcheck = { enable = true; };
         };
       };
+      packages.${system} = { scripts = shellScriptPkgs; };
       homeConfigurations = {
         jorel = mkHomeManager (mkPkgs nixpkgs-unstable { allowUnfree = true; })
           home-manager "jorel";
