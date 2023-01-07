@@ -33,7 +33,7 @@
     , home-manager-unstable, nixgl, pre-commit-hooks, scripts, ... }@inputs:
     let
       system = "x86_64-linux";
-      shellScriptPkgs = scripts.packages.${system};
+      binPkgs = scripts.packages.${system};
       mkPkgs = pkgs:
         { overlays ? [ ], allowUnfree ? false }:
         import pkgs {
@@ -45,7 +45,7 @@
         hm.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [ ./profiles/${hostName}/home.nix ];
-          extraSpecialArgs = { inherit shellScriptPkgs; };
+          extraSpecialArgs = { inherit binPkgs; };
         };
     in {
       checks.${system}.pre-commit-check = pre-commit-hooks.lib.${system}.run {
@@ -58,7 +58,7 @@
           shellcheck = { enable = true; };
         };
       };
-      packages.${system} = { scripts = shellScriptPkgs; };
+      packages.${system} = { scripts = binPkgs; };
       homeConfigurations = {
         jorel = mkHomeManager (mkPkgs nixpkgs-unstable { allowUnfree = true; })
           home-manager "jorel";

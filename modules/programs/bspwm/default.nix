@@ -1,4 +1,4 @@
-{ pkgs, lib, config, shellScriptPkgs, ... }:
+{ pkgs, lib, config, binPkgs, ... }:
 
 with lib;
 let cfg = config.modules.bspwm;
@@ -30,7 +30,7 @@ in {
             bspc config gapless_monocle true
             ${cfg.extraConfig}
             ${optionalString (cfg.bar)
-            "${shellScriptPkgs.bspwm-bar}/bin/bspwm-bar &"}
+            "${binPkgs.bspwm-bar}/bin/bspwm-bar &"}
           '';
         };
       };
