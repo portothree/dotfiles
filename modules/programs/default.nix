@@ -1,4 +1,4 @@
-{ inputs, pkgs, config, shellScriptPkgs, ... }:
+{ inputs, pkgs, config, binPkgs, ... }:
 
 {
   imports = [

@@ -29,6 +29,9 @@
           (with pkgs; [ bluez ]);
         bw-with-session = mkShellScript "bw-with-session" ./bw/bw-with-session
           (with pkgs; [ bitwarden-cli ]);
+        v4l2-ctl-set-video-settings =
+          mkShellScript "v4l2-ctl-set-video-settings"
+          ./v4l2-ctl/set-video-settings (with pkgs; [ v4l-utils ]);
       };
     };
 }

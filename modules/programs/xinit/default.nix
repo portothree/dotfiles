@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, lib, config, binPkgs, ... }:
 
 with lib;
 let cfg = config.modules.xinit;
@@ -44,6 +44,7 @@ in {
 
           ${cfg.extraConfig}
 
+          ${binPkgs.v4l2-ctl-set-video-settings}/bin/v4l2-ctl-set-video-settings
           ${
             optionalString (cfg.autorandr)
             "${pkgs.autorandr}/bin/autorandr --change"

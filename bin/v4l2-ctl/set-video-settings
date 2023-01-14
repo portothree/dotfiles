@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+v4l2-ctl -c \
+	brightness=10,contrast=10,saturation=70,hue=0,gamma=100,gain=5,sharpness=6,backlight_compensation=6,exposure_auto=3
