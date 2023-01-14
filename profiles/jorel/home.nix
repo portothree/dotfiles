@@ -124,14 +124,14 @@
           config = {
             "DP-0" = {
               enable = true;
-              primary = true;
+              primary = false;
               position = "0x0";
               mode = "1920x1080";
               rotate = "left";
             };
             "HDMI-0" = {
               enable = true;
-              primary = false;
+              primary = true;
               position = "1920x0";
               mode = "1920x1080";
               rotate = "normal";
