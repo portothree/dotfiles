@@ -38,6 +38,7 @@
       v4l-utils
       nextdns
       llama
+      awscli2
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
