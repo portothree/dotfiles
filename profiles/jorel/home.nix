@@ -8,6 +8,7 @@
     ../../config/ranger.nix
     ../../config/keynav.nix
     ../../config/rofi.nix
+    ../../config/tig.nix
   ];
   home = {
     stateVersion = "22.11";
