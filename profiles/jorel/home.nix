@@ -234,8 +234,8 @@
       enable = true;
       bar = true;
       extraConfig = ''
-        bspc monitor "DP-0" -d I II III
-        bspc monitor "HDMI-0" -d IV V VI VII VIII IX X
+        bspc monitor "DP-0" -d I II III IV
+        bspc monitor "HDMI-0" -d V VI VII VIII IX X
       '';
     };
     sxhkd = {
