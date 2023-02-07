@@ -40,6 +40,7 @@
       nextdns
       llama
       awscli2
+      chromium
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
