@@ -37,6 +37,7 @@
       monero-cli
       nextdns
       llama
+      openconnect
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {

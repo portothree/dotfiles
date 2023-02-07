@@ -41,6 +41,7 @@
       llama
       awscli2
       chromium
+      openconnect
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
