@@ -29,6 +29,7 @@
     fd
     cachix
     stow
+    difftastic
   ];
   programs = { home-manager = { enable = true; }; };
   xdg = { enable = true; };
