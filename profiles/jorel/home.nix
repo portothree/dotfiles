@@ -16,8 +16,6 @@
     homeDirectory = "/home/porto";
     packages = with pkgs; [
       st
-      k9s
-      kubectl
       cava
       astyle
       glow
@@ -42,6 +40,10 @@
       awscli2
       chromium
       openconnect
+      openshift
+      k9s
+      kubectl
+      kubernetes-helm
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
