@@ -89,7 +89,12 @@ in {
     variables = { EDITOR = "nvim"; };
     pathsToLink = [ "/share/icons" "/share/mime" "/share/zsh" ];
   };
-  virtualisation = { docker = { enable = true; }; };
+  virtualisation = {
+    docker = {
+      enable = true;
+      liveRestore = false;
+    };
+  };
   fonts = { fonts = with pkgs; [ fira-code siji ]; };
   sound = { enable = true; };
   hardware = {
