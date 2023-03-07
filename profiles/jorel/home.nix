@@ -44,6 +44,7 @@
       k9s
       kubectl
       kubernetes-helm
+      auth0-cli
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
