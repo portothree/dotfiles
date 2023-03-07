@@ -38,6 +38,7 @@
       nextdns
       llama
       openconnect
+      auth0-cli
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
