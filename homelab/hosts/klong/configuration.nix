@@ -30,11 +30,10 @@
       environmentFile = "/etc/nixos/.env";
       networks = {
         "@WIRELESS_SSID_HOME@" = {
-          hidden = true;
-          pskRaw = "@WIRELESS_PSKRAW_HOME@";
+          psk = "@WIRELESS_PSK_HOME@";
+          extraConfig = "bssid=@WIRELESS_BSSID_HOME@";
         };
         "@WIRELESS_SSID_WOO@" = { pskRaw = "@WIRELESS_PSKRAW_WOO@"; };
-        "@WIRELESS_SSID_NKOOWOORK@" = { psk = "@WIRELESS_PSK_NKOOWOORK@"; };
       };
     };
   };
