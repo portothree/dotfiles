@@ -1,7 +1,6 @@
 { config, pkgs, self, ... }:
 
-let tailscalePort = 41641;
-in {
+{
   imports = [
     ../../modules
     ../platformio.nix
@@ -32,8 +31,9 @@ in {
     useNetworkd = true;
     interfaces = { enp34s0 = { useDHCP = true; }; };
     firewall = {
-      allowedTCPPorts = [ 53 ];
-      allowedUDPPorts = [ 53 tailscalePort ];
+      allowedTCPPorts = [ ];
+      allowedUDPPorts = [ config.services.tailscale.port ];
+      trustedInterfaces = [ "tailscale0" ];
       checkReversePath = false;
     };
     nameservers = [ "100.100.100.100" ];
@@ -55,7 +55,7 @@ in {
     udev = { packages = with pkgs; [ ledger-udev-rules android-udev-rules ]; };
     tailscale = {
       enable = true;
-      port = tailscalePort;
+      port = 41641;
     };
     xserver = {
       enable = true;
