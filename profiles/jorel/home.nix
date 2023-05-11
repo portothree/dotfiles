@@ -41,6 +41,7 @@
       chromium
       openconnect
       openshift
+      google-cloud-sdk
       k9s
       kubectl
       kubernetes-helm
