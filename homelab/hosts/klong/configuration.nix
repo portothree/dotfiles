@@ -31,7 +31,8 @@
       networks = {
         "@WIRELESS_SSID_HOME@" = {
           psk = "@WIRELESS_PSK_HOME@";
-          extraConfig = "bssid=@WIRELESS_BSSID_HOME@";
+          extraConfig =
+            "bssid=@WIRELESS_BSSID_HOME@,freq_list=@WIRELESS_FREQ_HOME@";
         };
         "@WIRELESS_SSID_WOO@" = { pskRaw = "@WIRELESS_PSKRAW_WOO@"; };
       };
