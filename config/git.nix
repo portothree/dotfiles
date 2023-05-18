@@ -1,11 +1,13 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   programs.git = {
+    package = pkgs.gitFull;
     enable = true;
     userName = "Gustavo Porto";
-    userEmail = "gustavo@portosanti.com";
+    userEmail = "gus@p8s.co";
     extraConfig = {
+      credential.helper = "libsecret";
       core = { editor = "vim"; };
       color = { ui = true; };
       push = {
