@@ -34,7 +34,10 @@
           extraConfig =
             "bssid=@WIRELESS_BSSID_HOME@,freq_list=@WIRELESS_FREQ_HOME@";
         };
-        "@WIRELESS_SSID_WOO@" = { pskRaw = "@WIRELESS_PSKRAW_WOO@"; };
+        "@WIRELESS_SSID_PHONE_HOTSPOT@" = {
+          psk = "@WIRELESS_PSK_PHONE_HOTSPOT@";
+        };
+        "@WIRELESS_SSID_OFFICE@" = { psk = "@WIRELESS_PSK_OFFICE@"; };
       };
     };
   };
