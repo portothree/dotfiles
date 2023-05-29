@@ -36,6 +36,7 @@
     useNetworkd = true;
     interfaces = { enp34s0 = { useDHCP = true; }; };
     firewall = {
+      enable = true;
       allowedTCPPorts = [ ];
       allowedUDPPorts = [ config.services.tailscale.port ];
       trustedInterfaces = [ "tailscale0" ];
