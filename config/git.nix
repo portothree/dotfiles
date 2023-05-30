@@ -7,8 +7,6 @@
     userName = "Gustavo Porto";
     userEmail = "gus@p8s.co";
     extraConfig = {
-      credential.helper =
-        "${pkgs.gitAndTools.gitFull}/bin/git-credential-libsecret";
       core = { editor = "vim"; };
       color = { ui = true; };
       push = {
