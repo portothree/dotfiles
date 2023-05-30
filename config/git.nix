@@ -7,7 +7,8 @@
     userName = "Gustavo Porto";
     userEmail = "gus@p8s.co";
     extraConfig = {
-      credential.helper = "libsecret";
+      credential.helper =
+        "${pkgs.gitAndTools.gitFull}/bin/git-credential-libsecret";
       core = { editor = "vim"; };
       color = { ui = true; };
       push = {
@@ -27,6 +28,16 @@
           syntax-them = "Github";
         };
       };
+    };
+    aliases = {
+      st = "status";
+      co = "checkout";
+      ci = "commit";
+      br = "branch";
+      lg =
+        "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
+      recent =
+        "for-each-ref --sort=-committerdate --format='%(committerdate:short): %(refname:short)' refs/heads/";
     };
     ignores = [
       "__pycache__"
