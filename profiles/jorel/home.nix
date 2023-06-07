@@ -46,6 +46,8 @@
       kubectl
       kubernetes-helm
       auth0-cli
+      bandwhich
+      diskonaut
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
