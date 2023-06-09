@@ -193,6 +193,7 @@
       enable = true;
       enableNotifications = true;
     };
+    gptcommit.enable = true;
     weechat = {
       enable = true;
       scripts = with pkgs.weechatScripts; [
