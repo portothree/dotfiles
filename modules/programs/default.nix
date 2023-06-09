@@ -14,6 +14,7 @@
     ./neovim
     ./alacritty
     ./gcalcli
+    ./gptcommit
     ./jrnl
     ./sxhkd
     ./spotify
