@@ -30,6 +30,7 @@ in {
         onedarkpro-nvim
         nvim-treesitter
         vimwiki
+        telescope-nvim
       ];
       extraConfig = builtins.concatStringsSep "\n" [''
         lua << EOF
