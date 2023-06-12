@@ -251,11 +251,11 @@
       rofi = true;
       dunst = true;
     };
-    spotify = { enable = true; };
+    spotify.enable = true;
     nodejs.enable = true;
     neovim.enable = true;
     gcalcli.enable = true;
-    gptcommit.enable = true;
+    gptcommit.enable = false;
     timewarrior.enable = true;
     dockerTools.enable = true;
     jrnl = {
