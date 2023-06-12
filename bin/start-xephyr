@@ -49,7 +49,7 @@ function server_start() {
 }
 
 function check_display() {
-	xdpyinfo -display $XEPHYR_DISPLAY &>/dev/null || return 2
+	xdpyinfo -display "$XEPHYR_DISPLAY" &>/dev/null || return 2
 }
 
 # Returns:

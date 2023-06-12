@@ -19,7 +19,7 @@ color["preselect"]="0xE02d74da"
 
 # Uncomment to refresh ubersicht widget on workspace change
 # Make sure to replace WIDGET NAME for the name of the ubersicht widget
-#ubersicht_spaces_refresh_command="osascript -e 'tell application id \"tracesOf.Uebersicht\" to refresh widget id \"WIDGET NAME\"'"
+ubersicht_spaces_refresh_command="osascript -e 'tell application id \"tracesOf.Uebersicht\" to refresh widget id \"WIDGET NAME\"'"
 
 # ===== Loading Scripting Additions ============
 

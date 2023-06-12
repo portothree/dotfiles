@@ -6,11 +6,11 @@ in {
   options.modules.nodejs = { enable = mkEnableOption "nodejs"; };
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      nodejs-16_x
-      yarn
+      nodejs_20
       nodePackages.node-gyp
       nodePackages.node-pre-gyp
       nodePackages.node-gyp-build
+      yarn
     ];
   };
 }
