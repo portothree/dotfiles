@@ -42,16 +42,16 @@ in {
 
           Here are the labels you can choose from:
 
-          - build: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
-          - chore: Updating libraries, copyrights or other repo setting, includes updating dependencies.
-          - ci: Changes to our CI configuration files and scripts (example scopes: Travis, Circle, GitHub Actions)
-          - docs: Non-code changes, such as fixing typos or adding new documentation
+          - build: changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
+          - chore: updating libraries, copyrights or other repo setting, includes updating dependencies.
+          - ci: changes to our CI configuration files and scripts (example scopes: Travis, Circle, GitHub Actions)
+          - docs: non-code changes, such as fixing typos or adding new documentation
           - feat: a commit of the type feat introduces a new feature to the codebase
-          - fix: A commit of the type fix patches a bug in your codebase
-          - perf: A code change that improves performance
-          - refactor: A code change that neither fixes a bug nor adds a feature
-          - style: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
-          - test: Adding missing tests or correcting existing tests
+          - fix: a commit of the type fix patches a bug in your codebase
+          - perf: a code change that improves performance
+          - refactor: a code change that neither fixes a bug nor adds a feature
+          - style: changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+          - test: adding missing tests or correcting existing tests
 
 
           THE FILE SUMMARIES:
@@ -89,13 +89,15 @@ in {
           Write a high level title.
           Do not repeat the commit summaries or the file summaries.
           Do not list individual changes in the title.
+          It MUST NOT be sentence-case, start-case, pascal-case or upper-case
+          It MUST NOT end with full stop
 
           EXAMPLE SUMMARY COMMENTS:
           ```
-          Raise the amount of returned recordings
-          Switch to internal API for completions
-          Lower numeric tolerance for test files
-          Schedule all GitHub actions on all OSs
+          raise the amount of returned recordings
+          switch to internal API for completions
+          lower numeric tolerance for test files
+          schedule all GitHub actions on all OSs
           ```
 
           THE FILE SUMMARIES:
@@ -135,12 +137,12 @@ in {
 
           EXAMPLE SUMMARY COMMENTS:
           ```
-          - Raise the amount of returned recordings from `10` to `100`
-          - Fix a typo in the github action name
-          - Move the `octokit` initialization to a separate file
-          - Add an OpenAI API for completions
-          - Lower numeric tolerance for test files
-          - Add 2 tests for the inclusive string split function
+          - raise the amount of returned recordings from `10` to `100`
+          - fix a typo in the github action name
+          - move the `octokit` initialization to a separate file
+          - add an OpenAI API for completions
+          - lower numeric tolerance for test files
+          - add 2 tests for the inclusive string split function
           ```
           Most commits will have less comments than this examples list.
           The last comment does not include the file names,
