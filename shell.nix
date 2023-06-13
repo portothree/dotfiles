@@ -6,7 +6,7 @@ let
     ${nixFlakes}/bin/nix --option experimental-features "nix-command flakes" "$@"
   '';
 in mkShell {
-  buildInputs = [ git ];
+  buildInputs = [ git gptcommit ];
   shellHook = pkgs.lib.concatStringsSep "\n" [''
     export FLAKE="$(pwd)";
     export PATH="$FLAKE/bin:/${nixBin}/bin:$PATH"
