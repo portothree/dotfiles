@@ -10,5 +10,6 @@ in mkShell {
   shellHook = pkgs.lib.concatStringsSep "\n" [''
     export FLAKE="$(pwd)";
     export PATH="$FLAKE/bin:/${nixBin}/bin:$PATH"
+    gptcommit install
   ''];
 }
