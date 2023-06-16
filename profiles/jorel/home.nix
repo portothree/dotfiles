@@ -41,7 +41,6 @@
       chromium
       openconnect
       openshift
-      google-cloud-sdk
       k9s
       kubectl
       kubernetes-helm
@@ -256,6 +255,7 @@
     neovim.enable = true;
     gcalcli.enable = true;
     gptcommit.enable = false;
+    gcloud.enable = true;
     timewarrior.enable = true;
     dockerTools.enable = true;
     jrnl = {
