@@ -14,6 +14,7 @@
     ./neovim
     ./alacritty
     ./gcalcli
+    ./gcloud
     ./gptcommit
     ./jrnl
     ./sxhkd
