@@ -40,4 +40,7 @@ require("nvim-treesitter.configs").setup({
 		"sql",
 		"mermaid"
 	},
+	highlight = {
+		enable = true,
+	},
 })

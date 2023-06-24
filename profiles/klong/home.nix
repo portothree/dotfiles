@@ -186,6 +186,7 @@
       enable = true;
       gcalcli = false;
     };
+    tree-sitter.enable = true;
     timewarrior.enable = true;
     neovim.enable = true;
     nodejs.enable = true;
