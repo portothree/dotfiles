@@ -27,6 +27,7 @@
     };
     initExtraFirst = ''
       [[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
+      . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
     '';
     oh-my-zsh = {
       enable = true;
