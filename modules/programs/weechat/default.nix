@@ -9,7 +9,7 @@ in {
     enable = mkEnableOption "weechat";
     scripts = mkOption {
       type = types.listOf types.package;
-      default = with pkgs.weechatScripts; [ weechat-autosort url_hint ];
+      default = with pkgs.weechatScripts; [ weechat-autosort url_hint edit ];
       description = "List of weechat scripts to install.";
     };
   };
@@ -33,6 +33,7 @@ in {
               /alias add open_url /url_hint_replace /exec -bg xdg-open {url$1}
               /key bind meta2-11~ /open_url 1
               /key bind meta2-12~ /open_url 2
+              /key bind meta-! /buffer close
             '';
           };
         })
