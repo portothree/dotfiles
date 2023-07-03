@@ -235,6 +235,7 @@
       bspwm = true;
     };
     tmux.enable = true;
+    tree-sitter.enable = true;
     alacritty.enable = true;
     bspwm = {
       enable = true;

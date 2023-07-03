@@ -9,6 +9,7 @@
     ./dunst
     ./dockerTools
     ./tmux
+    ./tree-sitter
     ./timewarrior
     ./nodejs
     ./neovim
