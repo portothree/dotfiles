@@ -9,7 +9,7 @@ in {
     enable = mkEnableOption "weechat";
     scripts = mkOption {
       type = types.listOf types.package;
-      default = with pkgs.weechatScripts; [ weechat-autosort url_hint ];
+      default = with pkgs.weechatScripts; [ weechat-autosort url_hint edit ];
       description = "List of weechat scripts to install.";
     };
   };
