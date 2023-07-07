@@ -18,9 +18,18 @@ in {
         size = 10000;
         path = "${config.xdg.dataHome}/zsh/history";
       };
-      localVariables = {
+      localVariables = with pkgs; {
         LAMBDA = "λ";
         MEMEX_PATH = "/home/porto/www/memex";
+        PRISMA_ENGINES_CHECKSUM_IGNORE_MISSING = 1;
+        PRISMA_MIGRATION_ENGINE_BINARY =
+          "${prisma-engines}/bin/migration-engine";
+        PRISMA_QUERY_ENGINE_BINARY = "${prisma-engines}/bin/query-engine";
+        PRISMA_QUERY_ENGINE_LIBRARY =
+          "${prisma-engines}/lib/libquery_engine.node";
+        PRISMA_INTROSPECTION_ENGINE_BINARY =
+          "${prisma-engines}/bin/introspection-engine";
+        PRISMA_FMT_BINARY = "${prisma-engines}/bin/prisma-fmt";
       };
       shellAliases = {
         r = "ranger";
