@@ -10,8 +10,9 @@ in {
       nodePackages.node-gyp
       nodePackages.node-pre-gyp
       nodePackages.node-gyp-build
-      yarn
+      nodePackages.pnpm
       nodePackages.prisma
+      yarn
     ];
     home.sessionVariables = with pkgs; {
       PRISMA_MIGRATION_ENGINE_BINARY = "${prisma-engines}/bin/migration-engine";
