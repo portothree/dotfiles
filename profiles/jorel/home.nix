@@ -213,17 +213,6 @@
       enable = true;
       dataLocation = "/home/porto/www/portothree/memex/trails/tasks/.task";
     };
-    qutebrowser = {
-      enable = true;
-      loadAutoconfig = true;
-      extraConfig = ''
-        start_page = "https://github.com/search"
-        c.url.default_page = start_page 
-        c.url.start_pages = [ start_page ]
-
-        c.colors.webpage.darkmode.enabled = True
-      '';
-    };
   };
   modules = {
     anki.enable = true;
@@ -266,6 +255,7 @@
         /home/porto/www/portothree/memex/trails/jrnl/journal.txt;
       editor = "nvim";
     };
+    qutebrowser.enable = true;
     wally.enable = true;
     weechat = {
       enable = true;

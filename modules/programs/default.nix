@@ -19,6 +19,7 @@
     ./jrnl
     ./sxhkd
     ./spotify
+    ./qutebrowser
     ./xinit
     ./wally
     ./weechat
