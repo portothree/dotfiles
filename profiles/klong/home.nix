@@ -154,6 +154,8 @@
         start_page = "https://github.com/search"
         c.url.default_page = start_page 
         c.url.start_pages = [ start_page ]
+
+        c.colors.webpage.darkmode.enabled = True
       '';
     };
   };
