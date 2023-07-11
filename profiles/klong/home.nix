@@ -184,6 +184,7 @@
       enable = true;
       enableNotifications = true;
     };
+    gcloud.enable = true;
     gptcommit.enable = true;
     qutebrowser.enable = true;
     weechat = {
