@@ -4,12 +4,18 @@ with lib;
 let
   cfg = config.modules.weechat;
   scripts = cfg.scripts;
+  defaultScripts = with pkgs.weechatScripts; [
+    weechat-autosort
+    weechat-go
+    url_hint
+    edit
+  ];
 in {
   options.modules.weechat = {
     enable = mkEnableOption "weechat";
-    scripts = mkOption {
+    additionalScripts = mkOption {
       type = types.listOf types.package;
-      default = with pkgs.weechatScripts; [ weechat-autosort url_hint edit ];
+      default = [ ];
       description = "List of weechat scripts to install.";
     };
   };
@@ -23,7 +29,7 @@ in {
               perl
               (python.withPackages (p: with p; [ websocket-client ]))
             ];
-            scripts = cfg.scripts;
+            scripts = cfg.additionalScripts ++ defaultScripts;
             init = ''
               /set irc.look.server_buffer independent
 
