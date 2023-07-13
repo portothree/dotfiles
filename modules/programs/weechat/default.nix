@@ -35,6 +35,11 @@ in {
 
               /set plugins.var.python.urlserver.http_port "60211"
               /set plugins.var.python.slack.files_download_location "~/Downloads/weeslack"
+              /set plugins.var.python.slack.auto_open_threads true
+              /set plugins.var.python.slack.never_away true
+              /set plugins.var.python.slack.render_emoji_as_string true
+
+
 
               /alias add open_url /url_hint_replace /exec -bg xdg-open {url$1}
               /key bind meta2-11~ /open_url 1
