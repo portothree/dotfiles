@@ -9,6 +9,7 @@ let
     weechat-go
     url_hint
     edit
+    highmon
   ];
 in {
   options.modules.weechat = {
