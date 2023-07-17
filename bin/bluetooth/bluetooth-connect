@@ -8,6 +8,7 @@ connect() {
 
 	bluetoothctl power on
 	bluetoothctl connect "$MAC"
+	echo "$1" > /tmp/connected_bluetooth_device
 }
 
 devices="$(echo 'devices' | bluetoothctl | grep '^Device')"
