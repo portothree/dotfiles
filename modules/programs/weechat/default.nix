@@ -37,7 +37,7 @@ in {
               /set plugins.var.python.urlserver.http_port "60211"
               /set plugins.var.python.slack.files_download_location "~/Downloads/weeslack"
               /set plugins.var.python.slack.auto_open_threads true
-              /set plugins.var.python.slack.never_away true
+              /set plugins.var.python.slack.never_away false
               /set plugins.var.python.slack.render_emoji_as_string true
 
 
