@@ -39,6 +39,7 @@
       llama
       openconnect
       auth0-cli
+      ngrok
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
