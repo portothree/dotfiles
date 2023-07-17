@@ -47,6 +47,7 @@
       auth0-cli
       bandwhich
       diskonaut
+      ngrok
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
