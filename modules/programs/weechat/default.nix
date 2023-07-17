@@ -26,7 +26,7 @@ in {
             scripts = cfg.scripts;
             init = ''
               /set irc.look.server_buffer independent
-              /set buflist.format.buffer ${format_number}${indent}${cut:20,...,${format_nick_prefix}${color_hotlist}${format_name}}
+              /set buflist.format.buffer ''${format_number}''${indent}''${cut:20,...,}''${format_nick_prefix}''${color_hotlist}''${format_name}
 
               /set plugins.var.python.urlserver.http_port "60211"
               /set plugins.var.python.slack.files_download_location "~/Downloads/weeslack"
