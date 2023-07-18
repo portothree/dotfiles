@@ -39,6 +39,7 @@
       llama
       openconnect
       auth0-cli
+      ngrok
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
@@ -189,12 +190,7 @@
     qutebrowser.enable = true;
     weechat = {
       enable = true;
-      scripts = with pkgs.weechatScripts; [
-        wee-slack
-        url_hint
-        weechat-autosort
-        weechat-go
-      ];
+      additionalScripts = with pkgs.weechatScripts; [ wee-slack ];
     };
     xournalpp.enable = true;
     zsh.enable = true;

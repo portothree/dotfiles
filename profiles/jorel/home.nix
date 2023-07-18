@@ -47,6 +47,7 @@
       auth0-cli
       bandwhich
       diskonaut
+      ngrok
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
@@ -259,12 +260,7 @@
     wally.enable = true;
     weechat = {
       enable = true;
-      scripts = with pkgs.weechatScripts; [
-        wee-slack
-        url_hint
-        weechat-autosort
-        weechat-go
-      ];
+      additionalScripts = with pkgs.weechatScripts; [ wee-slack ];
     };
     xournalpp.enable = true;
     zsh.enable = true;
