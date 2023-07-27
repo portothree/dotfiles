@@ -1,4 +1,4 @@
-{ config, pkgs, self, ... }:
+{ config, pkgs, ... }:
 
 {
   imports = [
@@ -8,14 +8,6 @@
     ../common.nix
     ./hardware-configuration.nix
   ];
-  microvm = {
-    vms = {
-      oraculo = {
-        flake = self;
-        updateFlake = "microvm";
-      };
-    };
-  };
   boot = {
     loader = {
       systemd-boot = { enable = true; };
@@ -55,7 +47,7 @@
     openssh = {
       enable = true;
       openFirewall = false;
-      permitRootLogin = "no";
+      settings = { PermitRootLogin = "no"; };
     };
     blueman = { enable = true; };
     udev = { packages = with pkgs; [ ledger-udev-rules android-udev-rules ]; };
@@ -118,11 +110,10 @@
   nixpkgs = { config = { pulseaudio = true; }; };
   nix = {
     enable = true;
-    package = pkgs.nixFlakes;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-    trustedUsers = [ "root" "porto" ];
+    settings = { trusted-users = [ "root" "porto" ]; };
   };
   system = {
     stateVersion = "22.05";

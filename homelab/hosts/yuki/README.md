@@ -6,7 +6,7 @@ Smartphone
 
 ## Specs
 
-Xiaomi Redmi Note 9 Pro
+Nothing Phone (1)
 
 ## Installation
 
