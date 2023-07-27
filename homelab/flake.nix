@@ -15,7 +15,7 @@
     ];
   };
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-22.05";
+    nixpkgs.url = "nixpkgs/nixos-23.05";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOs/nixos-hardware/master";
     microvm = {
@@ -26,19 +26,10 @@
     k1x = { url = "github:p8sco/k1x"; };
     devenv = { url = "github:cachix/devenv/v0.5"; };
   };
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nixos-hardware
-    , microvm, pre-commit-hooks, k1x, devenv, ... }@inputs:
+  outputs = { self, nixpkgs, nixos-hardware, microvm, pre-commit-hooks, k1x
+    , devenv, ... }@inputs:
     let
       system = "x86_64-linux";
-      username = "porto";
-      homeDirectory = "/home/porto";
-      mkPkgs = pkgs:
-        { overlays ? [ ], allowUnfree ? false }:
-        import pkgs {
-          inherit system;
-          inherit overlays;
-          config.allowUnfree = allowUnfree;
-        };
       mkNixosSystem = pkgs:
         { hostName, allowUnfree ? false, extraModules ? [ ] }:
         pkgs.lib.nixosSystem {
@@ -85,7 +76,8 @@
       };
       packages.${system} = {
         k1x = k1x.packages.${system}.default;
-        devenv = devenv.packages.${system}.devenv;
+        inherit (devenv.packages.${system}.devenv)
+        ;
       };
       nixosConfigurations = {
         jorel = mkNixosSystem nixpkgs {
