@@ -15,6 +15,7 @@
     supportedLocales = [ "en_US.UTF-8/UTF-8" ];
   };
   console = { keyMap = "us"; };
+  programs = { zsh.enable = true; };
   nixpkgs = { config = { allowUnfree = true; }; };
   nix = {
     gc = {

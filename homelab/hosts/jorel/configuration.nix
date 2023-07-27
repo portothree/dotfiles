@@ -78,6 +78,7 @@
       porto = {
         isNormalUser = true;
         extraGroups = [ "wheel" "audio" "dialout" "docker" "plugdev" ];
+        shell = pkgs.zsh;
       };
     };
   };
