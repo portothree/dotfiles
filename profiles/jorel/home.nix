@@ -219,6 +219,7 @@
     anki.enable = true;
     androidTools.enable = true;
     bun.enable = true;
+    conky.enable = true;
     dunst.enable = true;
     xinit = {
       enable = true;
