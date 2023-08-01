@@ -6,6 +6,7 @@
     ./androidTools
     ./bun
     ./bspwm
+    ./conky
     ./dunst
     ./dockerTools
     ./tmux

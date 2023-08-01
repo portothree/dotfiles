@@ -219,6 +219,7 @@
     anki.enable = true;
     androidTools.enable = true;
     bun.enable = true;
+    conky.enable = true;
     dunst.enable = true;
     xinit = {
       enable = true;
@@ -234,6 +235,8 @@
       extraConfig = ''
         bspc monitor "DP-0" -d I II III IV
         bspc monitor "HDMI-0" -d V VI VII VIII IX X
+
+        bspc rule -a conky border=off
       '';
     };
     sxhkd = {
