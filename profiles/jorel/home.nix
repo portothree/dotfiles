@@ -235,6 +235,8 @@
       extraConfig = ''
         bspc monitor "DP-0" -d I II III IV
         bspc monitor "HDMI-0" -d V VI VII VIII IX X
+
+        bspc rule -a conky lower=on sticky=on state=floating border=off
       '';
     };
     sxhkd = {
