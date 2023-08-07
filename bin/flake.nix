@@ -29,6 +29,8 @@
           (with pkgs; [ bluez ]);
         bw-with-session = mkShellScript "bw-with-session" ./bw/bw-with-session
           (with pkgs; [ bitwarden-cli ]);
+        pomodoro = mkShellScript "pomodoro" ./pomodoro
+          (with pkgs; [ timer lolcat speechd ]);
       };
     };
 }
