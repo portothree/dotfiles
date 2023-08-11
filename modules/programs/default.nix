@@ -17,6 +17,7 @@
     ./gcalcli
     ./gcloud
     ./gptcommit
+    ./rust
     ./jrnl
     ./sxhkd
     ./spotify
