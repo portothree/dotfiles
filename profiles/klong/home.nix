@@ -181,6 +181,7 @@
     timewarrior.enable = true;
     neovim.enable = true;
     nodejs.enable = true;
+    rust.enable = true;
     gcalcli = {
       enable = true;
       enableNotifications = true;
