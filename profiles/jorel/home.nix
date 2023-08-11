@@ -247,6 +247,7 @@
     };
     spotify.enable = true;
     nodejs.enable = true;
+    rust.enable = true;
     neovim.enable = true;
     gcalcli.enable = true;
     gptcommit.enable = false;
