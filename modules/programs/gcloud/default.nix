@@ -1,14 +1,14 @@
 { pkgs, lib, config, ... }:
 
 with lib;
-let cfg = config.modules.conky;
+let cfg = config.modules.gcloud;
 in {
-  options.modules.conky = { enable = mkEnableOption "conky"; };
+  options.modules.gcloud = { enable = mkEnableOption "gcloud"; };
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ conky ];
-    home.file.conky = {
-      target = ".conkyrc";
-      text = lib.strings.fileContents ../../../config/conky/config.lua;
-    };
+    home.packages = with pkgs; [
+      (google-cloud-sdk.withExtraComponents
+        [ google-cloud-sdk.components.gke-gcloud-auth-plugin ])
+      cloud-sql-proxy
+    ];
   };
 }
