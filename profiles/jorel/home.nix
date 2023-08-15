@@ -44,6 +44,7 @@
       k9s
       kubectl
       kubernetes-helm
+      telepresence2
       auth0-cli
       bandwhich
       diskonaut

@@ -18,6 +18,7 @@
       bitwarden-cli
       k9s
       kubectl
+      telepresence2
       glow
       pgcli
       mycli
