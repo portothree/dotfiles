@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   imports = [ ./hardware-configuration.nix ../common.nix ../../modules ];
@@ -20,8 +20,10 @@
     nameservers = [ "100.100.100.100" ];
     search = [ "tailea386.ts.net" ];
     firewall = {
-      allowedTCPPorts = [ 53 ];
-      allowedUDPPorts = [ 53 ];
+      enable = true;
+      allowedTCPPorts = [ ];
+      allowedUDPPorts = [ config.services.tailscale.port ];
+      trustedInterfaces = [ "tailscale0" ];
       checkReversePath = false;
     };
     wireless = {
@@ -90,7 +92,7 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-    trustedUsers = [ "root" "porto" ];
+    settings = { trusted-users = [ "root" "porto" ]; };
   };
   system.stateVersion = "22.05";
 }
