@@ -7,7 +7,6 @@
     ../../config/git.nix
     ../../config/ranger.nix
     ../../config/keynav.nix
-    ../../config/conky.nix
     ../../config/rofi.nix
   ];
   home = {
