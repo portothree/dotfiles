@@ -49,6 +49,8 @@
       bandwhich
       diskonaut
       ngrok
+      postgresql_15
+      libpqxx
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
