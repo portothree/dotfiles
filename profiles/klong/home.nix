@@ -40,6 +40,7 @@
       openconnect
       auth0-cli
       ngrok
+      flyctl
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
