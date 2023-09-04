@@ -51,6 +51,7 @@
       ngrok
       postgresql_15
       libpqxx
+      flyctl
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
