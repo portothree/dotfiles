@@ -66,13 +66,6 @@
         Option         "TripleBuffer" "on"
       '';
     };
-    openvpn = {
-      servers = {
-        vowild = {
-          config = "config /root/nixos/openvpn/vowild.ovpn";
-        };
-      };
-    };
   };
   systemd = {
     network = {
