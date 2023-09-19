@@ -29,13 +29,8 @@
     interfaces = { enp34s0 = { useDHCP = true; }; };
     firewall = {
       enable = true;
-      allowedTCPPorts = [ ];
-      allowedUDPPorts = [ config.services.tailscale.port ];
-      trustedInterfaces = [ "tailscale0" ];
       checkReversePath = false;
     };
-    nameservers = [ "100.100.100.100" ];
-    search = [ "tailea386.ts.net" ];
   };
   location = {
     # Lisbon, Portugal
@@ -51,10 +46,6 @@
     };
     blueman = { enable = true; };
     udev = { packages = with pkgs; [ ledger-udev-rules android-udev-rules ]; };
-    tailscale = {
-      enable = true;
-      port = 41641;
-    };
     xserver = {
       enable = true;
       layout = "us";
@@ -65,6 +56,10 @@
         Option         "AllowIndirectGLXProtocol" "off"
         Option         "TripleBuffer" "on"
       '';
+    };
+    tailscalec = {
+      enable = true;
+      searchAddress = "tailea386.ts.net";
     };
   };
   systemd = {
@@ -83,7 +78,7 @@
     };
   };
   environment = {
-    systemPackages = with pkgs; [ wget curl xsecurelock tailscale ];
+    systemPackages = with pkgs; [ wget curl xsecurelock ];
     variables = { EDITOR = "nvim"; };
     pathsToLink = [ "/share/icons" "/share/mime" "/share/zsh" ];
   };
