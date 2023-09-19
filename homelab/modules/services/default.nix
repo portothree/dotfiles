@@ -1,5 +1,5 @@
 { pkgs, config, ... }:
 
 {
-  imports = [ ./nextdns ];
+  imports = [ ./nextdns ./tailscale ];
 }
