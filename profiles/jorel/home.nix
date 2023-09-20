@@ -52,6 +52,8 @@
       postgresql_15
       libpqxx
       flyctl
+      azure-cli
+      azure-functions-core-tools
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {
