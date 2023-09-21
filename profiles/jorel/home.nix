@@ -125,6 +125,10 @@
       timeout = 1;
       extraOptions = [ "root" ];
     };
+    udiskie = {
+      enable = true;
+      notify = true;
+    };
   };
   programs = {
     autorandr = {

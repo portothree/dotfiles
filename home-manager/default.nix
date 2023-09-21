@@ -30,6 +30,7 @@
     cachix
     stow
     difftastic
+    usbutils
   ];
   programs = { home-manager = { enable = true; }; };
   xdg = { enable = true; };
