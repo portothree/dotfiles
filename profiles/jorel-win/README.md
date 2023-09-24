@@ -26,6 +26,7 @@ Enable support for long paths in Windows by running the following command in an 
 > Set-ItemProperty 'HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem' -Name 'LongPathsEnabled' -Value 1
 ```
 
+Install whkd hotkey daemon and komorebi
 ```
 > scoop bucket add extras
 > scoop install whkd
