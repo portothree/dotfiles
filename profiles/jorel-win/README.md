@@ -57,3 +57,10 @@ Start komorebi and whkd
 ```
 > komorebic start -c $Env:USERPROFILE\komorebi.json --whkd
 ```
+
+Launch komorebi on startup:
+- Win + R to bring up the Run menu, then `shell:startup`` to bring up the Startup folder in Explorer
+- Right click in Explorer, File -> New -> Shortcut
+- Set the location to `$Env:USERPROFILE\scoop\apps\komorebi\current\komorebic.exe start --config $Env:USERPROFILE\komorebi.json --whkd`
+- Finish creating the shortcut
+- Restart
