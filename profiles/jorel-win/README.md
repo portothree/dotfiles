@@ -6,6 +6,7 @@ Main workstation.
 - Windows
 - Uses scoop package manager (https://scoop.sh)
 - Komorebi window tiling manager (https://github.com/LGUG2Z/komorebi)
+- Flow launcher (https://github.com/Flow-Launcher/Flow.Launcher)
 - TODO: Explore AutoHotkey (https://www.autohotkey.com/)
 
 ## Specs
