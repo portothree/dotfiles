@@ -3,6 +3,7 @@
     "window_hiding_behaviour": "Cloak",
     "cross_monitor_move_behaviour": "Insert",
     "alt_focus_hack": true,
+    "mouse_follows_focus": false,
     "default_workspace_padding": 0,
     "default_container_padding": 0,
     "active_window_border": true,
