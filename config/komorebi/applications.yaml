@@ -1051,3 +1051,10 @@
   float_identifiers:
   - kind: Exe
     id: ueli.exe
+- name: Qutebrowser
+  identifier:
+    kind: Exe
+    id: qutebrowser.exe
+  float_identifiers:
+  - kind: Exe
+    id: qutebrowser.exe
