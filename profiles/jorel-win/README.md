@@ -5,11 +5,15 @@
 Main workstation.
 - Windows
 - Uses scoop package manager (https://scoop.sh)
-- Komorebi window tiling manager (https://github.com/LGUG2Z/komorebi)
+- Window manager
+    - GlazeWM (https://github.com/glazerdesktop/GlazeWM)
+    - Komorebi window tiling manager (https://github.com/LGUG2Z/komorebi)
 - Flow launcher (https://github.com/Flow-Launcher/Flow.Launcher)
 - SRWE - Simple Runtime Window Editor (https://github.com/dtgDTGdtg/SRWE)
     - Used to config dual monitor setup for games such as Asseto Corsa
-- TODO: Explore AutoHotkey (https://www.autohotkey.com/)
+- **TODO:** Explore AutoHotkey (https://www.autohotkey.com/)
+- **TODO:** YASB Status bar (https://github.com/DenBot/yasb)
+- **TODO:** Rainmeter (https://github.com/rainmeter/rainmeter)
 
 ## Specs
 
@@ -67,3 +71,20 @@ Launch komorebi on startup:
 - Set the location to `$Env:USERPROFILE\scoop\apps\komorebi\current\komorebic.exe start --config $Env:USERPROFILE\komorebi.json --whkd`
 - Finish creating the shortcut
 - Restart
+
+### Hide taskbar
+
+Using `nircmd`
+
+Install with scoop:
+```
+$ scoop bucket add nirsoft
+$ scoop install nirsoft/nircmd
+```
+
+Then run:
+```
+$ nircmd.exe win trans class Shell_TrayWnd 256
+```
+
+To run it on system launch we can add a shortcut in the startup folder pointing to `$Env:USERPROFILE\scoop\apps\nircmd\current\nircmd.exe  win trans class Shell_TrayWnd 256`
