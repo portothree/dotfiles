@@ -75,6 +75,7 @@
     spotifyd = { enable = true; };
   };
   programs = {
+    atuin.enable = true;
     autorandr = {
       enable = true;
       profiles = {
