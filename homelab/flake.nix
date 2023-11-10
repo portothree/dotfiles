@@ -17,6 +17,9 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-23.05";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
+    nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-23.05-darwin";
+    nix-darwin.url = "github:LnL7/nix-darwin/master";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     nixos-hardware.url = "github:NixOs/nixos-hardware/master";
     microvm = {
       url = "github:astro/microvm.nix";
@@ -26,10 +29,23 @@
     k1x = { url = "github:p8sco/k1x"; };
     devenv = { url = "github:cachix/devenv/v0.5"; };
   };
-  outputs = { self, nixpkgs, nixos-hardware, microvm, pre-commit-hooks, k1x
+  outputs = { self, nixpkgs, nixpkgs-darwin, nix-darwin, nixos-hardware, microvm, pre-commit-hooks, k1x
     , devenv, ... }@inputs:
     let
       system = "x86_64-linux";
+      mkDarwinSystem = {
+        system ? "aarch64-darwin",
+        nixpkgs ? inputs.nixpkgs,
+        baseModules ? [
+          home-manager.darwinModules.home-manager
+        ],
+        extraModules ? [],
+      }:
+      inputs.darwin.lib.darwinSystem {
+        inherit system;
+        modules = baseModules ++ extraModules;
+        specialArgs = {inherit self inputs nixpkgs;};
+      };
       mkNixosSystem = pkgs:
         { hostName, allowUnfree ? false, extraModules ? [ ] }:
         pkgs.lib.nixosSystem {
@@ -79,6 +95,13 @@
         inherit (devenv.packages.${system}.devenv)
         ;
       };
+      darwinConfigurations."boris" = mkDarwinSystem nixpkgs-darwin {
+        system = "aarch64-darwin";
+        extraModules = [
+          ./hosts/boris/darwin-configuration.nix
+        ];
+      }
+      darwinPackages = self.darwinConfigurations."boris".pkgs;
       nixosConfigurations = {
         jorel = mkNixosSystem nixpkgs {
           hostName = "jorel";
