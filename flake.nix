@@ -63,6 +63,9 @@
         jorel =
           mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; }) home-manager
           "jorel";
+        boris =
+          mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; }) home-manager
+          "boris";
         klong =
           mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; }) home-manager
           "klong";
