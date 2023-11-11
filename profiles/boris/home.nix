@@ -24,10 +24,6 @@
     file = {};
   };
   programs = {
-    alacritty = {
-      enable = true;
-      installPkg = false;
-    };
     home-manager = { enable = true; };
     fish = { 
       enable = true;
@@ -80,6 +76,10 @@
     };
   };
   modules = {
+    alacritty = {
+      enable = true;
+      installPkg = false;
+    };
     bun.enable = true;
     tmux.enable = true;
     nodejs.enable = true;
