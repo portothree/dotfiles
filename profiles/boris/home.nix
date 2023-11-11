@@ -12,12 +12,12 @@
     stateVersion = "22.11";
     username = "gustavoporto";
     homeDirectory = "/Users/gustavoporto";
-    packages = with pkgs; [ ];
+    packages = with pkgs; [];
     sessionVariables = { EDITOR = "nvim"; };
   };
   programs = {
     home-manager = { enable = true; };
-    atuin.enable = true;
+    fish.enable = true;
     htop = { enable = true; };
     gh = {
       enable = true;
@@ -66,6 +66,5 @@
     nodejs.enable = true;
     rust.enable = true;
     neovim.enable = true;
-    zsh.enable = true;
   };
 }
