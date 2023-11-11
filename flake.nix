@@ -79,7 +79,7 @@
       packages.${defaultSystem}.scripts = shellScriptPkgs;
       devShells.${defaultSystem}.default = import ./shell.nix {
         pkgs = mkPkgs nixpkgs-unstable { };
-        inherit (self.checks.${system}.pre-commit-check) shellHook;
+        inherit (self.checks.${defaultSystem}.pre-commit-check) shellHook;
       };
     };
 }
