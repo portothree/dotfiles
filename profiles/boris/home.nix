@@ -78,6 +78,8 @@
   modules = {
     alacritty = {
       enable = true;
+      # Skip installation as Alacritty was installed on this machine
+      # with a .dmg image
       installPkg = false;
     };
     bun.enable = true;
