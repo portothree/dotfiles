@@ -8,8 +8,6 @@
     gcc
     ranger
     ripgrep
-    xclip
-    xdo
     stylua
     nixfmt
     shfmt
