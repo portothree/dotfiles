@@ -12,22 +12,20 @@ scrolling:
   multiplier: 3
 font:
   normal:
-    family: Menlo
+    family: Fira Code 
     style: Regular
   bold:
-    family: Menlo
+    family: Fira Code 
     style: Bold
   italic:
-    family: Menlo
+    family: Fira Code 
     style: Italic
   bold_italic:
-    family: Menlo
+    family: Fira Code 
     style: Bold Italic
   size: 16.0
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
-# Base16 Default Dark 256 - alacritty color config
-# Chris Kempson (http://chriskempson.com)
 colors:
   primary:
     background: "0x000000"
