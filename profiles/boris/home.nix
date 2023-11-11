@@ -14,7 +14,6 @@
     homeDirectory = "/Users/gustavoporto";
     packages = with pkgs; [
       glow
-      chromium
     ];
     sessionVariables = { EDITOR = "nvim"; };
   };
