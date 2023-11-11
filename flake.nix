@@ -35,10 +35,11 @@
   outputs = { self, nixpkgs, nixpkgs-unstable, nixpkgs-darwin, nix-darwin, home-manager
     , home-manager-unstable, nixgl, pre-commit-hooks, scripts, ... }@inputs:
     let
-      system = "x86_64-linux";
-      shellScriptPkgs = scripts.packages.${system};
+      # TODO: Make this configurable or use flake-utils
+      defaultSystem = "x86_64-linux";
+      shellScriptPkgs = scripts.packages.${defaultSystem};
       mkPkgs = pkgs:
-        { overlays ? [ ], allowUnfree ? false }:
+        { overlays ? [ ], allowUnfree ? false, system ? defaultSystem }:
         import pkgs {
           inherit system;
           inherit overlays;
@@ -51,7 +52,7 @@
           extraSpecialArgs = { inherit shellScriptPkgs; };
         };
     in {
-      checks.${system}.pre-commit-check = pre-commit-hooks.lib.${system}.run {
+      checks.${defaultSystem}.pre-commit-check = pre-commit-hooks.lib.${defaultSystem}.run {
         src = ./.;
         hooks = {
           nixfmt = {
@@ -63,10 +64,10 @@
       };
       homeConfigurations = {
         jorel =
-          mkHomeManager (mkPkgs nixpkgs-darwin { allowUnfree = true; }) home-manager
+          mkHomeManager (mkPkgs nixpkgs-darwin { allowUnfree = true; system }) home-manager
           "jorel";
         boris =
-          mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; }) home-manager
+          mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; system = "aarch64-darwin"; }) home-manager
           "boris";
         boris =
           mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; }) home-manager
@@ -78,8 +79,8 @@
           mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; }) home-manager
           "juju";
       };
-      packages.${system}.scripts = shellScriptPkgs;
-      devShells.${system}.default = import ./shell.nix {
+      packages.${defaultSystem}.scripts = shellScriptPkgs;
+      devShells.${defaultSystem}.default = import ./shell.nix {
         pkgs = mkPkgs nixpkgs-unstable { };
         inherit (self.checks.${system}.pre-commit-check) shellHook;
       };
