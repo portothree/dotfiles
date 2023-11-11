@@ -9,7 +9,6 @@
   users.users.gustavoporto = {
     name = "gustavoporto";
     home = "/Users/gustavoporto";
-    shell = pkgs.zsh;
   };
 
   # Auto upgrade nix package and the daemon service.
