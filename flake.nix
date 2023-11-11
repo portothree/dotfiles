@@ -17,6 +17,9 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-23.05";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
+    nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-23.05-darwin";
+    nix-darwin.url = "github:LnL7/nix-darwin/master";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager = {
       url = "github:nix-community/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -29,13 +32,14 @@
     pre-commit-hooks = { url = "github:cachix/pre-commit-hooks.nix"; };
     scripts.url = "path:./bin";
   };
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager
+  outputs = { self, nixpkgs, nixpkgs-unstable, nixpkgs-darwin, nix-darwin, home-manager
     , home-manager-unstable, nixgl, pre-commit-hooks, scripts, ... }@inputs:
     let
-      system = "x86_64-linux";
-      shellScriptPkgs = scripts.packages.${system};
+      # TODO: Make this configurable or use flake-utils
+      defaultSystem = "x86_64-linux";
+      shellScriptPkgs = scripts.packages.${defaultSystem};
       mkPkgs = pkgs:
-        { overlays ? [ ], allowUnfree ? false }:
+        { overlays ? [ ], allowUnfree ? false, system ? defaultSystem }:
         import pkgs {
           inherit system;
           inherit overlays;
@@ -46,10 +50,9 @@
           inherit pkgs;
           modules = [ ./profiles/${hostName}/home.nix ];
           extraSpecialArgs = { inherit shellScriptPkgs; };
-
         };
     in {
-      checks.${system}.pre-commit-check = pre-commit-hooks.lib.${system}.run {
+      checks.${defaultSystem}.pre-commit-check = pre-commit-hooks.lib.${defaultSystem}.run {
         src = ./.;
         hooks = {
           nixfmt = {
@@ -61,10 +64,10 @@
       };
       homeConfigurations = {
         jorel =
-          mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; }) home-manager
+          mkHomeManager (mkPkgs nixpkgs-darwin { allowUnfree = true; }) home-manager
           "jorel";
         boris =
-          mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; }) home-manager
+          mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; system = "aarch64-darwin"; }) home-manager
           "boris";
         klong =
           mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; }) home-manager
@@ -73,10 +76,10 @@
           mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; }) home-manager
           "juju";
       };
-      packages.${system}.scripts = shellScriptPkgs;
-      devShells.${system}.default = import ./shell.nix {
+      packages.${defaultSystem}.scripts = shellScriptPkgs;
+      devShells.${defaultSystem}.default = import ./shell.nix {
         pkgs = mkPkgs nixpkgs-unstable { };
-        inherit (self.checks.${system}.pre-commit-check) shellHook;
+        inherit (self.checks.${defaultSystem}.pre-commit-check) shellHook;
       };
     };
 }
