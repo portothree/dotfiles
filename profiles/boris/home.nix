@@ -11,15 +11,32 @@
     stateVersion = "22.11";
     username = "gustavoporto";
     homeDirectory = "/Users/gustavoporto";
-    packages = with pkgs; [ xcbuild python311 qt6.full ];
+    packages = with pkgs; [ 
+      xcbuild
+      python311
+      qt6.full
+      glow
+      azure-cli
+      azure-functions-core-tools
+      vscode
+    ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {};
   };
   programs = {
+    alacritty = {
+      enable = true;
+      installPkg = false;
+    };
     home-manager = { enable = true; };
     fish = { 
       enable = true;
       shellInit = lib.strings.fileContents ../../config/fish/init.fish;
+      shellAliases = {
+        g = "git";
+        r = "ranger";
+        "..." = "cd ../..";
+      };
     };
     htop = { enable = true; };
     gh = {

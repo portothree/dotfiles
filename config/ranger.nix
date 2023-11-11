@@ -1,7 +1,9 @@
-{ ... }:
+# TODO: Move to module
+{ pkgs, ... }:
 
 {
 
+  home.packages = [ pkgs.ranger ];
   home.file = {
     ranger-rc = {
       target = ".config/ranger/rc.conf";
