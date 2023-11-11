@@ -64,7 +64,7 @@
       };
       homeConfigurations = {
         jorel =
-          mkHomeManager (mkPkgs nixpkgs-darwin { allowUnfree = true; system }) home-manager
+          mkHomeManager (mkPkgs nixpkgs-darwin { allowUnfree = true; }) home-manager
           "jorel";
         boris =
           mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; system = "aarch64-darwin"; }) home-manager
