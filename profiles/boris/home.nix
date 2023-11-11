@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ../../home-manager
     ../../modules
     ../../config/git.nix
     ../../config/ranger.nix
@@ -23,6 +22,7 @@
     sessionVariables = { EDITOR = "nvim"; };
   };
   programs = {
+    home-manager = { enable = true; };
     atuin.enable = true;
     htop = { enable = true; };
     gh = {
