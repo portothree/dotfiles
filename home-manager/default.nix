@@ -8,6 +8,9 @@
     gcc
     ranger
     ripgrep
+    xclip
+    xdotool
+    xdo
     stylua
     nixfmt
     shfmt
