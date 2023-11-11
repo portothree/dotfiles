@@ -1,23 +1,26 @@
-{ pkgs, shellScriptPkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   imports = [
     ../../modules
     ../../config/git.nix
     ../../config/ranger.nix
-    ../../config/keynav.nix
     ../../config/tig.nix
   ];
   home = {
     stateVersion = "22.11";
     username = "gustavoporto";
     homeDirectory = "/Users/gustavoporto";
-    packages = with pkgs; [];
+    packages = with pkgs; [ python311 ];
     sessionVariables = { EDITOR = "nvim"; };
+    file = {};
   };
   programs = {
     home-manager = { enable = true; };
-    fish.enable = true;
+    fish = { 
+      enable = true;
+      shellInit = lib.strings.fileContents ../../config/fish/init.fish;
+    };
     htop = { enable = true; };
     gh = {
       enable = true;
@@ -62,7 +65,6 @@
   modules = {
     bun.enable = true;
     tmux.enable = true;
-    alacritty.enable = true;
     nodejs.enable = true;
     rust.enable = true;
     neovim.enable = true;
