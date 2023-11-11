@@ -1,14 +1,24 @@
 { config, pkgs, ... }:
 
 {
-  environment.systemPackages = with pkgs; [
-     vim
-     git
-    ];
-  # $ darwin-rebuild switch -I darwin-config=./darwin-configuration.nix
-  environment.darwinConfig = "$HOME/www/portothree/homelab/hosts/boris/darwin-configuration.nix";
+  environment.systemPackages = with pkgs; [ git ];
+
+  environment.darwinConfig =
+    "$HOME/www/portothree/homelab/hosts/boris/darwin-configuration.nix";
+
+  users.users.gustavoporto = {
+    name = "gustavoporto";
+    home = "/Users/gustavoporto";
+  };
+
+  # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
-  programs.zsh.enable = true;
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      allowUnfreePredicate = (_: true);
+    };
+  };
   nix = {
     extraOptions = ''
       experimental-features = nix-command flakes
