@@ -13,9 +13,6 @@
     username = "gustavoporto";
     homeDirectory = "/Users/gustavoporto";
     packages = with pkgs; [
-      st
-      cava
-      astyle
       glow
       chromium
     ];
