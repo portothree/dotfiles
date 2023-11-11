@@ -69,9 +69,6 @@
         boris =
           mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; system = "aarch64-darwin"; }) home-manager
           "boris";
-        boris =
-          mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; }) home-manager
-          "boris";
         klong =
           mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; }) home-manager
           "klong";
