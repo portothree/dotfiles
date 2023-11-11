@@ -1,6 +1,8 @@
 { pkgs, ... }:
 
 {
+  # Keep only generic packages to all systems
+  # right now it only supports x86_64-linux
   home.packages = with pkgs; [
     astyle
     sysz
