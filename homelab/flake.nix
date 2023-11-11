@@ -36,12 +36,10 @@
       mkDarwinSystem = {
         system ? "aarch64-darwin",
         nixpkgs ? inputs.nixpkgs,
-        baseModules ? [
-          home-manager.darwinModules.home-manager
-        ],
+        baseModules ? [],
         extraModules ? [],
       }:
-      inputs.darwin.lib.darwinSystem {
+      inputs.nix-darwin.lib.darwinSystem {
         inherit system;
         modules = baseModules ++ extraModules;
         specialArgs = {inherit self inputs nixpkgs;};
@@ -95,13 +93,13 @@
         inherit (devenv.packages.${system}.devenv)
         ;
       };
-      darwinConfigurations."boris" = mkDarwinSystem nixpkgs-darwin {
+      darwinConfigurations."Gustavos-MacBook-Pro" = mkDarwinSystem {
         system = "aarch64-darwin";
+	nixpkgs = nixpkgs-darwin;
         extraModules = [
           ./hosts/boris/darwin-configuration.nix
         ];
-      }
-      darwinPackages = self.darwinConfigurations."boris".pkgs;
+      };
       nixosConfigurations = {
         jorel = mkNixosSystem nixpkgs {
           hostName = "jorel";
