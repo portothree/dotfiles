@@ -10,9 +10,9 @@ Travel laptop
 
 ## Installation
 
-`nix run nix-darwin -- switch --flake .`
+`$ nix run nix-darwin -- switch --flake .`
 or
-`darwin-rebuild switch --flake .`
+`$ darwin-rebuild switch --flake .`
 
 ## Tricks
 

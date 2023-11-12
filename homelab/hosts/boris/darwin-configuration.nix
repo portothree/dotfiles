@@ -6,18 +6,20 @@
     darwinConfig =
       "$HOME/www/portothree/homelab/hosts/boris/darwin-configuration.nix";
     };
-
   users.users.gustavoporto = {
     name = "gustavoporto";
     home = "/Users/gustavoporto";
   };
-
   homebrew = {
     enable = true;
+    global = {
+      lockfiles = true;
+    };
     brews = [ "pyqt@6" "docker" ];
   };
-
-  # Auto upgrade nix package and the daemon service.
+  fonts = {
+    fonts = with pkgs; [ fira-code ];
+  };
   services = {
     nix-daemon = {
       enable = true;

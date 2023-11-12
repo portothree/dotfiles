@@ -89,51 +89,51 @@
           k1x = k1x.packages.${system}.default;
           inherit (devenv.packages.${system}.devenv)
           ;
+          darwinConfigurations."Gustavos-MacBook-Pro" = mkDarwinSystem {
+            targetSystem = "aarch64-darwin";
+            nixpkgs = nixpkgs-darwin;
+            extraModules = [ ./hosts/boris/darwin-configuration.nix ];
+          };
+          nixosConfigurations = {
+            jorel = mkNixosSystem nixpkgs {
+              hostName = "jorel";
+              allowUnfree = true;
+              extraModules = [
+                nixos-hardware.nixosModules.common-cpu-amd
+                microvm.nixosModules.host
+              ];
+            };
+            klong = mkNixosSystem nixpkgs { hostName = "klong"; };
+            juju = mkNixosSystem nixpkgs { hostName = "juju"; };
+            oraculo = mkQemuMicroVM nixpkgs {
+              hostName = "oraculo";
+              extraModules = [
+                ({ config, pkgs, ... }: {
+                  system.stateVersion = config.system.nixos.version;
+                  users = { users = { root = { password = ""; }; }; };
+                  services = {
+                    getty.helpLine = ''
+                      Log in as "root" with an empty password.
+                      Type Ctrl-a c to switch to the qemu console
+                      and `quit` to stop the VM.
+                    '';
+                  };
+                  nix = {
+                    enable = true;
+                    package = pkgs.nixFlakes;
+                    extraOptions = ''
+                      experimental-features = nix-command flakes
+                    '';
+                    registry = { nixpkgs.flake = nixpkgs; };
+                  };
+                })
+              ];
+            };
+          };
         };
         devShell = import ./shell.nix {
           pkgs = import nixpkgs { inherit system; };
           inherit (self.checks.${system}.pre-commit-check) shellHook;
-        };
-        darwinConfigurations."Gustavos-MacBook-Pro" = mkDarwinSystem {
-          targetSystem = "aarch64-darwin";
-          nixpkgs = nixpkgs-darwin;
-          extraModules = [ ./hosts/boris/darwin-configuration.nix ];
-        };
-        nixosConfigurations = {
-          jorel = mkNixosSystem nixpkgs {
-            hostName = "jorel";
-            allowUnfree = true;
-            extraModules = [
-              nixos-hardware.nixosModules.common-cpu-amd
-              microvm.nixosModules.host
-            ];
-          };
-          klong = mkNixosSystem nixpkgs { hostName = "klong"; };
-          juju = mkNixosSystem nixpkgs { hostName = "juju"; };
-          oraculo = mkQemuMicroVM nixpkgs {
-            hostName = "oraculo";
-            extraModules = [
-              ({ config, pkgs, ... }: {
-                system.stateVersion = config.system.nixos.version;
-                users = { users = { root = { password = ""; }; }; };
-                services = {
-                  getty.helpLine = ''
-                    Log in as "root" with an empty password.
-                    Type Ctrl-a c to switch to the qemu console
-                    and `quit` to stop the VM.
-                  '';
-                };
-                nix = {
-                  enable = true;
-                  package = pkgs.nixFlakes;
-                  extraOptions = ''
-                    experimental-features = nix-command flakes
-                  '';
-                  registry = { nixpkgs.flake = nixpkgs; };
-                };
-              })
-            ];
-          };
         };
       });
 }
