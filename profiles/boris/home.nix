@@ -19,6 +19,7 @@
       azure-cli
       azure-functions-core-tools
       vscode
+      bitwarden-cli
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = {};
