@@ -11,7 +11,7 @@
           "from": {
             "key_code": "tab",
             "modifiers": {
-              "mandatory": ["command"]
+              "mandatory": ["left_command"]
             }
           },
           "to": [
