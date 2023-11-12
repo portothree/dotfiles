@@ -13,7 +13,8 @@
   homebrew = {
     enable = true;
     global = { lockfiles = true; };
-    brews = [ "pyqt@6" "docker" ];
+    brews = [ "pyqt@6" ];
+    casks = [ "docker" ];
   };
   fonts = {
     fontDir = { enable = true; };
