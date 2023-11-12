@@ -1,23 +1,40 @@
-{ pkgs, shellScriptPkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   imports = [
     ../../modules
     ../../config/git.nix
     ../../config/ranger.nix
-    ../../config/keynav.nix
     ../../config/tig.nix
   ];
   home = {
     stateVersion = "22.11";
     username = "gustavoporto";
     homeDirectory = "/Users/gustavoporto";
-    packages = with pkgs; [];
+    packages = with pkgs; [ 
+      xcbuild
+      python311
+      qt6.full
+      glow
+      azure-cli
+      azure-functions-core-tools
+      vscode
+      bitwarden-cli
+    ];
     sessionVariables = { EDITOR = "nvim"; };
+    file = {};
   };
   programs = {
     home-manager = { enable = true; };
-    fish.enable = true;
+    fish = { 
+      enable = true;
+      shellInit = lib.strings.fileContents ../../config/fish/init.fish;
+      shellAliases = {
+        g = "git";
+        r = "ranger";
+        "..." = "cd ../..";
+      };
+    };
     htop = { enable = true; };
     gh = {
       enable = true;
@@ -60,9 +77,14 @@
     };
   };
   modules = {
+    alacritty = {
+      enable = true;
+      # Skip installation as Alacritty was installed on this machine
+      # with a .dmg image
+      installPkg = false;
+    };
     bun.enable = true;
     tmux.enable = true;
-    alacritty.enable = true;
     nodejs.enable = true;
     rust.enable = true;
     neovim.enable = true;
