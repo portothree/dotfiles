@@ -1,0 +1,26 @@
+{
+  "global": {
+    "show_in_menu_bar": true
+  },
+  "profiles": [
+    {
+      "name": "Default",
+      "selected": true,
+      "simple_modifications": [
+        {
+          "from": {
+            "key_code": "tab",
+            "modifiers": {
+              "mandatory": ["command"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "f13"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
