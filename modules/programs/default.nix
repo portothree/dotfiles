@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./alacritty
     ./anki
     ./androidTools
     ./bun
@@ -9,6 +10,7 @@
     ./conky
     ./dunst
     ./dockerTools
+    ./karabiner-elements
     ./tmux
     ./timewarrior
     ./nodejs
