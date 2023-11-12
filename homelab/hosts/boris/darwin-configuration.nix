@@ -1,18 +1,26 @@
 { config, pkgs, ... }:
 
 {
-  environment.systemPackages = with pkgs; [ git ];
-
-  environment.darwinConfig =
-    "$HOME/www/portothree/homelab/hosts/boris/darwin-configuration.nix";
-
+  environment = {
+    systemPackages = with pkgs; [ git ];
+    darwinConfig =
+      "$HOME/www/portothree/homelab/hosts/boris/darwin-configuration.nix";
+  };
   users.users.gustavoporto = {
     name = "gustavoporto";
     home = "/Users/gustavoporto";
   };
-
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
+  homebrew = {
+    enable = true;
+    global = { lockfiles = true; };
+    brews = [ "pyqt@6" ];
+    casks = [ "docker" ];
+  };
+  fonts = {
+    fontDir = { enable = true; };
+    fonts = with pkgs; [ fira-code ];
+  };
+  services = { nix-daemon = { enable = true; }; };
   nixpkgs = {
     config = {
       allowUnfree = true;
