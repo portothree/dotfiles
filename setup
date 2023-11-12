@@ -10,7 +10,7 @@ update_scripts_nar_hash() {
 rebuild_home_manager() {
 	local hostname="$1"
 	update_scripts_nar_hash
-	nix build .#homeConfigurations."$hostname".activationPackage --impure
+	nix --extra-experimental-features "nix-command flakes" build .#homeConfigurations."$hostname".activationPackage
 	./result/activate
 }
 
