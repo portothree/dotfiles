@@ -20,7 +20,10 @@
     fontDir = { enable = true; };
     fonts = with pkgs; [ fira-code ];
   };
-  services = { nix-daemon = { enable = true; }; };
+  services = {
+    nix-daemon = { enable = true; };
+    karabiner-elements = { enable = true; };
+  };
   nixpkgs = {
     config = {
       allowUnfree = true;
