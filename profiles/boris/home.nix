@@ -20,6 +20,7 @@
       azure-functions-core-tools
       vscode
       bitwarden-cli
+      teams
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = { };
