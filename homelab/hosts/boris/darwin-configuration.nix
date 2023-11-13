@@ -14,7 +14,7 @@
     enable = true;
     global = { lockfiles = true; };
     brews = [ "pyqt@6" ];
-    casks = [ "docker" ];
+    casks = [ "docker" "google-chrome" ];
   };
   fonts = {
     fontDir = { enable = true; };
