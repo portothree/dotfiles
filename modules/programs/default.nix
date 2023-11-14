@@ -15,6 +15,7 @@
     ./timewarrior
     ./nodejs
     ./neovim
+    ./nixTools
     ./alacritty
     ./gcalcli
     ./gcloud
