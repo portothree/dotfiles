@@ -85,6 +85,7 @@
       installPkg = false;
     };
     bun.enable = true;
+    dockerTools.enable = true;
     karabiner-elements = {
       enable = true;
       installPkg = false;
@@ -93,5 +94,6 @@
     nodejs.enable = true;
     rust.enable = true;
     neovim.enable = true;
+    nixTools.enable = true;
   };
 }
