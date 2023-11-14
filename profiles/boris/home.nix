@@ -21,6 +21,14 @@
       vscode
       bitwarden-cli
       teams
+      ripgrep
+      shfmt
+      shellcheck
+      jq
+      yq
+      sd
+      fd
+      difftastic
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = { };
