@@ -30,7 +30,6 @@
       nvtop
       mutt
       mpv
-      gh
       ffmpeg
       distrobox
       bitwarden-cli

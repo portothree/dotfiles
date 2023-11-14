@@ -12,6 +12,7 @@ in {
       nodePackages.node-gyp-build
       nodePackages.pnpm
       nodePackages.prisma
+      nodePackages.prettier
       yarn
     ];
   };
