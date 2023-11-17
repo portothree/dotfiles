@@ -25,8 +25,9 @@
   };
   networking = {
     useDHCP = false;
-    useNetworkd = true;
-    interfaces = { enp34s0 = { useDHCP = true; }; };
+    interfaces = { };
+    nameservers = [ "100.100.100.100" ];
+    search = [ "tailea386.ts.net" ];
     firewall = {
       enable = true;
       allowedTCPPorts = [ ];
@@ -34,8 +35,19 @@
       trustedInterfaces = [ "tailscale0" ];
       checkReversePath = false;
     };
-    nameservers = [ "100.100.100.100" ];
-    search = [ "tailea386.ts.net" ];
+    wireless = {
+      enable = true;
+      userControlled.enable = true;
+      environmentFile = "/etc/nixos/.env";
+      networks = {
+        "@WIRELESS_SSID_HOME@" = {
+          psk = "@WIRELESS_PSK_HOME@";
+          extraConfig =
+            "bssid=@WIRELESS_BSSID_HOME@,freq_list=@WIRELESS_FREQ_HOME@";
+        };
+        "@WIRELESS_SSID_OFFICE@" = { psk = "@WIRELESS_PSK_OFFICE@"; };
+      };
+    };
   };
   location = {
     # Lisbon, Portugal
