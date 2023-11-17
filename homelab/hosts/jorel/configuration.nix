@@ -10,7 +10,11 @@
   ];
   boot = {
     loader = {
-      systemd-boot = { enable = true; };
+      grub = {
+        enable = true;
+        device = "nodev";
+        useOSProber = true;
+      };
       efi = { canTouchEfiVariables = true; };
     };
     extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback.out ];
@@ -23,9 +27,10 @@
     device = "/dev/pool/home";
     fsType = "ext4";
   };
+  time.hardwareClockInLocalTime = true;
   networking = {
     useDHCP = false;
-    interfaces = { };
+    interfaces = { wlp35s0 = { useDHCP = true; }; };
     nameservers = [ "100.100.100.100" ];
     search = [ "tailea386.ts.net" ];
     firewall = {
@@ -79,12 +84,6 @@
       '';
     };
   };
-  systemd = {
-    network = {
-      enable = true;
-      wait-online = { extraArgs = [ "--any" ]; };
-    };
-  };
   users = {
     users = {
       porto = {
@@ -129,6 +128,5 @@
   };
   system = {
     stateVersion = "22.05";
-    copySystemConfiguration = true;
   };
 }
