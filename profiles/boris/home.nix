@@ -29,6 +29,7 @@
       sd
       fd
       difftastic
+      spotify
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = { };
