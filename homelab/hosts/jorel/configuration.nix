@@ -10,11 +10,7 @@
   ];
   boot = {
     loader = {
-      grub = {
-        enable = true;
-        device = "nodev";
-        useOSProber = true;
-      };
+      systemd-boot = { enable = true; };
       efi = { canTouchEfiVariables = true; };
     };
     extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback.out ];
