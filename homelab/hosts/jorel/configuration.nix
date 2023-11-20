@@ -19,10 +19,6 @@
       options v4l2loopback exclusive_caps=1 card_label="Virtual Camera"
     '';
   };
-  fileSystems."/home" = {
-    device = "/dev/pool/home";
-    fsType = "ext4";
-  };
   time.hardwareClockInLocalTime = true;
   networking = {
     useDHCP = false;
@@ -41,11 +37,6 @@
       userControlled.enable = true;
       environmentFile = "/etc/nixos/.env";
       networks = {
-        "@WIRELESS_SSID_HOME@" = {
-          psk = "@WIRELESS_PSK_HOME@";
-          extraConfig =
-            "bssid=@WIRELESS_BSSID_HOME@,freq_list=@WIRELESS_FREQ_HOME@";
-        };
         "@WIRELESS_SSID_OFFICE@" = { psk = "@WIRELESS_PSK_OFFICE@"; };
       };
     };
