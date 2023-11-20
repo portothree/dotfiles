@@ -236,6 +236,7 @@
       autorandr = true;
       sxhkd = true;
       bspwm = true;
+      xev = true;
     };
     tmux.enable = true;
     alacritty.enable = true;
@@ -245,8 +246,6 @@
       extraConfig = ''
         bspc monitor "DP-0" -d I II III IV
         bspc monitor "HDMI-0" -d V VI VII VIII IX X
-
-        bspc rule -a conky border=off
       '';
     };
     sxhkd = {
