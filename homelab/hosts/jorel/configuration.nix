@@ -41,11 +41,6 @@
       userControlled.enable = true;
       environmentFile = "/etc/nixos/.env";
       networks = {
-        "@WIRELESS_SSID_HOME@" = {
-          psk = "@WIRELESS_PSK_HOME@";
-          extraConfig =
-            "bssid=@WIRELESS_BSSID_HOME@,freq_list=@WIRELESS_FREQ_HOME@";
-        };
         "@WIRELESS_SSID_OFFICE@" = { psk = "@WIRELESS_PSK_OFFICE@"; };
       };
     };
