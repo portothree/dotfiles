@@ -23,7 +23,7 @@ font:
   bold_italic:
     family: Fira Code 
     style: Bold Italic
-  size: 18.0
+  size: 16.0
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
 colors:
@@ -81,8 +81,3 @@ cursor:
   unfocused_hollow: true
 # Live config reload (changes require restart)
 live_config_reload: true
-# Tell Alacritty that we’re using fish here
-shell:
-  program: /usr/local/bin/fish
-  args:
-    - --login

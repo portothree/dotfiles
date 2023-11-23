@@ -17,6 +17,10 @@ in {
       type = types.bool;
       default = false;
     };
+    xev = mkOption {
+      type = types.bool;
+      default = false;
+    };
     extraConfig = mkOption {
       type = types.lines;
       description = "Additional configuration to be added to .xinitrc";
@@ -48,6 +52,7 @@ in {
             optionalString (cfg.autorandr)
             "${pkgs.autorandr}/bin/autorandr --change"
           }
+          ${optionalString (cfg.xev) "${pkgs.xorg.xev}/bin/xev &"}
           ${optionalString (cfg.sxhkd) "${pkgs.sxhkd}/bin/sxhkd &"}
           ${optionalString (cfg.bspwm) "exec ${pkgs.bspwm}/bin/bspwm"}
       '';

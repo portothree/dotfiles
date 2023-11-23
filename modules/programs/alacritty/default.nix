@@ -10,13 +10,22 @@ in {
       type = types.bool;
       default = true;
     };
+    shell = mkOption {
+      description = "If enabled alacritty will use fish";
+      type = types.lines;
+      default = "zsh";
+    };
   };
   config = mkIf cfg.enable {
     home = {
       packages = mkIf cfg.installPkg [ pkgs.alacritty ];
       file.alacritty = {
         target = ".config/alacritty/alacritty.yml";
-        text = lib.strings.fileContents ../../../config/alacritty/alacritty.yml;
+        text = ''
+          ${lib.strings.fileContents ../../../config/alacritty/alacritty.yml}
+          shell:
+            program: ${cfg.shell}
+          '';
       };
     };
   };
