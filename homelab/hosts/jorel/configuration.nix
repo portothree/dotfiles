@@ -19,11 +19,8 @@
       options v4l2loopback exclusive_caps=1 card_label="Virtual Camera"
     '';
   };
-  fileSystems."/home" = {
-    device = "/dev/pool/home";
-    fsType = "ext4";
-  };
   time.hardwareClockInLocalTime = true;
+  i18n.defaultLocale = "en_US.UTF-8";
   networking = {
     useDHCP = false;
     interfaces = { wlp35s0 = { useDHCP = true; }; };
@@ -68,6 +65,12 @@
       layout = "us";
       videoDrivers = [ "nvidia" ];
       displayManager = { startx = { enable = true; }; };
+      libinput = {
+        enable = true;
+        mouse = {
+          accelProfile = "flat";
+        };
+      };
       screenSection = ''
         Option         "metamodes" "nvidia-auto-select +0+0 {ForceFullCompositionPipeline=On}"
         Option         "AllowIndirectGLXProtocol" "off"
