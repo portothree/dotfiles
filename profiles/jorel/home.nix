@@ -236,7 +236,6 @@
       autorandr = true;
       sxhkd = true;
       bspwm = true;
-      xev = true;
     };
     tmux.enable = true;
     alacritty.enable = true;

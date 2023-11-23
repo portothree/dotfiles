@@ -92,6 +92,7 @@
       # Skip installation as Alacritty was installed on this machine
       # with a .dmg image
       installPkg = false;
+      shell = "/usr/local/bin/fish";
     };
     bun.enable = true;
     dockerTools.enable = true;
