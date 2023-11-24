@@ -130,7 +130,6 @@
     };
   };
   programs = {
-    atuin.enable = true;
     autorandr = {
       enable = true;
       profiles = {
@@ -161,26 +160,6 @@
       };
     };
     htop = { enable = true; };
-    vim = {
-      enable = true;
-      settings = {
-        background = "dark";
-        number = true;
-        tabstop = 4;
-        shiftwidth = 4;
-      };
-      plugins = with pkgs.vimPlugins; [ vimwiki ];
-      extraConfig = ''
-        set clipboard=unnamedplus
-        set t_Co=256
-        set autoindent
-        set nocp
-        filetype plugin indent on
-        syntax on 
-
-        au BufNewFile,BufRead *.ldg,*.ledger setf ledger | comp ledger
-      '';
-    };
     gh = {
       enable = true;
       settings = {
