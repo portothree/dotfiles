@@ -64,6 +64,33 @@
       enable = true;
       port = 41641;
     };
+    syncthing = {
+      enable = true;
+      openDefaultPorts = true;
+      dataDir = "/home/porto/www";
+      configDir = "/home/porto/.config/syncthing";
+      user = "porto";
+      group = "users";
+      guiAddress = "0.0.0.0:8384";
+      overrideDevices = true;
+      overrideFolders = true;
+      devices = {
+        "jorel" = {
+          id =
+            "RTTGM7K-G3ZAONR-HSQFTS7-OA4GLAS-6SXEREI-TWPHTTB-34A4Y44-RY7FJAV";
+        };
+        "boris" = {
+          id =
+            "VKQZM3J-NVIBZ23-ZY2SOK5-2XCRZAE-OUPY6MP-A4IT2S6-NFA66BJ-E7LCMAM";
+        };
+      };
+      folders = {
+        "www" = {
+          path = "/home/porto/www";
+          devices = [ "jorel" "boris" ];
+        };
+      };
+    };
     xserver = {
       enable = true;
       layout = "us";
