@@ -25,7 +25,6 @@ in {
         vim-polyglot
         editorconfig-vim
         copilot-vim
-        YouCompleteMe
         ale
         onedarkpro-nvim
         nvim-treesitter
