@@ -38,7 +38,11 @@
       userControlled.enable = true;
       environmentFile = "/etc/nixos/.env";
       networks = {
-        "@WIRELESS_SSID_OFFICE@" = { psk = "@WIRELESS_PSK_OFFICE@"; };
+        "@WIRELESS_SSID_OFFICE@" = {
+          psk = "@WIRELESS_PSK_OFFICE@";
+          extraConfig =
+            "bssid=@WIRELESS_BSSID_OFFICE@,freq_list=@WIRELESS_FREQ_OFFICE@";
+        };
       };
     };
   };
@@ -67,9 +71,7 @@
       displayManager = { startx = { enable = true; }; };
       libinput = {
         enable = true;
-        mouse = {
-          accelProfile = "flat";
-        };
+        mouse = { accelProfile = "flat"; };
       };
       screenSection = ''
         Option         "metamodes" "nvidia-auto-select +0+0 {ForceFullCompositionPipeline=On}"
@@ -120,7 +122,5 @@
     '';
     settings = { trusted-users = [ "root" "porto" ]; };
   };
-  system = {
-    stateVersion = "22.05";
-  };
+  system = { stateVersion = "22.05"; };
 }
