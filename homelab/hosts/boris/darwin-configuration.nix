@@ -13,7 +13,7 @@
   homebrew = {
     enable = true;
     global = { lockfiles = true; };
-    brews = [ "pyqt@6" ];
+    brews = [ "pyqt@6" "syncthing" ];
     casks = [ "docker" "google-chrome" ];
     masApps = { "tailscale" = 1475387142; };
   };
