@@ -30,6 +30,7 @@
       fd
       difftastic
       spotify
+      jdk11
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = { };
