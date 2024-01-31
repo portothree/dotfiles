@@ -13,7 +13,6 @@
     homeDirectory = "/Users/gustavoporto";
     packages = with pkgs; [
       xcbuild
-      python311
       qt6.full
       glow
       azure-cli
@@ -37,15 +36,7 @@
   };
   programs = {
     home-manager = { enable = true; };
-    fish = {
-      enable = true;
-      shellInit = lib.strings.fileContents ../../config/fish/init.fish;
-      shellAliases = {
-        g = "git";
-        r = "ranger";
-        "..." = "cd ../..";
-      };
-    };
+    zsh = { enable = true; };
     htop = { enable = true; };
     gh = {
       enable = true;
@@ -93,7 +84,7 @@
       # Skip installation as Alacritty was installed on this machine
       # with a .dmg image
       installPkg = false;
-      shell = "/usr/local/bin/fish";
+      shell = "/bin/zsh";
     };
     bun.enable = true;
     dockerTools.enable = true;
@@ -102,7 +93,6 @@
       installPkg = false;
     };
     tmux.enable = true;
-    nodejs.enable = true;
     rust.enable = true;
     neovim.enable = true;
     nixTools.enable = true;

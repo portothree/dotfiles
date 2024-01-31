@@ -13,7 +13,7 @@ in {
     shell = mkOption {
       description = "If enabled alacritty will use fish";
       type = types.lines;
-      default = "zsh";
+      default = "/bin/zsh";
     };
   };
   config = mkIf cfg.enable {
