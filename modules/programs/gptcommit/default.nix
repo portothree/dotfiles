@@ -28,7 +28,7 @@ in {
 
           [openai]
           api_base = "https://api.openai.com/v1"
-          api_key = ""
+          api_key = "YOUR_API_KEY_HERE"
           model = "${cfg.openaiModel}"
           retries = 2
           proxy = ""
