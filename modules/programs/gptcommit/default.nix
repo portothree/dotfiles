@@ -13,10 +13,13 @@ in {
   };
   config = mkIf cfg.enable {
     home = {
-      packages = with pkgs; [ gptcommit ];
+      packages = with pkgs; [ ];
       file.gptcommit = {
-        target = ".config/gptcommit/config.toml";
+        target = ./. + "/.config/gptcommit/config.toml";
         text = ''
+      nixpkgs.localSystem = {
+          system = "x86_64-linux";
+      };
           model_provider = "openai"
           allow_amend = false
           file_ignore = [
