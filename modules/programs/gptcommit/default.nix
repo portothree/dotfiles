@@ -138,10 +138,10 @@ in {
           EXAMPLE SUMMARY COMMENTS:
           ```
           - raise the amount of returned recordings from `10` to `100`
-          - fix a typo in the github action name
+          - fix a typo in the GitHub Actions name
           - move the `octokit` initialization to a separate file
           - add an OpenAI API for completions
-          - lower numeric tolerance for test files
+          - lower the numeric tolerance for test files
           - add 2 tests for the inclusive string split function
           ```
           Most commits will have less comments than this examples list.
