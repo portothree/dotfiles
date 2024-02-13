@@ -7,3 +7,5 @@ result-*
 
 # microvm.nix
 *.img
+
+.rayconfig
