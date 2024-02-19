@@ -14,7 +14,14 @@ Travel laptop
 or
 `$ darwin-rebuild switch --flake .`
 
-## Tricks
+## Preparation
+
+### Keyboard
+
+- Disable all shortcuts in System Preferences > Keyboard > Shortcuts
+- Change modifier keys to replace Command with Control
+
+## Other
 
 ### Hide Dock
 
