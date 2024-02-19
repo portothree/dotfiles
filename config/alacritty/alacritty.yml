@@ -4,6 +4,7 @@ window:
   padding:
     x: 10
     y: 10
+  option_as_alt: "Both"
 scrolling:
   # Specifying '0' will disable scrolling.
   history: 100000
@@ -12,18 +13,18 @@ scrolling:
   multiplier: 3
 font:
   normal:
-    family: Fira Code 
+    family: Fira Code
     style: Regular
   bold:
-    family: Fira Code 
+    family: Fira Code
     style: Bold
   italic:
-    family: Fira Code 
+    family: Fira Code
     style: Italic
   bold_italic:
-    family: Fira Code 
+    family: Fira Code
     style: Bold Italic
-  size: 18.0
+  size: 16.0
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
 colors:
@@ -33,8 +34,8 @@ colors:
     bright_foreground: "0xe6efff"
   # Colors the cursor will use if `custom_cursor_colors` is true
   cursor:
-    text: '0xd8d8d8'
-    cursor: '0xd8d8d8'
+    text: "0xd8d8d8"
+    cursor: "0xd8d8d8"
   normal:
     black: "0x5c6370"
     red: "0xe06c75"
@@ -46,14 +47,14 @@ colors:
     white: "0xe6efff"
   # Bright colors
   bright:
-    black: '0x585858'
-    red: '0xab4642'
-    green: '0xa1b56c'
-    yellow: '0xf7ca88'
-    blue: '0x7cafc2'
-    magenta: '0xba8baf'
-    cyan: '0x86c1b9'
-    white: '0xf8f8f8'
+    black: "0x585858"
+    red: "0xab4642"
+    green: "0xa1b56c"
+    yellow: "0xf7ca88"
+    blue: "0x7cafc2"
+    magenta: "0xba8baf"
+    cyan: "0x86c1b9"
+    white: "0xf8f8f8"
   dim:
     black: "0x1e2127"
     red: "0xe06c75"
@@ -67,7 +68,7 @@ colors:
 bell:
   animation: EaseOutExpo
   duration: 300
-  color: '0xffffff'
+  color: "0xffffff"
 selection:
   # This string contains all characters that are used as separators for
   # "semantic words" in Alacritty.
@@ -79,5 +80,70 @@ window.dynamic_title: true
 cursor:
   style: Block
   unfocused_hollow: true
+key_bindings:
+  - { key: C,        mods: Command,       action: ClearHistory                 }
+  - { key: Q,        mods: Command,       action: Quit                         }
+  - { key: N,        mods: Command,       action: SpawnNewInstance             }
+  - { key: Return,   mods: Command,       action: ToggleFullscreen             }
+
+  - { key: Home,                          chars: "\x1bOH",   mode: AppCursor   }
+  - { key: Home,                          chars: "\x1b[H",   mode: ~AppCursor  }
+  - { key: End,                           chars: "\x1bOF",   mode: AppCursor   }
+  - { key: End,                           chars: "\x1b[F",   mode: ~AppCursor  }
+  - { key: Equals,   mods: Command,       action: IncreaseFontSize             }
+  - { key: Minus,    mods: Command,       action: DecreaseFontSize             }
+  - { key: Minus,    mods: Command|Shift, action: ResetFontSize                }
+  - { key: PageUp,   mods: Shift,         chars: "\x1b[5;2~"                   }
+  - { key: PageUp,   mods: Control,       chars: "\x1b[5;5~"                   }
+  - { key: PageUp,                        chars: "\x1b[5~"                     }
+  - { key: PageDown, mods: Shift,         chars: "\x1b[6;2~"                   }
+  - { key: PageDown, mods: Control,       chars: "\x1b[6;5~"                   }
+  - { key: PageDown,                      chars: "\x1b[6~"                     }
+  - { key: Left,     mods: Shift,         chars: "\x1b[1;2D"                   }
+  - { key: Left,     mods: Control,       chars: "\x1b[1;5D"                   }
+  - { key: Left,     mods: Alt,           chars: "\x1b[1;3D"                   }
+  - { key: Left,                          chars: "\x1b[D",   mode: ~AppCursor  }
+  - { key: Left,                          chars: "\x1bOD",   mode: AppCursor   }
+  - { key: Right,    mods: Shift,         chars: "\x1b[1;2C"                   }
+  - { key: Right,    mods: Control,       chars: "\x1b[1;5C"                   }
+  - { key: Right,    mods: Alt,           chars: "\x1b[1;3C"                   }
+  - { key: Right,                         chars: "\x1b[C",   mode: ~AppCursor  }
+  - { key: Right,                         chars: "\x1bOC",   mode: AppCursor   }
+  - { key: Up,       mods: Shift,         chars: "\x1b[1;2A"                   }
+  - { key: Up,       mods: Control,       chars: "\x1b[1;5A"                   }
+  - { key: Up,       mods: Alt,           chars: "\x1b[1;3A"                   }
+  - { key: Up,                            chars: "\x1b[A",   mode: ~AppCursor  }
+  - { key: Up,                            chars: "\x1bOA",   mode: AppCursor   }
+  - { key: Down,     mods: Shift,         chars: "\x1b[1;2B"                   }
+  - { key: Down,     mods: Control,       chars: "\x1b[1;5B"                   }
+  - { key: Down,     mods: Alt,           chars: "\x1b[1;3B"                   }
+  - { key: Down,                          chars: "\x1b[B",   mode: ~AppCursor  }
+  - { key: Down,                          chars: "\x1bOB",   mode: AppCursor   }
+  - { key: Tab,      mods: Shift,         chars: "\x1b[Z"                      }
+  - { key: F1,                            chars: "\x1bOP"                      }
+  - { key: F2,                            chars: "\x1bOQ"                      }
+  - { key: F3,                            chars: "\x1bOR"                      }
+  - { key: F4,                            chars: "\x1bOS"                      }
+  - { key: F5,                            chars: "\x1b[15~"                    }
+  - { key: F6,                            chars: "\x1b[17~"                    }
+  - { key: F7,                            chars: "\x1b[18~"                    }
+  - { key: F8,                            chars: "\x1b[19~"                    }
+  - { key: F9,                            chars: "\x1b[20~"                    }
+  - { key: F10,                           chars: "\x1b[21~"                    }
+  - { key: F11,                           chars: "\x1b[23~"                    }
+  - { key: F12,                           chars: "\x1b[24~"                    }
+  - { key: Back,                          chars: "\x7f"                        }
+  - { key: Back,     mods: Alt,           chars: "\x1b\x7f"                    }
+  - { key: Insert,                        chars: "\x1b[2~"                     }
+  - { key: Delete,                        chars: "\x1b[3~"                     }
+
+    # shortcuts for tmux. the leader key is control-b (0x02)
+  - { key: W,        mods: Command,       chars: "\x02&"                       }  # close tab (kill)
+  - { key: T,        mods: Command,       chars: "\x02c"                       }  # new tab
+  - { key: RBracket, mods: Command|Shift, chars: "\x02n"                       }  # select next tab
+  - { key: LBracket, mods: Command|Shift, chars: "\x02p"                       }  # select previous tab
+  - { key: RBracket, mods: Command,       chars: "\x02o"                       }  # select next pane
+  - { key: LBracket, mods: Command,       chars: "\x02;"                       }  # select last (previously used) pane
+  - { key: F,        mods: Command,       chars: "\x02/"                       }  # search (upwards) (see tmux.conf)
 # Live config reload (changes require restart)
 live_config_reload: true
