@@ -98,7 +98,7 @@
     bun.enable = true;
     dockerTools.enable = true;
     karabiner-elements = {
-      enable = true;
+      enable = false;
       installPkg = false;
     };
     tmux.enable = true;
