@@ -14,7 +14,7 @@
     enable = true;
     global = { lockfiles = true; };
     brews = [ "pyqt@6" "syncthing" "python@3.10" ];
-    casks = [ "ddpm" "docker" "google-chrome" "anki" ];
+    casks = [ "ddpm" "docker" "google-chrome" "anki" "warp" ];
     masApps = { "tailscale" = 1475387142; };
   };
   fonts = {
