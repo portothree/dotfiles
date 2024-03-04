@@ -10,6 +10,7 @@
     ./conky
     ./dunst
     ./dockerTools
+    ./hammerspoon
     ./karabiner-elements
     ./tmux
     ./timewarrior

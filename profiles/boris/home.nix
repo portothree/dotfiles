@@ -94,6 +94,7 @@
       installPkg = false;
       shell = "/usr/local/bin/fish";
     };
+    hammerspoon.enable = true;
     bun.enable = true;
     dockerTools.enable = true;
     karabiner-elements = {
