@@ -30,6 +30,7 @@ in {
         nvim-treesitter
         vimwiki
         telescope-nvim
+        vim-wakatime
       ];
       extraConfig = builtins.concatStringsSep "\n" [''
         lua << EOF
