@@ -27,6 +27,7 @@
     ./spotify
     ./qutebrowser
     ./xinit
+    ./wakatime
     ./wally
     ./weechat
     ./xournalpp
