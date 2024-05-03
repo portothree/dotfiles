@@ -1,12 +1,14 @@
 # Boris
 
+https://irmaodojorel.fandom.com/pt-br/wiki/B%C3%B3ris
+
 ## Overview
 
 Travel laptop
 
 ## Specs
 
-2023 MacBook M3 Pro
+2023 MacBook Pro M3
 
 ## Installation
 
