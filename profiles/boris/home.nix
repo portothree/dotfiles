@@ -20,7 +20,6 @@
       azure-functions-core-tools
       vscode
       bitwarden-cli
-      teams
       ripgrep
       shfmt
       shellcheck
