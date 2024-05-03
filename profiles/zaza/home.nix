@@ -9,17 +9,13 @@
   ];
   home = {
     stateVersion = "22.11";
-    username = "gustavoporto";
-    homeDirectory = "/Users/gustavoporto";
+    username = "porto";
+    homeDirectory = "/Users/porto";
     packages = with pkgs; [
       xcbuild
       python311
       qt6.full
       glow
-      azure-cli
-      azure-functions-core-tools
-      vscode
-      bitwarden-cli
       ripgrep
       shfmt
       shellcheck
@@ -29,7 +25,6 @@
       fd
       difftastic
       jdk11
-      wakatime
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = { };
@@ -44,15 +39,6 @@
         r = "ranger";
         "..." = "cd ../..";
       };
-      plugins = [{
-        name = "wakatime";
-        src = pkgs.fetchFromGitHub {
-          owner = "ik11235";
-          repo = "wakatime.fish";
-          rev = "v0.0.6";
-          sha256 = "sha256-Hsr69n4fCvPc64NztgaBZQuR0znkzlL8Uotw9Jf2S1o=";
-        };
-      }];
     };
     htop = { enable = true; };
     gh = {
@@ -84,16 +70,6 @@
         italic-text = "always";
       };
     };
-    zathura = {
-      enable = true;
-      options = {
-        window-height = 1000;
-        window-width = 1000;
-      };
-      extraConfig = ''
-        map <C-i> recolor
-      '';
-    };
   };
   modules = {
     alacritty = {
@@ -103,13 +79,8 @@
       installPkg = false;
       shell = "/usr/local/bin/fish";
     };
-    hammerspoon.enable = true;
     bun.enable = true;
     dockerTools.enable = true;
-    karabiner-elements = {
-      enable = false;
-      installPkg = false;
-    };
     tmux.enable = true;
     nodejs.enable = true;
     rust.enable = true;
