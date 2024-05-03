@@ -14,7 +14,7 @@
     enable = true;
     global = { lockfiles = true; };
     brews = [ "pyqt@6" "python@3.10" ];
-    casks = [ "docker" ];
+    casks = [ "docker" "alacritty" ];
   };
   fonts = {
     fontDir = { enable = true; };
