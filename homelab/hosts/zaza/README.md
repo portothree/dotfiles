@@ -8,10 +8,7 @@ Work laptop
 
 ## Specs
 
-2021 MacBook Pro M1
+2020 MacBook Pro i5
 
 ## Installation
 
-`$ nix run nix-darwin -- switch --flake .`
-or
-`$ darwin-rebuild switch --flake .`
