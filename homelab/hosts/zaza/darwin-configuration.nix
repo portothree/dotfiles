@@ -14,8 +14,7 @@
     enable = true;
     global = { lockfiles = true; };
     brews = [ "pyqt@6" "python@3.10" ];
-    casks = [ "ddpm" "docker" "google-chrome" ];
-    masApps = { "tailscale" = 1475387142; };
+    casks = [ "docker" "google-chrome" ];
   };
   fonts = {
     fontDir = { enable = true; };
