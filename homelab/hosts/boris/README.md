@@ -6,7 +6,7 @@ Travel laptop
 
 ## Specs
 
-2023 MacBook M3 Pro
+2023 MacBook Pro M3
 
 ## Installation
 
