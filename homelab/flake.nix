@@ -89,10 +89,17 @@
           k1x = k1x.packages.${system}.default;
           inherit (devenv.packages.${system}.devenv)
           ;
-          darwinConfigurations."Gustavos-MacBook-Pro" = mkDarwinSystem {
-            targetSystem = "aarch64-darwin";
-            nixpkgs = nixpkgs-darwin;
-            extraModules = [ ./hosts/boris/darwin-configuration.nix ];
+          darwinConfigurations = {
+            "Gustavos-MacBook-Pro" = mkDarwinSystem {
+              targetSystem = "aarch64-darwin";
+              nixpkgs = nixpkgs-darwin;
+              extraModules = [ ./hosts/boris/darwin-configuration.nix ];
+            };
+            "Gustavos-MBP" = mkDarwinSystem {
+              targetSystem = "x86_64-darwin";
+              nixpkgs = nixpkgs-darwin;
+              extraModules = [ ./hosts/zaza/darwin-configuration.nix ];
+            };
           };
           nixosConfigurations = {
             jorel = mkNixosSystem nixpkgs {
