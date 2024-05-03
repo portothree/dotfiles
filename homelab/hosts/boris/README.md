@@ -1,5 +1,7 @@
 # Boris
 
+https://irmaodojorel.fandom.com/pt-br/wiki/B%C3%B3ris
+
 ## Overview
 
 Travel laptop
