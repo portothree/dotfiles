@@ -67,6 +67,10 @@
               allowUnfree = true;
               targetSystem = "aarch64-darwin";
             }) home-manager "boris";
+            zaza = mkHomeManager (mkPkgs nixpkgs {
+              allowUnfree = true;
+              targetSystem = "x86_64-darwin";
+            }) home-manager "zaza";
             klong = mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; })
               home-manager "klong";
             juju = mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; })
