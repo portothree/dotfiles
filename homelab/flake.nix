@@ -90,12 +90,12 @@
           inherit (devenv.packages.${system}.devenv)
           ;
           darwinConfigurations = {
-            "Gustavos-MacBook-Pro" = mkDarwinSystem {
+            boris = mkDarwinSystem {
               targetSystem = "aarch64-darwin";
               nixpkgs = nixpkgs-darwin;
               extraModules = [ ./hosts/boris/darwin-configuration.nix ];
             };
-            "Gustavos-MBP" = mkDarwinSystem {
+            zaza = mkDarwinSystem {
               targetSystem = "x86_64-darwin";
               nixpkgs = nixpkgs-darwin;
               extraModules = [ ./hosts/zaza/darwin-configuration.nix ];
