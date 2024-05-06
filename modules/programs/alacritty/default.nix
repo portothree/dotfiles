@@ -5,8 +5,13 @@ let cfg = config.modules.alacritty;
 in {
   options.modules.alacritty = {
     enable = mkEnableOption "alacritty";
-    installPkg = mkOption {
+    installPkgFromNixpkgs = mkOption {
       description = "If enabled alacritty will be installed from nixpkgs";
+      type = types.bool;
+      default = false;
+    };
+    installPkgFromHomeManager = mkOption {
+      description = "If enabled alacritty will be installed from home-manager";
       type = types.bool;
       default = true;
     };
@@ -28,5 +33,6 @@ in {
         '';
       };
     };
+    programs.alacritty = { enable = cfg.installPkgFromHomeManager; };
   };
 }
