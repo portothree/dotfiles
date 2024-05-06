@@ -100,7 +100,8 @@
       enable = true;
       # Skip installation as Alacritty was installed on this machine
       # with a .dmg image
-      installPkg = false;
+      installPkgFromNixpkgs = false;
+      installPkgFromHomeManager = false;
       shell = "/usr/local/bin/fish";
     };
     hammerspoon.enable = true;

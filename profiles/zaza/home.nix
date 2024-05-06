@@ -7,10 +7,25 @@
     ../../config/ranger.nix
     ../../config/tig.nix
   ];
-  home = {
+  home = rec {
     stateVersion = "22.11";
     username = "porto";
     homeDirectory = "/Users/porto";
+    activation = {
+      # TODO: Move to a shared/common file
+      aliasHomeManagerApplications =
+        lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+          app_folder="${homeDirectory}/Applications/Home Manager Trampolines"
+          rm -rf "$app_folder"
+          mkdir -p "$app_folder"
+          find "$genProfilePath/home-path/Applications" -type l -print | while read -r app; do
+              app_target="$app_folder/$(basename "$app")"
+              real_app="$(readlink "$app")"
+              echo "mkalias \"$real_app\" \"$app_target\"" >&2
+              $DRY_RUN_CMD ${pkgs.mkalias}/bin/mkalias "$real_app" "$app_target"
+          done
+        '';
+    };
     packages = with pkgs; [
       xcbuild
       python311
