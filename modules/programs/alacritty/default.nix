@@ -3,7 +3,7 @@
 with lib;
 let cfg = config.modules.alacritty;
 in {
-  options.modules.alacritty = { 
+  options.modules.alacritty = {
     enable = mkEnableOption "alacritty";
     installPkg = mkOption {
       description = "If enabled alacritty will be installed from nixpkgs";
@@ -25,7 +25,7 @@ in {
           ${lib.strings.fileContents ../../../config/alacritty/alacritty.yml}
           shell:
             program: ${cfg.shell}
-          '';
+        '';
       };
     };
   };

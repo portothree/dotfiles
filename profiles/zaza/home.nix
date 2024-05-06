@@ -33,7 +33,6 @@
     home-manager = { enable = true; };
     fish = {
       enable = true;
-      shellInit = lib.strings.fileContents ../../config/fish/init.fish;
       shellAliases = {
         g = "git";
         r = "ranger";
@@ -74,7 +73,7 @@
   modules = {
     alacritty = {
       enable = true;
-      shell = "/usr/local/bin/fish";
+      shell = "fish";
     };
     bun.enable = true;
     dockerTools.enable = true;
