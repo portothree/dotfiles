@@ -88,7 +88,7 @@
   modules = {
     alacritty = {
       enable = true;
-      shell = "fish";
+      shell = "$HOME/.nix-profile/bin/fish";
     };
     bun.enable = true;
     dockerTools.enable = true;
