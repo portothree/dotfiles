@@ -1,7 +1,8 @@
 { pkgs, lib, ... }:
 
-let homeDirectory = "/Users/porto";
-
+let
+  homeDirectory = "/Users/porto";
+  username = "porto";
 in {
   imports = [
     ../../modules
@@ -10,9 +11,8 @@ in {
     ../../config/tig.nix
   ];
   home = {
+    inherit homeDirectory username;
     stateVersion = "22.11";
-    username = "porto";
-    homeDirectory = "/Users/porto";
     activation = {
       # TODO: Move to a shared/common file
       aliasHomeManagerApplications =
