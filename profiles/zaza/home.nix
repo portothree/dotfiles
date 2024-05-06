@@ -1,13 +1,15 @@
 { pkgs, lib, ... }:
 
-{
+let homeDirectory = "/Users/porto";
+
+in {
   imports = [
     ../../modules
     ../../config/git.nix
     ../../config/ranger.nix
     ../../config/tig.nix
   ];
-  home = rec {
+  home = {
     stateVersion = "22.11";
     username = "porto";
     homeDirectory = "/Users/porto";
