@@ -23,7 +23,7 @@ in {
   };
   config = mkIf cfg.enable {
     home = {
-      packages = mkIf cfg.installPkg [ pkgs.alacritty ];
+      packages = mkIf cfg.installPkgFromNixpkgs [ pkgs.alacritty ];
       file.alacritty = {
         target = ".config/alacritty/alacritty.yml";
         text = ''
