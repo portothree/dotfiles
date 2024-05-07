@@ -93,7 +93,7 @@ in {
     bun.enable = true;
     dockerTools.enable = true;
     tmux.enable = true;
-    nodejs.enable = true;
+    nodejs.enable = false;
     rust.enable = true;
     neovim.enable = true;
     nixTools.enable = true;
