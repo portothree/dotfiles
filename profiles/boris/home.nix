@@ -29,6 +29,7 @@
       fd
       difftastic
       jdk11
+      asdf-vm
       wakatime
     ];
     sessionVariables = { EDITOR = "nvim"; };
