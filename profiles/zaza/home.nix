@@ -40,6 +40,7 @@ in {
       fd
       difftastic
       jdk11
+      asdf-vm
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = { };
