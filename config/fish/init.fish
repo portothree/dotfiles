@@ -1,3 +1,2 @@
-source ~/.asdf/asdf.fish
+source ~/.nix-profile/share/asdf-vm/asdf.fish
 
-eval "$(/opt/homebrew/bin/brew shellenv)"

@@ -36,6 +36,7 @@ in {
     home-manager = { enable = true; };
     fish = {
       enable = true;
+      shellInit = lib.strings.fileContents ../../config/fish/init.fish;
       shellAliases = {
         g = "git";
         r = "ranger";

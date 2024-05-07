@@ -39,7 +39,11 @@
     home-manager = { enable = true; };
     fish = {
       enable = true;
-      shellInit = lib.strings.fileContents ../../config/fish/init.fish;
+      shellInit = ''
+        ${lib.strings.fileContents ../../config/fish/init.fish}
+
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+      '';
       shellAliases = {
         g = "git";
         r = "ranger";
