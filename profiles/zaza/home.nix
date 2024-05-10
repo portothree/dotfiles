@@ -77,7 +77,9 @@ in {
   modules = {
     alacritty = {
       enable = true;
-      shell = "$HOME/.nix-profile/bin/fish";
+      installPkgFromNixpkgs = false;
+      installPkgFromHomeManager = false;
+      shell = "fish";
     };
     bun.enable = true;
     dockerTools.enable = true;
