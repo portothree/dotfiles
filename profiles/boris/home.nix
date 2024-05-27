@@ -18,7 +18,6 @@
       glow
       azure-cli
       azure-functions-core-tools
-      vscode
       bitwarden-cli
       ripgrep
       shfmt
