@@ -1,0 +1,20 @@
+{
+	"name": "dotfiles",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "bbenoist.Nix",
+                "zhuangtongfa.material-theme",
+                "ms-vscode-remote.remote-wsl",
+                "vscodevim.vim",
+                "esbenp.prettier-vscode"
+            ],
+            "settings": {
+                "editor.formatOnSave": true,
+                "editor.fontFamily": "Fira Code",
+                "defaultFormatter": "esbenp.prettier-vscode",
+                "terminal.integrated.shell.linux": "/usr/bin/zsh"
+            }
+        }
+    }
+}
