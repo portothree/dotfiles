@@ -117,6 +117,7 @@
     };
     tmux.enable = true;
     nodejs.enable = true;
+    php.enable = true;
     rust.enable = true;
     neovim.enable = true;
     nixTools.enable = true;
