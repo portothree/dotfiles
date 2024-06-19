@@ -30,6 +30,8 @@
       jdk11
       asdf-vm
       wakatime
+      pgcli
+      mycli
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = { };
