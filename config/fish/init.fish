@@ -1,3 +1,2 @@
-set fish_greeting
+source ~/.nix-profile/share/asdf-vm/asdf.fish
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
