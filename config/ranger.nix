@@ -417,8 +417,8 @@
 
         mime ^text,  label editor = "$EDITOR" -- "$@"
         mime ^text,  label pager  = "$PAGER" -- "$@"
-        !mime ^text, label editor, ext xml|html|json|csv|tex|py|pl|rb|css|js|ts|jsx|nix|sh|php|rs = "$EDITOR" -- "$@"
-        !mime ^text, label pager,  ext xml|html|json|csv|tex|py|pl|rb|css|js|ts|jsx|nix|sh|php|rs = "$PAGER" -- "$@"
+        !mime ^text, label editor, ext xml|html|json|csv|tex|py|pl|rb|css|js|jsx|ts|tsx|nix|sh|php|rs = "$EDITOR" -- "$@"
+        !mime ^text, label pager,  ext xml|html|json|csv|tex|py|pl|rb|css|js|jsx|ts|tsx|nix|sh|php|rs = "$PAGER" -- "$@"
 
         ext 1                         = man "$1"
         ext s[wmf]c, has zsnes, X     = zsnes "$1"
