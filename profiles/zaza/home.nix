@@ -34,15 +34,6 @@ in {
   };
   programs = {
     home-manager = { enable = true; };
-    fish = {
-      enable = true;
-      shellInit = lib.strings.fileContents ../../config/fish/init.fish;
-      shellAliases = {
-        g = "git";
-        r = "ranger";
-        "..." = "cd ../..";
-      };
-    };
     htop = { enable = true; };
     gh = {
       enable = true;
@@ -79,7 +70,6 @@ in {
       enable = true;
       installPkgFromNixpkgs = false;
       installPkgFromHomeManager = false;
-      shell = "$HOME/.nix-profile/bin/fish";
     };
     bun.enable = true;
     dockerTools.enable = true;
@@ -88,5 +78,6 @@ in {
     rust.enable = true;
     neovim.enable = true;
     nixTools.enable = true;
+    zsh.enable = true;
   };
 }
