@@ -1,6 +1,9 @@
 { pkgs, lib, ... }:
 
-{
+let
+  homeDirectory = "/Users/porto";
+  username = "porto";
+in {
   imports = [
     ../../modules
     ../../config/git.nix
@@ -8,9 +11,8 @@
     ../../config/tig.nix
   ];
   home = {
+    inherit homeDirectory username;
     stateVersion = "22.11";
-    username = "porto";
-    homeDirectory = "/Users/porto";
     packages = with pkgs; [
       xcbuild
       python311
@@ -25,6 +27,7 @@
       fd
       difftastic
       jdk11
+      asdf-vm
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = { };
@@ -65,14 +68,13 @@
   modules = {
     alacritty = {
       enable = true;
-      # Skip installation as Alacritty was installed on this machine
-      # with a .dmg image
-      installPkg = false;
+      installPkgFromNixpkgs = false;
+      installPkgFromHomeManager = false;
     };
     bun.enable = true;
     dockerTools.enable = true;
     tmux.enable = true;
-    nodejs.enable = true;
+    nodejs.enable = false;
     rust.enable = true;
     neovim.enable = true;
     nixTools.enable = true;

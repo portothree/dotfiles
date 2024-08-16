@@ -15,6 +15,7 @@
     ./tmux
     ./timewarrior
     ./nodejs
+    ./php
     ./neovim
     ./nixTools
     ./alacritty

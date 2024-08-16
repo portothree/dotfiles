@@ -18,7 +18,6 @@
       glow
       azure-cli
       azure-functions-core-tools
-      vscode
       bitwarden-cli
       ripgrep
       shfmt
@@ -29,7 +28,10 @@
       fd
       difftastic
       jdk11
+      asdf-vm
       wakatime
+      pgcli
+      mycli
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = { };
@@ -38,7 +40,11 @@
     home-manager = { enable = true; };
     fish = {
       enable = true;
-      shellInit = lib.strings.fileContents ../../config/fish/init.fish;
+      shellInit = ''
+        ${lib.strings.fileContents ../../config/fish/init.fish}
+
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+      '';
       shellAliases = {
         g = "git";
         r = "ranger";
@@ -100,7 +106,8 @@
       enable = true;
       # Skip installation as Alacritty was installed on this machine
       # with a .dmg image
-      installPkg = false;
+      installPkgFromNixpkgs = false;
+      installPkgFromHomeManager = false;
       shell = "/usr/local/bin/fish";
     };
     hammerspoon.enable = true;
@@ -112,6 +119,7 @@
     };
     tmux.enable = true;
     nodejs.enable = true;
+    php.enable = true;
     rust.enable = true;
     neovim.enable = true;
     nixTools.enable = true;
