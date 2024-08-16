@@ -79,7 +79,7 @@ in {
       enable = true;
       installPkgFromNixpkgs = false;
       installPkgFromHomeManager = false;
-      shell = "fish";
+      shell = "$HOME/.nix-profile/bin/fish";
     };
     bun.enable = true;
     dockerTools.enable = true;
