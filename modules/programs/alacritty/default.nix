@@ -11,7 +11,7 @@ in {
       default = true;
     };
     shell = mkOption {
-      description = "If enabled alacritty will use fish";
+      description = "Select a custom shell to use with alacritty";
       type = types.lines;
       default = "zsh";
     };

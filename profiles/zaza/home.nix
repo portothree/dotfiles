@@ -31,15 +31,6 @@
   };
   programs = {
     home-manager = { enable = true; };
-    fish = {
-      enable = true;
-      shellInit = lib.strings.fileContents ../../config/fish/init.fish;
-      shellAliases = {
-        g = "git";
-        r = "ranger";
-        "..." = "cd ../..";
-      };
-    };
     htop = { enable = true; };
     gh = {
       enable = true;
@@ -77,7 +68,6 @@
       # Skip installation as Alacritty was installed on this machine
       # with a .dmg image
       installPkg = false;
-      shell = "/usr/local/bin/fish";
     };
     bun.enable = true;
     dockerTools.enable = true;
@@ -86,5 +76,6 @@
     rust.enable = true;
     neovim.enable = true;
     nixTools.enable = true;
+    zsh.enable = true;
   };
 }
