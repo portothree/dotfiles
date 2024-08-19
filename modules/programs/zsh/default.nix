@@ -3,7 +3,17 @@
 with lib;
 let cfg = config.modules.zsh;
 in {
-  options.modules.zsh = { enable = mkEnableOption "zsh"; };
+  options.modules.zsh = {
+    enable = mkEnableOption "zsh";
+    useOhMyZsh = mkOption {
+      type = types.bool;
+      default = true;
+    };
+    loadAsdf = mkOption {
+      type = types.bool;
+      default = false;
+    };
+  };
   config = mkIf cfg.enable {
     programs.zsh = {
       enable = true;
@@ -14,6 +24,9 @@ in {
         EDITOR = "nvim";
         HISTTIMEFORMAT = "%F %T ";
       };
+      initExtra = ''
+        ${if cfg.loadAsdf then ". $HOME/.asdf/asdf.sh" else ""}
+      '';
       history = {
         size = 10000;
         path = "${config.xdg.dataHome}/zsh/history";
@@ -41,7 +54,7 @@ in {
         kdns = "kubectl delete '$(krns)' --all";
       };
       oh-my-zsh = {
-        enable = true;
+        enable = cfg.useOhMyZsh;
         plugins = [ "git" "git-auto-fetch" ];
         theme = "robbyrussell";
       };

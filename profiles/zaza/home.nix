@@ -78,6 +78,9 @@ in {
     rust.enable = true;
     neovim.enable = true;
     nixTools.enable = true;
-    zsh.enable = true;
+    zsh = {
+      enable = true;
+      loadAsdf = true;
+    };
   };
 }
