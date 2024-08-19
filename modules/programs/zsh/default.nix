@@ -25,7 +25,10 @@ in {
         HISTTIMEFORMAT = "%F %T ";
       };
       initExtra = ''
-        ${if cfg.loadAsdf then ". $HOME/.asdf/asdf.sh" else ""}
+        ${if cfg.loadAsdf then
+          "source ${pkgs.asdf-vm}/share/asdf-vm/asdf.sh"
+        else
+          ""}
       '';
       history = {
         size = 10000;
