@@ -15,9 +15,9 @@
     ];
   };
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-23.11";
+    nixpkgs.url = "nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
-    nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-23.11-darwin";
+    nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-24.05-darwin";
     nix-darwin.url = "github:LnL7/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
@@ -29,16 +29,17 @@
     pre-commit-hooks = { url = "github:cachix/pre-commit-hooks.nix"; };
     k1x = { url = "github:p8sco/k1x"; };
     devenv = { url = "github:cachix/devenv/v0.5"; };
+    determinate = { url = "https://flakehub.com/f/DeterminateSystems/determinate/0.1"; };
   };
   outputs = { self, nixpkgs, nixpkgs-darwin, nix-darwin, flake-utils
-    , nixos-hardware, microvm, pre-commit-hooks, k1x, devenv, ... }@inputs:
+    , nixos-hardware, microvm, pre-commit-hooks, k1x, devenv, determinate, ... }@inputs:
     flake-utils.lib.eachDefaultSystem (system:
       let
         mkDarwinSystem = { targetSystem ? "aarch64-darwin"
-          , nixpkgs ? inputs.nixpkgs, baseModules ? [ ], extraModules ? [ ], }:
+          , nixpkgs ? inputs.nixpkgs, extraModules ? [ ], }:
           inputs.nix-darwin.lib.darwinSystem {
             system = targetSystem;
-            modules = baseModules ++ extraModules;
+            modules = [ determinate.darwinModules.default ]  ++ extraModules;
             specialArgs = { inherit self inputs nixpkgs; };
           };
         mkNixosSystem = pkgs:
