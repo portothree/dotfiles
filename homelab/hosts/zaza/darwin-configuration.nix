@@ -18,7 +18,7 @@
   };
   fonts = {
     fontDir = { enable = true; };
-    fonts = with pkgs; [ fira-code ];
+    packages = with pkgs; [ fira-code ];
   };
   services = {
     nix-daemon = { enable = true; };
