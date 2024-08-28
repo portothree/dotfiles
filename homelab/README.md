@@ -52,6 +52,16 @@ In [layer 2](https://metallb.org/concepts/layer2/) mode and ip pool of `192.168.
 
 The VM with id `102` have a Nvidia 3060 Ti GPU allocated that is being used to mine Ethereum and Ton using [lolminer](https://github.com/Lolliedieb/lolMiner-releases)
 
+### Nix
+
+#### Determinate Systems Nix
+
+https://determinate.systems/nix/
+
+```
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --determinate
+```
+
 ## NixOs
 
 ```
