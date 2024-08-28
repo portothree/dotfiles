@@ -25,10 +25,7 @@
     ];
     masApps = { "tailscale" = 1475387142; };
   };
-  fonts = {
-    fontDir = { enable = true; };
-    fonts = with pkgs; [ fira-code ];
-  };
+  fonts = { packages = with pkgs; [ fira-code ]; };
   services = {
     nix-daemon = { enable = true; };
     karabiner-elements = { enable = false; };
