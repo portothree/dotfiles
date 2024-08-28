@@ -16,10 +16,7 @@
     brews = [ "pyqt@6" "python@3.10" ];
     casks = [ "docker" "alacritty" ];
   };
-  fonts = {
-    fontDir = { enable = true; };
-    packages = with pkgs; [ fira-code ];
-  };
+  fonts = { packages = with pkgs; [ fira-code ]; };
   services = {
     nix-daemon = { enable = true; };
     karabiner-elements = { enable = false; };
