@@ -15,7 +15,6 @@ in {
     stateVersion = "22.11";
     packages = with pkgs; [
       xcbuild
-      python311
       qt6.full
       glow
       ripgrep
@@ -28,7 +27,6 @@ in {
       difftastic
       jdk11
       asdf-vm
-      sqlfluff
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = { };
