@@ -32,6 +32,7 @@
       wakatime
       pgcli
       mycli
+      sqlfluff
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = { };

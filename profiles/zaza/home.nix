@@ -28,6 +28,7 @@ in {
       difftastic
       jdk11
       asdf-vm
+      sqlfluff
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = { };
