@@ -22,6 +22,7 @@
       "trader-workstation"
       "stats"
       "hammerspoon"
+      "setapp"
     ];
     masApps = { "tailscale" = 1475387142; };
   };
