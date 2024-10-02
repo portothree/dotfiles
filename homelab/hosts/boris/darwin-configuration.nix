@@ -13,7 +13,7 @@
   homebrew = {
     enable = true;
     global = { lockfiles = true; };
-    brews = [ "pyqt@6" "syncthing" "python@3.10" ];
+    brews = [ "pyqt@6" "syncthing" ];
     casks = [
       "ddpm"
       "docker"
