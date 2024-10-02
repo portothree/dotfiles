@@ -13,7 +13,6 @@
     homeDirectory = "/Users/gustavoporto";
     packages = with pkgs; [
       xcbuild
-      python311
       qt6.full
       glow
       azure-cli
