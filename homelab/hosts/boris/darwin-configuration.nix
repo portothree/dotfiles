@@ -13,16 +13,23 @@
   homebrew = {
     enable = true;
     global = { lockfiles = true; };
-    brews = [ "pyqt@6" "syncthing" ];
+    brews = [ "pyqt@6" "colima" "helix" "syncthing" ];
     casks = [
+      "anki"
+      "dbeaver-community"
       "ddpm"
       "docker"
+      "finicky"
+      "ghostty"
       "google-chrome"
-      "anki"
-      "trader-workstation"
-      "stats"
       "hammerspoon"
+      "trader-workstation"
+      "postman"
+      "qutebrowser"
       "setapp"
+      "shortcat"
+      "slack"
+      "stats"
     ];
     masApps = { "tailscale" = 1475387142; };
   };
