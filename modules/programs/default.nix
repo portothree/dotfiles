@@ -11,6 +11,7 @@
     ./dunst
     ./dockerTools
     ./hammerspoon
+    ./ghostty
     ./karabiner-elements
     ./tmux
     ./timewarrior

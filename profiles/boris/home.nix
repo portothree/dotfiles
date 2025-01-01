@@ -111,6 +111,13 @@
       shell = "/usr/local/bin/fish";
     };
     hammerspoon.enable = true;
+    ghostty = {
+      enable = true;
+      # Skip installation as ghostty was installed on this machine
+      # using homebrew 
+      installPkgFromNixpkgs = false;
+      shell = "fish";
+    };
     bun.enable = true;
     dockerTools.enable = true;
     karabiner-elements = {
