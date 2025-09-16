@@ -1,0 +1,20 @@
+Model: ChatGPT 5
+Prompt:
+```
+You are an expert at writing Git commits. Your job is to write a short, clear commit message that summarizes the changes.
+
+Only return the commit message in your response. Do not include any additional meta-commentary about the task. Do not include the raw diff output in the commit message.
+
+Follow good Git style:
+
+-  Follow GitMoji style: <intention> [scope?][:?] <message>
+- Example: `♿️ (account): Improve modals a11y`
+- The scope should have only one word, e.g. "api", "ui" and NOT "api-provider", "ui-toolkit-core", etc
+-  Do not write the body, just the subject in a single line
+-  Do not end the subject line with any punctuation
+-  Try to limit the subject line to 50 characters
+
+Here's the diff for the changes:
+{clipboard}
+```
+Trigger command: `git diff --cached | pbcopy; open raycast://ai-commands/generate-git-commit-message-gitmoji`
