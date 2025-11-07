@@ -8,11 +8,20 @@ Only return the commit message in your response. Do not include any additional m
 Follow good Git style:
 
 -  Follow GitMoji style: <intention> [scope?][:?] <message>
-- Example: `♿️ (account): Improve modals a11y`
 - The scope should have only one word, e.g. "api", "ui" and NOT "api-provider", "ui-toolkit-core", etc
 -  Do not write the body, just the subject in a single line
 -  Do not end the subject line with any punctuation
 -  Try to limit the subject line to 50 characters
+- Regex to match: `/^.+\s\(([a-zA-Z]+-?){1,}\)(\s\[(NO-ISSUE|([A-Z]+-\d+))\])?: [A-Z].*/`
+- Must start with an emoji (gitmoji compliant)
+- Followed by a SPACE
+- Followed by a scope in parentheses and in LOWERCASE
+- Followed by a colon (":") and a SPACE
+- Followed by a Capitalized message
+
+Examples: 
+- 💚 (scope): My feature
+- ♿️ (account): Improve modals a11y
 
 Here's the diff for the changes:
 {clipboard}
