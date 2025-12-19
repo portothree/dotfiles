@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         LunchMoney Transaction Source Indicator
 // @namespace    http://tampermonkey.net/
-// @version      1.2
+// @version      1.3
 // @description  Shows whether a transaction was created via API or manually in LunchMoney
 // @author       You
-// @match        https://my.lunchmoney.app/transactions/*
+// @match        https://my.lunchmoney.app/*
 // @grant        GM_getValue
 // @grant        GM_setValue
 // @grant        GM_xmlhttpRequest
@@ -540,30 +540,29 @@
         });
     }
 
-    // Handle URL changes (SPA navigation)
-    function handleNavigation() {
-        let lastPath = window.location.pathname;
-
-        const checkPath = () => {
-            if (window.location.pathname !== lastPath) {
-                lastPath = window.location.pathname;
-                if (lastPath.includes('/transactions/')) {
-                    // Clear cache for new month
-                    GM_setValue(CACHE_KEY, null);
-                    setTimeout(fetchAndDisplaySources, 500);
-                }
-            }
-        };
-
-        // Check periodically for SPA navigation
-        setInterval(checkPath, 1000);
+    // Check if we're on a transactions page
+    function isTransactionsPage() {
+        return window.location.pathname.match(/\/transactions(\/|$)/);
     }
 
-    // Initialize
-    function init() {
-        console.log('[LM Source] Initializing...');
-        injectStyles();
-        addSettingsButton();
+    // Show/hide the settings button based on current page
+    function updateSettingsButtonVisibility() {
+        const btn = document.querySelector('.lm-settings-btn');
+        if (btn) {
+            btn.style.display = isTransactionsPage() ? 'flex' : 'none';
+        }
+    }
+
+    // Activate on transactions page
+    function activateOnTransactionsPage() {
+        if (!isTransactionsPage()) {
+            console.log('[LM Source] Not on transactions page, skipping activation');
+            updateSettingsButtonVisibility();
+            return;
+        }
+
+        console.log('[LM Source] On transactions page, activating...');
+        updateSettingsButtonVisibility();
 
         // Wait for the transactions table to appear
         function waitForTable() {
@@ -577,14 +576,68 @@
             }
         }
 
-        // Wait for the page to fully load
-        if (document.readyState === 'complete') {
-            waitForTable();
-        } else {
-            window.addEventListener('load', waitForTable);
+        waitForTable();
+    }
+
+    // Handle URL changes (SPA navigation)
+    function handleNavigation() {
+        let lastPath = window.location.pathname;
+        let lastDatePath = '';
+
+        const checkPath = () => {
+            const currentPath = window.location.pathname;
+
+            if (currentPath !== lastPath) {
+                console.log('[LM Source] Path changed:', lastPath, '->', currentPath);
+                lastPath = currentPath;
+
+                if (isTransactionsPage()) {
+                    // Extract date portion for cache invalidation
+                    const dateMatch = currentPath.match(/\/transactions\/(\d{4}\/\d{1,2})/);
+                    const currentDatePath = dateMatch ? dateMatch[1] : '';
+
+                    if (currentDatePath !== lastDatePath) {
+                        // Different month, clear cache
+                        console.log('[LM Source] Month changed, clearing cache');
+                        GM_setValue(CACHE_KEY, null);
+                        lastDatePath = currentDatePath;
+                    }
+
+                    // Small delay to let the page render
+                    setTimeout(activateOnTransactionsPage, 300);
+                } else {
+                    updateSettingsButtonVisibility();
+                }
+            }
+        };
+
+        // Check periodically for SPA navigation
+        setInterval(checkPath, 500);
+
+        // Also listen for popstate (browser back/forward)
+        window.addEventListener('popstate', () => {
+            setTimeout(checkPath, 100);
+        });
+    }
+
+    // Initialize
+    function init() {
+        console.log('[LM Source] Initializing on:', window.location.pathname);
+        injectStyles();
+        addSettingsButton();
+        updateSettingsButtonVisibility();
+
+        // Only activate if we're already on transactions page
+        if (isTransactionsPage()) {
+            // Wait for the page to fully load
+            if (document.readyState === 'complete') {
+                activateOnTransactionsPage();
+            } else {
+                window.addEventListener('load', activateOnTransactionsPage);
+            }
         }
 
-        // Observe for dynamic changes
+        // Observe for dynamic changes (only runs when needed)
         observeTransactionChanges();
 
         // Handle SPA navigation
