@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         LunchMoney Transaction Source Indicator
 // @namespace    http://tampermonkey.net/
-// @version      1.3
+// @version      1.5
 // @description  Shows whether a transaction was created via API or manually in LunchMoney
 // @author       You
 // @match        https://my.lunchmoney.app/*
@@ -19,6 +19,8 @@
     const STORAGE_KEY = 'lm_api_key';
     const CACHE_KEY = 'lm_transactions_cache';
     const CACHE_EXPIRY = 5 * 60 * 1000; // 5 minutes
+    let interceptedDateRange = null; // Store date range from intercepted requests
+    let interceptRefreshTimeout = null; // Debounce timeout for refresh after intercept
 
     // Source badge styles
     const styles = `
@@ -141,8 +143,83 @@
         document.head.appendChild(styleEl);
     }
 
-    // Get date range from URL
-    function getDateRangeFromURL() {
+    // Handle intercepted date range update with debouncing
+    function handleInterceptedDateRange(startDate, endDate) {
+        const newRange = { startDate, endDate };
+        const rangeChanged = !interceptedDateRange ||
+            interceptedDateRange.startDate !== startDate ||
+            interceptedDateRange.endDate !== endDate;
+
+        interceptedDateRange = newRange;
+
+        if (rangeChanged) {
+            console.log('[LM Source] Date range changed, will refresh...');
+            // Clear cache for new date range
+            GM_setValue(CACHE_KEY, null);
+
+            // Debounce the refresh
+            clearTimeout(interceptRefreshTimeout);
+            interceptRefreshTimeout = setTimeout(() => {
+                if (isTransactionsPage()) {
+                    activateOnTransactionsPage();
+                }
+            }, 1500); // Wait 1.5s for LunchMoney to finish loading
+        }
+    }
+
+    // Intercept XHR requests to capture date range from LunchMoney's own API calls
+    function setupRequestInterceptor() {
+        // Intercept XMLHttpRequest
+        const originalXHROpen = XMLHttpRequest.prototype.open;
+        XMLHttpRequest.prototype.open = function(method, url, ...args) {
+            if (url && url.includes('/transactions') && url.includes('start_date')) {
+                try {
+                    const urlObj = new URL(url, window.location.origin);
+                    const startDate = urlObj.searchParams.get('start_date');
+                    const endDate = urlObj.searchParams.get('end_date');
+                    if (startDate && endDate) {
+                        console.log('[LM Source] Intercepted XHR date range:', startDate, 'to', endDate);
+                        handleInterceptedDateRange(startDate, endDate);
+                    }
+                } catch (e) {
+                    console.log('[LM Source] Error parsing XHR URL:', e);
+                }
+            }
+            return originalXHROpen.call(this, method, url, ...args);
+        };
+
+        // Intercept fetch
+        const originalFetch = window.fetch;
+        window.fetch = function(url, ...args) {
+            const urlStr = typeof url === 'string' ? url : url?.url;
+            if (urlStr && urlStr.includes('/transactions') && urlStr.includes('start_date')) {
+                try {
+                    const urlObj = new URL(urlStr, window.location.origin);
+                    const startDate = urlObj.searchParams.get('start_date');
+                    const endDate = urlObj.searchParams.get('end_date');
+                    if (startDate && endDate) {
+                        console.log('[LM Source] Intercepted fetch date range:', startDate, 'to', endDate);
+                        handleInterceptedDateRange(startDate, endDate);
+                    }
+                } catch (e) {
+                    console.log('[LM Source] Error parsing fetch URL:', e);
+                }
+            }
+            return originalFetch.call(this, url, ...args);
+        };
+
+        console.log('[LM Source] Request interceptor set up');
+    }
+
+    // Get date range - prefer intercepted range, fall back to URL
+    function getDateRange() {
+        // First, check if we have an intercepted date range
+        if (interceptedDateRange) {
+            console.log('[LM Source] Using intercepted date range:', interceptedDateRange);
+            return interceptedDateRange;
+        }
+
+        // Fall back to URL-based date range
         const match = window.location.pathname.match(/\/transactions\/(\d{4})\/(\d{1,2})/);
         if (match) {
             const year = parseInt(match[1]);
@@ -150,6 +227,7 @@
             const startDate = `${year}-${String(month).padStart(2, '0')}-01`;
             const lastDay = new Date(year, month, 0).getDate();
             const endDate = `${year}-${String(month).padStart(2, '0')}-${lastDay}`;
+            console.log('[LM Source] Using URL-based date range:', startDate, 'to', endDate);
             return { startDate, endDate };
         }
         return null;
@@ -312,18 +390,18 @@
         const headerRow = document.querySelector('table.p-transactions-table thead tr');
         if (!headerRow || headerRow.querySelector('.lm-source-header')) return;
 
-        // Find the payee header (it has "Payee" text)
+        // Find the Date header (first column after checkbox and td-resize)
         const headers = headerRow.querySelectorAll('th');
-        let payeeHeaderIndex = -1;
+        let dateHeaderIndex = -1;
 
         headers.forEach((th, i) => {
-            if (th.textContent.includes('Payee')) {
-                payeeHeaderIndex = i;
+            if (th.textContent.includes('Date')) {
+                dateHeaderIndex = i;
             }
         });
 
-        if (payeeHeaderIndex === -1) {
-            console.log('[LM Source] Could not find Payee header');
+        if (dateHeaderIndex === -1) {
+            console.log('[LM Source] Could not find Date header');
             return;
         }
 
@@ -332,21 +410,16 @@
         sourceHeader.className = 'lm-source-header';
         sourceHeader.innerHTML = '<div>Source</div>';
 
-        // Insert after the payee header (and its td-resize)
-        const payeeHeader = headers[payeeHeaderIndex];
-        const nextSibling = payeeHeader.nextElementSibling?.nextElementSibling; // Skip td-resize
-        if (nextSibling) {
-            headerRow.insertBefore(sourceHeader, nextSibling);
-        } else {
-            headerRow.appendChild(sourceHeader);
-        }
+        // Insert before the Date header
+        const dateHeader = headers[dateHeaderIndex];
+        headerRow.insertBefore(sourceHeader, dateHeader);
 
         // Add a td-resize after our header for consistency
         const resizer = document.createElement('th');
         resizer.className = 'td-resize';
         sourceHeader.insertAdjacentElement('afterend', resizer);
 
-        console.log('[LM Source] Added source column header');
+        console.log('[LM Source] Added source column header before Date');
     }
 
     // Apply source badges to transaction rows
@@ -372,25 +445,20 @@
             const transaction = transactionsMap[txId];
             const source = transaction ? transaction.source : null;
 
-            // Find the payee cell by looking for editable-string class
+            // Find the date cell (contains a date like 2025-12-18)
             const cells = row.querySelectorAll('td');
-            let payeeCellIndex = -1;
+            let dateCellIndex = -1;
 
             cells.forEach((td, i) => {
-                if (td.querySelector('.editable-string')) {
-                    payeeCellIndex = i;
+                const text = td.textContent?.trim();
+                if (text && text.match(/^\d{4}-\d{2}-\d{2}$/)) {
+                    dateCellIndex = i;
                 }
             });
 
-            if (payeeCellIndex === -1) {
-                // Fallback: find by position (usually around index 6)
-                for (let i = 4; i < 10 && i < cells.length; i++) {
-                    const text = cells[i]?.textContent?.trim();
-                    if (text && !text.includes('$') && !text.includes('R$') && !text.match(/^\d{4}-\d{2}-\d{2}$/)) {
-                        payeeCellIndex = i;
-                        break;
-                    }
-                }
+            if (dateCellIndex === -1) {
+                // Fallback: date is usually the 3rd cell (after checkbox and td-divider)
+                dateCellIndex = 2;
             }
 
             // Create source cell
@@ -404,23 +472,17 @@
                 sourceCell.innerHTML = '<span class="lm-source-badge unknown">?</span>';
             }
 
-            // Insert after payee cell (and its td-divider)
-            if (payeeCellIndex !== -1 && cells[payeeCellIndex]) {
-                const payeeCell = cells[payeeCellIndex];
-                // Skip the td-divider after payee
-                const insertPoint = payeeCell.nextElementSibling?.nextElementSibling;
-                if (insertPoint) {
-                    row.insertBefore(sourceCell, insertPoint);
-                } else {
-                    row.appendChild(sourceCell);
-                }
+            // Insert before date cell
+            if (dateCellIndex !== -1 && cells[dateCellIndex]) {
+                const dateCell = cells[dateCellIndex];
+                row.insertBefore(sourceCell, dateCell);
                 appliedCount++;
-            }
 
-            // Add a td-divider after our cell for consistency
-            const divider = document.createElement('td');
-            divider.className = 'td-divider';
-            sourceCell.insertAdjacentElement('afterend', divider);
+                // Add a td-divider after our cell for consistency
+                const divider = document.createElement('td');
+                divider.className = 'td-divider';
+                sourceCell.insertAdjacentElement('afterend', divider);
+            }
         });
 
         console.log('[LM Source] Applied badges to', appliedCount, 'rows');
@@ -442,11 +504,11 @@
             }
         }
 
-        const dateRange = getDateRangeFromURL();
+        const dateRange = getDateRange();
         console.log('[LM Source] Date range:', dateRange);
 
         if (!dateRange) {
-            console.log('[LM Source] Could not determine date range from URL');
+            console.log('[LM Source] Could not determine date range');
             return;
         }
 
@@ -623,6 +685,9 @@
     // Initialize
     function init() {
         console.log('[LM Source] Initializing on:', window.location.pathname);
+
+        setupRequestInterceptor();
+
         injectStyles();
         addSettingsButton();
         updateSettingsButtonVisibility();
