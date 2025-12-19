@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         LunchMoney Transaction Source Indicator
 // @namespace    http://tampermonkey.net/
-// @version      1.5
+// @version      1.6
 // @description  Shows whether a transaction was created via API or manually in LunchMoney
 // @author       You
 // @match        https://my.lunchmoney.app/*
@@ -422,10 +422,54 @@
         console.log('[LM Source] Added source column header before Date');
     }
 
+    // Add empty source cell to editing rows (new transaction form)
+    function addSourceCellToEditingRows() {
+        const editingRows = document.querySelectorAll('tr.editing');
+
+        editingRows.forEach(row => {
+            // Skip if already has source cell
+            if (row.querySelector('.lm-source-cell')) return;
+
+            const cells = row.querySelectorAll('td');
+            if (cells.length < 3) return;
+
+            // Find the cell with the datepicker (it's the date cell that needs to shift)
+            let dateCellIndex = -1;
+            cells.forEach((td, i) => {
+                if (td.querySelector('.react-datepicker-wrapper') || td.querySelector('.datepicker')) {
+                    dateCellIndex = i;
+                }
+            });
+
+            if (dateCellIndex === -1) {
+                // Fallback: usually after checkbox (0) and td-divider (1)
+                dateCellIndex = 2;
+            }
+
+            // Create empty source cell for new transactions
+            const sourceCell = document.createElement('td');
+            sourceCell.className = 'lm-source-cell';
+            sourceCell.innerHTML = '<span class="lm-source-badge manual" style="opacity: 0.5;">New</span>';
+
+            // Insert before date cell
+            if (cells[dateCellIndex]) {
+                row.insertBefore(sourceCell, cells[dateCellIndex]);
+
+                // Add a td-divider after our cell
+                const divider = document.createElement('td');
+                divider.className = 'td-divider';
+                sourceCell.insertAdjacentElement('afterend', divider);
+            }
+        });
+    }
+
     // Apply source badges to transaction rows
     function applySourceBadges(transactionsMap) {
         // First, add the header column
         addSourceColumnHeader();
+
+        // Handle editing rows (new transaction form)
+        addSourceCellToEditingRows();
 
         const rows = document.querySelectorAll('tr.transaction-row');
         console.log('[LM Source] Found transaction rows:', rows.length);
@@ -564,24 +608,36 @@
     function observeTransactionChanges() {
         const observer = new MutationObserver((mutations) => {
             let shouldUpdate = false;
+            let hasEditingRow = false;
 
             for (const mutation of mutations) {
                 if (mutation.type === 'childList') {
                     for (const node of mutation.addedNodes) {
-                        if (node.nodeType === 1 && (
-                            node.classList?.contains('transaction-row') ||
-                            node.querySelector?.('.transaction-row')
-                        )) {
-                            shouldUpdate = true;
-                            break;
+                        if (node.nodeType === 1) {
+                            if (node.classList?.contains('transaction-row') ||
+                                node.querySelector?.('.transaction-row')) {
+                                shouldUpdate = true;
+                            }
+                            if (node.classList?.contains('editing') ||
+                                node.querySelector?.('.editing')) {
+                                hasEditingRow = true;
+                            }
                         }
                     }
                 }
-                if (shouldUpdate) break;
+                if (shouldUpdate && hasEditingRow) break;
+            }
+
+            // Handle editing rows immediately (no debounce needed)
+            if (hasEditingRow) {
+                setTimeout(() => {
+                    addSourceColumnHeader();
+                    addSourceCellToEditingRows();
+                }, 50);
             }
 
             if (shouldUpdate) {
-                // Debounce updates
+                // Debounce updates for transaction rows
                 clearTimeout(window._lmSourceTimeout);
                 window._lmSourceTimeout = setTimeout(() => {
                     const cacheData = GM_getValue(CACHE_KEY, null);
@@ -686,6 +742,7 @@
     function init() {
         console.log('[LM Source] Initializing on:', window.location.pathname);
 
+        // Set up request interceptor first to capture date ranges
         setupRequestInterceptor();
 
         injectStyles();
