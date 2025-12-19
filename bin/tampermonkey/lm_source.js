@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         LunchMoney Transaction Source Indicator
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.2
 // @description  Shows whether a transaction was created via API or manually in LunchMoney
 // @author       You
 // @match        https://my.lunchmoney.app/transactions/*
@@ -25,12 +25,12 @@
         .lm-source-badge {
             display: inline-flex;
             align-items: center;
-            padding: 2px 6px;
+            justify-content: center;
+            padding: 3px 8px;
             border-radius: 4px;
-            font-size: 10px;
+            font-size: 11px;
             font-weight: 600;
             text-transform: uppercase;
-            margin-left: 4px;
             white-space: nowrap;
         }
         .lm-source-badge.api {
@@ -52,6 +52,17 @@
         .lm-source-badge.unknown {
             background-color: #767676;
             color: white;
+        }
+        .lm-source-cell {
+            width: 70px !important;
+            min-width: 70px !important;
+            text-align: center !important;
+            padding: 4px !important;
+        }
+        th.lm-source-header {
+            width: 70px !important;
+            min-width: 70px !important;
+            text-align: center !important;
         }
         .lm-api-key-modal {
             position: fixed;
@@ -278,7 +289,8 @@
     // Create source badge
     function createSourceBadge(source) {
         const badge = document.createElement('span');
-        badge.className = `lm-source-badge ${source || 'unknown'}`;
+        const normalizedSource = (source || 'unknown').toLowerCase();
+        badge.className = `lm-source-badge ${normalizedSource}`;
 
         const sourceLabels = {
             'api': 'API',
@@ -288,22 +300,60 @@
             'unknown': '?'
         };
 
-        const sourceIcons = {
-            'api': '&#129302;', // robot
-            'manual': '&#9997;', // writing hand
-            'plaid': '&#128279;', // link
-            'csv': '&#128196;', // page
-            'unknown': '&#10067;' // question
-        };
-
-        badge.innerHTML = `${sourceIcons[source] || sourceIcons.unknown} ${sourceLabels[source] || source || 'Unknown'}`;
+        // Use short labels for the column view
+        badge.textContent = sourceLabels[normalizedSource] || source || '?';
         badge.title = `Source: ${source || 'Unknown'}`;
 
         return badge;
     }
 
+    // Add source column header to the table
+    function addSourceColumnHeader() {
+        const headerRow = document.querySelector('table.p-transactions-table thead tr');
+        if (!headerRow || headerRow.querySelector('.lm-source-header')) return;
+
+        // Find the payee header (it has "Payee" text)
+        const headers = headerRow.querySelectorAll('th');
+        let payeeHeaderIndex = -1;
+
+        headers.forEach((th, i) => {
+            if (th.textContent.includes('Payee')) {
+                payeeHeaderIndex = i;
+            }
+        });
+
+        if (payeeHeaderIndex === -1) {
+            console.log('[LM Source] Could not find Payee header');
+            return;
+        }
+
+        // Create new header cell
+        const sourceHeader = document.createElement('th');
+        sourceHeader.className = 'lm-source-header';
+        sourceHeader.innerHTML = '<div>Source</div>';
+
+        // Insert after the payee header (and its td-resize)
+        const payeeHeader = headers[payeeHeaderIndex];
+        const nextSibling = payeeHeader.nextElementSibling?.nextElementSibling; // Skip td-resize
+        if (nextSibling) {
+            headerRow.insertBefore(sourceHeader, nextSibling);
+        } else {
+            headerRow.appendChild(sourceHeader);
+        }
+
+        // Add a td-resize after our header for consistency
+        const resizer = document.createElement('th');
+        resizer.className = 'td-resize';
+        sourceHeader.insertAdjacentElement('afterend', resizer);
+
+        console.log('[LM Source] Added source column header');
+    }
+
     // Apply source badges to transaction rows
     function applySourceBadges(transactionsMap) {
+        // First, add the header column
+        addSourceColumnHeader();
+
         const rows = document.querySelectorAll('tr.transaction-row');
         console.log('[LM Source] Found transaction rows:', rows.length);
         console.log('[LM Source] Transaction map size:', Object.keys(transactionsMap).length);
@@ -311,7 +361,7 @@
         let appliedCount = 0;
         rows.forEach((row, index) => {
             // Skip if already processed
-            if (row.querySelector('.lm-source-badge')) return;
+            if (row.querySelector('.lm-source-cell')) return;
 
             const txId = extractTransactionId(row);
             if (!txId) {
@@ -320,30 +370,57 @@
             }
 
             const transaction = transactionsMap[txId];
-            if (!transaction) {
-                console.log('[LM Source] No transaction data for ID:', txId);
-                return;
-            }
+            const source = transaction ? transaction.source : null;
 
-            // Find the payee cell to insert the badge - try multiple selectors
-            let payeeCell = row.querySelector('td.editable .g-editable-text .default-state.editable-string');
+            // Find the payee cell by looking for editable-string class
+            const cells = row.querySelectorAll('td');
+            let payeeCellIndex = -1;
 
-            // Alternative: find by looking at the payee column (usually 7th td)
-            if (!payeeCell) {
-                const cells = row.querySelectorAll('td.editable');
-                // Payee is typically the 3rd editable cell (after date and category)
-                if (cells.length >= 3) {
-                    payeeCell = cells[2].querySelector('.default-state');
+            cells.forEach((td, i) => {
+                if (td.querySelector('.editable-string')) {
+                    payeeCellIndex = i;
+                }
+            });
+
+            if (payeeCellIndex === -1) {
+                // Fallback: find by position (usually around index 6)
+                for (let i = 4; i < 10 && i < cells.length; i++) {
+                    const text = cells[i]?.textContent?.trim();
+                    if (text && !text.includes('$') && !text.includes('R$') && !text.match(/^\d{4}-\d{2}-\d{2}$/)) {
+                        payeeCellIndex = i;
+                        break;
+                    }
                 }
             }
 
-            if (payeeCell) {
-                const badge = createSourceBadge(transaction.source);
-                payeeCell.appendChild(badge);
-                appliedCount++;
+            // Create source cell
+            const sourceCell = document.createElement('td');
+            sourceCell.className = 'lm-source-cell';
+
+            if (source) {
+                const badge = createSourceBadge(source);
+                sourceCell.appendChild(badge);
             } else {
-                console.log('[LM Source] Could not find payee cell for row', index);
+                sourceCell.innerHTML = '<span class="lm-source-badge unknown">?</span>';
             }
+
+            // Insert after payee cell (and its td-divider)
+            if (payeeCellIndex !== -1 && cells[payeeCellIndex]) {
+                const payeeCell = cells[payeeCellIndex];
+                // Skip the td-divider after payee
+                const insertPoint = payeeCell.nextElementSibling?.nextElementSibling;
+                if (insertPoint) {
+                    row.insertBefore(sourceCell, insertPoint);
+                } else {
+                    row.appendChild(sourceCell);
+                }
+                appliedCount++;
+            }
+
+            // Add a td-divider after our cell for consistency
+            const divider = document.createElement('td');
+            divider.className = 'td-divider';
+            sourceCell.insertAdjacentElement('afterend', divider);
         });
 
         console.log('[LM Source] Applied badges to', appliedCount, 'rows');
