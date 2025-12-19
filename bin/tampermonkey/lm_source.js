@@ -1,14 +1,16 @@
 // ==UserScript==
 // @name         LunchMoney Transaction Source Indicator
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @description  Shows whether a transaction was created via API or manually in LunchMoney
 // @author       You
 // @match        https://my.lunchmoney.app/transactions/*
 // @grant        GM_getValue
 // @grant        GM_setValue
 // @grant        GM_xmlhttpRequest
-// @connect      api.lunchmoney.app
+// @grant        GM_log
+// @connect      dev.lunchmoney.app
+// @connect      *
 // ==/UserScript==
 
 (function() {
@@ -187,6 +189,20 @@
         });
     }
 
+    // Update button status
+    function updateButtonStatus(status) {
+        const btn = document.querySelector('.lm-settings-btn');
+        if (btn) {
+            const statusMap = {
+                'loading': '&#8987; Loading...',
+                'ready': '&#9881; Source Indicator',
+                'error': '&#9888; Error - Click to retry',
+                'done': '&#10003; Sources Loaded'
+            };
+            btn.innerHTML = statusMap[status] || statusMap['ready'];
+        }
+    }
+
     // Add settings button
     function addSettingsButton() {
         const existingBtn = document.querySelector('.lm-settings-btn');
@@ -201,6 +217,7 @@
             if (newKey) {
                 // Clear cache and refetch
                 GM_setValue(CACHE_KEY, null);
+                console.log('[LM Source] API key updated, refetching...');
                 fetchAndDisplaySources();
             }
         });
@@ -209,20 +226,28 @@
 
     // Fetch transactions from API
     function fetchTransactions(apiKey, startDate, endDate) {
+        const url = `https://dev.lunchmoney.app/v1/transactions?start_date=${startDate}&end_date=${endDate}`;
+        console.log('[LM Source] Fetching:', url);
+
         return new Promise((resolve, reject) => {
             GM_xmlhttpRequest({
                 method: 'GET',
-                url: `https://dev.lunchmoney.app/v1/transactions?start_date=${startDate}&end_date=${endDate}`,
+                url: url,
                 headers: {
                     'Authorization': `Bearer ${apiKey}`,
                     'Content-Type': 'application/json'
                 },
                 onload: function(response) {
+                    console.log('[LM Source] Response status:', response.status);
+                    console.log('[LM Source] Response:', response.responseText.substring(0, 500));
+
                     if (response.status === 200) {
                         try {
                             const data = JSON.parse(response.responseText);
+                            console.log('[LM Source] Parsed transactions:', data.transactions?.length || 0);
                             resolve(data.transactions || []);
                         } catch (e) {
+                            console.error('[LM Source] Parse error:', e);
                             reject(new Error('Failed to parse response'));
                         }
                     } else if (response.status === 401) {
@@ -232,6 +257,7 @@
                     }
                 },
                 onerror: function(error) {
+                    console.error('[LM Source] Network error:', error);
                     reject(new Error('Network error'));
                 }
             });
@@ -279,36 +305,69 @@
     // Apply source badges to transaction rows
     function applySourceBadges(transactionsMap) {
         const rows = document.querySelectorAll('tr.transaction-row');
+        console.log('[LM Source] Found transaction rows:', rows.length);
+        console.log('[LM Source] Transaction map size:', Object.keys(transactionsMap).length);
 
-        rows.forEach(row => {
+        let appliedCount = 0;
+        rows.forEach((row, index) => {
             // Skip if already processed
             if (row.querySelector('.lm-source-badge')) return;
 
             const txId = extractTransactionId(row);
-            if (!txId) return;
+            if (!txId) {
+                console.log('[LM Source] Could not extract ID for row', index);
+                return;
+            }
 
             const transaction = transactionsMap[txId];
-            if (!transaction) return;
+            if (!transaction) {
+                console.log('[LM Source] No transaction data for ID:', txId);
+                return;
+            }
 
-            // Find the payee cell to insert the badge
-            const payeeCell = row.querySelector('td.editable .g-editable-text .default-state.editable-string');
+            // Find the payee cell to insert the badge - try multiple selectors
+            let payeeCell = row.querySelector('td.editable .g-editable-text .default-state.editable-string');
+
+            // Alternative: find by looking at the payee column (usually 7th td)
+            if (!payeeCell) {
+                const cells = row.querySelectorAll('td.editable');
+                // Payee is typically the 3rd editable cell (after date and category)
+                if (cells.length >= 3) {
+                    payeeCell = cells[2].querySelector('.default-state');
+                }
+            }
+
             if (payeeCell) {
                 const badge = createSourceBadge(transaction.source);
                 payeeCell.appendChild(badge);
+                appliedCount++;
+            } else {
+                console.log('[LM Source] Could not find payee cell for row', index);
             }
         });
+
+        console.log('[LM Source] Applied badges to', appliedCount, 'rows');
     }
 
     // Main function to fetch and display sources
     async function fetchAndDisplaySources() {
+        console.log('[LM Source] fetchAndDisplaySources called');
+
         let apiKey = GM_getValue(STORAGE_KEY, '');
+        console.log('[LM Source] API key exists:', !!apiKey, 'length:', apiKey?.length);
 
         if (!apiKey) {
+            console.log('[LM Source] No API key, showing modal...');
             apiKey = await showApiKeyModal();
-            if (!apiKey) return;
+            if (!apiKey) {
+                console.log('[LM Source] User cancelled API key input');
+                return;
+            }
         }
 
         const dateRange = getDateRangeFromURL();
+        console.log('[LM Source] Date range:', dateRange);
+
         if (!dateRange) {
             console.log('[LM Source] Could not determine date range from URL');
             return;
@@ -325,6 +384,7 @@
             transactions = cacheData.transactions;
         } else {
             try {
+                updateButtonStatus('loading');
                 console.log('[LM Source] Fetching transactions from API...');
                 transactions = await fetchTransactions(apiKey, dateRange.startDate, dateRange.endDate);
 
@@ -336,6 +396,7 @@
                 });
             } catch (error) {
                 console.error('[LM Source]', error.message);
+                updateButtonStatus('error');
                 if (error.message === 'Invalid API key') {
                     GM_setValue(STORAGE_KEY, '');
                     const newKey = await showApiKeyModal();
@@ -357,6 +418,7 @@
 
         // Apply badges
         applySourceBadges(transactionsMap);
+        updateButtonStatus('done');
     }
 
     // Observe for dynamic content changes
@@ -422,14 +484,27 @@
 
     // Initialize
     function init() {
+        console.log('[LM Source] Initializing...');
         injectStyles();
         addSettingsButton();
 
+        // Wait for the transactions table to appear
+        function waitForTable() {
+            const table = document.querySelector('table.p-transactions-table');
+            if (table) {
+                console.log('[LM Source] Found transactions table, starting fetch...');
+                fetchAndDisplaySources();
+            } else {
+                console.log('[LM Source] Waiting for table...');
+                setTimeout(waitForTable, 500);
+            }
+        }
+
         // Wait for the page to fully load
         if (document.readyState === 'complete') {
-            fetchAndDisplaySources();
+            waitForTable();
         } else {
-            window.addEventListener('load', fetchAndDisplaySources);
+            window.addEventListener('load', waitForTable);
         }
 
         // Observe for dynamic changes
@@ -439,5 +514,6 @@
         handleNavigation();
     }
 
+    console.log('[LM Source] Script loaded');
     init();
 })();
