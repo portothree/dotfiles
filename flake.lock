@@ -279,15 +279,14 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-ypKFxDb7+yyuayTjilzGBnXxRkIfbQTYSrpXDh8kUbk=",
         "path": "./bin",
         "type": "path"
       },
       "original": {
         "path": "./bin",
         "type": "path"
-      }
+      },
+      "parent": []
     },
     "systems": {
       "locked": {
