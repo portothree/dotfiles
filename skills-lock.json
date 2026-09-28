@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "skills": {
+    "memory-capture": {
+      "source": "basicmachines-co/basic-memory",
+      "sourceType": "github",
+      "skillPath": "skills/memory-capture/SKILL.md",
+      "computedHash": "fac633ed65979974c7f271d57dfc4b5ab5b9ea5aea0631219f3b4167424b009b"
+    },
+    "memory-ci-capture": {
+      "source": "basicmachines-co/basic-memory",
+      "sourceType": "github",
+      "skillPath": "skills/memory-ci-capture/SKILL.md",
+      "computedHash": "97c383e59b592328e6f0c474dab133f0dc5d7f0919267b7c5b53f36332eb7a4b"
+    },
+    "memory-continue": {
+      "source": "basicmachines-co/basic-memory",
+      "sourceType": "github",
+      "skillPath": "skills/memory-continue/SKILL.md",
+      "computedHash": "fb5b54b9250f284e2ff61661c5fec29b9ff361a2a43df85f9a87df72d98e25a4"
+    },
+    "memory-curate": {
+      "source": "basicmachines-co/basic-memory",
+      "sourceType": "github",
+      "skillPath": "skills/memory-curate/SKILL.md",
+      "computedHash": "73e21ef17b37a7ba77d24b6d452230c81f933250fe36239bbbc3756777ee424f"
+    },
+    "memory-defrag": {
+      "source": "basicmachines-co/basic-memory",
+      "sourceType": "github",
+      "skillPath": "skills/memory-defrag/SKILL.md",
+      "computedHash": "82da4efe339bfb37fe68e97909df5a966d821fb790a4c0ab092a020f1252621e"
+    },
+    "memory-ingest": {
+      "source": "basicmachines-co/basic-memory",
+      "sourceType": "github",
+      "skillPath": "skills/memory-ingest/SKILL.md",
+      "computedHash": "c1ecd6237ae2cba8073082f7bc9a54b06a41101bfe2643c3b302c66400f3d98b"
+    },
+    "memory-lifecycle": {
+      "source": "basicmachines-co/basic-memory",
+      "sourceType": "github",
+      "skillPath": "skills/memory-lifecycle/SKILL.md",
+      "computedHash": "13d1b99948c6341735d9e65d6a697edc83fc51bc7fab7e84df8da625fb24e081"
+    },
+    "memory-literary-analysis": {
+      "source": "basicmachines-co/basic-memory",
+      "sourceType": "github",
+      "skillPath": "skills/memory-literary-analysis/SKILL.md",
+      "computedHash": "cc8b8b5683ec38ec25c02cd8f3a9852557fb77d416c4a5835ce361f8d75452e5"
+    },
+    "memory-metadata-search": {
+      "source": "basicmachines-co/basic-memory",
+      "sourceType": "github",
+      "skillPath": "skills/memory-metadata-search/SKILL.md",
+      "computedHash": "6968c954d44868f2b7f92f04d53c068d71a0baa8dbe99b82fca3d61dd7c99bf6"
+    },
+    "memory-notes": {
+      "source": "basicmachines-co/basic-memory",
+      "sourceType": "github",
+      "skillPath": "skills/memory-notes/SKILL.md",
+      "computedHash": "f1b167acaf5ea7d83cb10912189dc463675defdb100b237d65887688ef026842"
+    },
+    "memory-onboarding": {
+      "source": "basicmachines-co/basic-memory",
+      "sourceType": "github",
+      "skillPath": "skills/memory-onboarding/SKILL.md",
+      "computedHash": "fff95cb5b374084d5fcd4eedfa1cbfcf9edbc721b618efa8c1adfb96a07d2f96"
+    },
+    "memory-reflect": {
+      "source": "basicmachines-co/basic-memory",
+      "sourceType": "github",
+      "skillPath": "skills/memory-reflect/SKILL.md",
+      "computedHash": "a2fcd9a3141857bce1ce34f55ba98b0d941c40542a1be4f53ee3d776f57127b1"
+    },
+    "memory-research": {
+      "source": "basicmachines-co/basic-memory",
+      "sourceType": "github",
+      "skillPath": "skills/memory-research/SKILL.md",
+      "computedHash": "294b3a6c9978a93e3bfc613ec33646c2e47a01d15633e31cb294daf79c7d81aa"
+    },
+    "memory-schema": {
+      "source": "basicmachines-co/basic-memory",
+      "sourceType": "github",
+      "skillPath": "skills/memory-schema/SKILL.md",
+      "computedHash": "ec36ba689df1549919b96a9c21ff05af400cd7f98e4a6081c52ce9f7c9c25427"
+    },
+    "memory-tasks": {
+      "source": "basicmachines-co/basic-memory",
+      "sourceType": "github",
+      "skillPath": "skills/memory-tasks/SKILL.md",
+      "computedHash": "abc17a4831fee2a02abdb7035383820cf2950f56dcf8f07cedb27d82741e4f2b"
+    }
+  }
+}
