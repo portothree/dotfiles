@@ -1,8 +1,15 @@
-{ pkgs, lib, config, shellScriptPkgs, ... }:
+{
+  lib,
+  config,
+  shellScriptPkgs,
+  ...
+}:
 
 with lib;
-let cfg = config.modules.bspwm;
-in {
+let
+  cfg = config.modules.bspwm;
+in
+{
   options.modules.bspwm = {
     enable = mkEnableOption "bspwm";
     bar = mkOption {
@@ -29,8 +36,7 @@ in {
             bspc config borderless_monocle true
             bspc config gapless_monocle true
             ${cfg.extraConfig}
-            ${optionalString (cfg.bar)
-            "${shellScriptPkgs.bspwm-bar}/bin/bspwm-bar &"}
+            ${optionalString cfg.bar "${shellScriptPkgs.bspwm-bar}/bin/bspwm-bar &"}
           '';
         };
       };

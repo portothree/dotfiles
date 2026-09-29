@@ -1,8 +1,15 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 
 with lib;
-let cfg = config.modules.xinit;
-in {
+let
+  cfg = config.modules.xinit;
+in
+{
   options.modules.xinit = {
     enable = mkEnableOption "xinit";
     autorandr = mkOption {
@@ -48,13 +55,10 @@ in {
 
           ${cfg.extraConfig}
 
-          ${
-            optionalString (cfg.autorandr)
-            "${pkgs.autorandr}/bin/autorandr --change"
-          }
-          ${optionalString (cfg.xev) "${pkgs.xorg.xev}/bin/xev &"}
-          ${optionalString (cfg.sxhkd) "${pkgs.sxhkd}/bin/sxhkd &"}
-          ${optionalString (cfg.bspwm) "exec ${pkgs.bspwm}/bin/bspwm"}
+          ${optionalString cfg.autorandr "${pkgs.autorandr}/bin/autorandr --change"}
+          ${optionalString cfg.xev "${pkgs.xorg.xev}/bin/xev &"}
+          ${optionalString cfg.sxhkd "${pkgs.sxhkd}/bin/sxhkd &"}
+          ${optionalString cfg.bspwm "exec ${pkgs.bspwm}/bin/bspwm"}
       '';
     };
   };

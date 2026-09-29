@@ -34,6 +34,12 @@
     difftastic
     usbutils
   ];
-  programs = { home-manager = { enable = true; }; };
-  xdg = { enable = true; };
+  programs = {
+    home-manager = {
+      enable = true;
+    };
+  };
+  xdg = {
+    enable = true;
+  };
 }

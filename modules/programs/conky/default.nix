@@ -1,9 +1,18 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 
 with lib;
-let cfg = config.modules.conky;
-in {
-  options.modules.conky = { enable = mkEnableOption "conky"; };
+let
+  cfg = config.modules.conky;
+in
+{
+  options.modules.conky = {
+    enable = mkEnableOption "conky";
+  };
   config = mkIf cfg.enable {
     home.packages = with pkgs; [ conky ];
     home.file.conky = {

@@ -9,23 +9,29 @@
         name = "Gustavo Porto";
         email = "gus@p8s.co";
       };
-      core = { editor = "vim"; };
-      color = { ui = true; };
+      core = {
+        editor = "vim";
+      };
+      color = {
+        ui = true;
+      };
       push = {
         default = "current";
         autoSetupRemote = true;
       };
-      pull = { ff = "only"; };
-      init = { defaultBranch = "master"; };
+      pull = {
+        ff = "only";
+      };
+      init = {
+        defaultBranch = "master";
+      };
       alias = {
         st = "status";
         co = "checkout";
         ci = "commit";
         br = "branch";
-        lg =
-          "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
-        recent =
-          "for-each-ref --sort=-committerdate --format='%(committerdate:short): %(refname:short)' refs/heads/";
+        lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
+        recent = "for-each-ref --sort=-committerdate --format='%(committerdate:short): %(refname:short)' refs/heads/";
       };
     };
     ignores = [

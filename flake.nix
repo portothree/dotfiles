@@ -31,23 +31,41 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     nixgl.url = "github:guibou/nixGL";
-    pre-commit-hooks = { url = "github:cachix/pre-commit-hooks.nix"; };
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     scripts.url = "path:./bin";
     basic-memory = {
       url = "github:basicmachines-co/basic-memory";
       flake = false;
     };
   };
-  outputs = { self, nixpkgs, nixpkgs-unstable, flake-utils, home-manager
-    , nix-darwin, pre-commit-hooks, scripts, ... }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+      home-manager,
+      nix-darwin,
+      git-hooks,
+      scripts,
+      ...
+    }@inputs:
     let
-      mkPkgs = pkgs:
-        { system, overlays ? [ ], allowUnfree ? false }:
+      mkPkgs =
+        pkgs:
+        {
+          system,
+          overlays ? [ ],
+          allowUnfree ? false,
+        }:
         import pkgs {
           inherit system overlays;
           config.allowUnfree = allowUnfree;
         };
-      mkHomeManager = system: hostName:
+      mkHomeManager =
+        system: hostName:
         home-manager.lib.homeManagerConfiguration {
           pkgs = mkPkgs nixpkgs {
             inherit system;
@@ -59,7 +77,8 @@
             shellScriptPkgs = scripts.packages.${system};
           };
         };
-      mkDarwin = system: hostName: user:
+      mkDarwin =
+        system: hostName: user:
         nix-darwin.lib.darwinSystem {
           specialArgs = { inherit inputs; };
           modules = [
@@ -80,7 +99,8 @@
             }
           ];
         };
-    in {
+    in
+    {
       darwinConfigurations = {
         boris = mkDarwin "aarch64-darwin" "boris" "gustavoporto";
       };
@@ -91,20 +111,27 @@
         klong = mkHomeManager "x86_64-linux" "klong";
         juju = mkHomeManager "x86_64-linux" "juju";
       };
-    } // flake-utils.lib.eachDefaultSystem (system: {
-      checks.pre-commit-check = pre-commit-hooks.lib.${system}.run {
+    }
+    // flake-utils.lib.eachDefaultSystem (system: {
+      checks.pre-commit-check = git-hooks.lib.${system}.run {
         src = ./.;
+        excludes = [ "hardware-configuration\\.nix$" ];
         hooks = {
-          nixfmt = {
+          nixfmt.enable = true;
+          statix.enable = true;
+          deadnix.enable = true;
+          shellcheck = {
             enable = true;
-            excludes = [ "hardware-configuration.nix" ];
+            excludes = [
+              "\\.zshrc$"
+              "\\.envrc$"
+            ];
           };
-          shellcheck = { enable = true; };
         };
       };
       packages.scripts = scripts.packages.${system};
       devShell = import ./shell.nix {
-        pkgs = mkPkgs nixpkgs-unstable { inherit system; };
+        pkgs = mkPkgs nixpkgs { inherit system; };
         inherit (self.checks.${system}.pre-commit-check) shellHook;
       };
     });

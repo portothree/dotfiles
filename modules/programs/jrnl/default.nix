@@ -1,8 +1,15 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 
 with lib;
-let cfg = config.modules.jrnl;
-in {
+let
+  cfg = config.modules.jrnl;
+in
+{
   options.modules.jrnl = {
     enable = mkEnableOption "jrnl";
     journalPath = mkOption {

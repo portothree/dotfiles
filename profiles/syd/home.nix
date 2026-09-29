@@ -37,20 +37,28 @@
       nextdns
       walk
     ];
-    sessionVariables = { EDITOR = "nvim"; };
+    sessionVariables = {
+      EDITOR = "nvim";
+    };
   };
   services = {
     mpris-proxy.enable = true;
-    keynav = { enable = true; };
+    keynav = {
+      enable = true;
+    };
     unclutter = {
       enable = true;
       timeout = 1;
       extraOptions = [ "root" ];
     };
-    spotifyd = { enable = true; };
+    spotifyd = {
+      enable = true;
+    };
   };
   programs = {
-    htop = { enable = true; };
+    htop = {
+      enable = true;
+    };
     gh = {
       enable = true;
       settings = {
@@ -65,7 +73,9 @@
     };
     direnv = {
       enable = true;
-      nix-direnv = { enable = true; };
+      nix-direnv = {
+        enable = true;
+      };
       enableZshIntegration = true;
     };
     fzf = {

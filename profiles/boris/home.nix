@@ -1,4 +1,9 @@
-{ inputs, pkgs, lib, ... }:
+{
+  inputs,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   imports = [
@@ -39,11 +44,15 @@
       poetry
       tsx
     ];
-    sessionVariables = { EDITOR = "nvim"; };
+    sessionVariables = {
+      EDITOR = "nvim";
+    };
     file = { };
   };
   programs = {
-    home-manager = { enable = true; };
+    home-manager = {
+      enable = true;
+    };
     fish = {
       enable = true;
       shellInit = ''
@@ -56,17 +65,21 @@
         r = "ranger";
         "..." = "cd ../..";
       };
-      plugins = [{
-        name = "wakatime";
-        src = pkgs.fetchFromGitHub {
-          owner = "ik11235";
-          repo = "wakatime.fish";
-          rev = "v0.0.6";
-          sha256 = "sha256-Hsr69n4fCvPc64NztgaBZQuR0znkzlL8Uotw9Jf2S1o=";
-        };
-      }];
+      plugins = [
+        {
+          name = "wakatime";
+          src = pkgs.fetchFromGitHub {
+            owner = "ik11235";
+            repo = "wakatime.fish";
+            rev = "v0.0.6";
+            sha256 = "sha256-Hsr69n4fCvPc64NztgaBZQuR0znkzlL8Uotw9Jf2S1o=";
+          };
+        }
+      ];
     };
-    htop = { enable = true; };
+    htop = {
+      enable = true;
+    };
     gh = {
       enable = true;
       settings = {
@@ -81,7 +94,9 @@
     };
     direnv = {
       enable = true;
-      nix-direnv = { enable = true; };
+      nix-direnv = {
+        enable = true;
+      };
       enableZshIntegration = true;
     };
     fzf = {
@@ -99,8 +114,7 @@
     zathura = {
       enable = true;
       # appstream (a zathura dep) fails to build on aarch64-darwin in 26.05
-      package =
-        inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.zathura;
+      package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.zathura;
       options = {
         window-height = 1000;
         window-width = 1000;
@@ -124,7 +138,7 @@
     ghostty = {
       enable = true;
       # Skip installation as ghostty was installed on this machine
-      # using homebrew 
+      # using homebrew
       installPkgFromNixpkgs = false;
       shell = "fish";
     };

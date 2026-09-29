@@ -1,6 +1,7 @@
 { lib, config, ... }:
 
-with lib; {
+with lib;
+{
   imports = [ ./agents.nix ];
 
   options.modules.ai = {

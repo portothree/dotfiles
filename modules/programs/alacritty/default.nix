@@ -1,8 +1,15 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 
 with lib;
-let cfg = config.modules.alacritty;
-in {
+let
+  cfg = config.modules.alacritty;
+in
+{
   options.modules.alacritty = {
     enable = mkEnableOption "alacritty";
     installPkgFromNixpkgs = mkOption {
@@ -27,13 +34,14 @@ in {
       file.alacritty = {
         target = ".config/alacritty/alacritty.yml";
         text = ''
-          ${lib.strings.fileContents
-          ../../../config/terminal/alacritty/alacritty.yml}
+          ${lib.strings.fileContents ../../../config/terminal/alacritty/alacritty.yml}
           shell:
             program: ${cfg.shell}
         '';
       };
     };
-    programs.alacritty = { enable = cfg.installPkgFromHomeManager; };
+    programs.alacritty = {
+      enable = cfg.installPkgFromHomeManager;
+    };
   };
 }

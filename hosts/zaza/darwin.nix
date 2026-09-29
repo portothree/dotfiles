@@ -1,10 +1,9 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   environment = {
     systemPackages = with pkgs; [ git ];
-    darwinConfig =
-      "$HOME/www/portothree/homelab/hosts/zaza/darwin-configuration.nix";
+    darwinConfig = "$HOME/www/portothree/homelab/hosts/zaza/darwin-configuration.nix";
   };
   users.users.gustavoporto = {
     name = "porto";
@@ -12,19 +11,33 @@
   };
   homebrew = {
     enable = true;
-    global = { lockfiles = true; };
-    brews = [ "pyqt@6" "python@3.10" ];
-    casks = [ "docker" "alacritty" ];
+    global = {
+      lockfiles = true;
+    };
+    brews = [
+      "pyqt@6"
+      "python@3.10"
+    ];
+    casks = [
+      "docker"
+      "alacritty"
+    ];
   };
-  fonts = { packages = with pkgs; [ fira-code ]; };
+  fonts = {
+    packages = with pkgs; [ fira-code ];
+  };
   services = {
-    nix-daemon = { enable = true; };
-    karabiner-elements = { enable = false; };
+    nix-daemon = {
+      enable = true;
+    };
+    karabiner-elements = {
+      enable = false;
+    };
   };
   nixpkgs = {
     config = {
       allowUnfree = true;
-      allowUnfreePredicate = (_: true);
+      allowUnfreePredicate = _: true;
     };
   };
   nix = {

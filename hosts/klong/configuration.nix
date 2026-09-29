@@ -1,7 +1,11 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./hardware-configuration.nix ../common.nix ../../modules/nixos ];
+  imports = [
+    ./hardware-configuration.nix
+    ../common.nix
+    ../../modules/nixos
+  ];
   boot = {
     loader = {
       efi = {
@@ -16,7 +20,11 @@
   };
   networking = {
     useDHCP = false;
-    interfaces = { wlp0s20f3 = { useDHCP = true; }; };
+    interfaces = {
+      wlp0s20f3 = {
+        useDHCP = true;
+      };
+    };
     nameservers = [ "100.100.100.100" ];
     search = [ "tailea386.ts.net" ];
     firewall = {
@@ -33,33 +41,55 @@
       networks = {
         "@WIRELESS_SSID_HOME@" = {
           psk = "@WIRELESS_PSK_HOME@";
-          extraConfig =
-            "bssid=@WIRELESS_BSSID_HOME@,freq_list=@WIRELESS_FREQ_HOME@";
+          extraConfig = "bssid=@WIRELESS_BSSID_HOME@,freq_list=@WIRELESS_FREQ_HOME@";
         };
         "@WIRELESS_SSID_PHONE_HOTSPOT@" = {
           psk = "@WIRELESS_PSK_PHONE_HOTSPOT@";
         };
-        "@WIRELESS_SSID_OFFICE@" = { psk = "@WIRELESS_PSK_OFFICE@"; };
+        "@WIRELESS_SSID_OFFICE@" = {
+          psk = "@WIRELESS_PSK_OFFICE@";
+        };
       };
     };
   };
   environment = {
-    systemPackages = with pkgs; [ wget curl xsecurelock tailscale ];
-    variables = { EDITOR = "nvim"; };
-    pathsToLink = [ "/share/icons" "/share/mime" "/share/zsh" ];
+    systemPackages = with pkgs; [
+      wget
+      curl
+      xsecurelock
+      tailscale
+    ];
+    variables = {
+      EDITOR = "nvim";
+    };
+    pathsToLink = [
+      "/share/icons"
+      "/share/mime"
+      "/share/zsh"
+    ];
   };
   services = {
     openssh.enable = true;
-    udev = { packages = with pkgs; [ ledger-udev-rules ]; };
+    udev = {
+      packages = with pkgs; [ ledger-udev-rules ];
+    };
     xserver = {
       enable = true;
       layout = "us";
       libinput = {
         enable = true;
-        mouse = { accelProfile = "flat"; };
-        touchpad = { accelProfile = "flat"; };
+        mouse = {
+          accelProfile = "flat";
+        };
+        touchpad = {
+          accelProfile = "flat";
+        };
       };
-      displayManager = { startx = { enable = true; }; };
+      displayManager = {
+        startx = {
+          enable = true;
+        };
+      };
     };
     tailscale.enable = true;
     blueman.enable = true;
@@ -79,21 +109,35 @@
     users = {
       porto = {
         isNormalUser = true;
-        extraGroups = [ "wheel" "docker" ];
+        extraGroups = [
+          "wheel"
+          "docker"
+        ];
         shell = pkgs.zsh;
       };
     };
   };
-  virtualisation = { docker = { enable = true; }; };
-  fonts.fonts = with pkgs; [ fira-code siji ];
+  virtualisation = {
+    docker = {
+      enable = true;
+    };
+  };
+  fonts.fonts = with pkgs; [
+    fira-code
+    siji
+  ];
   nix = {
     enable = true;
     package = pkgs.nixFlakes;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-    settings = { trusted-users = [ "root" "porto" ]; };
+    settings = {
+      trusted-users = [
+        "root"
+        "porto"
+      ];
+    };
   };
   system.stateVersion = "22.05";
 }
-

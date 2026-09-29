@@ -1,8 +1,12 @@
 { pkgs, ... }:
 
 {
-  home = { packages = with pkgs; [ google-chrome ]; };
-  xdg = { enable = true; };
+  home = {
+    packages = with pkgs; [ google-chrome ];
+  };
+  xdg = {
+    enable = true;
+  };
   gtk = {
     enable = true;
     theme = {
@@ -11,7 +15,9 @@
     };
   };
   programs = {
-    home-manager = { enable = true; };
+    home-manager = {
+      enable = true;
+    };
     zathura = {
       enable = true;
       options = {

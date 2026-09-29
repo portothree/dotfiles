@@ -1,4 +1,4 @@
-{ pkgs, shellScriptPkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -54,7 +54,9 @@
       azure-cli
       azure-functions-core-tools
     ];
-    sessionVariables = { EDITOR = "nvim"; };
+    sessionVariables = {
+      EDITOR = "nvim";
+    };
     file = {
       bugwarrior = {
         target = ".config/bugwarrior/bugwarriorrc";
@@ -118,7 +120,9 @@
       backend = "glx";
       vSync = true;
     };
-    keynav = { enable = true; };
+    keynav = {
+      enable = true;
+    };
     unclutter = {
       enable = true;
       timeout = 1;
@@ -159,7 +163,9 @@
         };
       };
     };
-    htop = { enable = true; };
+    htop = {
+      enable = true;
+    };
     gh = {
       enable = true;
       settings = {
@@ -174,7 +180,9 @@
     };
     direnv = {
       enable = true;
-      nix-direnv = { enable = true; };
+      nix-direnv = {
+        enable = true;
+      };
       enableZshIntegration = true;
     };
     fzf = {
@@ -243,8 +251,7 @@
     dockerTools.enable = true;
     jrnl = {
       enable = true;
-      journalPath = builtins.toString
-        /home/porto/www/portothree/memex/trails/jrnl/journal.txt;
+      journalPath = builtins.toString /home/porto/www/portothree/memex/trails/jrnl/journal.txt;
       editor = "nvim";
     };
     qutebrowser.enable = true;

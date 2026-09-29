@@ -5,23 +5,34 @@
     microvm.url = "github:astro/microvm.nix";
     microvm.inputs.nixpkgs.follows = "nixpkgs";
   };
-  outputs = { self, nixpkgs, microvm }:
-    let system = "x86_64-linux";
-    in {
+  outputs =
+    {
+      self,
+      nixpkgs,
+      microvm,
+    }:
+    let
+      system = "x86_64-linux";
+    in
+    {
       defaultPackage.${system} = self.packages.${system}.staging;
 
-      packages.${system}.staging = let
-        inherit (self.nixosConfigurations.staging) config;
-        # quickly build with another hypervisor if this MicroVM is built as a package
-        hypervisor = "qemu";
-      in config.microvm.runner.${hypervisor};
+      packages.${system}.staging =
+        let
+          inherit (self.nixosConfigurations.staging) config;
+          # quickly build with another hypervisor if this MicroVM is built as a package
+          hypervisor = "qemu";
+        in
+        config.microvm.runner.${hypervisor};
 
       nixosConfigurations.staging = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
           microvm.nixosModules.microvm
           {
-            networking = { hostName = "staging"; };
+            networking = {
+              hostName = "staging";
+            };
             users.users.root.password = "";
             nix = {
               enable = true;
@@ -31,30 +42,36 @@
               trustedUsers = [ "root" ];
             };
             microvm = {
-              volumes = [{
-                mountPoint = "/var";
-                image = "var.img";
-                size = 256;
-              }];
-              shares = [{
-                # use "virtiofs" for MicroVMs that are started by systemd
-                proto = "9p";
-                tag = "ro-store";
-                # a host's /nix/store will be picked up so that the
-                # size of the /dev/vda can be reduced.
-                source = "/nix/store";
-                mountPoint = "/nix/.ro-store";
-              }];
+              volumes = [
+                {
+                  mountPoint = "/var";
+                  image = "var.img";
+                  size = 256;
+                }
+              ];
+              shares = [
+                {
+                  # use "virtiofs" for MicroVMs that are started by systemd
+                  proto = "9p";
+                  tag = "ro-store";
+                  # a host's /nix/store will be picked up so that the
+                  # size of the /dev/vda can be reduced.
+                  source = "/nix/store";
+                  mountPoint = "/nix/.ro-store";
+                }
+              ];
               socket = "control.socket";
               # relevant for delarative MicroVM management
               hypervisor = "qemu";
-              interfaces = [{
-                type = "user";
-                # interface name on the host
-                id = "microvm-a1";
-                # Ethernet address of the MicroVM's interface, not the host's
-                mac = "02:00:00:00:00:01";
-              }];
+              interfaces = [
+                {
+                  type = "user";
+                  # interface name on the host
+                  id = "microvm-a1";
+                  # Ethernet address of the MicroVM's interface, not the host's
+                  mac = "02:00:00:00:00:01";
+                }
+              ];
             };
           }
         ];

@@ -1,4 +1,4 @@
-{ pkgs, shellScriptPkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -55,11 +55,15 @@
       azure-cli
       azure-functions-core-tools
     ];
-    sessionVariables = { EDITOR = "nvim"; };
+    sessionVariables = {
+      EDITOR = "nvim";
+    };
   };
   programs = {
     atuin.enable = true;
-    htop = { enable = true; };
+    htop = {
+      enable = true;
+    };
     gh = {
       enable = true;
       settings = {
@@ -74,7 +78,9 @@
     };
     direnv = {
       enable = true;
-      nix-direnv = { enable = true; };
+      nix-direnv = {
+        enable = true;
+      };
       enableZshIntegration = true;
     };
     fzf = {

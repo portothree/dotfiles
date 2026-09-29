@@ -1,9 +1,18 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 
 with lib;
-let cfg = config.modules.xournalpp;
-in {
-  options.modules.xournalpp = { enable = mkEnableOption "xournalpp"; };
+let
+  cfg = config.modules.xournalpp;
+in
+{
+  options.modules.xournalpp = {
+    enable = mkEnableOption "xournalpp";
+  };
   config = mkIf cfg.enable {
     home = {
       packages = with pkgs; [

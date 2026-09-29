@@ -1,13 +1,19 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 
 with lib;
-let cfg = config.modules.karabiner-elements;
-in {
+let
+  cfg = config.modules.karabiner-elements;
+in
+{
   options.modules.karabiner-elements = {
     enable = mkEnableOption "karabiner-elements";
     installPkg = mkOption {
-      description =
-        "If enabled karabiner-elements will be installed from nixpkgs";
+      description = "If enabled karabiner-elements will be installed from nixpkgs";
       type = types.bool;
       default = true;
     };
@@ -17,8 +23,7 @@ in {
       packages = mkIf cfg.installPkg [ pkgs.karabiner-elements ];
       file.karabiner-elements = {
         target = ".config/karabiner/karabiner.json";
-        text = lib.strings.fileContents
-          ../../../config/desktop/karabiner-elements/karabiner.json;
+        text = lib.strings.fileContents ../../../config/desktop/karabiner-elements/karabiner.json;
       };
     };
   };
