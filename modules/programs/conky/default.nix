@@ -8,7 +8,7 @@ in {
     home.packages = with pkgs; [ conky ];
     home.file.conky = {
       target = ".conkyrc";
-      text = lib.strings.fileContents ../../../config/conky/config.lua;
+      text = lib.strings.fileContents ../../../config/desktop/conky/config.lua;
     };
   };
 }

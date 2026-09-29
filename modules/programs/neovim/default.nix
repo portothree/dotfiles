@@ -20,6 +20,9 @@ in {
       viAlias = true;
       vimAlias = true;
       vimdiffAlias = true;
+      # Keep the pre-26.05 defaults
+      withPython3 = true;
+      withRuby = true;
       withNodeJs = true;
       plugins = with pkgs.vimPlugins; [
         vim-polyglot
@@ -34,10 +37,10 @@ in {
       ];
       extraConfig = builtins.concatStringsSep "\n" [''
         lua << EOF
-        ${lib.strings.fileContents ../../../config/neovim/init.lua}
-        ${lib.strings.fileContents ../../../config/neovim/utils.lua}
-        ${lib.strings.fileContents ../../../config/neovim/settings.lua}
-        ${lib.strings.fileContents ../../../config/neovim/maps.lua}
+        ${lib.strings.fileContents ../../../config/editors/neovim/init.lua}
+        ${lib.strings.fileContents ../../../config/editors/neovim/utils.lua}
+        ${lib.strings.fileContents ../../../config/editors/neovim/settings.lua}
+        ${lib.strings.fileContents ../../../config/editors/neovim/maps.lua}
         EOF
       ''];
     };

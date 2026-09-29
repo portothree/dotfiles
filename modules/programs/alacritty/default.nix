@@ -27,7 +27,8 @@ in {
       file.alacritty = {
         target = ".config/alacritty/alacritty.yml";
         text = ''
-          ${lib.strings.fileContents ../../../config/alacritty/alacritty.yml}
+          ${lib.strings.fileContents
+          ../../../config/terminal/alacritty/alacritty.yml}
           shell:
             program: ${cfg.shell}
         '';

@@ -1,0 +1,74 @@
+{
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+  "permissions": {
+    "allow": [
+      "Read(//Users/gustavoporto/**)",
+      "mcp__mcp-server-basic-memory__search",
+      "mcp__mcp-server-basic-memory__write_note",
+      "mcp__basic-memory__search",
+      "mcp__basic-memory__write_note"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo \"🧠 SESSION STARTED: Search mcp-server-basic-memory for context about: $(basename $(pwd)) project, previous conversations, and related work. Do this before responding to user queries.\""
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '💭 CONTEXT SEARCH: Before responding, use mcp-server-basic-memory search to search for: previous discussions about this topic, related project context, and similar problems solved before. Before this conversation ends, you must use mcp-server-basic-memory write-note to store: [USER] their question/request + [ASSISTANT] your solution/explanation/reasoning. Do this storage as the very last action.'"
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "/Users/gustavoporto/.claude/abtop-statusline.sh"
+  },
+  "enabledPlugins": {
+    "notion-workspace-plugin@notion-plugin-marketplace": true,
+    "superpowers@claude-plugins-official": true,
+    "ponytail@ponytail": true,
+    "slack@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "notion-plugin-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "makenotion/claude-code-notion-plugin"
+      }
+    },
+    "superpowers-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "obra/superpowers-marketplace"
+      }
+    },
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      }
+    }
+  },
+  "outputStyle": "Concise",
+  "tui": "fullscreen",
+  "theme": "dark",
+  "editorMode": "vim",
+  "autoCompactEnabled": false,
+  "voiceEnabled": true
+}

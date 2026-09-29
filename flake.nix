@@ -15,11 +15,11 @@
     ];
   };
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-23.11";
+    nixpkgs.url = "nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.11";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager-unstable = {
@@ -29,6 +29,10 @@
     nixgl.url = "github:guibou/nixGL";
     pre-commit-hooks = { url = "github:cachix/pre-commit-hooks.nix"; };
     scripts.url = "path:./bin";
+    basic-memory = {
+      url = "github:basicmachines-co/basic-memory";
+      flake = false;
+    };
   };
   outputs = { self, nixpkgs, nixpkgs-unstable, flake-utils, home-manager
     , home-manager-unstable, nixgl, pre-commit-hooks, scripts, ... }@inputs:
@@ -46,7 +50,7 @@
           hm.lib.homeManagerConfiguration {
             inherit pkgs;
             modules = [ ./profiles/${hostName}/home.nix ];
-            extraSpecialArgs = { inherit shellScriptPkgs; };
+            extraSpecialArgs = { inherit inputs shellScriptPkgs; };
           };
       in {
         checks.pre-commit-check = pre-commit-hooks.lib.${system}.run {

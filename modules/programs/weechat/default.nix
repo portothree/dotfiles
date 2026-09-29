@@ -52,7 +52,7 @@ in {
         })
       ];
       file.".config/weechat/weechat.conf".source =
-        ../../../config/weechat/weechat.conf;
+        ../../../config/comms/weechat/weechat.conf;
     };
   };
 }

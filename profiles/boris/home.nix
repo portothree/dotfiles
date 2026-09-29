@@ -3,9 +3,9 @@
 {
   imports = [
     ../../modules
-    ../../config/git.nix
-    ../../config/ranger.nix
-    ../../config/tig.nix
+    ../../config/dev/git.nix
+    ../../config/terminal/ranger.nix
+    ../../config/dev/tig.nix
   ];
   home = {
     stateVersion = "22.11";
@@ -13,7 +13,7 @@
     homeDirectory = "/Users/gustavoporto";
     packages = with pkgs; [
       xcbuild
-      qt6.full
+      qt6.qtbase
       glow
       azure-cli
       azure-functions-core-tools
@@ -28,7 +28,7 @@
       difftastic
       jdk11
       asdf-vm
-      wakatime
+      wakatime-cli
       pgcli
       mycli
       sqlfluff
@@ -41,7 +41,7 @@
     fish = {
       enable = true;
       shellInit = ''
-        ${lib.strings.fileContents ../../config/fish/init.fish}
+        ${lib.strings.fileContents ../../config/terminal/fish/init.fish}
 
         eval "$(/opt/homebrew/bin/brew shellenv)"
       '';
@@ -102,6 +102,7 @@
     };
   };
   modules = {
+    ai.agents.enable = true;
     alacritty = {
       enable = true;
       # Skip installation as Alacritty was installed on this machine

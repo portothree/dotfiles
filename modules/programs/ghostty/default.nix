@@ -22,7 +22,7 @@ in {
       file.ghostty = {
         target = ".config/ghostty/config";
         text = ''
-          ${lib.strings.fileContents ../../../config/ghostty/config}
+          ${lib.strings.fileContents ../../../config/terminal/ghostty/config}
           shell-integration = ${cfg.shell}
         '';
       };
