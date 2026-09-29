@@ -12,7 +12,7 @@ Travel laptop
 
 ## Installation
 
-`$ nix run nix-darwin -- switch --flake .`
+`$ ./setup boris` (see the repo README)
 or
 `$ darwin-rebuild switch --flake .`
 

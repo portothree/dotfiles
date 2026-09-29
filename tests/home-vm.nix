@@ -7,10 +7,10 @@
 pkgs.testers.runNixOSTest {
   name = "home-modules";
 
-  nodes.machine = {
+  nodes.gesonel = {
     imports = [ inputs.home-manager.nixosModules.home-manager ];
 
-    users.users.alice = {
+    users.users.nico = {
       isNormalUser = true;
       shell = pkgs.zsh;
     };
@@ -25,7 +25,7 @@ pkgs.testers.runNixOSTest {
         inherit inputs;
         shellScriptPkgs = inputs.scripts.packages.${pkgs.stdenv.hostPlatform.system};
       };
-      users.alice = {
+      users.nico = {
         imports = [
           ../modules
           ../config/dev/git.nix
@@ -46,22 +46,22 @@ pkgs.testers.runNixOSTest {
   };
 
   testScript = ''
-    machine.wait_for_unit("home-manager-alice.service")
+    gesonel.wait_for_unit("home-manager-nico.service")
 
     with subtest("agent skills and Claude config"):
-        machine.succeed("test -f /home/alice/.claude/skills/memory-notes/SKILL.md")
-        machine.succeed("test -f /home/alice/.agents/skills/memory-notes/SKILL.md")
-        machine.succeed("test -f /home/alice/.claude/CLAUDE.md")
-        machine.succeed("test -d /home/alice/.claude/agents")
-        machine.succeed("jq -e .permissions /home/alice/.claude/settings.json")
-        machine.succeed("jq -e . /home/alice/.config/opencode/opencode.json")
+        gesonel.succeed("test -f /home/nico/.claude/skills/memory-notes/SKILL.md")
+        gesonel.succeed("test -f /home/nico/.agents/skills/memory-notes/SKILL.md")
+        gesonel.succeed("test -f /home/nico/.claude/CLAUDE.md")
+        gesonel.succeed("test -d /home/nico/.claude/agents")
+        gesonel.succeed("jq -e .permissions /home/nico/.claude/settings.json")
+        gesonel.succeed("jq -e . /home/nico/.config/opencode/opencode.json")
 
     with subtest("git"):
-        machine.succeed("su - alice -c 'git config user.name' | grep -qx 'Gustavo Porto'")
+        gesonel.succeed("su - nico -c 'git config user.name' | grep -qx 'Gustavo Porto'")
 
     with subtest("shell and editors start"):
-        machine.succeed("su - alice -c 'zsh -ic exit'")
-        machine.succeed("su - alice -c 'nvim --headless +qa'")
-        machine.succeed("su - alice -c 'tmux -V'")
+        gesonel.succeed("su - nico -c 'zsh -ic exit'")
+        gesonel.succeed("su - nico -c 'nvim --headless +qa'")
+        gesonel.succeed("su - nico -c 'tmux -V'")
   '';
 }
