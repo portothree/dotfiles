@@ -1,40 +1,93 @@
 # dotfiles
 
-It uses [home-manager](https://github.com/nix-community/home-manager) to install and create programs configurations based off the `home.nix` file.
+One Nix flake for all my machines: macOS system config with
+[nix-darwin](https://github.com/nix-darwin/nix-darwin), user config with
+[home-manager](https://github.com/nix-community/home-manager), NixOS hosts,
+and the homelab cluster manifests.
 
 ![Current desk screenshot](./other/screenshot.png)
 
-[Home Manager Manual](https://nix-community.github.io/home-manager/)
-
-
-### Debian + Nix as package manager(?)
-
-For my non-nixos machines I'm currently using debian `apt` strictly for the base system, and Nix for all userspace apps.
-
-### Usage
-
-Make sure `nix` and `home-manager` is installed.
+## Usage
 
 ```
-$ nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
-$ nix-channel --update
-$ export NIX_PATH = "$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels";
-$ nix-shell '<home-manager>' -A install
+$ ./setup [--update] [host]
 ```
 
-Create a symbolic link of `./config/nixos/hosts/<host>/home.nix` at `$HOME/.config/nixpkgs/home.nix`.
+`host` defaults to the machine's short hostname. `--update` bumps every flake
+input first. The script picks the right tool for the host:
+
+| Host | Kind | Applied with |
+|-|-|-|
+| boris | macOS, aarch64 | nix-darwin, with home-manager as a module |
+| zaza | macOS, x86_64 | standalone home-manager |
+| jorel, klong, juju | Linux | standalone home-manager |
+
+On a Mac, one run applies the system (Homebrew, macOS defaults, fonts, Touch
+ID sudo) and the home-manager config together.
+
+### New Mac
+
+1. Install Nix with the [Determinate installer](https://determinate.systems/nix-installer/)
+   (nix-darwin is configured with `nix.enable = false` to leave Nix to it).
+2. Install [Homebrew](https://brew.sh).
+3. Clone this repo to `~/www/portothree/dotfiles`.
+4. Add `hosts/<host>/darwin.nix` and `profiles/<host>/home.nix` (copy boris),
+   and a `darwinConfigurations.<host>` entry in `flake.nix`.
+5. Run `./setup <host>`. It bootstraps nix-darwin on the first run and sets
+   the machine's hostname, so later runs need no argument.
+
+On the first switch, nix-darwin refuses to overwrite `/etc` files it doesn't
+own (for example `/etc/zshrc` or `/etc/bashrc`); rename them to
+`*.before-nix-darwin` as it asks. Files home-manager finds in `$HOME` are
+moved aside with the same suffix.
+
+Homebrew never uninstalls anything here (`onActivation.cleanup` stays
+`"none"`), so packages missing from the list are left alone.
+
+Apps installed by hand before they were added as casks make `brew bundle`
+fail on the first switch. Hand them over to Homebrew once:
 
 ```
-$ ln home.nix $HOME/.config/nixpkgs/home/nix
+$ brew install --cask --adopt arduino-ide chatgpt claude jamie ledger-wallet \
+    microsoft-teams notion notion-calendar obsidian openvpn-connect raycast \
+    steam telegram vlc zed zen
 ```
 
-Run `home-manager switch`
+App Store apps (`masApps`) need you to be signed in to the App Store.
 
-### Config layout
+### Not managed here
 
-`config/` is grouped by category: `ai`, `comms`, `desktop`, `dev`, `editors`,
-`media`, `system`, `terminal`. Modules in `modules/programs` and host profiles
-in `profiles/` reference files from there.
+No Nix option or Homebrew cask covers these; install them by hand.
+
+- Setapp (the `setapp` cask installs the client): CleanMyMac, CleanShot X,
+  JoyCast, Lungo, Proxyman, TablePlus, TripMode, Tripsy
+- Direct downloads: Delta (Zed), Intelbras SIMPlay, IBKR Desktop
+- `npm -g`: `@google/gemini-cli` (nixpkgs lags far behind), and
+  `ledger-reports`/`ynab-to-ledger` linked from the memex repo
+- `cargo install`: `abtop`, `portogrrs`; `go install`: `aperture`
+- `~/.local/bin`: `claude` and `basic-memory` from their own installers,
+  `camo-studio`
+
+## Layout
+
+| Path | What |
+|-|-|
+| `flake.nix` | Every machine's entry point |
+| `hosts/<host>/` | System config: `darwin.nix` (nix-darwin) or `configuration.nix` + `hardware-configuration.nix` (NixOS) |
+| `hosts/*.nix` | Shared NixOS modules (`common.nix`, `zsa.nix`, `platformio.nix`) |
+| `profiles/<host>/home.nix` | home-manager config per host |
+| `modules/programs/` | home-manager modules (`modules.<name>.enable`) |
+| `modules/nixos/` | NixOS modules |
+| `config/` | Dotfile sources, grouped by category: `ai`, `comms`, `desktop`, `dev`, `editors`, `media`, `system`, `terminal` |
+| `cluster/` | k3s cluster manifests, applied by Flux from git |
+| `infrastructure/` | microvm definitions |
+| `docs/homelab.md` | Homelab notes and network diagram |
+
+The NixOS hosts (jorel, klong, juju, lara), `hosts/zaza/darwin.nix`, the
+cluster and the microvms came from the former
+[portothree/homelab](https://github.com/portothree/homelab) repo, with its
+history. They date from nixpkgs 24.05 and aren't wired into the flake yet;
+they'll need updating when those machines come back.
 
 # AI (coding agents, skills, subagents, harness config)
 

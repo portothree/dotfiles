@@ -1,0 +1,53 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: pihole 
+  namespace: networking
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: pihole 
+      sourceRef:
+        kind: HelmRepository
+        name: pihole-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: "kong"
+      hosts: ["pi.hole"]
+      path: "/"
+      tls: []
+    persistentVolumeClaim:
+      enabled: true
+      accessModes:
+        - ReadWriteOnce
+      size: "500Mi"
+    DNS1: 45.90.28.156
+    DNS2: 45.90.30.156
+    podDnsConfig:
+      enabled: true
+      policy: "None"
+      nameservers:
+        - 45.90.28.156
+        - 45.90.30.156
+    serviceTCP:
+      annotations:
+        metallb.universe.tf/address-pool: default
+        metallb.universe.tf/allow-shared-ip: pihole-svc
+      type: LoadBalancer
+    serviceUDP:
+      annotations:
+        metallb.universe.tf/address-pool: default
+        metallb.universe.tf/allow-shared-ip: pihole-svc
+      type: LoadBalancer
+    serviceDns:
+      annotations:
+        metallb.universe.tf/address-pool: default
+        metallb.universe.tf/allow-shared-ip: pihole-svc
+      type: LoadBalancer
+

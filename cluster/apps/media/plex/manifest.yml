@@ -1,0 +1,115 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: plex-server
+  labels:
+    name: plex-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: plex-server
+  template:
+    metadata:
+      labels:
+        name: plex-server
+    spec:
+      volumes:
+        - hostPath:
+            path: /volumes/plex-config
+          name: config
+        - hostPath:
+            path: /mnt/disks/library/videos
+          name: movies
+        - hostPath:
+            path: /mnt/disks/library/tvseries
+          name: tv
+      containers:
+        - name: plex-server
+          image: plexinc/pms-docker
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            tcpSocket:
+              port: 32400
+            initialDelaySeconds: 60
+            periodSeconds: 5
+          volumeMounts:
+            - mountPath: /config
+              name: config
+            - mountPath: /movies
+              name: movies
+            - mountPath: /tv
+              name: tv
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "4000"
+            - name: VERSION
+              value: "docker"
+            - name: UMASK_SET
+              value: "022"
+            - name: TZ
+              value: "Europe/Lisbon"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: plex-server
+  labels:
+    name: plex-server
+spec:
+  ports:
+    - name: plex-server-port
+      protocol: "TCP"
+      port: 32400
+      targetPort: 32400
+      nodePort: 32400
+    - name: plex-dlna-udp
+      protocol: "UDP"
+      port: 1900
+      targetPort: 1900
+      nodePort: 1900
+    - name: plex-companion
+      protocol: "TCP"
+      port: 3005
+      targetPort: 3005
+      nodePort: 3005
+    - name: plex-bonjour
+      protocol: "UDP"
+      port: 5353
+      targetPort: 5353
+      nodePort: 5353
+    - name: plex-roku
+      protocol: "TCP"
+      port: 8324
+      targetPort: 8324
+      nodePort: 8324
+    - name: plex-gdm-1
+      protocol: "UDP"
+      port: 32410
+      targetPort: 32410
+      nodePort: 32410
+    - name: plex-gdm-2
+      protocol: "UDP"
+      port: 32412
+      targetPort: 32412
+      nodePort: 32412
+    - name: plex-gdm-3
+      protocol: "UDP"
+      port: 32413
+      targetPort: 32413
+      nodePort: 32413
+    - name: plex-gdm-4
+      protocol: "UDP"
+      port: 32414
+      targetPort: 32414
+      nodePort: 32414
+    - name: plex-dlna-tcp
+      protocol: "TCP"
+      port: 32469
+      targetPort: 32469
+      nodePort: 32469
+  selector:
+    name: plex-server
+  type: NodePort

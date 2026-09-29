@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ inputs, pkgs, lib, ... }:
 
 {
   imports = [
@@ -32,6 +32,12 @@
       pgcli
       mycli
       sqlfluff
+      cloud-provider-kind
+      elmPackages.elm-format
+      firebase-tools
+      mise
+      poetry
+      tsx
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = { };
@@ -92,6 +98,9 @@
     };
     zathura = {
       enable = true;
+      # appstream (a zathura dep) fails to build on aarch64-darwin in 26.05
+      package =
+        inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.zathura;
       options = {
         window-height = 1000;
         window-width = 1000;

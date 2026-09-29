@@ -1,30 +1,30 @@
 #!/usr/bin/env bash
+# Apply this flake to the current machine.
+# Usage: ./setup [--update] [host]   (host defaults to the short hostname)
+set -euo pipefail
+cd "$(dirname "$0")"
 
-HOST=$2
-VALID_ARGS=$(getopt -o r --long rebuild-home-manager -- "$@")
+if [ "${1:-}" = "--update" ]; then
+	nix flake update
+	shift
+fi
+host="${1:-$(hostname -s)}"
 
-update_scripts_nar_hash() {
-	nix flake lock --update-input scripts
+has_output() {
+	nix eval --json ".#$1" --apply builtins.attrNames 2>/dev/null | grep -q "\"$host\""
 }
 
-rebuild_home_manager() {
-	local hostname="$1"
-	update_scripts_nar_hash
-	nix --extra-experimental-features "nix-command flakes" build .#homeConfigurations."$hostname".activationPackage
-	./result/activate
-}
-
-eval set -- "$VALID_ARGS"
-while true; do
-	case "$1" in
-	-r | --rebuild-home-manager)
-		echo "Rebuilding home-manager for host $HOST"
-		rebuild_home_manager "$HOST"
-		shift
-		;;
-	--)
-		shift
-		break
-		;;
-	esac
-done
+if has_output darwinConfigurations; then
+	if command -v darwin-rebuild >/dev/null; then
+		sudo darwin-rebuild switch --flake ".#$host"
+	else
+		sudo nix run nix-darwin/nix-darwin-26.05#darwin-rebuild -- switch --flake ".#$host"
+	fi
+elif has_output nixosConfigurations; then
+	sudo nixos-rebuild switch --flake ".#$host"
+elif has_output homeConfigurations; then
+	nix run home-manager/release-26.05 -- switch --flake ".#$host"
+else
+	echo "No configuration for host '$host' in this flake" >&2
+	exit 1
+fi
