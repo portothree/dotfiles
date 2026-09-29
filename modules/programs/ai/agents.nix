@@ -1,13 +1,17 @@
-{ inputs, pkgs, lib, config, ... }:
+{
+  inputs,
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 
 with lib;
 let
   cfg = config.modules.ai.agents;
   claudeDir = ../../../config/ai/claude/.claude;
   opencodeDir = "config/ai/opencode/.config/opencode";
-  link = path:
-    config.lib.file.mkOutOfStoreSymlink
-    "${config.modules.ai.dotfilesPath}/${path}";
+  link = path: config.lib.file.mkOutOfStoreSymlink "${config.modules.ai.dotfilesPath}/${path}";
   fromRepo = src: names: genAttrs names (n: "${src}/skills/${n}");
   skills = fromRepo inputs.basic-memory [
     "memory-capture"
@@ -26,7 +30,8 @@ let
     "memory-schema"
     "memory-tasks"
   ];
-in {
+in
+{
   options.modules.ai.agents = {
     enable = mkEnableOption "coding agent config";
   };
@@ -40,10 +45,8 @@ in {
     };
     home.file = {
       ".agents/skills".source = pkgs.linkFarm "agent-skills" skills;
-      ".claude/settings.json".source =
-        link "config/ai/claude/.claude/settings.json";
-      ".config/opencode/opencode.json".source =
-        link "${opencodeDir}/opencode.json";
+      ".claude/settings.json".source = link "config/ai/claude/.claude/settings.json";
+      ".config/opencode/opencode.json".source = link "${opencodeDir}/opencode.json";
       ".config/opencode/agents".source = link "${opencodeDir}/agents";
     };
   };

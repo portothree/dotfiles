@@ -10,7 +10,8 @@ let
       sha256 = "QC+7EkRU4OGjKEzlWhbbph2pW0g7zcLquq1FrUBCG40=";
     };
   };
-in {
+in
+{
   programs = {
     vim = {
       enable = true;
@@ -33,4 +34,3 @@ in {
     };
   };
 }
-

@@ -10,11 +10,18 @@
   ];
   boot = {
     loader = {
-      systemd-boot = { enable = true; };
-      efi = { canTouchEfiVariables = true; };
+      systemd-boot = {
+        enable = true;
+      };
+      efi = {
+        canTouchEfiVariables = true;
+      };
     };
     extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback.out ];
-    kernelModules = [ "v4l2loopback" "snd-aloop" ];
+    kernelModules = [
+      "v4l2loopback"
+      "snd-aloop"
+    ];
     extraModprobeConfig = ''
       options v4l2loopback exclusive_caps=1 card_label="Virtual Camera"
     '';
@@ -23,7 +30,11 @@
   i18n.defaultLocale = "en_US.UTF-8";
   networking = {
     useDHCP = false;
-    interfaces = { wlp35s0 = { useDHCP = true; }; };
+    interfaces = {
+      wlp35s0 = {
+        useDHCP = true;
+      };
+    };
     nameservers = [ "100.100.100.100" ];
     search = [ "tailea386.ts.net" ];
     firewall = {
@@ -40,8 +51,7 @@
       networks = {
         "@WIRELESS_SSID_OFFICE@" = {
           psk = "@WIRELESS_PSK_OFFICE@";
-          extraConfig =
-            "bssid=@WIRELESS_BSSID_OFFICE@,freq_list=@WIRELESS_FREQ_OFFICE@";
+          extraConfig = "bssid=@WIRELESS_BSSID_OFFICE@,freq_list=@WIRELESS_FREQ_OFFICE@";
         };
       };
     };
@@ -52,14 +62,25 @@
     longitude = -9.142685;
   };
   services = {
-    clight = { enable = false; };
+    clight = {
+      enable = false;
+    };
     openssh = {
       enable = true;
       openFirewall = false;
-      settings = { PermitRootLogin = "no"; };
+      settings = {
+        PermitRootLogin = "no";
+      };
     };
-    blueman = { enable = true; };
-    udev = { packages = with pkgs; [ ledger-udev-rules android-udev-rules ]; };
+    blueman = {
+      enable = true;
+    };
+    udev = {
+      packages = with pkgs; [
+        ledger-udev-rules
+        android-udev-rules
+      ];
+    };
     tailscale = {
       enable = true;
       port = 41641;
@@ -76,18 +97,19 @@
       overrideFolders = true;
       devices = {
         "jorel" = {
-          id =
-            "RTTGM7K-G3ZAONR-HSQFTS7-OA4GLAS-6SXEREI-TWPHTTB-34A4Y44-RY7FJAV";
+          id = "RTTGM7K-G3ZAONR-HSQFTS7-OA4GLAS-6SXEREI-TWPHTTB-34A4Y44-RY7FJAV";
         };
         "boris" = {
-          id =
-            "VKQZM3J-NVIBZ23-ZY2SOK5-2XCRZAE-OUPY6MP-A4IT2S6-NFA66BJ-E7LCMAM";
+          id = "VKQZM3J-NVIBZ23-ZY2SOK5-2XCRZAE-OUPY6MP-A4IT2S6-NFA66BJ-E7LCMAM";
         };
       };
       folders = {
         "www" = {
           path = "/home/porto/www";
-          devices = [ "jorel" "boris" ];
+          devices = [
+            "jorel"
+            "boris"
+          ];
         };
       };
     };
@@ -95,10 +117,16 @@
       enable = true;
       layout = "us";
       videoDrivers = [ "nvidia" ];
-      displayManager = { startx = { enable = true; }; };
+      displayManager = {
+        startx = {
+          enable = true;
+        };
+      };
       libinput = {
         enable = true;
-        mouse = { accelProfile = "flat"; };
+        mouse = {
+          accelProfile = "flat";
+        };
       };
       screenSection = ''
         Option         "metamodes" "nvidia-auto-select +0+0 {ForceFullCompositionPipeline=On}"
@@ -111,15 +139,32 @@
     users = {
       porto = {
         isNormalUser = true;
-        extraGroups = [ "wheel" "audio" "dialout" "docker" "plugdev" ];
+        extraGroups = [
+          "wheel"
+          "audio"
+          "dialout"
+          "docker"
+          "plugdev"
+        ];
         shell = pkgs.zsh;
       };
     };
   };
   environment = {
-    systemPackages = with pkgs; [ wget curl xsecurelock tailscale ];
-    variables = { EDITOR = "nvim"; };
-    pathsToLink = [ "/share/icons" "/share/mime" "/share/zsh" ];
+    systemPackages = with pkgs; [
+      wget
+      curl
+      xsecurelock
+      tailscale
+    ];
+    variables = {
+      EDITOR = "nvim";
+    };
+    pathsToLink = [
+      "/share/icons"
+      "/share/mime"
+      "/share/zsh"
+    ];
   };
   virtualisation = {
     docker = {
@@ -127,10 +172,19 @@
       liveRestore = false;
     };
   };
-  fonts = { fonts = with pkgs; [ fira-code siji ]; };
-  sound = { enable = true; };
+  fonts = {
+    fonts = with pkgs; [
+      fira-code
+      siji
+    ];
+  };
+  sound = {
+    enable = true;
+  };
   hardware = {
-    nvidia = { package = config.boot.kernelPackages.nvidiaPackages.stable; };
+    nvidia = {
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+    };
     opengl.enable = true;
     bluetooth.enable = true;
     pulseaudio = {
@@ -141,13 +195,24 @@
       '';
     };
   };
-  nixpkgs = { config = { pulseaudio = true; }; };
+  nixpkgs = {
+    config = {
+      pulseaudio = true;
+    };
+  };
   nix = {
     enable = true;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-    settings = { trusted-users = [ "root" "porto" ]; };
+    settings = {
+      trusted-users = [
+        "root"
+        "porto"
+      ];
+    };
   };
-  system = { stateVersion = "22.05"; };
+  system = {
+    stateVersion = "22.05";
+  };
 }

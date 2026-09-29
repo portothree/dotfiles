@@ -1,8 +1,10 @@
-{ pkgs, lib, config, ... }:
+{ lib, config, ... }:
 
 with lib;
-let cfg = config.modules.dunst;
-in {
+let
+  cfg = config.modules.dunst;
+in
+{
   options.modules.dunst = {
     enable = mkEnableOption "dunst";
     extraSettings = mkOption {

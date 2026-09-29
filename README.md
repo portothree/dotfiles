@@ -20,7 +20,7 @@ input first. The script picks the right tool for the host:
 |-|-|-|
 | boris | macOS, aarch64 | nix-darwin, with home-manager as a module |
 | zaza | macOS, x86_64 | standalone home-manager |
-| jorel, klong, juju | Linux | standalone home-manager |
+| jorel, klong | Linux | standalone home-manager |
 
 On a Mac, one run applies the system (Homebrew, macOS defaults, fonts, Touch
 ID sudo) and the home-manager config together.
@@ -68,6 +68,44 @@ No Nix option or Homebrew cask covers these; install them by hand.
 - `~/.local/bin`: `claude` and `basic-memory` from their own installers,
   `camo-studio`
 
+## Host names
+
+Machines are named after characters from the Brazilian animated series
+[Irmão do Jorel](https://irmaodojorel.fandom.com/pt-br/wiki/Irm%C3%A3o_do_Jorel_Wiki).
+New machines, VMs and test fixtures follow the same scheme, using a
+character not taken yet from the [character list](https://irmaodojorel.fandom.com/pt-br/wiki/Categoria:Personagens).
+
+| Host | Character | Machine |
+|-|-|-|
+| boris | [Bóris](https://irmaodojorel.fandom.com/pt-br/wiki/B%C3%B3ris) | MacBook Pro M3 (2023) |
+| zaza | [Zazá](https://irmaodojorel.fandom.com/pt-br/wiki/Zaz%C3%A1) | MacBook Pro i5 (2020), work |
+| jorel | [Jorel](https://irmaodojorel.fandom.com/pt-br/wiki/Jorel) | Main workstation, NixOS (`jorel-wsl`: WSL on it) |
+| klong | [Klong](https://irmaodojorel.fandom.com/pt-br/wiki/Klong) | ThinkPad X1 Nano, NixOS |
+| juju | [Vovó Juju](https://irmaodojorel.fandom.com/pt-br/wiki/Vov%C3%B3_Juju) | Huawei Matebook D14, NixOS |
+| lara | [Lara](https://irmaodojorel.fandom.com/pt-br/wiki/Lara) | NixOS VM on Proxmox (k3s) |
+| yuki | [Yuki](https://irmaodojorel.fandom.com/pt-br/wiki/Yuki) | Nothing Phone (1) |
+| syd | [Syd Vinicius](https://irmaodojorel.fandom.com/pt-br/wiki/Syd_Vinicius) | Mac (home-manager only) |
+| oraculo | [Oráculo](https://irmaodojorel.fandom.com/pt-br/wiki/Or%C3%A1culo) | microvm in `infrastructure/staging` |
+| gesonel | [Gesonel](https://irmaodojorel.fandom.com/pt-br/wiki/Gesonel) | NixOS VM in the `home-vm` test (user `nico`, after [Nico](https://irmaodojorel.fandom.com/pt-br/wiki/Nico)) |
+
+## Tests and CI
+
+`nix flake check` runs everything for the current system:
+
+| Check | What it does |
+|-|-|
+| `pre-commit-check` | nixfmt, statix, deadnix and shellcheck (also installed as a git hook by `nix develop`) |
+| `darwin-boris` (aarch64-darwin) | Builds the full boris system |
+| `home-jorel`, `home-klong` (x86_64-linux) | Build the Linux home configs |
+| `home-vm` (x86_64-linux) | Boots a NixOS VM, applies the home-manager modules (agents, zsh, neovim, tmux, git) for the test user `nico` and checks the result |
+
+macOS has no VM test, so CI ([`.github/workflows/ci.yml`](.github/workflows/ci.yml))
+switches a throwaway macOS runner to `darwinConfigurations.ci` (boris for
+the runner user, without Homebrew and App Store installs) and runs
+`tests/darwin-smoke.sh`. `tests/brew-check.sh` checks that every tap,
+formula and cask still exists; run it before a switch after upstream
+renames. Renovate's `flake.lock` update PRs go through the same CI.
+
 ## Layout
 
 | Path | What |
@@ -83,7 +121,7 @@ No Nix option or Homebrew cask covers these; install them by hand.
 | `infrastructure/` | microvm definitions |
 | `docs/homelab.md` | Homelab notes and network diagram |
 
-The NixOS hosts (jorel, klong, juju, lara), `hosts/zaza/darwin.nix`, the
+The NixOS hosts (jorel, klong, juju, lara), juju's incomplete home profile, `hosts/zaza/darwin.nix`, the
 cluster and the microvms came from the former
 [portothree/homelab](https://github.com/portothree/homelab) repo, with its
 history. They date from nixpkgs 24.05 and aren't wired into the flake yet;

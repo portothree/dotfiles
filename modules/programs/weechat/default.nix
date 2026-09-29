@@ -1,9 +1,13 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 
 with lib;
 let
   cfg = config.modules.weechat;
-  scripts = cfg.scripts;
   defaultScripts = with pkgs.weechatScripts; [
     weechat-autosort
     weechat-go
@@ -11,7 +15,8 @@ let
     edit
     highmon
   ];
-in {
+in
+{
   options.modules.weechat = {
     enable = mkEnableOption "weechat";
     additionalScripts = mkOption {
@@ -51,8 +56,7 @@ in {
           };
         })
       ];
-      file.".config/weechat/weechat.conf".source =
-        ../../../config/comms/weechat/weechat.conf;
+      file.".config/weechat/weechat.conf".source = ../../../config/comms/weechat/weechat.conf;
     };
   };
 }

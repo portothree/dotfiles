@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+_:
 
 {
   home.file.khal = {

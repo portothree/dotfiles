@@ -476,9 +476,7 @@
         label open, has open     = open -- "$@"
 
                       !mime ^text, !ext xml|json|csv|tex|py|pl|rb|js|sh|php  = ask
-        label editor, !mime ^text, !ext xml|json|csv|tex|py|pl|rb|js|sh|php  = ${
-          "VISUAL:-$EDITOR"
-        } -- "$@"
+        label editor, !mime ^text, !ext xml|json|csv|tex|py|pl|rb|js|sh|php  = ${"VISUAL:-$EDITOR"} -- "$@"
         label pager,  !mime ^text, !ext xml|json|csv|tex|py|pl|rb|js|sh|php  = "$PAGER" -- "$@"
 
         mime application/x-executable = "$1"

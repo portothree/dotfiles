@@ -1,8 +1,15 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 
 with lib;
-let cfg = config.modules.gptcommit;
-in {
+let
+  cfg = config.modules.gptcommit;
+in
+{
   options.modules.gptcommit = {
     enable = mkEnableOption "gptcommit";
     openaiModel = mkOption {

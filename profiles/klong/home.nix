@@ -42,7 +42,9 @@
       ngrok
       flyctl
     ];
-    sessionVariables = { EDITOR = "nvim"; };
+    sessionVariables = {
+      EDITOR = "nvim";
+    };
     file = {
       crontab = {
         target = ".crontab";
@@ -66,13 +68,17 @@
   };
   services = {
     mpris-proxy.enable = true;
-    keynav = { enable = true; };
+    keynav = {
+      enable = true;
+    };
     unclutter = {
       enable = true;
       timeout = 1;
       extraOptions = [ "root" ];
     };
-    spotifyd = { enable = true; };
+    spotifyd = {
+      enable = true;
+    };
   };
   programs = {
     atuin.enable = true;
@@ -106,7 +112,9 @@
         };
       };
     };
-    htop = { enable = true; };
+    htop = {
+      enable = true;
+    };
     gh = {
       enable = true;
       settings = {
@@ -121,7 +129,9 @@
     };
     direnv = {
       enable = true;
-      nix-direnv = { enable = true; };
+      nix-direnv = {
+        enable = true;
+      };
       enableZshIntegration = true;
     };
     fzf = {

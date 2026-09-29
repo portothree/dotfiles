@@ -37,13 +37,20 @@
 
   homebrew = {
     enable = true;
-    taps = [
-      "anomalyco/tap"
-      "basicmachines-co/basic-memory"
-      "hashicorp/tap"
-      "supreme-gg-gg/tap"
-      "warrensbox/tap"
-    ];
+    taps =
+      map
+        (name: {
+          inherit name;
+          trusted = true;
+        })
+        [
+          "anomalyco/tap"
+          "basicmachines-co/basic-memory"
+          "hashicorp/tap"
+          "sozercan/repo"
+          "supreme-gg-gg/tap"
+          "warrensbox/tap"
+        ];
     brews = [
       "anomalyco/tap/opencode"
       "asdf"
@@ -92,7 +99,6 @@
       "timewarrior"
       "trivy"
       "uv"
-      "warrensbox/tap/tfswitch"
       # Libraries installed by hand, probably for builds
       "ghostscript"
       "jpeg"
@@ -128,7 +134,7 @@
       "hammerspoon"
       "insomnia"
       "jamie"
-      "kaset"
+      "sozercan/repo/kaset"
       "ledger-wallet"
       "microsoft-teams"
       "mono-mdk"
@@ -151,6 +157,7 @@
       "sublime-text"
       "telegram"
       "trader-workstation"
+      "warrensbox/tap/tfswitch"
       "ungoogled-chromium"
       "vlc"
       "yubico-authenticator"

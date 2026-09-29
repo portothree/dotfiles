@@ -1,8 +1,15 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 
 with lib;
-let cfg = config.modules.wakatime;
-in {
+let
+  cfg = config.modules.wakatime;
+in
+{
   options.modules.wakatime = {
     enable = mkEnableOption "wakatime";
     installPkg = mkOption {
@@ -16,8 +23,7 @@ in {
       packages = mkIf cfg.installPkg [ pkgs.wakatime-cli ];
       file.wakatime = {
         target = ".wakatime.cfg";
-        text =
-          lib.strings.fileContents ../../../config/dev/wakatime/.wakatime.cfg;
+        text = lib.strings.fileContents ../../../config/dev/wakatime/.wakatime.cfg;
       };
     };
   };

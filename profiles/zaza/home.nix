@@ -1,9 +1,10 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 
 let
   homeDirectory = "/Users/porto";
   username = "porto";
-in {
+in
+{
   imports = [
     ../../modules
     ../../config/dev/git.nix
@@ -28,12 +29,18 @@ in {
       jdk11
       asdf-vm
     ];
-    sessionVariables = { EDITOR = "nvim"; };
+    sessionVariables = {
+      EDITOR = "nvim";
+    };
     file = { };
   };
   programs = {
-    home-manager = { enable = true; };
-    htop = { enable = true; };
+    home-manager = {
+      enable = true;
+    };
+    htop = {
+      enable = true;
+    };
     gh = {
       enable = true;
       settings = {
@@ -48,7 +55,9 @@ in {
     };
     direnv = {
       enable = true;
-      nix-direnv = { enable = true; };
+      nix-direnv = {
+        enable = true;
+      };
       enableZshIntegration = true;
     };
     fzf = {

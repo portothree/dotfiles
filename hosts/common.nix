@@ -1,7 +1,9 @@
-{ inputs, pkgs, lib, ... }:
+_:
 
 {
-  time = { timeZone = "Europe/Lisbon"; };
+  time = {
+    timeZone = "Europe/Lisbon";
+  };
   networking = {
     extraHosts = ''
       192.168.1.100 pve.homelab
@@ -14,9 +16,17 @@
     defaultLocale = "en_US.UTF-8";
     supportedLocales = [ "en_US.UTF-8/UTF-8" ];
   };
-  console = { keyMap = "us"; };
-  programs = { zsh.enable = true; };
-  nixpkgs = { config = { allowUnfree = true; }; };
+  console = {
+    keyMap = "us";
+  };
+  programs = {
+    zsh.enable = true;
+  };
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+    };
+  };
   nix = {
     gc = {
       automatic = true;

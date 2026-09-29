@@ -1,13 +1,18 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  imports = [ ../common.nix ./hardware-configuration.nix ];
+  imports = [
+    ../common.nix
+    ./hardware-configuration.nix
+  ];
   boot = {
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    initrd = { kernelModules = [ "amdgpu" ]; };
+    initrd = {
+      kernelModules = [ "amdgpu" ];
+    };
     kernelParams = [
       "video=eDP-1:1920x1080@60"
       "video=HDMI-A-1:1920x1080@60"
@@ -16,22 +21,43 @@
   };
   networking = {
     useDHCP = false;
-    interfaces = { wlp1s0 = { useDHCP = true; }; };
-    nameservers = [ "208.67.222.222" "208.67.220.220" ];
+    interfaces = {
+      wlp1s0 = {
+        useDHCP = true;
+      };
+    };
+    nameservers = [
+      "208.67.222.222"
+      "208.67.220.220"
+    ];
   };
   services = {
-    openssh = { enable = true; };
+    openssh = {
+      enable = true;
+    };
     xserver = {
       enable = true;
       layout = "us";
       videoDrivers = [ "amdgpu" ];
       libinput = {
         enable = true;
-        mouse = { accelProfile = "flat"; };
-        touchpad = { accelProfile = "flat"; };
+        mouse = {
+          accelProfile = "flat";
+        };
+        touchpad = {
+          accelProfile = "flat";
+        };
       };
-      displayManager = { gdm = { enable = true; }; };
-      desktopManager = { gnome = { enable = true; }; };
+      displayManager = {
+        gdm = {
+          enable = true;
+        };
+      };
+      desktopManager = {
+        gnome = {
+          enable = true;
+        };
+      };
     };
     blueman.enable = true;
   };
@@ -40,23 +66,45 @@
     pulseaudio.enable = true;
     opengl = {
       driSupport = true;
-      extraPackages = with pkgs; [ rocm-opencl-icd rocm-opencl-runtime amdvlk ];
+      extraPackages = with pkgs; [
+        rocm-opencl-icd
+        rocm-opencl-runtime
+        amdvlk
+      ];
     };
     bluetooth.enable = true;
   };
   users = {
-    groups = { plugdev = { }; };
+    groups = {
+      plugdev = { };
+    };
 
     users = {
       porto = {
         isNormalUser = true;
-        extraGroups = [ "wheel" "plugdev" "dialout" "docker" ];
+        extraGroups = [
+          "wheel"
+          "plugdev"
+          "dialout"
+          "docker"
+        ];
       };
     };
   };
-  environment.systemPackages = with pkgs; [ git wget curl ];
-  virtualisation = { docker = { enable = true; }; };
-  fonts.fonts = with pkgs; [ fira-code siji ];
+  environment.systemPackages = with pkgs; [
+    git
+    wget
+    curl
+  ];
+  virtualisation = {
+    docker = {
+      enable = true;
+    };
+  };
+  fonts.fonts = with pkgs; [
+    fira-code
+    siji
+  ];
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
@@ -68,8 +116,10 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-    trustedUsers = [ "root" "porto" ];
+    trustedUsers = [
+      "root"
+      "porto"
+    ];
   };
   system.stateVersion = "21.11";
 }
-

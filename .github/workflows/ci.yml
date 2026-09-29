@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  linux:
+    name: Lint, build and VM test (Linux)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      # Home configs and the VM test need more disk than the runner has free
+      - uses: wimpysworld/nothing-but-nix@v10
+      - uses: DeterminateSystems/determinate-nix-action@v3
+      - uses: DeterminateSystems/magic-nix-cache-action@v15
+        with:
+          use-flakehub: false
+      - name: Check flake (lint, Linux home builds, VM test)
+        run: nix flake check -L
+      - name: Evaluate configs outside checks
+        run: nix eval --raw .#homeConfigurations.zaza.activationPackage.drvPath
+
+  darwin:
+    name: Build, Homebrew check and switch (macOS)
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: DeterminateSystems/determinate-nix-action@v3
+      - uses: DeterminateSystems/magic-nix-cache-action@v15
+        with:
+          use-flakehub: false
+      - name: Check flake (lint, boris system build)
+        run: nix flake check -L
+      - name: Homebrew taps, formulae and casks exist
+        run: tests/brew-check.sh boris
+      - name: Switch to the CI variant of boris
+        run: |
+          # nix-darwin won't overwrite /etc files it didn't create
+          for f in /etc/bashrc /etc/zshrc /etc/zprofile; do
+            if [ -e "$f" ]; then sudo mv "$f" "$f.before-nix-darwin"; fi
+          done
+          sudo nix run nix-darwin/nix-darwin-26.05#darwin-rebuild -- switch --flake .#ci
+      - name: Smoke test the applied config
+        run: tests/darwin-smoke.sh

@@ -1,15 +1,16 @@
-{ pkgs, lib, config, ... }:
+{ lib, config, ... }:
 
 with lib;
-let cfg = config.modules.sxhkd;
-in {
+let
+  cfg = config.modules.sxhkd;
+in
+{
   options.modules.sxhkd = {
     enable = mkEnableOption "sxhkd";
 
     terminal = mkOption {
       type = types.str;
-      description =
-        "Name of terminal emulator to be called with 'super + Return'";
+      description = "Name of terminal emulator to be called with 'super + Return'";
       default = "alacritty";
     };
     rofi = mkOption {
@@ -30,14 +31,14 @@ in {
         super + Return
           ${cfg.terminal}
 
-        ${optionalString (cfg.rofi) ''
+        ${optionalString cfg.rofi ''
           super + @space
             rofi -show drun
           alt + Tab
               rofi -show window
         ''}
 
-        ${optionalString (cfg.dunst) ''
+        ${optionalString cfg.dunst ''
           ctrl + @space
             dunstctl close
         ''}
