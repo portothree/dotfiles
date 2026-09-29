@@ -110,9 +110,12 @@
       "android-commandlinetools"
       "android-platform-tools"
       "anki"
+      "arduino-ide"
       "betterdisplay"
       "bitwarden"
       "bruno"
+      "chatgpt"
+      "claude"
       "cleanmymac-cli"
       "dbeaver-community"
       "ddpm"
@@ -124,23 +127,43 @@
       "google-chrome"
       "hammerspoon"
       "insomnia"
+      "jamie"
       "kaset"
+      "ledger-wallet"
+      "microsoft-teams"
       "mono-mdk"
       "ngrok"
+      "notion"
+      "notion-calendar"
+      "obsidian"
+      "openvpn-connect"
       "openwebstart"
       "postman"
       "qutebrowser"
+      "raycast"
       "rio"
       "setapp"
       "shortcat"
       "slack"
       "stats"
+      "steam"
       "sublime-merge"
       "sublime-text"
+      "telegram"
       "trader-workstation"
       "ungoogled-chromium"
+      "vlc"
       "yubico-authenticator"
+      "zed"
+      "zen"
       "zulu@17"
     ];
+    masApps = {
+      "DigiDoc4" = 1370791134;
+      "Okta Verify" = 490179405;
+      "TestFlight" = 899247664;
+      "Web eID" = 1576665083;
+      "WhatsApp" = 310633997;
+    };
   };
 }

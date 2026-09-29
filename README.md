@@ -43,6 +43,30 @@ moved aside with the same suffix.
 Homebrew never uninstalls anything here (`onActivation.cleanup` stays
 `"none"`), so packages missing from the list are left alone.
 
+Apps installed by hand before they were added as casks make `brew bundle`
+fail on the first switch. Hand them over to Homebrew once:
+
+```
+$ brew install --cask --adopt arduino-ide chatgpt claude jamie ledger-wallet \
+    microsoft-teams notion notion-calendar obsidian openvpn-connect raycast \
+    steam telegram vlc zed zen
+```
+
+App Store apps (`masApps`) need you to be signed in to the App Store.
+
+#### Not managed here
+
+No Nix option or Homebrew cask covers these; install them by hand.
+
+- Setapp (the `setapp` cask installs the client): CleanMyMac, CleanShot X,
+  JoyCast, Lungo, Proxyman, TablePlus, TripMode, Tripsy
+- Direct downloads: Delta (Zed), Intelbras SIMPlay, IBKR Desktop
+- `npm -g`: `@google/gemini-cli` (nixpkgs lags far behind), and
+  `ledger-reports`/`ynab-to-ledger` linked from the memex repo
+- `cargo install`: `abtop`, `portogrrs`; `go install`: `aperture`
+- `~/.local/bin`: `claude` and `basic-memory` from their own installers,
+  `camo-studio`
+
 ### Homelab
 
 `homelab/` is the former [portothree/homelab](https://github.com/portothree/homelab)

@@ -32,6 +32,12 @@
       pgcli
       mycli
       sqlfluff
+      cloud-provider-kind
+      elmPackages.elm-format
+      firebase-tools
+      mise
+      poetry
+      tsx
     ];
     sessionVariables = { EDITOR = "nvim"; };
     file = { };
