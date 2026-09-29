@@ -78,10 +78,15 @@
           };
         };
       mkDarwin =
-        system: hostName: user:
+        {
+          system,
+          hostName,
+          user,
+          extraModules ? [ ],
+        }:
         nix-darwin.lib.darwinSystem {
           specialArgs = { inherit inputs; };
-          modules = [
+          modules = extraModules ++ [
             ./hosts/${hostName}/darwin.nix
             home-manager.darwinModules.home-manager
             {
@@ -102,7 +107,17 @@
     in
     {
       darwinConfigurations = {
-        boris = mkDarwin "aarch64-darwin" "boris" "gustavoporto";
+        boris = mkDarwin {
+          system = "aarch64-darwin";
+          hostName = "boris";
+          user = "gustavoporto";
+        };
+        ci = mkDarwin {
+          system = "aarch64-darwin";
+          hostName = "boris";
+          user = "runner";
+          extraModules = [ ./tests/darwin-ci.nix ];
+        };
       };
       homeConfigurations = {
         boris = mkHomeManager "aarch64-darwin" "boris";
@@ -113,20 +128,36 @@
       };
     }
     // flake-utils.lib.eachDefaultSystem (system: {
-      checks.pre-commit-check = git-hooks.lib.${system}.run {
-        src = ./.;
-        excludes = [ "hardware-configuration\\.nix$" ];
-        hooks = {
-          nixfmt.enable = true;
-          statix.enable = true;
-          deadnix.enable = true;
-          shellcheck = {
-            enable = true;
-            excludes = [
-              "\\.zshrc$"
-              "\\.envrc$"
-            ];
+      checks = {
+        pre-commit-check = git-hooks.lib.${system}.run {
+          src = ./.;
+          excludes = [ "hardware-configuration\\.nix$" ];
+          hooks = {
+            nixfmt.enable = true;
+            statix.enable = true;
+            deadnix.enable = true;
+            shellcheck = {
+              enable = true;
+              excludes = [
+                "\\.zshrc$"
+                "\\.envrc$"
+              ];
+            };
           };
+        };
+      }
+      // nixpkgs.lib.optionalAttrs (system == "aarch64-darwin") {
+        darwin-boris = self.darwinConfigurations.boris.system;
+      }
+      // nixpkgs.lib.optionalAttrs (system == "x86_64-linux") {
+        home-jorel = self.homeConfigurations.jorel.activationPackage;
+        home-klong = self.homeConfigurations.klong.activationPackage;
+        home-vm = import ./tests/home-vm.nix {
+          pkgs = mkPkgs nixpkgs {
+            inherit system;
+            allowUnfree = true;
+          };
+          inherit self inputs;
         };
       };
       packages.scripts = scripts.packages.${system};

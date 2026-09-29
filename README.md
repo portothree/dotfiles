@@ -68,6 +68,24 @@ No Nix option or Homebrew cask covers these; install them by hand.
 - `~/.local/bin`: `claude` and `basic-memory` from their own installers,
   `camo-studio`
 
+## Tests and CI
+
+`nix flake check` runs everything for the current system:
+
+| Check | What it does |
+|-|-|
+| `pre-commit-check` | nixfmt, statix, deadnix and shellcheck (also installed as a git hook by `nix develop`) |
+| `darwin-boris` (aarch64-darwin) | Builds the full boris system |
+| `home-jorel`, `home-klong` (x86_64-linux) | Build the Linux home configs |
+| `home-vm` (x86_64-linux) | Boots a NixOS VM, applies the home-manager modules (agents, zsh, neovim, tmux, git) for a test user and checks the result |
+
+macOS has no VM test, so CI ([`.github/workflows/ci.yml`](.github/workflows/ci.yml))
+switches a throwaway macOS runner to `darwinConfigurations.ci` (boris for
+the runner user, without Homebrew and App Store installs) and runs
+`tests/darwin-smoke.sh`. `tests/brew-check.sh` checks that every tap,
+formula and cask still exists; run it before a switch after upstream
+renames. Renovate's `flake.lock` update PRs go through the same CI.
+
 ## Layout
 
 | Path | What |
