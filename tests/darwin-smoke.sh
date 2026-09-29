@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Checks that an applied darwin config works. Run after a switch.
 set -euo pipefail
+# A login shell gets these from nix-darwin's /etc/zshrc; CI steps don't
+export PATH="/etc/profiles/per-user/$USER/bin:/run/current-system/sw/bin:$PATH"
 
 check() {
 	if eval "$2" >/dev/null 2>&1; then

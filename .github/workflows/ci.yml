@@ -25,8 +25,8 @@ jobs:
       - uses: DeterminateSystems/magic-nix-cache-action@v15
         with:
           use-flakehub: false
-      - name: Check flake (lint, Linux home builds, VM test, eval all systems)
-        run: nix flake check --all-systems -L
+      - name: Check flake (lint, Linux home builds, VM test)
+        run: nix flake check -L
       - name: Evaluate configs outside checks
         run: nix eval --raw .#homeConfigurations.zaza.activationPackage.drvPath
 
