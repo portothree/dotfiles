@@ -22,6 +22,10 @@
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin/nix-darwin-26.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager-unstable = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -35,7 +39,7 @@
     };
   };
   outputs = { self, nixpkgs, nixpkgs-unstable, flake-utils, home-manager
-    , pre-commit-hooks, scripts, ... }@inputs:
+    , nix-darwin, pre-commit-hooks, scripts, ... }@inputs:
     let
       mkPkgs = pkgs:
         { system, overlays ? [ ], allowUnfree ? false }:
@@ -55,7 +59,31 @@
             shellScriptPkgs = scripts.packages.${system};
           };
         };
+      mkDarwin = system: hostName: user:
+        nix-darwin.lib.darwinSystem {
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/${hostName}/darwin.nix
+            home-manager.darwinModules.home-manager
+            {
+              networking.hostName = hostName;
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                backupFileExtension = "before-nix-darwin";
+                users.${user} = import ./profiles/${hostName}/home.nix;
+                extraSpecialArgs = {
+                  inherit inputs;
+                  shellScriptPkgs = scripts.packages.${system};
+                };
+              };
+            }
+          ];
+        };
     in {
+      darwinConfigurations = {
+        boris = mkDarwin "aarch64-darwin" "boris" "gustavoporto";
+      };
       homeConfigurations = {
         boris = mkHomeManager "aarch64-darwin" "boris";
         zaza = mkHomeManager "x86_64-darwin" "zaza";
@@ -69,9 +97,12 @@
         hooks = {
           nixfmt = {
             enable = true;
-            excludes = [ "hardware-configuration.nix" ];
+            excludes = [ "hardware-configuration.nix" "^homelab/" ];
           };
-          shellcheck = { enable = true; };
+          shellcheck = {
+            enable = true;
+            excludes = [ "^homelab/" ];
+          };
         };
       };
       packages.scripts = scripts.packages.${system};

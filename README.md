@@ -13,22 +13,42 @@ For my non-nixos machines I'm currently using debian `apt` strictly for the base
 
 ### Usage
 
-Make sure `nix` and `home-manager` is installed.
+Macs use [nix-darwin](https://github.com/nix-darwin/nix-darwin) for the
+system (Homebrew, macOS defaults, fonts, Touch ID sudo), with home-manager
+running as a nix-darwin module, so one command applies both. Linux hosts use
+standalone home-manager.
 
-```
-$ nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
-$ nix-channel --update
-$ export NIX_PATH = "$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels";
-$ nix-shell '<home-manager>' -A install
-```
+| Host | Kind | Apply with |
+|-|-|-|
+| boris | macOS, aarch64 | `sudo darwin-rebuild switch --flake .#boris` |
+| zaza | macOS, x86_64 | `home-manager switch --flake .#zaza` |
+| jorel, klong, juju | Linux | `home-manager switch --flake .#<host>` |
 
-Create a symbolic link of `./config/nixos/hosts/<host>/home.nix` at `$HOME/.config/nixpkgs/home.nix`.
+New Mac:
 
-```
-$ ln home.nix $HOME/.config/nixpkgs/home/nix
-```
+1. Install Nix with the [Determinate installer](https://determinate.systems/nix-installer/)
+   (nix-darwin is configured with `nix.enable = false` to leave Nix to it).
+2. Install [Homebrew](https://brew.sh).
+3. Clone this repo to `~/www/portothree/dotfiles`.
+4. Add `hosts/<host>/darwin.nix` and `profiles/<host>/home.nix` (copy boris),
+   and a `darwinConfigurations.<host>` entry in `flake.nix`.
+5. First run: `sudo nix run nix-darwin/nix-darwin-26.05#darwin-rebuild -- switch --flake .#<host>`.
+   Afterwards, `sudo darwin-rebuild switch --flake .#<host>`.
 
-Run `home-manager switch`
+On the first switch, nix-darwin refuses to overwrite `/etc` files it doesn't
+own (for example `/etc/zshrc` or `/etc/bashrc`); rename them to
+`*.before-nix-darwin` as it asks. Files home-manager finds in `$HOME` are
+moved aside with the same suffix.
+
+Homebrew never uninstalls anything here (`onActivation.cleanup` stays
+`"none"`), so packages missing from the list are left alone.
+
+### Homelab
+
+`homelab/` is the former [portothree/homelab](https://github.com/portothree/homelab)
+repo, imported with its history (minus an old uptime-kuma provisioning file
+and work VPN scripts). It's kept as-is for reference and isn't wired into
+this flake yet: NixOS hosts, the k3s/Flux cluster and the microvm setup.
 
 ### Config layout
 
