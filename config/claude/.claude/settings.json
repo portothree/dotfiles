@@ -3,6 +3,15 @@
     "commit": "",
     "pr": ""
   },
+  "permissions": {
+    "allow": [
+      "Read(//Users/gustavoporto/**)",
+      "mcp__mcp-server-basic-memory__search",
+      "mcp__mcp-server-basic-memory__write_note",
+      "mcp__basic-memory__search",
+      "mcp__basic-memory__write_note"
+    ]
+  },
   "hooks": {
     "SessionStart": [
       {
@@ -26,9 +35,40 @@
       }
     ]
   },
-  "permissions": {
-    "allow": [
-      "Read(//Users/gustavoporto/**)"
-    ]
-  }
+  "statusLine": {
+    "type": "command",
+    "command": "/Users/gustavoporto/.claude/abtop-statusline.sh"
+  },
+  "enabledPlugins": {
+    "notion-workspace-plugin@notion-plugin-marketplace": true,
+    "superpowers@claude-plugins-official": true,
+    "ponytail@ponytail": true,
+    "slack@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "notion-plugin-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "makenotion/claude-code-notion-plugin"
+      }
+    },
+    "superpowers-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "obra/superpowers-marketplace"
+      }
+    },
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      }
+    }
+  },
+  "outputStyle": "Concise",
+  "tui": "fullscreen",
+  "theme": "dark",
+  "editorMode": "vim",
+  "autoCompactEnabled": false,
+  "voiceEnabled": true
 }

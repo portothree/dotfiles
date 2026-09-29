@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./ai
     ./alacritty
     ./anki
     ./androidTools
