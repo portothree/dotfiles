@@ -17,14 +17,15 @@ in {
   config = mkIf cfg.enable {
     programs.zsh = {
       enable = true;
-      enableAutosuggestions = true;
+      autosuggestion.enable = true;
+      dotDir = config.home.homeDirectory;
       enableCompletion = true;
       sessionVariables = {
         VISUAL = "nvim";
         EDITOR = "nvim";
         HISTTIMEFORMAT = "%F %T ";
       };
-      initExtra = ''
+      initContent = ''
         ${if cfg.loadAsdf then
           "source ${pkgs.asdf-vm}/share/asdf-vm/asdf.sh"
         else

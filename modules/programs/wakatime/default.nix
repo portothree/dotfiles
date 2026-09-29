@@ -13,10 +13,11 @@ in {
   };
   config = mkIf cfg.enable {
     home = {
-      packages = mkIf cfg.installPkg [ pkgs.wakatime ];
+      packages = mkIf cfg.installPkg [ pkgs.wakatime-cli ];
       file.wakatime = {
         target = ".wakatime.cfg";
-        text = lib.strings.fileContents ../../../config/wakatime/.wakatime.cfg;
+        text =
+          lib.strings.fileContents ../../../config/dev/wakatime/.wakatime.cfg;
       };
     };
   };

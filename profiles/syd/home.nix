@@ -4,10 +4,10 @@
   imports = [
     ../../modules
     ../../home-manager
-    ../../config/git.nix
-    ../../config/ranger.nix
-    ../../config/keynav.nix
-    ../../config/rofi.nix
+    ../../config/dev/git.nix
+    ../../config/terminal/ranger.nix
+    ../../config/desktop/keynav.nix
+    ../../config/desktop/rofi.nix
   ];
   home = {
     stateVersion = "22.11";
@@ -35,7 +35,7 @@
       monero-gui
       monero-cli
       nextdns
-      llama
+      walk
     ];
     sessionVariables = { EDITOR = "nvim"; };
   };

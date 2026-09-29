@@ -6,16 +6,16 @@ let
 in {
   imports = [
     ../../modules
-    ../../config/git.nix
-    ../../config/ranger.nix
-    ../../config/tig.nix
+    ../../config/dev/git.nix
+    ../../config/terminal/ranger.nix
+    ../../config/dev/tig.nix
   ];
   home = {
     inherit homeDirectory username;
     stateVersion = "22.11";
     packages = with pkgs; [
       xcbuild
-      qt6.full
+      qt6.qtbase
       glow
       ripgrep
       shfmt

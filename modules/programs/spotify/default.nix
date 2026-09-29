@@ -38,7 +38,7 @@ in {
       (lib.hm.assertions.assertPlatform "services.spotifyd" pkgs
         lib.platforms.linux)
     ];
-    home.packages = with pkgs; [ spotify-tui ];
+    home.packages = with pkgs; [ spotify-player ];
     systemd.user.services.spotifyd-custom = {
       Unit = { Description = "spotify deamon"; };
       Install.WantedBy = [ "default.target" ];

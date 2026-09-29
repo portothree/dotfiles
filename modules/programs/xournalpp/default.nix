@@ -9,7 +9,7 @@ in {
       packages = with pkgs; [
         xournalpp
         # TODO: Remove when https://github.com/NixOS/nixpkgs/issues/163107 is fixed
-        gnome.adwaita-icon-theme
+        adwaita-icon-theme
         shared-mime-info
       ];
       file.xournalpp-toolbar = {

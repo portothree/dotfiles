@@ -4,11 +4,11 @@
   imports = [
     ../../home-manager
     ../../modules
-    ../../config/git.nix
-    ../../config/ranger.nix
-    ../../config/keynav.nix
-    ../../config/rofi.nix
-    ../../config/tig.nix
+    ../../config/dev/git.nix
+    ../../config/terminal/ranger.nix
+    ../../config/desktop/keynav.nix
+    ../../config/desktop/rofi.nix
+    ../../config/dev/tig.nix
   ];
   home = {
     stateVersion = "22.11";
@@ -26,8 +26,8 @@
       pulsemixer
       nudoku
       playerctl
-      spotify-tui
-      nvtop
+      spotify-player
+      nvtopPackages.full
       mutt
       mpv
       gh
@@ -36,7 +36,7 @@
       bitwarden-cli
       v4l-utils
       nextdns
-      llama
+      walk
       awscli2
       chromium
       openconnect
@@ -47,7 +47,7 @@
       telepresence2
       auth0-cli
       bandwhich
-      diskonaut
+      dua
       ngrok
       postgresql_15
       libpqxx

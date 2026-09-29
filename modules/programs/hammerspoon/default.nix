@@ -8,7 +8,8 @@ in {
     home = {
       file.hammerspoon = {
         target = "./.hammerspoon/init.lua";
-        text = lib.strings.fileContents ../../../config/hammerspoon/init.lua;
+        text =
+          lib.strings.fileContents ../../../config/desktop/hammerspoon/init.lua;
       };
     };
   };

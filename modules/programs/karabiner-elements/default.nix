@@ -18,7 +18,7 @@ in {
       file.karabiner-elements = {
         target = ".config/karabiner/karabiner.json";
         text = lib.strings.fileContents
-          ../../../config/karabiner-elements/karabiner.json;
+          ../../../config/desktop/karabiner-elements/karabiner.json;
       };
     };
   };
