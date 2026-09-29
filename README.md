@@ -20,7 +20,7 @@ input first. The script picks the right tool for the host:
 |-|-|-|
 | boris | macOS, aarch64 | nix-darwin, with home-manager as a module |
 | zaza | macOS, x86_64 | standalone home-manager |
-| jorel, klong, juju | Linux | standalone home-manager |
+| jorel, klong | Linux | standalone home-manager |
 
 On a Mac, one run applies the system (Homebrew, macOS defaults, fonts, Touch
 ID sudo) and the home-manager config together.
@@ -121,7 +121,7 @@ renames. Renovate's `flake.lock` update PRs go through the same CI.
 | `infrastructure/` | microvm definitions |
 | `docs/homelab.md` | Homelab notes and network diagram |
 
-The NixOS hosts (jorel, klong, juju, lara), `hosts/zaza/darwin.nix`, the
+The NixOS hosts (jorel, klong, juju, lara), juju's incomplete home profile, `hosts/zaza/darwin.nix`, the
 cluster and the microvms came from the former
 [portothree/homelab](https://github.com/portothree/homelab) repo, with its
 history. They date from nixpkgs 24.05 and aren't wired into the flake yet;

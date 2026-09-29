@@ -74,7 +74,7 @@
           modules = [ ./profiles/${hostName}/home.nix ];
           extraSpecialArgs = {
             inherit inputs;
-            shellScriptPkgs = scripts.packages.${system};
+            shellScriptPkgs = scripts.packages.${system} or { };
           };
         };
       mkDarwin =
@@ -98,7 +98,7 @@
                 users.${user} = import ./profiles/${hostName}/home.nix;
                 extraSpecialArgs = {
                   inherit inputs;
-                  shellScriptPkgs = scripts.packages.${system};
+                  shellScriptPkgs = scripts.packages.${system} or { };
                 };
               };
             }
@@ -124,10 +124,9 @@
         zaza = mkHomeManager "x86_64-darwin" "zaza";
         jorel = mkHomeManager "x86_64-linux" "jorel";
         klong = mkHomeManager "x86_64-linux" "klong";
-        juju = mkHomeManager "x86_64-linux" "juju";
       };
     }
-    // flake-utils.lib.eachDefaultSystem (system: {
+    // flake-utils.lib.eachSystem [ "aarch64-darwin" "x86_64-linux" ] (system: {
       checks = {
         pre-commit-check = git-hooks.lib.${system}.run {
           src = ./.;
@@ -160,7 +159,7 @@
           inherit self inputs;
         };
       };
-      packages.scripts = scripts.packages.${system};
+      packages = scripts.packages.${system} or { };
       devShell = import ./shell.nix {
         pkgs = mkPkgs nixpkgs { inherit system; };
         inherit (self.checks.${system}.pre-commit-check) shellHook;

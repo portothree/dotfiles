@@ -23,6 +23,8 @@ jobs:
       - uses: wimpysworld/nothing-but-nix@v10
       - uses: DeterminateSystems/determinate-nix-action@v3
       - uses: DeterminateSystems/magic-nix-cache-action@v15
+        with:
+          use-flakehub: false
       - name: Check flake (lint, Linux home builds, VM test, eval all systems)
         run: nix flake check --all-systems -L
       - name: Evaluate configs outside checks
@@ -35,6 +37,8 @@ jobs:
       - uses: actions/checkout@v7
       - uses: DeterminateSystems/determinate-nix-action@v3
       - uses: DeterminateSystems/magic-nix-cache-action@v15
+        with:
+          use-flakehub: false
       - name: Check flake (lint, boris system build)
         run: nix flake check -L
       - name: Homebrew taps, formulae and casks exist

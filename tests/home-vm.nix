@@ -23,7 +23,7 @@ pkgs.testers.runNixOSTest {
       useUserPackages = true;
       extraSpecialArgs = {
         inherit inputs;
-        shellScriptPkgs = inputs.scripts.packages.${pkgs.stdenv.hostPlatform.system};
+        shellScriptPkgs = inputs.scripts.packages.${pkgs.stdenv.hostPlatform.system} or { };
       };
       users.nico = {
         imports = [
