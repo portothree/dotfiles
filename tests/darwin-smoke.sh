@@ -5,10 +5,12 @@ set -euo pipefail
 export PATH="/etc/profiles/per-user/$USER/bin:/run/current-system/sw/bin:$PATH"
 
 check() {
-	if eval "$2" >/dev/null 2>&1; then
+	local out
+	if out=$(eval "$2" 2>&1); then
 		echo "ok   $1"
 	else
 		echo "FAIL $1"
+		echo "$out"
 		failed=1
 	fi
 }
@@ -20,7 +22,7 @@ check "agent skills" "test -f ~/.agents/skills/memory-notes/SKILL.md"
 check "claude settings link" "jq -e .permissions ~/.claude/settings.json"
 check "claude CLAUDE.md" "test -f ~/.claude/CLAUDE.md"
 check "opencode config" "jq -e . ~/.config/opencode/opencode.json"
-check "git identity" "test \"\$(git config --global user.name)\" = 'Gustavo Porto'"
+check "git identity" "git config --file ~/.config/git/config user.name | grep -qx 'Gustavo Porto'"
 check "fish starts" "fish -c true"
 check "neovim starts" "nvim --headless +qa"
 check "dock tile size" "test \"\$(defaults read com.apple.dock tilesize)\" = 69"
