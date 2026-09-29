@@ -35,56 +35,49 @@
     };
   };
   outputs = { self, nixpkgs, nixpkgs-unstable, flake-utils, home-manager
-    , home-manager-unstable, nixgl, pre-commit-hooks, scripts, ... }@inputs:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        shellScriptPkgs = scripts.packages.${system};
-        mkPkgs = pkgs:
-          { overlays ? [ ], allowUnfree ? false, targetSystem ? system }:
-          import pkgs {
-            inherit overlays;
-            system = targetSystem;
-            config.allowUnfree = allowUnfree;
+    , pre-commit-hooks, scripts, ... }@inputs:
+    let
+      mkPkgs = pkgs:
+        { system, overlays ? [ ], allowUnfree ? false }:
+        import pkgs {
+          inherit system overlays;
+          config.allowUnfree = allowUnfree;
+        };
+      mkHomeManager = system: hostName:
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = mkPkgs nixpkgs {
+            inherit system;
+            allowUnfree = true;
           };
-        mkHomeManager = pkgs: hm: hostName:
-          hm.lib.homeManagerConfiguration {
-            inherit pkgs;
-            modules = [ ./profiles/${hostName}/home.nix ];
-            extraSpecialArgs = { inherit inputs shellScriptPkgs; };
-          };
-      in {
-        checks.pre-commit-check = pre-commit-hooks.lib.${system}.run {
-          src = ./.;
-          hooks = {
-            nixfmt = {
-              enable = true;
-              excludes = [ "hardware-configuration.nix" ];
-            };
-            shellcheck = { enable = true; };
+          modules = [ ./profiles/${hostName}/home.nix ];
+          extraSpecialArgs = {
+            inherit inputs;
+            shellScriptPkgs = scripts.packages.${system};
           };
         };
-        packages = {
-          homeConfigurations = {
-            jorel = mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; })
-              home-manager "jorel";
-            boris = mkHomeManager (mkPkgs nixpkgs {
-              allowUnfree = true;
-              targetSystem = "aarch64-darwin";
-            }) home-manager "boris";
-            zaza = mkHomeManager (mkPkgs nixpkgs {
-              allowUnfree = true;
-              targetSystem = "x86_64-darwin";
-            }) home-manager "zaza";
-            klong = mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; })
-              home-manager "klong";
-            juju = mkHomeManager (mkPkgs nixpkgs { allowUnfree = true; })
-              home-manager "juju";
+    in {
+      homeConfigurations = {
+        boris = mkHomeManager "aarch64-darwin" "boris";
+        zaza = mkHomeManager "x86_64-darwin" "zaza";
+        jorel = mkHomeManager "x86_64-linux" "jorel";
+        klong = mkHomeManager "x86_64-linux" "klong";
+        juju = mkHomeManager "x86_64-linux" "juju";
+      };
+    } // flake-utils.lib.eachDefaultSystem (system: {
+      checks.pre-commit-check = pre-commit-hooks.lib.${system}.run {
+        src = ./.;
+        hooks = {
+          nixfmt = {
+            enable = true;
+            excludes = [ "hardware-configuration.nix" ];
           };
-          scripts = shellScriptPkgs;
+          shellcheck = { enable = true; };
         };
-        devShell = import ./shell.nix {
-          pkgs = mkPkgs nixpkgs-unstable { };
-          inherit (self.checks.${system}.pre-commit-check) shellHook;
-        };
-      });
+      };
+      packages.scripts = scripts.packages.${system};
+      devShell = import ./shell.nix {
+        pkgs = mkPkgs nixpkgs-unstable { inherit system; };
+        inherit (self.checks.${system}.pre-commit-check) shellHook;
+      };
+    });
 }
