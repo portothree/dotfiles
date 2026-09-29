@@ -1,0 +1,14 @@
+# microvm
+*.img
+
+.pre-commit-config.yaml
+
+.direnv
+.k1x*
+
+.env
+
+# Devenv
+.devenv*
+devenv.local.nix
+

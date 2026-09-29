@@ -1,0 +1,10 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: kong-charts
+  namespace: flux-system
+spec:
+  url: https://charts.konghq.com
+  interval: 10m
+  timeout: 3m
