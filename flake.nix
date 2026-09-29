@@ -97,12 +97,9 @@
         hooks = {
           nixfmt = {
             enable = true;
-            excludes = [ "hardware-configuration.nix" "^homelab/" ];
+            excludes = [ "hardware-configuration.nix" ];
           };
-          shellcheck = {
-            enable = true;
-            excludes = [ "^homelab/" ];
-          };
+          shellcheck = { enable = true; };
         };
       };
       packages.scripts = scripts.packages.${system};

@@ -4,12 +4,8 @@
   imports = [ ../common.nix ./hardware-configuration.nix ];
   boot = {
     loader = {
-	systemd-boot = {
-		enable = true;
-	};
-	efi = {
-		canTouchEfiVariables = true;
-	};
+      systemd-boot = { enable = true; };
+      efi = { canTouchEfiVariables = true; };
     };
   };
   networking = {
@@ -30,10 +26,7 @@
     k3s = {
       enable = true;
       role = "server";
-      extraFlags = toString [ 
-        "--disable traefik"
-        "--disable servicelb"
-      ];
+      extraFlags = toString [ "--disable traefik" "--disable servicelb" ];
     };
   };
   users = {
@@ -44,6 +37,8 @@
       };
     };
   };
-  environment = { systemPackages = with pkgs; [ git curl k3s k9s kubectl fluxcd fluxctl ]; };
+  environment = {
+    systemPackages = with pkgs; [ git curl k3s k9s kubectl fluxcd fluxctl ];
+  };
   system = { stateVersion = "21.11"; };
 }

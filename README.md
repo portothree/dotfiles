@@ -1,30 +1,31 @@
 # dotfiles
 
-It uses [home-manager](https://github.com/nix-community/home-manager) to install and create programs configurations based off the `home.nix` file.
+One Nix flake for all my machines: macOS system config with
+[nix-darwin](https://github.com/nix-darwin/nix-darwin), user config with
+[home-manager](https://github.com/nix-community/home-manager), NixOS hosts,
+and the homelab cluster manifests.
 
 ![Current desk screenshot](./other/screenshot.png)
 
-[Home Manager Manual](https://nix-community.github.io/home-manager/)
+## Usage
 
+```
+$ ./setup [--update] [host]
+```
 
-### Debian + Nix as package manager(?)
+`host` defaults to the machine's short hostname. `--update` bumps every flake
+input first. The script picks the right tool for the host:
 
-For my non-nixos machines I'm currently using debian `apt` strictly for the base system, and Nix for all userspace apps.
-
-### Usage
-
-Macs use [nix-darwin](https://github.com/nix-darwin/nix-darwin) for the
-system (Homebrew, macOS defaults, fonts, Touch ID sudo), with home-manager
-running as a nix-darwin module, so one command applies both. Linux hosts use
-standalone home-manager.
-
-| Host | Kind | Apply with |
+| Host | Kind | Applied with |
 |-|-|-|
-| boris | macOS, aarch64 | `sudo darwin-rebuild switch --flake .#boris` |
-| zaza | macOS, x86_64 | `home-manager switch --flake .#zaza` |
-| jorel, klong, juju | Linux | `home-manager switch --flake .#<host>` |
+| boris | macOS, aarch64 | nix-darwin, with home-manager as a module |
+| zaza | macOS, x86_64 | standalone home-manager |
+| jorel, klong, juju | Linux | standalone home-manager |
 
-New Mac:
+On a Mac, one run applies the system (Homebrew, macOS defaults, fonts, Touch
+ID sudo) and the home-manager config together.
+
+### New Mac
 
 1. Install Nix with the [Determinate installer](https://determinate.systems/nix-installer/)
    (nix-darwin is configured with `nix.enable = false` to leave Nix to it).
@@ -32,8 +33,8 @@ New Mac:
 3. Clone this repo to `~/www/portothree/dotfiles`.
 4. Add `hosts/<host>/darwin.nix` and `profiles/<host>/home.nix` (copy boris),
    and a `darwinConfigurations.<host>` entry in `flake.nix`.
-5. First run: `sudo nix run nix-darwin/nix-darwin-26.05#darwin-rebuild -- switch --flake .#<host>`.
-   Afterwards, `sudo darwin-rebuild switch --flake .#<host>`.
+5. Run `./setup <host>`. It bootstraps nix-darwin on the first run and sets
+   the machine's hostname, so later runs need no argument.
 
 On the first switch, nix-darwin refuses to overwrite `/etc` files it doesn't
 own (for example `/etc/zshrc` or `/etc/bashrc`); rename them to
@@ -54,7 +55,7 @@ $ brew install --cask --adopt arduino-ide chatgpt claude jamie ledger-wallet \
 
 App Store apps (`masApps`) need you to be signed in to the App Store.
 
-#### Not managed here
+### Not managed here
 
 No Nix option or Homebrew cask covers these; install them by hand.
 
@@ -67,18 +68,26 @@ No Nix option or Homebrew cask covers these; install them by hand.
 - `~/.local/bin`: `claude` and `basic-memory` from their own installers,
   `camo-studio`
 
-### Homelab
+## Layout
 
-`homelab/` is the former [portothree/homelab](https://github.com/portothree/homelab)
-repo, imported with its history (minus an old uptime-kuma provisioning file
-and work VPN scripts). It's kept as-is for reference and isn't wired into
-this flake yet: NixOS hosts, the k3s/Flux cluster and the microvm setup.
+| Path | What |
+|-|-|
+| `flake.nix` | Every machine's entry point |
+| `hosts/<host>/` | System config: `darwin.nix` (nix-darwin) or `configuration.nix` + `hardware-configuration.nix` (NixOS) |
+| `hosts/*.nix` | Shared NixOS modules (`common.nix`, `zsa.nix`, `platformio.nix`) |
+| `profiles/<host>/home.nix` | home-manager config per host |
+| `modules/programs/` | home-manager modules (`modules.<name>.enable`) |
+| `modules/nixos/` | NixOS modules |
+| `config/` | Dotfile sources, grouped by category: `ai`, `comms`, `desktop`, `dev`, `editors`, `media`, `system`, `terminal` |
+| `cluster/` | k3s cluster manifests, applied by Flux from git |
+| `infrastructure/` | microvm definitions |
+| `docs/homelab.md` | Homelab notes and network diagram |
 
-### Config layout
-
-`config/` is grouped by category: `ai`, `comms`, `desktop`, `dev`, `editors`,
-`media`, `system`, `terminal`. Modules in `modules/programs` and host profiles
-in `profiles/` reference files from there.
+The NixOS hosts (jorel, klong, juju, lara), `hosts/zaza/darwin.nix`, the
+cluster and the microvms came from the former
+[portothree/homelab](https://github.com/portothree/homelab) repo, with its
+history. They date from nixpkgs 24.05 and aren't wired into the flake yet;
+they'll need updating when those machines come back.
 
 # AI (coding agents, skills, subagents, harness config)
 

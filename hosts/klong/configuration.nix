@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./hardware-configuration.nix ../common.nix ../../modules ];
+  imports = [ ./hardware-configuration.nix ../common.nix ../../modules/nixos ];
   boot = {
     loader = {
       efi = {
