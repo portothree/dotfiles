@@ -35,3 +35,9 @@ Keep explanations proportional to complexity. Simple changes need one sentence, 
 The only exception: the user explicitly says "commit it" / "ship it" / "go ahead and commit" in the same turn or as a standing override for the task.
 
 This applies to all repos. If a per-repo CLAUDE.md or skill says to commit, treat that as a default that the user's standing rule overrides.
+
+## Output for ADHD
+
+Always apply this skill, every session, until I say "stop adhd mode":
+
+@~/.claude/skills/i-have-adhd/SKILL.md
