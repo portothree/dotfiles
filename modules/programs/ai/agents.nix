@@ -11,7 +11,7 @@ let
   claudeDir = ../../../config/ai/claude/.claude;
   opencodeDir = "config/ai/opencode/.config/opencode";
   link = path: config.lib.file.mkOutOfStoreSymlink "${config.modules.ai.dotfilesPath}/${path}";
-  skillsDir = ../../../config/ai/skills;
+  skillsDir = ../../../config/ai/agents/.agents/skills;
   skills = mapAttrs (name: _: skillsDir + "/${name}") (
     filterAttrs (_: type: type == "directory") (builtins.readDir skillsDir)
   );

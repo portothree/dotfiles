@@ -135,7 +135,7 @@ home-manager's [`programs.claude-code`](https://nix-community.github.io/home-man
 
 | Source | Deployed to |
 |-|-|
-| `config/ai/skills/<name>/` (vendored) | `~/.claude/skills/<name>`, `~/.agents/skills` |
+| `config/ai/agents/.agents/skills/<name>/` (vendored) | `~/.claude/skills/<name>`, `~/.agents/skills` |
 | `config/ai/claude/.claude/{CLAUDE.md,agents}` | `~/.claude/...` (store copy) |
 | `config/ai/claude/.claude/settings.json` | `~/.claude/settings.json` (live link) |
 | `config/ai/opencode/.config/opencode/{opencode.json,agents}` | `~/.config/opencode/...` (live link) |
@@ -160,21 +160,28 @@ first switch: `home-manager switch -b backup --flake .#<host>`.
 
 ### Skills
 
-Skills are vendored: each one is a plain copy in `config/ai/skills/<name>/`,
-and `config/ai/skills/sources.json` records its upstream repo, path and the
-commit it was copied from. Every folder there is deployed.
+Skills are managed with the [skills](https://github.com/vercel-labs/skills)
+CLI at project scope in `config/ai/agents/`. It keeps real copies in
+`config/ai/agents/.agents/skills/<name>/` and records each skill's source and
+content hash in `config/ai/agents/skills-lock.json`. Every folder there is
+deployed; the per-agent symlink folders the CLI also creates are gitignored.
 
-- Add a skill: add an entry to `sources.json` (`repo`, `path` to the folder
-  holding `SKILL.md`, any `rev`), run `config/ai/skills/update.sh <name>`,
-  read the files, then switch.
-- Remove a skill: delete its folder and its `sources.json` entry, then switch.
-- Update: `config/ai/skills/update.sh` syncs every skill with its upstream
-  default branch. A skill's recorded commit only moves when its files changed.
+```
+$ cd config/ai/agents
+$ export DISABLE_TELEMETRY=1
+$ npx skills add <owner/repo> --skill <name> -a codex   # add; read the files before switching
+$ npx skills remove <name>                              # remove
+$ npx skills update -p                                  # pull upstream changes
+```
+
+`-a codex` installs only the shared `.agents/skills` copy (Codex reads that
+folder directly), without extra per-agent folders. Then run `./setup`.
 
 The [Update agent skills](.github/workflows/update-skills.yml) workflow runs
-the script every Monday and opens a PR when anything changed. Skills run with
-full agent permissions, so read those diffs before merging. CI doesn't start
-on PRs opened by a workflow; close and reopen the PR to run it.
+`npx skills update -p` every Monday and opens a PR when a skill changed
+upstream. Skills run with full agent permissions, so read those diffs before
+merging. CI doesn't start on PRs opened by a workflow; close and reopen the
+PR to run it.
 
 Installed:
 

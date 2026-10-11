@@ -10,3 +10,7 @@ result-*
 
 .rayconfig
 
+
+# Per-agent symlink dirs created by `npx skills`; only .agents/skills is used
+config/ai/agents/.claude
+config/ai/agents/skills

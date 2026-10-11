@@ -14,13 +14,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - name: Sync skills with upstream
+      - name: Update skills from upstream
         id: sync
+        working-directory: config/ai/agents
+        env:
+          DISABLE_TELEMETRY: "1"
         run: |
-          config/ai/skills/update.sh > "$RUNNER_TEMP/sync.log"
+          npx -y skills@1.7.2 update -p -y | tee "$RUNNER_TEMP/update.log"
           {
             echo 'summary<<EOF'
-            grep -v ': unchanged$' "$RUNNER_TEMP/sync.log" || true
+            grep -E "Updated|Failed|rror" "$RUNNER_TEMP/update.log" || true
             echo EOF
           } >> "$GITHUB_OUTPUT"
       - uses: peter-evans/create-pull-request@v8
@@ -30,7 +33,7 @@ jobs:
           commit-message: "chore(ai): update agent skills from upstream"
           title: "Update agent skills from upstream"
           body: |
-            Upstream changed these vendored skills:
+            `npx skills update` found these upstream skill changes:
 
             ```
             ${{ steps.sync.outputs.summary }}
