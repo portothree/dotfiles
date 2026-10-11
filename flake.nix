@@ -36,10 +36,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     scripts.url = "path:./bin";
-    basic-memory = {
-      url = "github:basicmachines-co/basic-memory";
-      flake = false;
-    };
   };
   outputs =
     {

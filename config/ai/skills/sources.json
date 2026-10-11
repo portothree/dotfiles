@@ -1,0 +1,82 @@
+{
+  "i-have-adhd": {
+    "path": "skills/i-have-adhd",
+    "repo": "ayghri/i-have-adhd",
+    "rev": "1ecea1993b7fce257ffbd686c070948b5e07eda6"
+  },
+  "memory-capture": {
+    "path": "skills/memory-capture",
+    "repo": "basicmachines-co/basic-memory",
+    "rev": "fd848a357da718b32fe2fc975083c6ab2175b409"
+  },
+  "memory-ci-capture": {
+    "path": "skills/memory-ci-capture",
+    "repo": "basicmachines-co/basic-memory",
+    "rev": "fd848a357da718b32fe2fc975083c6ab2175b409"
+  },
+  "memory-continue": {
+    "path": "skills/memory-continue",
+    "repo": "basicmachines-co/basic-memory",
+    "rev": "fd848a357da718b32fe2fc975083c6ab2175b409"
+  },
+  "memory-curate": {
+    "path": "skills/memory-curate",
+    "repo": "basicmachines-co/basic-memory",
+    "rev": "fd848a357da718b32fe2fc975083c6ab2175b409"
+  },
+  "memory-defrag": {
+    "path": "skills/memory-defrag",
+    "repo": "basicmachines-co/basic-memory",
+    "rev": "fd848a357da718b32fe2fc975083c6ab2175b409"
+  },
+  "memory-ingest": {
+    "path": "skills/memory-ingest",
+    "repo": "basicmachines-co/basic-memory",
+    "rev": "fd848a357da718b32fe2fc975083c6ab2175b409"
+  },
+  "memory-lifecycle": {
+    "path": "skills/memory-lifecycle",
+    "repo": "basicmachines-co/basic-memory",
+    "rev": "fd848a357da718b32fe2fc975083c6ab2175b409"
+  },
+  "memory-literary-analysis": {
+    "path": "skills/memory-literary-analysis",
+    "repo": "basicmachines-co/basic-memory",
+    "rev": "fd848a357da718b32fe2fc975083c6ab2175b409"
+  },
+  "memory-metadata-search": {
+    "path": "skills/memory-metadata-search",
+    "repo": "basicmachines-co/basic-memory",
+    "rev": "fd848a357da718b32fe2fc975083c6ab2175b409"
+  },
+  "memory-notes": {
+    "path": "skills/memory-notes",
+    "repo": "basicmachines-co/basic-memory",
+    "rev": "fd848a357da718b32fe2fc975083c6ab2175b409"
+  },
+  "memory-onboarding": {
+    "path": "skills/memory-onboarding",
+    "repo": "basicmachines-co/basic-memory",
+    "rev": "fd848a357da718b32fe2fc975083c6ab2175b409"
+  },
+  "memory-reflect": {
+    "path": "skills/memory-reflect",
+    "repo": "basicmachines-co/basic-memory",
+    "rev": "fd848a357da718b32fe2fc975083c6ab2175b409"
+  },
+  "memory-research": {
+    "path": "skills/memory-research",
+    "repo": "basicmachines-co/basic-memory",
+    "rev": "fd848a357da718b32fe2fc975083c6ab2175b409"
+  },
+  "memory-schema": {
+    "path": "skills/memory-schema",
+    "repo": "basicmachines-co/basic-memory",
+    "rev": "fd848a357da718b32fe2fc975083c6ab2175b409"
+  },
+  "memory-tasks": {
+    "path": "skills/memory-tasks",
+    "repo": "basicmachines-co/basic-memory",
+    "rev": "fd848a357da718b32fe2fc975083c6ab2175b409"
+  }
+}

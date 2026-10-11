@@ -1,5 +1,4 @@
 {
-  inputs,
   pkgs,
   lib,
   config,
@@ -12,24 +11,10 @@ let
   claudeDir = ../../../config/ai/claude/.claude;
   opencodeDir = "config/ai/opencode/.config/opencode";
   link = path: config.lib.file.mkOutOfStoreSymlink "${config.modules.ai.dotfilesPath}/${path}";
-  fromRepo = src: names: genAttrs names (n: "${src}/skills/${n}");
-  skills = fromRepo inputs.basic-memory [
-    "memory-capture"
-    "memory-ci-capture"
-    "memory-continue"
-    "memory-curate"
-    "memory-defrag"
-    "memory-ingest"
-    "memory-lifecycle"
-    "memory-literary-analysis"
-    "memory-metadata-search"
-    "memory-notes"
-    "memory-onboarding"
-    "memory-reflect"
-    "memory-research"
-    "memory-schema"
-    "memory-tasks"
-  ];
+  skillsDir = ../../../config/ai/skills;
+  skills = mapAttrs (name: _: skillsDir + "/${name}") (
+    filterAttrs (_: type: type == "directory") (builtins.readDir skillsDir)
+  );
 in
 {
   options.modules.ai.agents = {
