@@ -19,6 +19,12 @@
       "skillPath": "skills/memory-ci-capture/SKILL.md",
       "computedHash": "97c383e59b592328e6f0c474dab133f0dc5d7f0919267b7c5b53f36332eb7a4b"
     },
+    "memory-comark": {
+      "source": "basicmachines-co/basic-memory",
+      "sourceType": "github",
+      "skillPath": "skills/memory-comark/SKILL.md",
+      "computedHash": "447dfd5f1374605217451b3c55603b0bfd571c0b9d83b98071e72a7b4c0c988e"
+    },
     "memory-continue": {
       "source": "basicmachines-co/basic-memory",
       "sourceType": "github",
