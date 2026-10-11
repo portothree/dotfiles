@@ -135,7 +135,7 @@ home-manager's [`programs.claude-code`](https://nix-community.github.io/home-man
 
 | Source | Deployed to |
 |-|-|
-| Skills from pinned flake inputs | `~/.claude/skills/<name>`, `~/.agents/skills` |
+| `config/ai/skills/<name>/` (vendored) | `~/.claude/skills/<name>`, `~/.agents/skills` |
 | `config/ai/claude/.claude/{CLAUDE.md,agents}` | `~/.claude/...` (store copy) |
 | `config/ai/claude/.claude/settings.json` | `~/.claude/settings.json` (live link) |
 | `config/ai/opencode/.config/opencode/{opencode.json,agents}` | `~/.config/opencode/...` (live link) |
@@ -160,13 +160,21 @@ first switch: `home-manager switch -b backup --flake .#<host>`.
 
 ### Skills
 
-Skills come from GitHub repos pinned as `flake = false` inputs in
-`flake.nix`, and are picked by name in `modules/programs/ai/agents.nix`.
+Skills are vendored: each one is a plain copy in `config/ai/skills/<name>/`,
+and `config/ai/skills/sources.json` records its upstream repo, path and the
+commit it was copied from. Every folder there is deployed.
 
-- Add a skill: add its name to the list (or a new input + `fromRepo` call for
-  a new repo), then `home-manager switch`.
-- Remove a skill: delete its name, then `home-manager switch`.
-- Update: `nix flake update basic-memory`, review the diff, then switch.
+- Add a skill: add an entry to `sources.json` (`repo`, `path` to the folder
+  holding `SKILL.md`, any `rev`), run `config/ai/skills/update.sh <name>`,
+  read the files, then switch.
+- Remove a skill: delete its folder and its `sources.json` entry, then switch.
+- Update: `config/ai/skills/update.sh` syncs every skill with its upstream
+  default branch. A skill's recorded commit only moves when its files changed.
+
+The [Update agent skills](.github/workflows/update-skills.yml) workflow runs
+the script every Monday and opens a PR when anything changed. Skills run with
+full agent permissions, so read those diffs before merging. CI doesn't start
+on PRs opened by a workflow; close and reopen the PR to run it.
 
 Installed:
 
@@ -174,6 +182,9 @@ Installed:
   Basic Memory workflows: capture, continue, curate, defrag, ingest,
   lifecycle, metadata-search, notes, onboarding, reflect, research, schema,
   tasks, literary-analysis, ci-capture
+- `i-have-adhd` ([ayghri/i-have-adhd](https://github.com/ayghri/i-have-adhd)):
+  ADHD-friendly output (next action first, numbered steps, restated state).
+  Only runs when invoked with `/i-have-adhd`; "stop adhd mode" turns it off.
 
 # Shell scripts
 
