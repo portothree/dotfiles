@@ -185,7 +185,9 @@ an `.agents/` folder and the commands must run in `config/ai/agents`.
 **The skill files are read-only.** `update` overwrites hand edits, so a
 pre-commit hook (installed by `nix develop`) rejects commits that change
 skill files without changing `skills-lock.json`, which only the CLI does. To
-change a skill's behaviour, write your own skill in another folder instead.
+change a skill's behaviour, write your own skill instead. Hand-written skills
+need their own folder added to `modules/programs/ai/agents.nix`, since this
+one is reserved for the CLI.
 
 The [Update agent skills](.github/workflows/update-skills.yml) workflow runs
 `npx skills update -p` every Monday and opens a PR when a skill changed
