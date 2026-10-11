@@ -50,7 +50,7 @@ Use these skills on your own, without waiting to be asked, when the situation fi
 - Tracking tasks that must survive context compaction: `memory-tasks`
 - Archiving or moving notes between status folders: `memory-lifecycle`
 - Notes that share a type (Task, Person, Meeting) and need consistent fields: `memory-schema`
-- The knowledge base needs linking, deduplication or hub notes: `memory-curate`
+- The knowledge base needs linking, deduplication or hub notes: `memory-curate`. Don't run it unprompted: when loaded or searched notes show several notes for one ticket, the same topic in different folders, or `[USER]`/`[ASSISTANT]` transcripts, say so in one line and suggest running `memory-curate` on that project folder
 - Memory files are bloated or duplicated: `memory-defrag`
 - Asked to reflect on recent activity: `memory-reflect`
 - New to a project or setting up structure: `memory-onboarding`
