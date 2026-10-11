@@ -36,6 +36,26 @@ The only exception: the user explicitly says "commit it" / "ship it" / "go ahead
 
 This applies to all repos. If a per-repo CLAUDE.md or skill says to commit, treat that as a default that the user's standing rule overrides.
 
+## Basic Memory skills
+
+Use these skills on your own, without waiting to be asked, when the situation fits:
+
+- Starting a session, or "continue", "back to", "where were we": `memory-continue`
+- Before writing or editing any note: `memory-notes`
+- A note would read better as a chart, table, checklist, kanban or live dashboard: `memory-comark`
+- Decisions or insights worth keeping mid-thread or at the end: `memory-capture`
+- Transcripts, logs or pasted documents to file away: `memory-ingest`
+- Researching a company, person, technology or topic: `memory-research`
+- Finding notes by frontmatter fields (status, priority, dates): `memory-metadata-search`
+- Tracking tasks that must survive context compaction: `memory-tasks`
+- Archiving or moving notes between status folders: `memory-lifecycle`
+- Notes that share a type (Task, Person, Meeting) and need consistent fields: `memory-schema`
+- The knowledge base needs linking, deduplication or hub notes: `memory-curate`
+- Memory files are bloated or duplicated: `memory-defrag`
+- Asked to reflect on recent activity: `memory-reflect`
+- New to a project or setting up structure: `memory-onboarding`
+- Only when asked: `memory-literary-analysis` (a whole book) and `memory-ci-capture` (CI only)
+
 ## Output for ADHD
 
 Always apply this skill, every session, until I say "stop adhd mode":
