@@ -1,0 +1,53 @@
+name: Update agent skills
+
+on:
+  schedule:
+    - cron: "0 7 * * 1" # Mondays 07:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install every skill each source publishes
+        id: sync
+        working-directory: config/ai/agents
+        env:
+          DISABLE_TELEMETRY: "1"
+        run: |
+          # Sources are derived from the lock: repo plus the folder holding the
+          # skill folders. `add --skill '*'` installs new skills and updates
+          # existing ones; `update` would only refresh what's already locked.
+          jq -r '.skills[] | .source as $s
+            | (.skillPath | split("/")[:-2] | join("/")) as $p
+            | if $p == "" then $s else "\($s)/\($p)" end' skills-lock.json |
+            sort -u |
+            while read -r src; do
+              npx -y skills@1.7.2 add "$src" --skill '*' -a codex -y
+            done
+          {
+            echo 'summary<<EOF'
+            git status --porcelain -- .agents/skills |
+              awk '{ split($2, p, "/"); print ($1 == "??" ? "new:     " : "updated: ") p[6] }' |
+              sort -u
+            echo EOF
+          } >> "$GITHUB_OUTPUT"
+      - uses: peter-evans/create-pull-request@v8
+        with:
+          branch: chore/update-agent-skills
+          delete-branch: true
+          commit-message: "chore(ai): update agent skills from upstream"
+          title: "Update agent skills from upstream"
+          body: |
+            Upstream skill changes:
+
+            ```
+            ${{ steps.sync.outputs.summary }}
+            ```
+
+            Skills run with full agent permissions, so read the diff before merging. CI doesn't run automatically on PRs opened by this workflow; close and reopen the PR to trigger it.
