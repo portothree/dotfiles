@@ -6,10 +6,14 @@
   "permissions": {
     "allow": [
       "Read(//Users/gustavoporto/**)",
-      "mcp__mcp-server-basic-memory__search",
-      "mcp__mcp-server-basic-memory__write_note",
+      "mcp__basic-memory__recent_activity",
+      "mcp__basic-memory__build_context",
+      "mcp__basic-memory__search_notes",
       "mcp__basic-memory__search",
-      "mcp__basic-memory__write_note"
+      "mcp__basic-memory__read_note",
+      "mcp__basic-memory__list_directory",
+      "mcp__basic-memory__write_note",
+      "mcp__basic-memory__edit_note"
     ]
   },
   "hooks": {
@@ -19,17 +23,11 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo \"🧠 SESSION STARTED: Search mcp-server-basic-memory for context about: $(basename $(pwd)) project, previous conversations, and related work. Do this before responding to user queries.\""
-          }
-        ]
-      }
-    ],
-    "UserPromptSubmit": [
-      {
-        "hooks": [
+            "command": "echo \"Before your first reply, use the memory-continue skill to load Basic Memory context for the $(basename \"$PWD\") project and recent related work.\""
+          },
           {
             "type": "command",
-            "command": "echo '💭 CONTEXT SEARCH: Before responding, use mcp-server-basic-memory search to search for: previous discussions about this topic, related project context, and similar problems solved before. Before this conversation ends, you must use mcp-server-basic-memory write-note to store: [USER] their question/request + [ASSISTANT] your solution/explanation/reasoning. Do this storage as the very last action.'"
+            "command": "~/.claude/hooks/basic-memory-health.sh"
           }
         ]
       }

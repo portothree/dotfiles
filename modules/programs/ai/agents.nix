@@ -25,14 +25,13 @@ in
       enable = true;
       package = null;
       context = claudeDir + "/CLAUDE.md";
-      agentsDir = claudeDir + "/agents";
       inherit skills;
     };
     home.file = {
       ".agents/skills".source = pkgs.linkFarm "agent-skills" skills;
       ".claude/settings.json".source = link "config/ai/claude/.claude/settings.json";
+      ".claude/hooks/basic-memory-health.sh".source = claudeDir + "/hooks/basic-memory-health.sh";
       ".config/opencode/opencode.json".source = link "${opencodeDir}/opencode.json";
-      ".config/opencode/agents".source = link "${opencodeDir}/agents";
     };
   };
 }

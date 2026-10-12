@@ -136,9 +136,9 @@ home-manager's [`programs.claude-code`](https://nix-community.github.io/home-man
 | Source | Deployed to |
 |-|-|
 | `config/ai/agents/.agents/skills/<name>/` (vendored) | `~/.claude/skills/<name>`, `~/.agents/skills` |
-| `config/ai/claude/.claude/{CLAUDE.md,agents}` | `~/.claude/...` (store copy) |
+| `config/ai/claude/.claude/CLAUDE.md` | `~/.claude/CLAUDE.md` (store copy) |
 | `config/ai/claude/.claude/settings.json` | `~/.claude/settings.json` (live link) |
-| `config/ai/opencode/.config/opencode/{opencode.json,agents}` | `~/.config/opencode/...` (live link) |
+| `config/ai/opencode/.config/opencode/opencode.json` | `~/.config/opencode/opencode.json` (live link) |
 
 Live links are out-of-store (`mkOutOfStoreSymlink`) and point at this
 checkout, so Claude Code can still write `settings.json` (plugins, `/config`)
@@ -157,6 +157,21 @@ modules.ai = {
 
 On a machine that already has these files, move them out of the way on the
 first switch: `home-manager switch -b backup --flake .#<host>`.
+
+### Basic Memory
+
+Notes live in [Basic Memory](https://basicmemory.com) (MCP server
+`basic-memory`). A `SessionStart` hook in `settings.json` tells Claude to run
+the `memory-continue` skill before its first reply, so each session starts
+with the relevant notes loaded. Writing follows the `memory-capture` and
+`memory-notes` skills: search first, then update an existing note instead of
+adding a new one. Read and write tools are pre-approved in `settings.json`.
+
+A second `SessionStart` hook, `config/ai/claude/.claude/hooks/basic-memory-health.sh`,
+checks the default Basic Memory project (from `~/.basic-memory/config.json`).
+When it finds 5 or more transcript-style notes, a ticket split across 8 or
+more notes, or 35 or more top-level folders, it prints a one-line hint and
+Claude suggests running `memory-curate`. It stays silent otherwise.
 
 ### Skills
 

@@ -53,8 +53,8 @@ pkgs.testers.runNixOSTest {
         gesonel.succeed("test -f /home/nico/.agents/skills/memory-notes/SKILL.md")
         gesonel.succeed("test -f /home/nico/.claude/skills/i-have-adhd/SKILL.md")
         gesonel.succeed("test -f /home/nico/.claude/CLAUDE.md")
-        gesonel.succeed("test -d /home/nico/.claude/agents")
         gesonel.succeed("jq -e .permissions /home/nico/.claude/settings.json")
+        gesonel.succeed("su - nico -c /home/nico/.claude/hooks/basic-memory-health.sh")
         gesonel.succeed("jq -e . /home/nico/.config/opencode/opencode.json")
 
     with subtest("git"):
