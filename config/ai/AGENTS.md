@@ -3,15 +3,11 @@
 Shared by Claude Code, Zed's agent, Codex and OpenCode. The source is
 `config/ai/AGENTS.md` in the dotfiles repo; edit it there.
 
-## Responses
-Don't echo back file contents you just read — the user can see them.
-Don't narrate tool calls ("Let me read the file..." / "Now I'll edit..."). Just do it.
-Keep explanations proportional to complexity. Simple changes need one sentence, not three paragraphs.
+## Formatting
 
-**Tables — STRICT RULES (apply everywhere, always):**
-- Markdown tables: use minimum separator (`|-|-|`). Never pad with repeated hyphens (`|---|---|`).
-- NEVER use box-drawing / ASCII-art tables with characters like `┌`, `┬`, `─`, `│`, `└`, `┘`, `├`, `┤`, `┼`. These are completely banned.
-- No exceptions. Not for "clarity", not for alignment, not for terminal output.
+- Don't paste back file contents you just read.
+- Markdown tables use the minimum separator (`|-|-|`), never padded (`|---|---|`).
+- Never use box-drawing or ASCII-art tables (`┌`, `─`, `│`, `┼` and the like), not even in terminal output.
 
 ## Committing — STRICT RULE (all projects, all branches)
 
