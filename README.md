@@ -135,8 +135,9 @@ home-manager's [`programs.claude-code`](https://nix-community.github.io/home-man
 
 | Source | Deployed to |
 |-|-|
-| `config/ai/agents/.agents/skills/<name>/` (vendored) | `~/.claude/skills/<name>`, `~/.agents/skills` |
-| `config/ai/claude/.claude/CLAUDE.md` | `~/.claude/CLAUDE.md` (store copy) |
+| `config/ai/agents/.agents/skills/<name>/` (vendored) | `~/.claude/skills/<name>`, `~/.agents/skills/<name>` (one link per skill, so other skills can sit next to them) |
+| `config/ai/AGENTS.md` (shared instructions) | `~/.agents/AGENTS.md`, Zed `~/.config/zed/AGENTS.md`, Codex `~/.codex/AGENTS.md`, OpenCode `~/.config/opencode/AGENTS.md` (live links) |
+| `config/ai/claude/.claude/CLAUDE.md` (imports the shared file, plus Claude-only rules) | `~/.claude/CLAUDE.md` (store copy) |
 | `config/ai/claude/.claude/settings.json` | `~/.claude/settings.json` (live link) |
 | `config/ai/opencode/.config/opencode/opencode.json` | `~/.config/opencode/opencode.json` (live link) |
 
