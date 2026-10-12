@@ -1,21 +1,5 @@
 {
   "nodes": {
-    "basic-memory": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1790706013,
-        "narHash": "sha256-W7fz7DDo20/g7HyX33OV21hpVhwFoft644tq9kaYmjI=",
-        "owner": "basicmachines-co",
-        "repo": "basic-memory",
-        "rev": "fd848a357da718b32fe2fc975083c6ab2175b409",
-        "type": "github"
-      },
-      "original": {
-        "owner": "basicmachines-co",
-        "repo": "basic-memory",
-        "type": "github"
-      }
-    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -229,7 +213,6 @@
     },
     "root": {
       "inputs": {
-        "basic-memory": "basic-memory",
         "flake-utils": "flake-utils",
         "git-hooks": "git-hooks",
         "home-manager": "home-manager",

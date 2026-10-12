@@ -36,10 +36,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     scripts.url = "path:./bin";
-    basic-memory = {
-      url = "github:basicmachines-co/basic-memory";
-      flake = false;
-    };
   };
   outputs =
     {
@@ -141,6 +137,24 @@
                 "\\.zshrc$"
                 "\\.envrc$"
               ];
+            };
+            # Vendored skills change only through `npx skills`, which always
+            # updates the lock file in the same commit
+            skills-read-only = {
+              enable = true;
+              name = "vendored skills are read-only";
+              files = "^config/ai/agents/(\\.agents/skills/|skills-lock\\.json$)";
+              require_serial = true;
+              entry = toString (
+                nixpkgs.legacyPackages.${system}.writeShellScript "skills-read-only" ''
+                  for f in "$@"; do
+                    [ "$f" = config/ai/agents/skills-lock.json ] && exit 0
+                  done
+                  echo "config/ai/agents/.agents/skills is managed by npx skills; don't edit it by hand." >&2
+                  echo "Run npx skills add/remove/update -p in config/ai/agents instead (see README)." >&2
+                  exit 1
+                ''
+              );
             };
           };
         };

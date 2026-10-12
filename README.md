@@ -135,7 +135,7 @@ home-manager's [`programs.claude-code`](https://nix-community.github.io/home-man
 
 | Source | Deployed to |
 |-|-|
-| Skills from pinned flake inputs | `~/.claude/skills/<name>`, `~/.agents/skills` |
+| `config/ai/agents/.agents/skills/<name>/` (vendored) | `~/.claude/skills/<name>`, `~/.agents/skills` |
 | `config/ai/claude/.claude/{CLAUDE.md,agents}` | `~/.claude/...` (store copy) |
 | `config/ai/claude/.claude/settings.json` | `~/.claude/settings.json` (live link) |
 | `config/ai/opencode/.config/opencode/{opencode.json,agents}` | `~/.config/opencode/...` (live link) |
@@ -160,20 +160,54 @@ first switch: `home-manager switch -b backup --flake .#<host>`.
 
 ### Skills
 
-Skills come from GitHub repos pinned as `flake = false` inputs in
-`flake.nix`, and are picked by name in `modules/programs/ai/agents.nix`.
+Skills are managed with the [skills](https://github.com/vercel-labs/skills)
+CLI at project scope in `config/ai/agents/`. It keeps real copies in
+`config/ai/agents/.agents/skills/<name>/` and records each skill's source and
+content hash in `config/ai/agents/skills-lock.json`. Every folder there is
+deployed; the per-agent symlink folders the CLI also creates are gitignored.
 
-- Add a skill: add its name to the list (or a new input + `fromRepo` call for
-  a new repo), then `home-manager switch`.
-- Remove a skill: delete its name, then `home-manager switch`.
-- Update: `nix flake update basic-memory`, review the diff, then switch.
+```
+$ cd config/ai/agents
+$ export DISABLE_TELEMETRY=1
+$ npx skills add <owner/repo/folder> --skill '*' -a codex   # add every skill in a folder; read them before switching
+$ npx skills remove <name>                              # remove
+$ npx skills update -p                                  # pull upstream changes to installed skills
+```
+
+`-a codex` installs only the shared `.agents/skills` copy (Codex reads that
+folder directly), without extra per-agent folders. Then run `./setup`.
+
+The CLI works on the folder it runs from: it reads `./skills-lock.json`,
+compares each skill's recorded hash with upstream, and rewrites
+`./.agents/skills/<name>/` when they differ. That's why the skills live under
+an `.agents/` folder and the commands must run in `config/ai/agents`.
+
+**The skill files are read-only.** `update` overwrites hand edits, so a
+pre-commit hook (installed by `nix develop`) rejects commits that change
+skill files without changing `skills-lock.json`, which only the CLI does. To
+change a skill's behaviour, write your own skill instead. Hand-written skills
+need their own folder added to `modules/programs/ai/agents.nix`, since this
+one is reserved for the CLI.
+
+Each source is tracked as a whole: every skill it publishes is installed.
+The [Update agent skills](.github/workflows/update-skills.yml) workflow
+re-runs `npx skills add <source> --skill '*'` for every source in the lock
+file every Monday, so new skills get added and existing ones updated, and
+opens a PR when anything changed. Skills run with full agent permissions, so read those diffs before
+merging. CI doesn't start on PRs opened by a workflow; close and reopen the
+PR to run it.
 
 Installed:
 
 - `memory-*` ([basicmachines-co/basic-memory](https://github.com/basicmachines-co/basic-memory/tree/main/skills)):
-  Basic Memory workflows: capture, continue, curate, defrag, ingest,
-  lifecycle, metadata-search, notes, onboarding, reflect, research, schema,
-  tasks, literary-analysis, ci-capture
+  every skill in `skills/`, the published pack: capture, ci-capture, comark,
+  continue, curate, defrag, ingest, lifecycle, literary-analysis,
+  metadata-search, notes, onboarding, reflect, research, schema, tasks. The
+  repo's other skills (`bm-*` from its Claude Code plugin, and its own dev
+  skills like `code-review`) aren't part of it.
+- `i-have-adhd` ([ayghri/i-have-adhd](https://github.com/ayghri/i-have-adhd)):
+  ADHD-friendly output (next action first, numbered steps, restated state).
+  Only runs when invoked with `/i-have-adhd`; "stop adhd mode" turns it off.
 
 # Shell scripts
 
