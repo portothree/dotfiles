@@ -53,6 +53,8 @@ pkgs.testers.runNixOSTest {
         gesonel.succeed("test -f /home/nico/.agents/skills/memory-notes/SKILL.md")
         gesonel.succeed("test -f /home/nico/.claude/skills/i-have-adhd/SKILL.md")
         gesonel.succeed("test -f /home/nico/.claude/CLAUDE.md")
+        gesonel.succeed("grep -qx 'keep-coding-instructions: true' /home/nico/.claude/output-styles/adhd.md")
+        gesonel.succeed("grep -q 'Lead with the next action' /home/nico/.claude/output-styles/adhd.md")
         gesonel.succeed("grep -q 'Instructions for every coding agent' /home/nico/.agents/AGENTS.md")
         gesonel.succeed("cmp /home/nico/.agents/AGENTS.md /home/nico/.config/zed/AGENTS.md")
         gesonel.succeed("cmp /home/nico/.agents/AGENTS.md /home/nico/.codex/AGENTS.md")

@@ -1,4 +1,5 @@
 {
+  pkgs,
   lib,
   config,
   ...
@@ -11,6 +12,15 @@ let
   opencodeDir = "config/ai/opencode/.config/opencode";
   link = path: config.lib.file.mkOutOfStoreSymlink "${config.modules.ai.dotfilesPath}/${path}";
   skillsDir = ../../../config/ai/agents/.agents/skills;
+  # The i-have-adhd skill doubles as Claude Code's output style: same body,
+  # output-style frontmatter, so the weekly skill updates reach it too.
+  adhdOutputStyle = pkgs.runCommand "adhd-output-style.md" { } ''
+    {
+      printf -- '---\nname: ADHD\ndescription: %s\nkeep-coding-instructions: true\n---\n' \
+        "Lead with the next action, number steps, restate state, cap lists, no preamble or recaps"
+      awk 'seen >= 2 { print; next } /^---$/ { seen++ }' ${skillsDir}/i-have-adhd/SKILL.md
+    } > $out
+  '';
   skills = mapAttrs (name: _: skillsDir + "/${name}") (
     filterAttrs (_: type: type == "directory") (builtins.readDir skillsDir)
   );
@@ -43,6 +53,7 @@ in
           })
       // {
         ".claude/settings.json".source = link "config/ai/claude/.claude/settings.json";
+        ".claude/output-styles/adhd.md".source = adhdOutputStyle;
         ".claude/hooks/basic-memory-health.sh".source = claudeDir + "/hooks/basic-memory-health.sh";
         ".config/opencode/opencode.json".source = link "${opencodeDir}/opencode.json";
       };
