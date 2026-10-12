@@ -1,8 +1,17 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base"],
+  "extends": ["config:recommended"],
   "dependencyDashboard": false,
   "ignorePaths": ["cluster/**"],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "skills CLI pinned in npx calls",
+      "managerFilePatterns": ["/^\\.github/workflows/[^/]+\\.ya?ml$/"],
+      "matchStrings": ["npx -y (?<depName>skills)@(?<currentValue>\\d+\\.\\d+\\.\\d+)"],
+      "datasourceTemplate": "npm"
+    }
+  ],
   "lockFileMaintenance": {
     "enabled": true,
     "extends": ["schedule:daily"]
