@@ -1,5 +1,4 @@
 {
-  pkgs,
   lib,
   config,
   ...
@@ -27,11 +26,25 @@ in
       context = claudeDir + "/CLAUDE.md";
       inherit skills;
     };
-    home.file = {
-      ".agents/skills".source = pkgs.linkFarm "agent-skills" skills;
-      ".claude/settings.json".source = link "config/ai/claude/.claude/settings.json";
-      ".claude/hooks/basic-memory-health.sh".source = claudeDir + "/hooks/basic-memory-health.sh";
-      ".config/opencode/opencode.json".source = link "${opencodeDir}/opencode.json";
-    };
+    # Each skill is linked on its own so skills installed outside this repo
+    # (by Zed, a plugin or by hand) can live next to them in ~/.agents/skills.
+    home.file =
+      mapAttrs' (name: path: nameValuePair ".agents/skills/${name}" { source = path; }) skills
+      //
+        genAttrs
+          [
+            ".agents/AGENTS.md"
+            ".config/zed/AGENTS.md"
+            ".codex/AGENTS.md"
+            ".config/opencode/AGENTS.md"
+          ]
+          (_: {
+            source = link "config/ai/AGENTS.md";
+          })
+      // {
+        ".claude/settings.json".source = link "config/ai/claude/.claude/settings.json";
+        ".claude/hooks/basic-memory-health.sh".source = claudeDir + "/hooks/basic-memory-health.sh";
+        ".config/opencode/opencode.json".source = link "${opencodeDir}/opencode.json";
+      };
   };
 }
