@@ -24,6 +24,10 @@
           {
             "type": "command",
             "command": "echo \"Before your first reply, use the memory-continue skill to load Basic Memory context for the $(basename \"$PWD\") project and recent related work.\""
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/basic-memory-health.sh"
           }
         ]
       }

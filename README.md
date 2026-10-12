@@ -167,6 +167,12 @@ with the relevant notes loaded. Writing follows the `memory-capture` and
 `memory-notes` skills: search first, then update an existing note instead of
 adding a new one. Read and write tools are pre-approved in `settings.json`.
 
+A second `SessionStart` hook, `config/ai/claude/.claude/hooks/basic-memory-health.sh`,
+checks the default Basic Memory project (from `~/.basic-memory/config.json`).
+When it finds 5 or more transcript-style notes, a ticket split across 8 or
+more notes, or 35 or more top-level folders, it prints a one-line hint and
+Claude suggests running `memory-curate`. It stays silent otherwise.
+
 ### Skills
 
 Skills are managed with the [skills](https://github.com/vercel-labs/skills)
