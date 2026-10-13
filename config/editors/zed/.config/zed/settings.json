@@ -99,6 +99,12 @@
       "command": "npx",
       "args": ["-y", "chrome-devtools-mcp@latest"]
     },
+    "notion": {
+      "enabled": true,
+      "remote": false,
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.notion.com/mcp"]
+    },
     "jamie": {
       "enabled": true,
       "remote": false,

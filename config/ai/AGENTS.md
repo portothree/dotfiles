@@ -46,6 +46,21 @@ Use these skills on your own when the situation fits:
 - New to a project or setting up structure: `memory-onboarding`
 - Only when asked: `memory-literary-analysis` (a whole book) and `memory-ci-capture` (CI only)
 
+## Notion issue tracker
+
+My work items, for every client, live in one Notion issue tracker database.
+Reach it through the Notion MCP (`notion`). Each entry has an ID:
+
+- The client's own ticket ID when they have a tracker, such as a Jira key.
+- Otherwise one I assign: a client prefix and the next free number, such as `ABC-012`. Find the highest existing number for that prefix before picking the next.
+
+Rules:
+
+- When work maps to an entry (an ID in the task, branch, PR, linked issue or notes), fetch the entry before starting: search Notion for the ID.
+- Never change an entry's Status yourself. When the work reaches a point where it might move (started, PR open, merged, issue closed), tell me the status you'd suggest and why; I decide, since some work stays in QA after a merge.
+- Create an entry for new work I ask you to track, or for a follow-up I agree to. Link the source ticket or issue. Show me the ID, title and fields first.
+- If the Notion MCP isn't available or authorized, say so in one line and give me the change to make by hand.
+
 ## Output for ADHD
 
 Follow the rules in `~/.agents/skills/i-have-adhd/SKILL.md` in every reply, for the whole session, until I say "stop adhd mode". Read that file at the start of each session if it isn't already in your instructions.

@@ -30,6 +30,10 @@
           },
           {
             "type": "command",
+            "command": "echo 'If this work maps to an entry in the Notion issue tracker (a client ticket ID or one of my own IDs), fetch it with the Notion MCP before starting. Never change its Status; suggest one and let me decide (see AGENTS.md).'"
+          },
+          {
+            "type": "command",
             "command": "~/.claude/hooks/basic-memory-health.sh"
           }
         ]
