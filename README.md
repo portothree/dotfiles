@@ -33,8 +33,22 @@ ID sudo) and the home-manager config together.
 3. Clone this repo to `~/www/portothree/dotfiles`.
 4. Add `hosts/<host>/darwin.nix` and `profiles/<host>/home.nix` (copy boris),
    and a `darwinConfigurations.<host>` entry in `flake.nix`.
-5. Run `./setup <host>`. It bootstraps nix-darwin on the first run and sets
+5. Copy the Bitwarden secure note "dotfiles secrets.env" to
+   `~/.config/dotfiles/secrets.env` and `chmod 600` it, so the first switch
+   fills in the Zed MCP tokens (see [Secrets](#secrets)).
+6. Run `./setup <host>`. It bootstraps nix-darwin on the first run and sets
    the machine's hostname, so later runs need no argument.
+
+Then the logins and settings nothing here can do:
+
+1. Sign in to Tailscale, so the Aperture gateway (`p8s.tailea386.ts.net`)
+   is reachable; without it Claude Code and Codex can't reach a model.
+2. Install Claude Code with its native installer
+   (`curl -fsSL https://claude.ai/install.sh | bash`) and run `/login` with
+   the Max account.
+3. Sign in to ChatGPT in the ChatGPT app (Codex uses that login).
+4. Restore Raycast with Cloud Sync, sign in to its Claude and ChatGPT
+   subscriptions, and set Claude's executable path (see [Raycast](#raycast)).
 
 On the first switch, nix-darwin refuses to overwrite `/etc` files it doesn't
 own (for example `/etc/zshrc` or `/etc/bashrc`); rename them to
