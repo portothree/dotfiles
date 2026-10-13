@@ -108,7 +108,7 @@ character not taken yet from the [character list](https://irmaodojorel.fandom.co
 
 | Check | What it does |
 |-|-|
-| `pre-commit-check` | nixfmt, statix, deadnix and shellcheck (also installed as a git hook by `nix develop`) |
+| `pre-commit-check` | nixfmt, statix, deadnix, shellcheck and gitleaks (also installed as a git hook by `nix develop`) |
 | `darwin-boris` (aarch64-darwin) | Builds the full boris system |
 | `home-jorel`, `home-klong` (x86_64-linux) | Build the Linux home configs |
 | `home-vm` (x86_64-linux) | Boots a NixOS VM, applies the home-manager modules (agents, zsh, neovim, tmux, git) for the test user `nico` and checks the result |
@@ -118,7 +118,9 @@ switches a throwaway macOS runner to `darwinConfigurations.ci` (boris for
 the runner user, without Homebrew and App Store installs) and runs
 `tests/darwin-smoke.sh`. `tests/brew-check.sh` checks that every tap,
 formula and cask still exists; run it before a switch after upstream
-renames. Renovate's `flake.lock` update PRs go through the same CI.
+renames. CI also scans the whole git history for secrets with gitleaks,
+which catches a token added in one commit and removed in a later one.
+Renovate's `flake.lock` update PRs go through the same CI.
 
 ## Layout
 

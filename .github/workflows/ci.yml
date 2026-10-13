@@ -19,9 +19,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
       # Home configs and the VM test need more disk than the runner has free
       - uses: wimpysworld/nothing-but-nix@v10
       - uses: DeterminateSystems/determinate-nix-action@v3
+      - name: Scan git history for secrets
+        run: nix shell --inputs-from . nixpkgs#gitleaks -c gitleaks git --no-banner --redact
       - name: Check flake (lint, Linux home builds, VM test)
         run: nix flake check -L
       - name: Evaluate configs outside checks
