@@ -186,7 +186,9 @@ Notes live in [Basic Memory](https://basicmemory.com) (MCP server
 the `memory-continue` skill before its first reply, so each session starts
 with the relevant notes loaded. Writing follows the `memory-capture` and
 `memory-notes` skills: search first, then update an existing note instead of
-adding a new one. Read and write tools are pre-approved in `settings.json`.
+adding a new one. A `UserPromptSubmit` hook reminds Claude on each prompt to
+update the thread's note with `memory-capture` once something is settled; it
+replaced an older hook that wrote a new transcript note per exchange. Read and write tools are pre-approved in `settings.json`.
 
 A second `SessionStart` hook, `config/ai/claude/.claude/hooks/basic-memory-health.sh`,
 checks the default Basic Memory project (from `~/.basic-memory/config.json`).
