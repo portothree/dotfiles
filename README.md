@@ -141,6 +141,7 @@ home-manager's [`programs.claude-code`](https://nix-community.github.io/home-man
 | `config/ai/claude/.claude/settings.json` | `~/.claude/settings.json` (live link) |
 | `config/ai/claude/.local/bin/claude-aperture` | `~/.local/bin/claude-aperture` (see [Aperture](#aperture)) |
 | `config/ai/aperture/config.hujson` | Not deployed; pasted into the Aperture admin UI (see [Aperture](#aperture)) |
+| `config/ai/snippets.md` | Not deployed; prompt snippets kept in Raycast (PR review, cross-review between agents) |
 | `config/ai/codex/.codex/config.toml` | `~/.codex/config.toml` (written file, see [Secrets](#secrets)) |
 | `config/editors/zed/.config/zed/settings.json` (template, `modules.zed`) | `~/.config/zed/settings.json` (rendered file, see [Secrets](#secrets)) |
 

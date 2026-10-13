@@ -48,6 +48,7 @@
       "*~"
       "tags"
       "[._]*.un~"
+      ".claude/sdd-cache/"
     ];
   };
   programs.delta = {

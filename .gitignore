@@ -4,6 +4,8 @@
 # Secrets for the templated configs
 secrets.env
 
+.claude/sdd-cache/
+
 # Nix
 result
 result-*
