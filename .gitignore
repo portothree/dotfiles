@@ -1,6 +1,9 @@
 .env
 .direnv
 
+# Secrets for the templated configs
+secrets.env
+
 # Nix
 result
 result-*
