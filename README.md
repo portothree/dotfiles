@@ -140,7 +140,7 @@ home-manager's [`programs.claude-code`](https://nix-community.github.io/home-man
 | `config/ai/claude/.claude/CLAUDE.md` (imports the shared file, plus Claude-only rules) | `~/.claude/CLAUDE.md` (store copy) |
 | `config/ai/claude/.claude/settings.json` | `~/.claude/settings.json` (live link) |
 | `config/ai/opencode/.config/opencode/opencode.json` | `~/.config/opencode/opencode.json` (live link) |
-| `config/ai/aperture/config.json` | Not deployed; pasted into the Aperture admin UI (see [Aperture](#aperture)) |
+| `config/ai/aperture/config.hujson` | Not deployed; pasted into the Aperture admin UI (see [Aperture](#aperture)) |
 
 Live links are out-of-store (`mkOutOfStoreSymlink`) and point at this
 checkout, so Claude Code can still write `settings.json` (plugins, `/config`)
@@ -178,38 +178,28 @@ Claude suggests running `memory-curate`. It stays silent otherwise.
 ### Aperture
 
 [Tailscale Aperture](https://tailscale.com/docs/aperture) is an LLM gateway
-on the tailnet (`tailea386.ts.net`). It logs every model request under the
-caller's Tailscale identity, which gives one view of usage across tools. It
-runs in [passthrough mode](https://tailscale.com/docs/aperture/how-to/use-passthrough-mode/claude-subscriptions):
+on the tailnet at `http://p8s.tailea386.ts.net`. It logs every model request
+under the caller's Tailscale identity, which gives one view of usage across
+tools. It runs in [passthrough mode](https://tailscale.com/docs/aperture/how-to/use-passthrough-mode/claude-subscriptions):
 Claude Code signs in to the Claude Max subscription and Aperture forwards that
 OAuth token to Anthropic unchanged. No API key is stored in Aperture or here.
 
+`settings.json` sets `env.ANTHROPIC_BASE_URL` to the gateway, so every Claude
+Code session goes through it. Requests show up at
+`http://p8s.tailea386.ts.net/sessions`; the admin dashboard is at `/admin/`.
+
 Aperture is hosted by Tailscale, so its config lives in its admin UI, not on
-disk. `config/ai/aperture/config.json` is the copy kept in git; paste it into
-**Admin > Configuration** after changing it.
-
-Setup:
-
-1. Sign up at [aperture.tailscale.com](https://aperture.tailscale.com) and
-   note the gateway hostname, for example `<aperture-host>.tailea386.ts.net`.
-2. Paste `config/ai/aperture/config.json` into **Admin > Configuration**
-   (it hot-reloads) and grant yourself access to the Anthropic models.
-3. In Claude Code, run `/login` with the Max account.
-4. Add the gateway to `config/ai/claude/.claude/settings.json`:
-
-   ```json
-   "env": { "ANTHROPIC_BASE_URL": "http://<aperture-host>.tailea386.ts.net" }
-   ```
-
-5. Run `claude -p hi`; the request shows up at
-   `http://<aperture-host>.tailea386.ts.net/sessions`.
+disk. `config/ai/aperture/config.hujson` is the copy kept in git (Aperture's
+default: Claude and ChatGPT subscription passthrough, every user gets every
+model). After editing it, paste it into `/admin/config` and save; saving
+validates it. To pull the live one: `curl -s http://p8s.tailea386.ts.net/api/config | jq -r .config`.
 
 Only inference (`/v1/messages`) goes through Aperture; sign-in and token
 refresh go straight to `api.anthropic.com`. Don't set `ANTHROPIC_API_KEY` or
 `ANTHROPIC_AUTH_TOKEN`: either replaces the OAuth token and Aperture returns
-`401`. Aperture's own chat UI can't use a passthrough-only provider; it needs
-an `apikey` added to the provider, which this setup skips. Costs and budgets
-don't apply to a flat-rate subscription.
+`401`. Costs and budgets in the dashboard are list prices, not what the
+flat-rate subscription bills. A model missing from the provider's `models`
+list fails with "There's an issue with the selected model".
 
 When the tailnet is unreachable, Claude Code can't reach the model. Remove
 the `env` entry to go direct again.

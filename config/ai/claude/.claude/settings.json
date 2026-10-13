@@ -1,4 +1,7 @@
 {
+  "env": {
+    "ANTHROPIC_BASE_URL": "http://p8s.tailea386.ts.net"
+  },
   "attribution": {
     "commit": "",
     "pr": ""
