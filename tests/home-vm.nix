@@ -61,7 +61,6 @@ pkgs.testers.runNixOSTest {
         gesonel.succeed("test ! -L /home/nico/.agents/skills")
         gesonel.succeed("jq -e .permissions /home/nico/.claude/settings.json")
         gesonel.succeed("su - nico -c /home/nico/.claude/hooks/basic-memory-health.sh")
-        gesonel.succeed("jq -e . /home/nico/.config/opencode/opencode.json")
 
     with subtest("git"):
         gesonel.succeed("su - nico -c 'git config user.name' | grep -qx 'Gustavo Porto'")

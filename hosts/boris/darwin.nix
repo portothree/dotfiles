@@ -44,7 +44,6 @@
           trusted = true;
         })
         [
-          "anomalyco/tap"
           "basicmachines-co/basic-memory"
           "hashicorp/tap"
           "sozercan/repo"
@@ -52,7 +51,6 @@
           "warrensbox/tap"
         ];
     brews = [
-      "anomalyco/tap/opencode"
       "asdf"
       "awscli"
       "backlog-md"

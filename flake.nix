@@ -138,8 +138,23 @@
                 "\\.envrc$"
               ];
             };
-            # Vendored skills change only through `npx skills`, which always
-            # updates the lock file in the same commit
+            gitleaks = {
+              enable = true;
+              name = "gitleaks";
+              entry = nixpkgs.lib.getExe (
+                nixpkgs.legacyPackages.${system}.writeShellApplication {
+                  name = "gitleaks-files";
+                  runtimeInputs = [ nixpkgs.legacyPackages.${system}.gitleaks ];
+                  text = ''
+                    rc=0
+                    for f in "$@"; do
+                      gitleaks dir --no-banner --redact --log-level warn "$f" || rc=1
+                    done
+                    exit "$rc"
+                  '';
+                }
+              );
+            };
             skills-read-only = {
               enable = true;
               name = "vendored skills are read-only";

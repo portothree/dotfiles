@@ -126,6 +126,7 @@
   };
   modules = {
     ai.agents.enable = true;
+    zed.enable = true;
     alacritty = {
       enable = true;
       # Skip installation as Alacritty was installed on this machine

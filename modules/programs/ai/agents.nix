@@ -9,7 +9,7 @@ with lib;
 let
   cfg = config.modules.ai.agents;
   claudeDir = ../../../config/ai/claude/.claude;
-  opencodeDir = "config/ai/opencode/.config/opencode";
+  codexDir = ../../../config/ai/codex/.codex;
   link = path: config.lib.file.mkOutOfStoreSymlink "${config.modules.ai.dotfilesPath}/${path}";
   skillsDir = ../../../config/ai/agents/.agents/skills;
   # The i-have-adhd skill doubles as Claude Code's output style: same body,
@@ -46,7 +46,6 @@ in
             ".agents/AGENTS.md"
             ".config/zed/AGENTS.md"
             ".codex/AGENTS.md"
-            ".config/opencode/AGENTS.md"
           ]
           (_: {
             source = link "config/ai/AGENTS.md";
@@ -55,7 +54,12 @@ in
         ".claude/settings.json".source = link "config/ai/claude/.claude/settings.json";
         ".claude/output-styles/adhd.md".source = adhdOutputStyle;
         ".claude/hooks/basic-memory-health.sh".source = claudeDir + "/hooks/basic-memory-health.sh";
-        ".config/opencode/opencode.json".source = link "${opencodeDir}/opencode.json";
+        ".local/bin/claude-aperture".source = ../../../config/ai/claude/.local/bin/claude-aperture;
       };
+    # Written as a real file, not a link, since the ChatGPT app adds its own
+    # entries to it.
+    home.activation.codexConfig = hm.dag.entryAfter [ "writeBoundary" ] (
+      config.lib.secrets.render (codexDir + "/config.toml") ".codex/config.toml"
+    );
   };
 }

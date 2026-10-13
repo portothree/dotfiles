@@ -1,0 +1,19 @@
+# Written to ~/.codex/config.toml by home-manager. MCP servers live in Zed's
+# settings, not here; Codex in Zed gets them from Zed.
+# The ChatGPT app adds its own entries (plugins, marketplaces, node_repl,
+# project trust) to the written file; they're machine-specific and not kept here.
+model = "gpt-6-astra"
+model_reasoning_effort = "high"
+service_tier = "priority"
+model_provider = "aperture"
+
+# ChatGPT subscription passthrough through Tailscale Aperture (see README).
+[model_providers.aperture]
+name = "Aperture"
+base_url = "http://p8s.tailea386.ts.net/codex"
+wire_api = "responses"
+requires_openai_auth = true
+
+[features]
+js_repl = false
+
