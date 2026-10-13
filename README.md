@@ -141,7 +141,7 @@ home-manager's [`programs.claude-code`](https://nix-community.github.io/home-man
 | `config/ai/claude/.claude/settings.json` | `~/.claude/settings.json` (live link) |
 | `config/ai/opencode/.config/opencode/opencode.json` | `~/.config/opencode/opencode.json` (live link) |
 | `config/ai/aperture/config.hujson` | Not deployed; pasted into the Aperture admin UI (see [Aperture](#aperture)) |
-| `config/ai/codex/.codex/config.toml` (template) | `~/.codex/config.toml` (rendered file, see [Secrets](#secrets)) |
+| `config/ai/codex/.codex/config.toml` | `~/.codex/config.toml` (written file, see [Secrets](#secrets)) |
 | `config/editors/zed/.config/zed/settings.json` (template, `modules.zed`) | `~/.config/zed/settings.json` (rendered file, see [Secrets](#secrets)) |
 
 Live links are out-of-store (`mkOutOfStoreSymlink`) and point at this
@@ -195,7 +195,9 @@ Aperture or here.
 Requests show up at `http://p8s.tailea386.ts.net/sessions`; the admin
 dashboard is at `/admin/`.
 
-The gateway also serves an MCP server at `/v1/mcp`, added to Codex and Zed.
+The gateway also serves an MCP server at `/v1/mcp`, added to Zed (all MCP
+servers live in Zed's settings; Codex and Claude Code run inside Zed get them
+from there).
 Its `aperture_list_sessions`, `aperture_get_session` and
 `aperture_get_session_request` tools read back recorded sessions, so one agent
 can read what another did, e.g. "read Aperture session `ancc_…` and review the
@@ -217,15 +219,21 @@ one: `curl -s http://p8s.tailea386.ts.net/api/config | jq -r .config`.
   `ANTHROPIC_AUTH_TOKEN` or a Codex `env_key`: they replace the OAuth token.
 - Codex logs a harmless `404` for `/codex/models` on startup.
 - Costs in the dashboard are list prices, not what the subscriptions bill.
+- Raycast AI isn't routed. Its custom providers
+  (`~/.config/raycast/ai/providers.yaml`) send a fixed API key, and
+  passthrough needs the subscription's OAuth login, which expires within
+  hours. Routing it would need a paid API key on an Aperture provider.
 - When the tailnet is unreachable, neither tool reaches a model. Remove the
   Claude `env` entry or the Codex `model_provider` line to go direct.
 
 ### Secrets
 
-Configs that hold tokens (Zed's MCP servers, Codex's Lunch Money server) are
-kept in git as templates with `${VAR}` placeholders. On each switch,
-`modules/programs/secrets.nix` fills them from `~/.config/dotfiles/secrets.env`
-(not in git) and writes real files, since the apps also edit them. When the
+Zed's settings hold the MCP servers' tokens, so they're kept in git as a
+template with `${VAR}` placeholders. On each switch,
+`modules/programs/secrets.nix` fills it from `~/.config/dotfiles/secrets.env`
+(not in git) and writes a real file, since Zed also edits it. Codex's
+`config.toml` goes through the same step (it has no placeholders) because the
+ChatGPT app edits it too. When the
 written file differs, the previous one is kept as `<file>.bak`.
 
 On a new machine:

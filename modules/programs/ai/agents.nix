@@ -58,8 +58,8 @@ in
         ".claude/hooks/basic-memory-health.sh".source = claudeDir + "/hooks/basic-memory-health.sh";
         ".config/opencode/opencode.json".source = link "${opencodeDir}/opencode.json";
       };
-    # Templated (the Lunch Money token comes from the secrets file) and written
-    # as a real file, since the ChatGPT app adds its own entries to it.
+    # Written as a real file, not a link, since the ChatGPT app adds its own
+    # entries to it.
     home.activation.codexConfig = hm.dag.entryAfter [ "writeBoundary" ] (
       config.lib.secrets.render (codexDir + "/config.toml") ".codex/config.toml"
     );

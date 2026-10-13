@@ -77,6 +77,16 @@
         "SLACK_MCP_XOXD_TOKEN": "${SLACK_MCP_XOXD_TOKEN}"
       }
     },
+    "lunchmoney": {
+      "enabled": true,
+      "remote": false,
+      "command": "npx",
+      "args": ["@akutishevsky/lunchmoney-mcp"],
+      "env": {
+        "LUNCHMONEY_API_TOKEN": "${LUNCHMONEY_API_TOKEN}",
+        "LUNCHMONEY_DEBUG": "true"
+      }
+    },
     "basic-memory": {
       "enabled": true,
       "remote": false,
@@ -218,24 +228,5 @@
     "mode": "system",
     "light": "Oxocarbon Dark (IBM Carbon)",
     "dark": "Oxocarbon Dark (IBM Carbon)"
-  },
-  "language_models": {
-    "vercel_ai_gateway": {
-      "api_url": "https://ai-gateway.vercel.sh/coding-agent/v1",
-      "available_models": [
-        {
-          "name": "moonshotai/kimi-k3",
-          "display_name": "Kimi K3",
-          "max_tokens": 1000000,
-          "max_output_tokens": 131072,
-          "capabilities": {
-            "prompt_cache_key": false,
-            "parallel_tool_calls": false,
-            "tools": true,
-            "images": true
-          }
-        }
-      ]
-    }
   }
 }

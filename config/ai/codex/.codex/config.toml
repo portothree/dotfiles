@@ -1,5 +1,5 @@
-# Template: home-manager fills each ${VAR} from ~/.config/dotfiles/secrets.env
-# (see config/ai/secrets.env.example) and writes ~/.codex/config.toml.
+# Written to ~/.codex/config.toml by home-manager. MCP servers live in Zed's
+# settings, not here; Codex in Zed gets them from Zed.
 # The ChatGPT app adds its own entries (plugins, marketplaces, node_repl,
 # project trust) to the written file; they're machine-specific and not kept here.
 model = "gpt-6-astra"
@@ -17,24 +17,3 @@ requires_openai_auth = true
 [features]
 js_repl = false
 
-# Read-only tools over the sessions Aperture recorded (Claude Code, Codex, ...).
-[mcp_servers.aperture]
-url = "http://p8s.tailea386.ts.net/v1/mcp"
-default_tools_approval_mode = "approve"
-
-[mcp_servers.basic-memory]
-enabled = true
-command = "basic-memory"
-args = ["mcp", "--project", "memex"]
-
-[mcp_servers.basic-memory.tools.write_note]
-approval_mode = "approve"
-
-[mcp_servers.lunchmoney]
-enabled = true
-command = "npx"
-args = ["@akutishevsky/lunchmoney-mcp"]
-
-[mcp_servers.lunchmoney.env]
-LUNCHMONEY_API_TOKEN = "${LUNCHMONEY_API_TOKEN}"
-LUNCHMONEY_DEBUG = "true"
