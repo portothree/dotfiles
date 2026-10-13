@@ -136,11 +136,10 @@ home-manager's [`programs.claude-code`](https://nix-community.github.io/home-man
 | Source | Deployed to |
 |-|-|
 | `config/ai/agents/.agents/skills/<name>/` (vendored) | `~/.claude/skills/<name>`, `~/.agents/skills/<name>` (one link per skill, so other skills can sit next to them) |
-| `config/ai/AGENTS.md` (shared instructions) | `~/.agents/AGENTS.md`, Zed `~/.config/zed/AGENTS.md`, Codex `~/.codex/AGENTS.md`, OpenCode `~/.config/opencode/AGENTS.md` (live links) |
+| `config/ai/AGENTS.md` (shared instructions) | `~/.agents/AGENTS.md`, Zed `~/.config/zed/AGENTS.md` and Codex `~/.codex/AGENTS.md` (live links) |
 | `config/ai/claude/.claude/CLAUDE.md` (imports the shared file, plus Claude-only rules) | `~/.claude/CLAUDE.md` (store copy) |
 | `config/ai/claude/.claude/settings.json` | `~/.claude/settings.json` (live link) |
 | `config/ai/claude/.local/bin/claude-aperture` | `~/.local/bin/claude-aperture` (see [Aperture](#aperture)) |
-| `config/ai/opencode/.config/opencode/opencode.json` | `~/.config/opencode/opencode.json` (live link) |
 | `config/ai/aperture/config.hujson` | Not deployed; pasted into the Aperture admin UI (see [Aperture](#aperture)) |
 | `config/ai/codex/.codex/config.toml` | `~/.codex/config.toml` (written file, see [Secrets](#secrets)) |
 | `config/editors/zed/.config/zed/settings.json` (template, `modules.zed`) | `~/.config/zed/settings.json` (rendered file, see [Secrets](#secrets)) |
@@ -230,10 +229,8 @@ one: `curl -s http://p8s.tailea386.ts.net/api/config | jq -r .config`.
   `ANTHROPIC_AUTH_TOKEN` or a Codex `env_key`: they replace the OAuth token.
 - Codex logs a harmless `404` for `/codex/models` on startup.
 - Not routed, checked 2026-10-13: Zed's own agent (its models come from
-  zed.dev), Gemini and Antigravity in Zed (Google account login, which
-  Aperture has no passthrough for), and OpenCode (its Claude login fails
-  token refresh with `429` even without Aperture; its OpenRouter and Zen keys
-  are pay-per-token and haven't been used since February 2026).
+  zed.dev), and Gemini and Antigravity in Zed (Google account login, which
+  Aperture has no passthrough for).
 - Costs in the dashboard are list prices, not what the subscriptions bill.
 - Raycast runs Claude Code with no setting sources, so it ignores
   `settings.json` and its `env`. `config/ai/claude/.local/bin/claude-aperture`

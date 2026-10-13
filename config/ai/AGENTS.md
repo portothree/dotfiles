@@ -1,6 +1,6 @@
 # Instructions for every coding agent
 
-Shared by Claude Code, Zed's agent, Codex and OpenCode. The source is
+Shared by Claude Code, Zed's agent and Codex. The source is
 `config/ai/AGENTS.md` in the dotfiles repo; edit it there.
 
 ## Formatting

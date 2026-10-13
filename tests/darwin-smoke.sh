@@ -25,7 +25,6 @@ check "ADHD output style" "grep -qx 'keep-coding-instructions: true' ~/.claude/o
 check "shared AGENTS.md" "grep -q 'Instructions for every coding agent' ~/.agents/AGENTS.md"
 check "zed uses shared AGENTS.md" "cmp ~/.agents/AGENTS.md ~/.config/zed/AGENTS.md"
 check "memory health hook runs" "\"\$HOME/.claude/hooks/basic-memory-health.sh\""
-check "opencode config" "jq -e . ~/.config/opencode/opencode.json"
 check "git identity" "git config --file ~/.config/git/config user.name | grep -qx 'Gustavo Porto'"
 check "fish starts" "fish -c true"
 check "neovim starts" "nvim --headless +qa"

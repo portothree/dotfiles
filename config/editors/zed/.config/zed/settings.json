@@ -147,9 +147,6 @@
         "model": "opus"
       },
       "type": "registry"
-    },
-    "opencode": {
-      "type": "registry"
     }
   },
   "collaboration_panel": {
