@@ -1,0 +1,18 @@
+{
+  "providers": {
+    "anthropic": {
+      "baseurl": "https://api.anthropic.com",
+      "auth_mode": "passthrough",
+      "authorization": "x-api-key",
+      "models": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5",
+        "claude-haiku-5-5",
+        "claude-fable-5-1"
+      ],
+      "compatibility": {
+        "anthropic_messages": true
+      }
+    }
+  }
+}
