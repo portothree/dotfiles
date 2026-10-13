@@ -34,6 +34,17 @@
           }
         ]
       }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'If this thread has settled decisions, root causes or open items not yet in Basic Memory, update its note with the memory-capture skill (one note per thread, rewritten in place, never a transcript). Skip it for small talk and quick lookups.'"
+          }
+        ]
+      }
     ]
   },
   "statusLine": {
