@@ -56,6 +56,7 @@ in
         ".claude/settings.json".source = link "config/ai/claude/.claude/settings.json";
         ".claude/output-styles/adhd.md".source = adhdOutputStyle;
         ".claude/hooks/basic-memory-health.sh".source = claudeDir + "/hooks/basic-memory-health.sh";
+        ".local/bin/claude-aperture".source = ../../../config/ai/claude/.local/bin/claude-aperture;
         ".config/opencode/opencode.json".source = link "${opencodeDir}/opencode.json";
       };
     # Written as a real file, not a link, since the ChatGPT app adds its own

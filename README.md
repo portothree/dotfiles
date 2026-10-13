@@ -139,6 +139,7 @@ home-manager's [`programs.claude-code`](https://nix-community.github.io/home-man
 | `config/ai/AGENTS.md` (shared instructions) | `~/.agents/AGENTS.md`, Zed `~/.config/zed/AGENTS.md`, Codex `~/.codex/AGENTS.md`, OpenCode `~/.config/opencode/AGENTS.md` (live links) |
 | `config/ai/claude/.claude/CLAUDE.md` (imports the shared file, plus Claude-only rules) | `~/.claude/CLAUDE.md` (store copy) |
 | `config/ai/claude/.claude/settings.json` | `~/.claude/settings.json` (live link) |
+| `config/ai/claude/.local/bin/claude-aperture` | `~/.local/bin/claude-aperture` (see [Aperture](#aperture)) |
 | `config/ai/opencode/.config/opencode/opencode.json` | `~/.config/opencode/opencode.json` (live link) |
 | `config/ai/aperture/config.hujson` | Not deployed; pasted into the Aperture admin UI (see [Aperture](#aperture)) |
 | `config/ai/codex/.codex/config.toml` | `~/.codex/config.toml` (written file, see [Secrets](#secrets)) |
@@ -191,6 +192,8 @@ Aperture or here.
 |-|-|-|
 | Claude Code | `env.ANTHROPIC_BASE_URL` in `settings.json` | `/v1/messages` |
 | Codex (CLI, ChatGPT app, Zed) | `model_provider = "aperture"` in `config.toml` | `/codex/responses` |
+| Raycast AI, ChatGPT subscription | Runs the Codex CLI, so `config.toml` covers it | `/codex/responses` |
+| Raycast AI, Claude subscription | Claude "Advanced > Executable path" set to `~/.local/bin/claude-aperture` | `/v1/messages` |
 
 Requests show up at `http://p8s.tailea386.ts.net/sessions`; the admin
 dashboard is at `/admin/`.
@@ -219,10 +222,10 @@ one: `curl -s http://p8s.tailea386.ts.net/api/config | jq -r .config`.
   `ANTHROPIC_AUTH_TOKEN` or a Codex `env_key`: they replace the OAuth token.
 - Codex logs a harmless `404` for `/codex/models` on startup.
 - Costs in the dashboard are list prices, not what the subscriptions bill.
-- Raycast AI isn't routed. Its custom providers
-  (`~/.config/raycast/ai/providers.yaml`) send a fixed API key, and
-  passthrough needs the subscription's OAuth login, which expires within
-  hours. Routing it would need a paid API key on an Aperture provider.
+- Raycast runs Claude Code with no setting sources, so it ignores
+  `settings.json` and its `env`. `config/ai/claude/.local/bin/claude-aperture`
+  (deployed to `~/.local/bin`) sets `ANTHROPIC_BASE_URL` and runs `claude`;
+  Raycast's Claude executable path is a Raycast setting, set by hand.
 - When the tailnet is unreachable, neither tool reaches a model. Remove the
   Claude `env` entry or the Codex `model_provider` line to go direct.
 

@@ -17,117 +17,122 @@
 // Visit https://tailscale.com/docs/aperture for guides to set up these features.
 //
 {
-    "providers": {
-        // Anthropic — Claude subscription passthrough
-        // Users sign in with their Claude account; OAuth tokens flow through.
-        "anthropic-sub": {
-            "name": "Anthropic (Subscription)",
-            "apikey": "",
-            "auth_mode": "passthrough",
-            "authorization": "x-api-key",
-            "baseurl": "https://api.anthropic.com",
-            "compatibility": {
-                "anthropic_messages": true,
-            },
-            "models": [
-                "claude-fable-5",
-                "claude-haiku-4-5-20251001",
-                "claude-haiku-4-5",
-                "claude-opus-4-7",
-                "claude-opus-4-8",
-                "claude-opus-5",
-                "claude-sonnet-4-6",
-                "claude-sonnet-5",
-                "claude-fable-5-1",
-                "claude-haiku-5-5",
-                "claude-opus-5-5",
-                "claude-sonnet-5-5",
-            ],
-        },
+	"providers": {
+		// Anthropic — Claude subscription passthrough
+		// Users sign in with their Claude account; OAuth tokens flow through.
+		"anthropic-sub": {
+			"name":          "Anthropic (Subscription)",
+			"apikey":        "",
+			"auth_mode":     "passthrough",
+			"authorization": "x-api-key",
+			"baseurl":       "https://api.anthropic.com",
+			"compatibility": {
+				"anthropic_messages": true,
+			},
+			"models": [
+				"claude-fable-5",
+				"claude-haiku-4-5-20251001",
+				"claude-haiku-4-5",
+				"claude-opus-4-7",
+				"claude-opus-4-8",
+				"claude-opus-5",
+				"claude-sonnet-4-6",
+				"claude-sonnet-5",
+				"claude-fable-5-1",
+				"claude-haiku-5-5",
+				"claude-opus-5-5",
+				"claude-sonnet-5-5",
+			],
+		},
 
-        // OpenAI — ChatGPT subscription passthrough
-        // Users sign in with their ChatGPT account; OAuth tokens flow through.
-        // This uses the ChatGPT backend endpoint, not the platform API.
-        "openai-sub": {
-            "name": "OpenAI (Subscription)",
-            "apikey": "",
-            "auth_mode": "passthrough",
-            "authorization": "bearer",
-            "baseurl": "https://chatgpt.com/backend-api/codex",
-            "compatibility": {
-                "openai_chat": true,
-                "openai_responses": true,
-            },
-            "models": [
-                "gpt-5.5",
-                "gpt-5.5-pro",
-                "gpt-5.6-luna",
-                "gpt-5.6-sol",
-                "gpt-5.6-terra",
-                "gpt-6-astra",
-            ],
-        },
-    },
+		// OpenAI — ChatGPT subscription passthrough
+		// Users sign in with their ChatGPT account; OAuth tokens flow through.
+		// This uses the ChatGPT backend endpoint, not the platform API.
+		"openai-sub": {
+			"name":          "OpenAI (Subscription)",
+			"apikey":        "",
+			"auth_mode":     "passthrough",
+			"authorization": "bearer",
+			"baseurl":       "https://chatgpt.com/backend-api/codex",
+			"compatibility": {
+				"openai_chat":      true,
+				"openai_responses": true,
+			},
+			"models": [
+				"gpt-5.5",
+				"gpt-5.5-pro",
+				"gpt-5.6-luna",
+				"gpt-5.6-sol",
+				"gpt-5.6-terra",
+				"gpt-6-astra",
+				"gpt-6-luna",
+				"gpt-6-sol",
+				"gpt-6.1-sol",
+				"gpt-reserve",
+				"codex-auto-review",
+			],
+		},
+	},
 
-    // Start with every configured, chat-compatible model in the Chat model
-    // selector. Administrators can replace this glob with a curated list.
-    "chat_models": [
-        {"model": "**"},
-    ],
+	// Start with every configured, chat-compatible model in the Chat model
+	// selector. Administrators can replace this glob with a curated list.
+	"chat_models": [
+		{"model": "**"},
+	],
 
-    // grants: a list of grant rules following the Tailscale ACL grant structure
-    // - optional, default: [] (empty array)
-    // - mirrors the grant structure from Tailscale policy files
-    // - ref: https://tailscale.com/kb/1537/grants-app-capabilities
-    // - each entry has src (source matching), optional dst, and app (capabilities)
-    // - src: ["*"] matches all sessions, or specify login names ("user@domain.tld"),
-    //   groups ("group:eng", "engineering@example.com"), or tags ("tag:api")
-    //   group matching requires tailscale.com/visible-groups node attribute on the Aperture node
-    // - app: map of capability keys to grant arrays
-    //   - "tailscale.com/cap/aperture" is the aperture capability key
-    //   - each grant can specify one of: model access, MCP access, role, or hooks
-    // - models: "provider/model" FQN glob pattern for model access
-    //   - "*" matches a single path segment, "**" matches across segments
-    //   - e.g. "anthropic/*", "**" (all models), "openai/gpt-5"
-    // - role: "admin" or "user"
-    "grants": [
-        {
-            // Grant admin role to specific users.
-            // Admins have full access to change all settings and view all
-            // data in the dashboard.
-            "src": [
-                "*",  // Remove this line to restrict admin access to specific users
-                // "user@example.tld",
-                // "user2@example.tld"
-            ],
-            "app": {
-                "tailscale.com/cap/aperture": [
-                    {"role": "admin"},
-                ],
-            },
-        },
+	// grants: a list of grant rules following the Tailscale ACL grant structure
+	// - optional, default: [] (empty array)
+	// - mirrors the grant structure from Tailscale policy files
+	// - ref: https://tailscale.com/kb/1537/grants-app-capabilities
+	// - each entry has src (source matching), optional dst, and app (capabilities)
+	// - src: ["*"] matches all sessions, or specify login names ("user@domain.tld"),
+	//   groups ("group:eng", "engineering@example.com"), or tags ("tag:api")
+	//   group matching requires tailscale.com/visible-groups node attribute on the Aperture node
+	// - app: map of capability keys to grant arrays
+	//   - "tailscale.com/cap/aperture" is the aperture capability key
+	//   - each grant can specify one of: model access, MCP access, role, or hooks
+	// - models: "provider/model" FQN glob pattern for model access
+	//   - "*" matches a single path segment, "**" matches across segments
+	//   - e.g. "anthropic/*", "**" (all models), "openai/gpt-5"
+	// - role: "admin" or "user"
+	"grants": [
+		{
+			// Grant admin role to specific users.
+			// Admins have full access to change all settings and view all
+			// data in the dashboard.
+			"src": [
+				"*", // Remove this line to restrict admin access to specific users
+				// "user@example.tld",
+				// "user2@example.tld"
+			],
+			"app": {
+				"tailscale.com/cap/aperture": [
+					{"role": "admin"},
+				],
+			},
+		},
 
-        // allow all users access to all models from all providers
-        // without this grant users are unable to access any model (deny by default)
-        {
-            "src": ["*"],
-            "app": {
-                "tailscale.com/cap/aperture": [
-                    {"role": "user", "models": "**"},
-                    // connectors: grant access to Aperture system tools
-                    {"connectors": ["label:system"]},
-                ],
-            },
-        },
-    ],
+		// allow all users access to all models from all providers
+		// without this grant users are unable to access any model (deny by default)
+		{
+			"src": ["*"],
+			"app": {
+				"tailscale.com/cap/aperture": [
+					{"role": "user", "models": "**"},
+					// connectors: grant access to Aperture system tools
+					{"connectors": ["label:system"]},
+				],
+			},
+		},
+	],
 
-    // Hooks are configured API endpoints that we can call under certain
-    // conditions. None are configured by default.
-    // See: https://tailscale.com/docs/aperture/how-to/build-custom-webhook
-    // "hooks": {
-    //     "my-hook": {
-    //         "url":    "https://hook.example.com/model-request",
-    //         "apikey": "YOUR_API_KEY",
-    //     },
-    // },
+	// Hooks are configured API endpoints that we can call under certain
+	// conditions. None are configured by default.
+	// See: https://tailscale.com/docs/aperture/how-to/build-custom-webhook
+	// "hooks": {
+	//     "my-hook": {
+	//         "url":    "https://hook.example.com/model-request",
+	//         "apikey": "YOUR_API_KEY",
+	//     },
+	// },
 }
