@@ -44,7 +44,8 @@
     "notion-workspace-plugin@notion-plugin-marketplace": true,
     "superpowers@claude-plugins-official": true,
     "ponytail@ponytail": true,
-    "slack@claude-plugins-official": true
+    "slack@claude-plugins-official": true,
+    "ocos@opencoreos": true
   },
   "extraKnownMarketplaces": {
     "notion-plugin-marketplace": {
@@ -64,6 +65,12 @@
         "source": "github",
         "repo": "DietrichGebert/ponytail"
       }
+    },
+    "opencoreos": {
+      "source": {
+        "source": "github",
+        "repo": "opencoreos/claude-plugins"
+      }
     }
   },
   "outputStyle": "ADHD",
@@ -71,5 +78,6 @@
   "theme": "dark",
   "editorMode": "vim",
   "autoCompactEnabled": false,
-  "voiceEnabled": true
+  "voiceEnabled": true,
+  "model": "opus"
 }
