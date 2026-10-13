@@ -198,6 +198,14 @@ Aperture or here.
 Requests show up at `http://p8s.tailea386.ts.net/sessions`; the admin
 dashboard is at `/admin/`.
 
+Aperture names the agent from the request's `User-Agent` (Claude) or
+`originator` (Codex) header. To tell launchers apart, Zed's `agent_servers`
+set `env` so their sessions show as `zed` (`ANTHROPIC_CUSTOM_HEADERS` with a
+`User-Agent` for Claude, `CODEX_INTERNAL_ORIGINATOR_OVERRIDE` for Codex), the
+way Raycast uses one name for both; the model column tells them apart.
+Raycast shows as `raycast-ai-chat`, the Claude Code CLI as Claude Code and
+the Codex CLI as Codex.
+
 The gateway also serves an MCP server at `/v1/mcp`, added to Zed (all MCP
 servers live in Zed's settings; Codex and Claude Code run inside Zed get them
 from there).
@@ -221,6 +229,11 @@ one: `curl -s http://p8s.tailea386.ts.net/api/config | jq -r .config`.
   to Anthropic and OpenAI. Don't set `ANTHROPIC_API_KEY`,
   `ANTHROPIC_AUTH_TOKEN` or a Codex `env_key`: they replace the OAuth token.
 - Codex logs a harmless `404` for `/codex/models` on startup.
+- Not routed, checked 2026-10-13: Zed's own agent (its models come from
+  zed.dev), Gemini and Antigravity in Zed (Google account login, which
+  Aperture has no passthrough for), and OpenCode (its Claude login fails
+  token refresh with `429` even without Aperture; its OpenRouter and Zen keys
+  are pay-per-token and haven't been used since February 2026).
 - Costs in the dashboard are list prices, not what the subscriptions bill.
 - Raycast runs Claude Code with no setting sources, so it ignores
   `settings.json` and its `env`. `config/ai/claude/.local/bin/claude-aperture`

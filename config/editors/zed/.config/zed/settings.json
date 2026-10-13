@@ -129,9 +129,15 @@
       "type": "registry"
     },
     "codex-acp": {
+      "env": {
+        "CODEX_INTERNAL_ORIGINATOR_OVERRIDE": "zed"
+      },
       "type": "registry"
     },
     "claude-acp": {
+      "env": {
+        "ANTHROPIC_CUSTOM_HEADERS": "User-Agent: zed (claude-cli)"
+      },
       "favorite_config_option_values": {
         "model": ["opus", "claude-fable-5-1", "fable"]
       },
