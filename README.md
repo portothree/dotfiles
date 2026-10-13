@@ -141,6 +141,8 @@ home-manager's [`programs.claude-code`](https://nix-community.github.io/home-man
 | `config/ai/claude/.claude/settings.json` | `~/.claude/settings.json` (live link) |
 | `config/ai/opencode/.config/opencode/opencode.json` | `~/.config/opencode/opencode.json` (live link) |
 | `config/ai/aperture/config.hujson` | Not deployed; pasted into the Aperture admin UI (see [Aperture](#aperture)) |
+| `config/ai/codex/.codex/config.toml` (template) | `~/.codex/config.toml` (rendered file, see [Secrets](#secrets)) |
+| `config/editors/zed/.config/zed/settings.json` (template, `modules.zed`) | `~/.config/zed/settings.json` (rendered file, see [Secrets](#secrets)) |
 
 Live links are out-of-store (`mkOutOfStoreSymlink`) and point at this
 checkout, so Claude Code can still write `settings.json` (plugins, `/config`)
@@ -180,29 +182,62 @@ Claude suggests running `memory-curate`. It stays silent otherwise.
 [Tailscale Aperture](https://tailscale.com/docs/aperture) is an LLM gateway
 on the tailnet at `http://p8s.tailea386.ts.net`. It logs every model request
 under the caller's Tailscale identity, which gives one view of usage across
-tools. It runs in [passthrough mode](https://tailscale.com/docs/aperture/how-to/use-passthrough-mode/claude-subscriptions):
-Claude Code signs in to the Claude Max subscription and Aperture forwards that
-OAuth token to Anthropic unchanged. No API key is stored in Aperture or here.
+tools. It runs in [passthrough mode](https://tailscale.com/docs/aperture/how-to/use-passthrough-mode):
+Claude Code and Codex sign in to their subscriptions (Claude Max, ChatGPT) and
+Aperture forwards those OAuth tokens unchanged. No API key is stored in
+Aperture or here.
 
-`settings.json` sets `env.ANTHROPIC_BASE_URL` to the gateway, so every Claude
-Code session goes through it. Requests show up at
-`http://p8s.tailea386.ts.net/sessions`; the admin dashboard is at `/admin/`.
+| Client | Setting | Gateway path |
+|-|-|-|
+| Claude Code | `env.ANTHROPIC_BASE_URL` in `settings.json` | `/v1/messages` |
+| Codex (CLI, ChatGPT app, Zed) | `model_provider = "aperture"` in `config.toml` | `/codex/responses` |
+
+Requests show up at `http://p8s.tailea386.ts.net/sessions`; the admin
+dashboard is at `/admin/`.
+
+The gateway also serves an MCP server at `/v1/mcp`, added to Codex and Zed.
+Its `aperture_list_sessions`, `aperture_get_session` and
+`aperture_get_session_request` tools read back recorded sessions, so one agent
+can read what another did, e.g. "read Aperture session `ancc_…` and review the
+branch against it". Claude Code requests only carry the new messages of each
+turn, so a full transcript means reading every request of the session.
+Sessions are kept 30 days and only their owner can read them.
 
 Aperture is hosted by Tailscale, so its config lives in its admin UI, not on
-disk. `config/ai/aperture/config.hujson` is the copy kept in git (Aperture's
-default: Claude and ChatGPT subscription passthrough, every user gets every
-model). After editing it, paste it into `/admin/config` and save; saving
-validates it. To pull the live one: `curl -s http://p8s.tailea386.ts.net/api/config | jq -r .config`.
+disk. `config/ai/aperture/config.hujson` is the copy kept in git. To push it:
+paste it into `/admin/config` and save (saving validates it). To pull the live
+one: `curl -s http://p8s.tailea386.ts.net/api/config | jq -r .config`.
 
-Only inference (`/v1/messages`) goes through Aperture; sign-in and token
-refresh go straight to `api.anthropic.com`. Don't set `ANTHROPIC_API_KEY` or
-`ANTHROPIC_AUTH_TOKEN`: either replaces the OAuth token and Aperture returns
-`401`. Costs and budgets in the dashboard are list prices, not what the
-flat-rate subscription bills. A model missing from the provider's `models`
-list fails with "There's an issue with the selected model".
+- A model missing from a provider's `models` list doesn't pass through: Claude
+  Code says "There's an issue with the selected model", Codex gets `402
+  Payment Required` (Aperture tries to bill it as its own model). Add new
+  model IDs there.
+- Only inference goes through Aperture; sign-in and token refresh go straight
+  to Anthropic and OpenAI. Don't set `ANTHROPIC_API_KEY`,
+  `ANTHROPIC_AUTH_TOKEN` or a Codex `env_key`: they replace the OAuth token.
+- Codex logs a harmless `404` for `/codex/models` on startup.
+- Costs in the dashboard are list prices, not what the subscriptions bill.
+- When the tailnet is unreachable, neither tool reaches a model. Remove the
+  Claude `env` entry or the Codex `model_provider` line to go direct.
 
-When the tailnet is unreachable, Claude Code can't reach the model. Remove
-the `env` entry to go direct again.
+### Secrets
+
+Configs that hold tokens (Zed's MCP servers, Codex's Lunch Money server) are
+kept in git as templates with `${VAR}` placeholders. On each switch,
+`modules/programs/secrets.nix` fills them from `~/.config/dotfiles/secrets.env`
+(not in git) and writes real files, since the apps also edit them. When the
+written file differs, the previous one is kept as `<file>.bak`.
+
+On a new machine:
+
+1. Copy the Bitwarden secure note "dotfiles secrets.env" to
+   `~/.config/dotfiles/secrets.env` and `chmod 600` it.
+   `config/ai/secrets.env.example` lists the variables.
+2. Run the switch. Without the file it warns and leaves the placeholders in.
+
+Zed and the ChatGPT app save their own changes into the written files. Copy
+any you want to keep back into the templates, or the next switch replaces them
+(the old file stays in `.bak`).
 
 ### Skills
 

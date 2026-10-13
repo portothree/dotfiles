@@ -3,6 +3,7 @@
 {
   imports = [
     ./ai
+    ./secrets.nix
     ./alacritty
     ./anki
     ./androidTools
@@ -34,6 +35,7 @@
     ./wally
     ./weechat
     ./xournalpp
+    ./zed
     ./zsh
   ];
 }

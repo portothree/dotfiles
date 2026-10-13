@@ -10,6 +10,7 @@ let
   cfg = config.modules.ai.agents;
   claudeDir = ../../../config/ai/claude/.claude;
   opencodeDir = "config/ai/opencode/.config/opencode";
+  codexDir = ../../../config/ai/codex/.codex;
   link = path: config.lib.file.mkOutOfStoreSymlink "${config.modules.ai.dotfilesPath}/${path}";
   skillsDir = ../../../config/ai/agents/.agents/skills;
   # The i-have-adhd skill doubles as Claude Code's output style: same body,
@@ -57,5 +58,10 @@ in
         ".claude/hooks/basic-memory-health.sh".source = claudeDir + "/hooks/basic-memory-health.sh";
         ".config/opencode/opencode.json".source = link "${opencodeDir}/opencode.json";
       };
+    # Templated (the Lunch Money token comes from the secrets file) and written
+    # as a real file, since the ChatGPT app adds its own entries to it.
+    home.activation.codexConfig = hm.dag.entryAfter [ "writeBoundary" ] (
+      config.lib.secrets.render (codexDir + "/config.toml") ".codex/config.toml"
+    );
   };
 }
