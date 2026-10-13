@@ -224,10 +224,26 @@ one: `curl -s http://p8s.tailea386.ts.net/api/config | jq -r .config`.
 - Costs in the dashboard are list prices, not what the subscriptions bill.
 - Raycast runs Claude Code with no setting sources, so it ignores
   `settings.json` and its `env`. `config/ai/claude/.local/bin/claude-aperture`
-  (deployed to `~/.local/bin`) sets `ANTHROPIC_BASE_URL` and runs `claude`;
-  Raycast's Claude executable path is a Raycast setting, set by hand.
+  (deployed to `~/.local/bin`) sets `ANTHROPIC_BASE_URL` and runs `claude`.
+  It also sets the `User-Agent` (through `ANTHROPIC_CUSTOM_HEADERS`) so
+  Aperture labels the sessions `raycast-ai-chat`, as it does for Raycast's
+  Codex ones, instead of Claude Code.
 - When the tailnet is unreachable, neither tool reaches a model. Remove the
   Claude `env` entry or the Codex `model_provider` line to go direct.
+
+### Raycast
+
+Raycast is installed by the `raycast` cask in `hosts/boris/darwin.nix`. Its
+settings live in encrypted databases under
+`~/Library/Application Support/com.raycast.macos`, so they can't be kept in
+git or written by home-manager. They move between machines with Raycast Cloud
+Sync (Settings > Cloud Sync), or with **Export Settings & Data** to a
+`.rayconfig` file kept in Bitwarden, not here (it includes extension
+preferences, which can hold tokens).
+
+What this repo does provide for Raycast is `~/.local/bin/claude-aperture` (see
+[Aperture](#aperture)). After a restore, check that Settings > AI > Claude
+Account > Advanced > Executable path is `~/.local/bin/claude-aperture`.
 
 ### Secrets
 
