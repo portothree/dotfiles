@@ -225,9 +225,11 @@ one: `curl -s http://p8s.tailea386.ts.net/api/config | jq -r .config`.
 - Raycast runs Claude Code with no setting sources, so it ignores
   `settings.json` and its `env`. `config/ai/claude/.local/bin/claude-aperture`
   (deployed to `~/.local/bin`) sets `ANTHROPIC_BASE_URL` and runs `claude`.
-  It also sets the `User-Agent` (through `ANTHROPIC_CUSTOM_HEADERS`) so
-  Aperture labels the sessions `raycast-ai-chat`, as it does for Raycast's
-  Codex ones, instead of Claude Code.
+  It also sets the `User-Agent` (through `ANTHROPIC_CUSTOM_HEADERS`) to the
+  client name Raycast passes in `CLAUDE_AGENT_SDK_CLIENT_APP`, so Aperture
+  labels the sessions like Raycast's Codex ones instead of Claude Code.
+  Raycast sends `raycast-ai-chat` for every AI feature (chat, Quick AI, AI
+  Commands), so tell them apart by the session's prompt.
 - When the tailnet is unreachable, neither tool reaches a model. Remove the
   Claude `env` entry or the Codex `model_provider` line to go direct.
 

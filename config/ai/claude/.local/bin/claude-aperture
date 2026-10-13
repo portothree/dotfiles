@@ -2,8 +2,8 @@
 # Claude Code through the Aperture gateway, for Raycast AI. Raycast runs Claude
 # with no setting sources, so ~/.claude/settings.json (and its env) is skipped;
 # point Raycast's Claude "Advanced > Executable path" at this script. The
-# User-Agent makes Aperture label these sessions raycast-ai-chat, like
-# Raycast's Codex ones, instead of Claude Code.
+# User-Agent makes Aperture label the sessions with the client name Raycast
+# passes (raycast-ai-chat for every AI feature today), like its Codex ones.
 export ANTHROPIC_BASE_URL=http://p8s.tailea386.ts.net
-export ANTHROPIC_CUSTOM_HEADERS="User-Agent: raycast-ai-chat (claude-cli)"
+export ANTHROPIC_CUSTOM_HEADERS="User-Agent: ${CLAUDE_AGENT_SDK_CLIENT_APP:-raycast} (claude-cli)"
 exec "$HOME/.local/bin/claude" "$@"
