@@ -2,22 +2,20 @@
   pkgs,
   lib,
   config,
+  inputs,
   ...
 }:
 
 with lib;
 let
   cfg = config.modules.ai.aperture;
-  # No releases or binaries upstream, so it's built from a pinned commit
+  # Source comes from the ts-plug flake input, bumped by Renovate's lock file
+  # maintenance. When a bump changes go.sum, the build fails with the new
+  # vendorHash ("got: sha256-…"); paste it here.
   ts-unplug = pkgs.buildGoModule {
     pname = "ts-unplug";
-    version = "0-unstable-2026-09-17";
-    src = pkgs.fetchFromGitHub {
-      owner = "tailscale";
-      repo = "ts-plug";
-      rev = "0b0b083dae1aad0ad55c62ba28d3402f421a9aab";
-      hash = "sha256-mkKONwBmlEpSTyty4126LCre+XIM3gEa8zahaUhV/xc=";
-    };
+    version = "0-unstable-${inputs.ts-plug.lastModifiedDate}";
+    src = inputs.ts-plug;
     vendorHash = "sha256-jDncA3HPjndfQ5dd/Qv1Etxk5qyS79YfBicNYzohHAc=";
     subPackages = [ "cmd/ts-unplug" ];
     meta.mainProgram = "ts-unplug";

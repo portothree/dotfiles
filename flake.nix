@@ -36,6 +36,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     scripts.url = "path:./bin";
+    # Source for ts-unplug (modules/programs/ai/aperture.nix); no releases
+    # upstream, so Renovate's lock file maintenance bumps it with the rest
+    ts-plug = {
+      url = "github:tailscale/ts-plug";
+      flake = false;
+    };
   };
   outputs =
     {

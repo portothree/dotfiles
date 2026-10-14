@@ -219,7 +219,9 @@ dashboard is at `/admin/`.
 
 Every client uses `http://localhost:8787`, not the gateway hostname. That's
 [ts-unplug](https://tailscale.com/docs/aperture/connect-outside-tailnet),
-packaged and run at login by `modules/programs/ai/aperture.nix`
+built from the `ts-plug` flake input (Renovate's lock file maintenance bumps
+it; when go.sum changes the build fails with the new `vendorHash` to paste
+into the module) and run at login by `modules/programs/ai/aperture.nix`
 (`modules.ai.aperture.enable`, a home-manager `launchd` agent). It joins the
 personal tailnet as its own node and forwards to the gateway, so the agents
 keep working when the Tailscale app is signed in to another tailnet (e.g. the

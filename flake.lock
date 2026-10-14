@@ -222,7 +222,8 @@
         "nixgl": "nixgl",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
-        "scripts": "scripts"
+        "scripts": "scripts",
+        "ts-plug": "ts-plug"
       }
     },
     "scripts": {
@@ -266,6 +267,22 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "ts-plug": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1789664690,
+        "narHash": "sha256-mkKONwBmlEpSTyty4126LCre+XIM3gEa8zahaUhV/xc=",
+        "owner": "tailscale",
+        "repo": "ts-plug",
+        "rev": "0b0b083dae1aad0ad55c62ba28d3402f421a9aab",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tailscale",
+        "repo": "ts-plug",
         "type": "github"
       }
     }
