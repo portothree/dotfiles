@@ -65,7 +65,7 @@
   "context_servers": {
     "aperture": {
       "enabled": true,
-      "url": "http://p8s.tailea386.ts.net/v1/mcp"
+      "url": "http://localhost:8787/v1/mcp"
     },
     "slack-ocos": {
       "enabled": true,

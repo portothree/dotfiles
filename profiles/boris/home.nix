@@ -125,7 +125,10 @@
     };
   };
   modules = {
-    ai.agents.enable = true;
+    ai = {
+      agents.enable = true;
+      aperture.enable = true;
+    };
     zed.enable = true;
     alacritty = {
       enable = true;

@@ -31,7 +31,7 @@ Memory note. Both read each other's sessions through Aperture (see the
 Aperture section of the README).
 
 1. Build in one agent, e.g. Claude in Zed.
-2. Copy that session's ID from `http://p8s.tailea386.ts.net/sessions`
+2. Copy that session's ID from `http://localhost:8787/sessions`
    (`ancc_…` Claude, `ocdx_…` Codex).
 3. Open the other agent, e.g. Codex in Zed, and paste **Cross-review**.
 4. Back in the builder, paste **Address review**.
