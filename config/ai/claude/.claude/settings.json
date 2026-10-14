@@ -1,6 +1,6 @@
 {
   "env": {
-    "ANTHROPIC_BASE_URL": "http://p8s.tailea386.ts.net"
+    "ANTHROPIC_BASE_URL": "http://localhost:8787"
   },
   "attribution": {
     "commit": "",

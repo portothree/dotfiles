@@ -2,7 +2,10 @@
 
 with lib;
 {
-  imports = [ ./agents.nix ];
+  imports = [
+    ./agents.nix
+    ./aperture.nix
+  ];
 
   options.modules.ai = {
     dotfilesPath = mkOption {

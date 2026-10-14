@@ -41,8 +41,9 @@ ID sudo) and the home-manager config together.
 
 Then the logins and settings nothing here can do:
 
-1. Sign in to Tailscale, so the Aperture gateway (`p8s.tailea386.ts.net`)
-   is reachable; without it Claude Code and Codex can't reach a model.
+1. Approve the Aperture proxy's tailnet login: open the URL in
+   `~/.local/state/ts-unplug/ts-unplug.log` (see [Aperture](#aperture));
+   without it Claude Code and Codex can't reach a model.
 2. Install Claude Code with its native installer
    (`curl -fsSL https://claude.ai/install.sh | bash`) and run `/login` with
    the Max account.
@@ -199,7 +200,7 @@ Claude suggests running `memory-curate`. It stays silent otherwise.
 ### Aperture
 
 [Tailscale Aperture](https://tailscale.com/docs/aperture) is an LLM gateway
-on the tailnet at `http://p8s.tailea386.ts.net`. It logs every model request
+on the personal tailnet at `p8s.tailea386.ts.net`. It logs every model request
 under the caller's Tailscale identity, which gives one view of usage across
 tools. It runs in [passthrough mode](https://tailscale.com/docs/aperture/how-to/use-passthrough-mode):
 Claude Code and Codex sign in to their subscriptions (Claude Max, ChatGPT) and
@@ -213,8 +214,21 @@ Aperture or here.
 | Raycast AI, ChatGPT subscription | Runs the Codex CLI, so `config.toml` covers it | `/codex/responses` |
 | Raycast AI, Claude subscription | Claude "Advanced > Executable path" set to `~/.local/bin/claude-aperture` | `/v1/messages` |
 
-Requests show up at `http://p8s.tailea386.ts.net/sessions`; the admin
+Requests show up at `http://localhost:8787/sessions`; the admin
 dashboard is at `/admin/`.
+
+Every client uses `http://localhost:8787`, not the gateway hostname. That's
+[ts-unplug](https://tailscale.com/docs/aperture/connect-outside-tailnet),
+packaged and run at login by `modules/programs/ai/aperture.nix`
+(`modules.ai.aperture.enable`, a home-manager `launchd` agent). It joins the
+personal tailnet as its own node and forwards to the gateway, so the agents
+keep working when the Tailscale app is signed in to another tailnet (e.g. the
+opencoreos one). First run: open the login URL it writes to
+`~/.local/state/ts-unplug/ts-unplug.log` with the personal account, and
+approve the node if the tailnet asks. Its tailnet session lives in that state
+folder; keep it out of backups you share. A DNS filter that blocks
+`controlplane.tailscale.com` (NextDNS does by default with some lists) stops it
+signing in; allowlist `tailscale.com`.
 
 Aperture names the agent from the request's `User-Agent` (Claude) or
 `originator` (Codex) header. To tell launchers apart, Zed's `agent_servers`
@@ -237,7 +251,7 @@ Sessions are kept 30 days and only their owner can read them.
 Aperture is hosted by Tailscale, so its config lives in its admin UI, not on
 disk. `config/ai/aperture/config.hujson` is the copy kept in git. To push it:
 paste it into `/admin/config` and save (saving validates it). To pull the live
-one: `curl -s http://p8s.tailea386.ts.net/api/config | jq -r .config`.
+one: `curl -s http://localhost:8787/api/config | jq -r .config`.
 
 - A model missing from a provider's `models` list doesn't pass through: Claude
   Code says "There's an issue with the selected model", Codex gets `402
