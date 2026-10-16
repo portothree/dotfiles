@@ -102,6 +102,12 @@
       "sourceType": "github",
       "skillPath": "skills/memory-tasks/SKILL.md",
       "computedHash": "603f19eb165363bf9eadfe9412f8645976d0f7a5d874ad57e6f2d01a6bc2611b"
+    },
+    "tailscale": {
+      "source": "tailscale/tailscale-skill",
+      "sourceType": "github",
+      "skillPath": "skills/tailscale/SKILL.md",
+      "computedHash": "afc1aeb8729d5efd0ca3d9714dcfb6cea860b4ac7688d4ca6c6e8b384edf4ddd"
     }
   }
 }

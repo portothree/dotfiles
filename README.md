@@ -109,7 +109,7 @@ character not taken yet from the [character list](https://irmaodojorel.fandom.co
 
 | Check | What it does |
 |-|-|
-| `pre-commit-check` | nixfmt, statix, deadnix, shellcheck and gitleaks (also installed as a git hook by `nix develop`) |
+| `pre-commit-check` | nixfmt, statix, deadnix, shellcheck, gitleaks, `reuse lint`, and a check that every vendored skill has its own license in `REUSE.toml` (also installed as a git hook by `nix develop`) |
 | `darwin-boris` (aarch64-darwin) | Builds the full boris system |
 | `home-jorel`, `home-klong` (x86_64-linux) | Build the Linux home configs |
 | `home-vm` (x86_64-linux) | Boots a NixOS VM, applies the home-manager modules (agents, zsh, neovim, tmux, git) for the test user `nico` and checks the result |
@@ -121,6 +121,8 @@ the runner user, without Homebrew and App Store installs) and runs
 formula and cask still exists; run it before a switch after upstream
 renames. CI also scans the whole git history for secrets with gitleaks,
 which catches a token added in one commit and removed in a later one.
+Both read `.gitleaks.toml`, which skips `curl -u "$TOKEN:"`-style
+placeholders in two files of the vendored tailscale skill, and nowhere else.
 Renovate's `flake.lock` update PRs go through the same CI.
 
 ## Layout
@@ -137,6 +139,7 @@ Renovate's `flake.lock` update PRs go through the same CI.
 | `cluster/` | k3s cluster manifests, applied by Flux from git |
 | `infrastructure/` | microvm definitions |
 | `docs/homelab.md` | Homelab notes and network diagram |
+| `REUSE.toml`, `LICENSES/`, `LICENSE` | License and copyright of every file ([REUSE](https://reuse.software)): MIT for my own, upstream licenses for vendored skills, Flux manifests and copied configs |
 
 The NixOS hosts (jorel, klong, juju, lara), juju's incomplete home profile, `hosts/zaza/darwin.nix`, the
 cluster and the microvms came from the former
