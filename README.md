@@ -121,6 +121,8 @@ the runner user, without Homebrew and App Store installs) and runs
 formula and cask still exists; run it before a switch after upstream
 renames. CI also scans the whole git history for secrets with gitleaks,
 which catches a token added in one commit and removed in a later one.
+Both read `.gitleaks.toml`, which allowlists `curl -u "$TOKEN:"`-style
+placeholders in docs and vendored skills.
 Renovate's `flake.lock` update PRs go through the same CI.
 
 ## Layout

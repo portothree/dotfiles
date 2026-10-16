@@ -154,7 +154,7 @@
                   text = ''
                     rc=0
                     for f in "$@"; do
-                      gitleaks dir --no-banner --redact --log-level warn "$f" || rc=1
+                      gitleaks dir --no-banner --redact --log-level warn --config ${./.gitleaks.toml} "$f" || rc=1
                     done
                     exit "$rc"
                   '';

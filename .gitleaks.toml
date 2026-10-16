@@ -1,0 +1,11 @@
+# Extends gitleaks' default rules.
+[extend]
+useDefault = true
+
+# `curl -u "$TOKEN:"` and `-u "tskey-api-xxxxx:"` in docs (e.g. the vendored
+# tailscale skill) are placeholders, not secrets.
+[[allowlists]]
+description = "curl -u with an env var or xxxxx placeholder"
+targetRules = ["curl-auth-user"]
+regexTarget = "line"
+regexes = ['''-u\s+"(\$\{?[A-Z_]+\}?|[a-z-]*x{4,}):"''']

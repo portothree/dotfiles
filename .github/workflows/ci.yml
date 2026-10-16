@@ -25,7 +25,7 @@ jobs:
       - uses: wimpysworld/nothing-but-nix@v10
       - uses: DeterminateSystems/determinate-nix-action@v3
       - name: Scan git history for secrets
-        run: nix shell --inputs-from . nixpkgs#gitleaks -c gitleaks git --no-banner --redact
+        run: nix shell --inputs-from . nixpkgs#gitleaks -c gitleaks git --no-banner --redact --config .gitleaks.toml
       - name: Check flake (lint, Linux home builds, VM test)
         run: nix flake check -L
       - name: Evaluate configs outside checks
