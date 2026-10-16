@@ -20,6 +20,14 @@ The only exception: the user explicitly says "commit it" / "ship it" / "go ahead
 
 This applies to all repos. If a per-repo CLAUDE.md or skill says to commit, treat that as a default that the user's standing rule overrides.
 
+## Third-party code
+
+When you copy code, config or docs from another project into a repo, record
+its license. If the repo has a `REUSE.toml`, add an annotation for the copied
+path (upstream URL as a comment, its copyright and SPDX license) and run
+`reuse download <SPDX-ID>`; otherwise add a notice the way that repo does. If
+the source has no clear license, don't copy it; say so.
+
 ## Basic Memory
 
 My notes live in Basic Memory (MCP server `basic-memory`, project `memex`). Its skills are in `~/.agents/skills`.

@@ -36,8 +36,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     scripts.url = "path:./bin";
-    # Source for ts-unplug (modules/programs/ai/aperture.nix); no releases
-    # upstream, so Renovate's lock file maintenance bumps it with the rest
     ts-plug = {
       url = "github:tailscale/ts-plug";
       flake = false;
@@ -159,6 +157,43 @@
                     exit "$rc"
                   '';
                 }
+              );
+            };
+            reuse.enable = true;
+            skills-licensed = {
+              enable = true;
+              name = "vendored skills have a license in REUSE.toml";
+              files = "^(config/ai/agents/skills-lock\\.json|REUSE\\.toml)$";
+              pass_filenames = false;
+              entry = nixpkgs.lib.getExe (
+                nixpkgs.legacyPackages.${system}.writers.writePython3Bin "skills-licensed" { } ''
+                  import fnmatch
+                  import json
+                  import sys
+                  import tomllib
+
+                  skills = json.load(open("config/ai/agents/skills-lock.json"))["skills"]
+                  paths = []
+                  for a in tomllib.load(open("REUSE.toml", "rb"))["annotations"]:
+                      p = a["path"]
+                      paths += [p] if isinstance(p, str) else p
+                  paths = [p for p in paths if p != "**"]
+                  missing = [
+                      f"{name} ({info['source']})"
+                      for name, info in skills.items()
+                      if not any(
+                          fnmatch.fnmatch(f"config/ai/agents/.agents/skills/{name}/SKILL.md", p)
+                          for p in paths
+                      )
+                  ]
+                  if missing:
+                      print("Skills without a license annotation in REUSE.toml:")
+                      for m in missing:
+                          print(f"  {m}")
+                      print("Add one with the upstream license and copyright,")
+                      print("then run `reuse download <SPDX-ID>`.")
+                      sys.exit(1)
+                ''
               );
             };
             skills-read-only = {
