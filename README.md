@@ -121,8 +121,8 @@ the runner user, without Homebrew and App Store installs) and runs
 formula and cask still exists; run it before a switch after upstream
 renames. CI also scans the whole git history for secrets with gitleaks,
 which catches a token added in one commit and removed in a later one.
-Both read `.gitleaks.toml`, which allowlists `curl -u "$TOKEN:"`-style
-placeholders in docs and vendored skills.
+Both read `.gitleaks.toml`, which skips `curl -u "$TOKEN:"`-style
+placeholders in two files of the vendored tailscale skill, and nowhere else.
 Renovate's `flake.lock` update PRs go through the same CI.
 
 ## Layout
@@ -139,6 +139,7 @@ Renovate's `flake.lock` update PRs go through the same CI.
 | `cluster/` | k3s cluster manifests, applied by Flux from git |
 | `infrastructure/` | microvm definitions |
 | `docs/homelab.md` | Homelab notes and network diagram |
+| `THIRD-PARTY-LICENSES.md`, `LICENSES/` | Licenses of files copied from other projects (vendored skills, Flux manifests, default configs) |
 
 The NixOS hosts (jorel, klong, juju, lara), juju's incomplete home profile, `hosts/zaza/darwin.nix`, the
 cluster and the microvms came from the former

@@ -2,10 +2,13 @@
 [extend]
 useDefault = true
 
-# `curl -u "$TOKEN:"` and `-u "tskey-api-xxxxx:"` in docs (e.g. the vendored
-# tailscale skill) are placeholders, not secrets.
+# The vendored tailscale skill's API docs show `curl -u "$TOKEN:"` and
+# `-u "tskey-api-xxxxx:"`. Only those two files, only that rule, and only
+# lines whose credential is a $VAR or an xxxx placeholder are skipped.
 [[allowlists]]
-description = "curl -u with an env var or xxxxx placeholder"
+description = "curl -u placeholders in the tailscale skill's API docs"
 targetRules = ["curl-auth-user"]
+condition = "AND"
+paths = ['''(^|/)config/ai/agents/\.agents/skills/tailscale/references/(api|device-management)\.md$''']
 regexTarget = "line"
 regexes = ['''-u\s+"(\$\{?[A-Z_]+\}?|[a-z-]*x{4,}):"''']
