@@ -281,6 +281,38 @@ one: `curl -s http://localhost:8787/api/config | jq -r .config`.
 - When the tailnet is unreachable, neither tool reaches a model. Remove the
   Claude `env` entry or the Codex `model_provider` line to go direct.
 
+### Obsidian
+
+The [Local REST API](https://github.com/coddingtonbear/obsidian-local-rest-api)
+Obsidian plugin serves an MCP server at `https://127.0.0.1:27124/mcp/` while
+Obsidian is open. It's the `obsidian` server in Zed's settings. Its tools act
+on the open vault: read and write notes, search, list and run commands
+(`command_execute`), open a file. Editing notes is still better done on the
+files, since that gives a git diff and works with Obsidian closed; the MCP is
+for what only the running app can do.
+
+`search_query` takes a [JsonLogic](https://jsonlogic.com) object, not a
+Dataview query, e.g. `{"glob": ["Gus/Home/*.md", {"var": "path"}]}`.
+
+On a new machine:
+
+1. Copy the plugin's API key (Obsidian Settings > Local REST API) into
+   `OBSIDIAN_MCP_TOKEN` in `~/.config/dotfiles/secrets.env` (see
+   [Secrets](#secrets)) and run the switch.
+2. Trust the plugin's certificate authority, or Zed rejects its self-signed
+   certificate. The CA is in the vault's
+   `.obsidian/plugins/obsidian-local-rest-api/data.json` (`crypto.caCert`) and
+   is restricted to `127.0.0.1` and `localhost`:
+
+   ```sh
+   jq -r .crypto.caCert <vault>/.obsidian/plugins/obsidian-local-rest-api/data.json > /tmp/obsidian-ca.pem
+   sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain /tmp/obsidian-ca.pem
+   ```
+
+   Redo this if the plugin regenerates its certificates. Check with
+   `curl -s -o /dev/null -w '%{http_code}' https://127.0.0.1:27124/`
+   (200 means it's trusted).
+
 ### Raycast
 
 Raycast is installed by the `raycast` cask in `hosts/boris/darwin.nix`. Its
