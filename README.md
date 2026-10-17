@@ -281,6 +281,35 @@ one: `curl -s http://localhost:8787/api/config | jq -r .config`.
 - When the tailnet is unreachable, neither tool reaches a model. Remove the
   Claude `env` entry or the Codex `model_provider` line to go direct.
 
+### Obsidian
+
+The [Local REST API](https://github.com/coddingtonbear/obsidian-local-rest-api)
+Obsidian plugin serves an MCP server while Obsidian is open. It's the
+`obsidian` server in Zed's settings, at `http://127.0.0.1:27123/mcp/`. Its
+tools act on the open vault: read and write notes, search, list and run
+commands (`command_execute`), open a file. Editing notes is still better done
+on the files, since that gives a git diff and works with Obsidian closed; the
+MCP is for what only the running app can do.
+
+It uses the plugin's plain-HTTP port, not HTTPS on 27124. The HTTPS
+certificate is self-signed, and Claude Code (Node) ignores the macOS keychain,
+so trusting the plugin's CA there isn't enough. Both ports listen on
+`127.0.0.1` only, so the traffic stays on this machine, and every request
+still needs the bearer token.
+
+`search_query` takes a [JsonLogic](https://jsonlogic.com) object, not a
+Dataview query, e.g. `{"glob": ["Gus/Home/*.md", {"var": "path"}]}`.
+
+On a new machine:
+
+1. In Obsidian Settings > Local REST API, turn on **Enable Non-encrypted
+   (HTTP) Server** (port 27123).
+2. Copy the plugin's API key from the same page into `OBSIDIAN_MCP_TOKEN` in
+   `~/.config/dotfiles/secrets.env` (see [Secrets](#secrets)) and run the
+   switch.
+3. Check it: `curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:27123/`
+   returns 200.
+
 ### Raycast
 
 Raycast is installed by the `raycast` cask in `hosts/boris/darwin.nix`. Its
