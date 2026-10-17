@@ -153,6 +153,7 @@
       "steam"
       "sublime-merge"
       "sublime-text"
+      "tailscale-app"
       "telegram"
       "trader-workstation"
       "warrensbox/tap/tfswitch"

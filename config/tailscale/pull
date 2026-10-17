@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Pull the personal tailnet's policy file, DNS and settings into this folder.
+# Needs TAILSCALE_API_KEY (admin console > Settings > Keys) in
+# ~/.config/dotfiles/secrets.env.
+set -euo pipefail
+
+dir=$(cd "$(dirname "$0")" && pwd)
+# shellcheck disable=SC1091
+. "${XDG_CONFIG_HOME:-$HOME/.config}/dotfiles/secrets.env"
+: "${TAILSCALE_API_KEY:?missing from secrets.env}"
+
+api() { curl -fsS --oauth2-bearer "$TAILSCALE_API_KEY" "https://api.tailscale.com/api/v2/tailnet/-/$1"; }
+
+api acl > "$dir/policy.hujson"
+# The nameserver address embeds the NextDNS profile ID, which would let anyone
+# use the profile, so it stays out of git.
+jq -n \
+  --argjson nameservers "$(api dns/nameservers | jq '.dns |= map("redacted, see the NextDNS dashboard")')" \
+  --argjson preferences "$(api dns/preferences)" \
+  --argjson searchpaths "$(api dns/searchpaths)" \
+  --argjson splitdns "$(api dns/split-dns)" \
+  '{$nameservers, $preferences, $searchpaths, "split-dns": $splitdns}' > "$dir/dns.json"
+api settings | jq . > "$dir/settings.json"
