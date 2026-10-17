@@ -41,14 +41,17 @@ ID sudo) and the home-manager config together.
 
 Then the logins and settings nothing here can do:
 
-1. Approve the Aperture proxy's tailnet login: open the URL in
+1. Sign in to the Tailscale app with the personal account
+   (the `tailea386` tailnet); its policy and DNS are backed up in
+   `config/tailscale/` (see [Tailscale](#tailscale)).
+2. Approve the Aperture proxy's tailnet login: open the URL in
    `~/.local/state/ts-unplug/ts-unplug.log` (see [Aperture](#aperture));
    without it Claude Code and Codex can't reach a model.
-2. Install Claude Code with its native installer
+3. Install Claude Code with its native installer
    (`curl -fsSL https://claude.ai/install.sh | bash`) and run `/login` with
    the Max account.
-3. Sign in to ChatGPT in the ChatGPT app (Codex uses that login).
-4. Restore Raycast with Cloud Sync, sign in to its Claude and ChatGPT
+4. Sign in to ChatGPT in the ChatGPT app (Codex uses that login).
+5. Restore Raycast with Cloud Sync, sign in to its Claude and ChatGPT
    subscriptions, and set Claude's executable path (see [Raycast](#raycast)).
 
 On the first switch, nix-darwin refuses to overwrite `/etc` files it doesn't
@@ -65,7 +68,7 @@ fail on the first switch. Hand them over to Homebrew once:
 ```
 $ brew install --cask --adopt arduino-ide chatgpt claude jamie ledger-wallet \
     microsoft-teams notion notion-calendar obsidian openvpn-connect raycast \
-    steam telegram vlc zed zen
+    steam tailscale-app telegram vlc zed zen
 ```
 
 App Store apps (`masApps`) need you to be signed in to the App Store.
@@ -309,6 +312,24 @@ On a new machine:
    switch.
 3. Check it: `curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:27123/`
    returns 200.
+
+### Tailscale
+
+The personal tailnet's config lives in the admin console, so
+`config/tailscale/` keeps a copy in git: `policy.hujson` (the policy file),
+`dns.json` (nameservers, MagicDNS, search paths, split DNS) and
+`settings.json` (device approval, key expiry and the like). To pull the live
+config, add an API key (admin console > Settings > Keys) as
+`TAILSCALE_API_KEY` in `~/.config/dotfiles/secrets.env`, then:
+
+```
+$ config/tailscale/pull
+```
+
+To push the policy file: paste it into Access controls > JSON editor and save
+(saving validates it). DNS and settings are set by hand in the admin console.
+The Tailscale app comes from the `tailscale-app` cask; the `tailscale` formula's
+CLI talks to it.
 
 ### Raycast
 

@@ -1,0 +1,14 @@
+{
+  "nameservers": {
+    "dns": [
+      "redacted, see the NextDNS dashboard"
+    ]
+  },
+  "preferences": {
+    "magicDNS": true
+  },
+  "searchpaths": {
+    "searchPaths": []
+  },
+  "split-dns": {}
+}
