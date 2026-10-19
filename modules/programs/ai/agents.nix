@@ -25,11 +25,13 @@ let
       cat ${adhdRules}
     } > $out
   '';
-  # Codex, Zed and Antigravity have no output styles: their AGENTS.md is the shared file with
-  # the rules appended and the checkout path made real for this machine.
+  # Files read outside this repo name the default checkout; make it this machine's.
+  realCheckout = "sed 's|~/www/portothree/dotfiles|${config.modules.ai.dotfilesPath}|g'";
+  # Every ~/*/AGENTS.md: the shared file with the rules appended, for tools
+  # without output styles (Codex, Zed, Antigravity).
   agentsWithAdhd = pkgs.runCommand "AGENTS.md" { } ''
     {
-      sed 's|~/www/portothree/dotfiles|${config.modules.ai.dotfilesPath}|g' ${../../../config/ai/AGENTS.md}
+      ${realCheckout} ${../../../config/ai/AGENTS.md}
       echo
       cat ${adhdRules}
     } > $out
@@ -46,20 +48,29 @@ in
     programs.claude-code = {
       enable = true;
       package = null;
-      context = claudeDir + "/CLAUDE.md";
+      # Includes the plain AGENTS.md from the checkout, since the output style
+      # already has the rules.
+      context = replaceStrings [ "~/www/portothree/dotfiles" ] [ config.modules.ai.dotfilesPath ] (
+        readFile (claudeDir + "/CLAUDE.md")
+      );
       inherit skills;
     };
     # Each skill is linked on its own so skills installed outside this repo
     # (by Zed, a plugin or by hand) can live next to them in ~/.agents/skills.
     home.file =
       mapAttrs' (name: path: nameValuePair ".agents/skills/${name}" { source = path; }) skills
-      // genAttrs [ ".config/zed/AGENTS.md" ".codex/AGENTS.md" ".gemini/AGENTS.md" ] (_: {
-        source = agentsWithAdhd;
-      })
+      //
+        genAttrs
+          [
+            ".agents/AGENTS.md"
+            ".config/zed/AGENTS.md"
+            ".codex/AGENTS.md"
+            ".gemini/AGENTS.md"
+          ]
+          (_: {
+            source = agentsWithAdhd;
+          })
       // {
-        # Claude Code includes this from CLAUDE.md and has the output style, so
-        # it stays the plain file.
-        ".agents/AGENTS.md".source = link "config/ai/AGENTS.md";
         # Store copy, so tools can't save memories into it
         ".gemini/GEMINI.md".source = ../../../config/ai/gemini/.gemini/GEMINI.md;
         ".claude/settings.json".source = link "config/ai/claude/.claude/settings.json";
