@@ -1,4 +1,4 @@
-@~/www/portothree/dotfiles/config/ai/AGENTS.md
+@~/.agents/AGENTS.md
 
 ## Subagents
 

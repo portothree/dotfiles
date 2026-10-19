@@ -25,13 +25,13 @@ let
       cat ${adhdRules}
     } > $out
   '';
-  # Files read outside this repo name the default checkout; make it this machine's.
-  realCheckout = "sed 's|~/www/portothree/dotfiles|${config.modules.ai.dotfilesPath}|g'";
-  # Every ~/*/AGENTS.md: the shared file with the rules appended, for tools
-  # without output styles (Codex, Zed, Antigravity).
+  # Every ~/*/AGENTS.md: the shared file with the rules appended. Claude Code
+  # includes it too, on top of the output style, so it gets the rules twice:
+  # in the system prompt and in CLAUDE.md.
   agentsWithAdhd = pkgs.runCommand "AGENTS.md" { } ''
     {
-      ${realCheckout} ${../../../config/ai/AGENTS.md}
+      # The shared file names the default checkout; make it this machine's.
+      sed 's|~/www/portothree/dotfiles|${config.modules.ai.dotfilesPath}|g' ${../../../config/ai/AGENTS.md}
       echo
       cat ${adhdRules}
     } > $out
@@ -48,11 +48,7 @@ in
     programs.claude-code = {
       enable = true;
       package = null;
-      # Includes the plain AGENTS.md from the checkout, since the output style
-      # already has the rules.
-      context = replaceStrings [ "~/www/portothree/dotfiles" ] [ config.modules.ai.dotfilesPath ] (
-        readFile (claudeDir + "/CLAUDE.md")
-      );
+      context = claudeDir + "/CLAUDE.md";
       inherit skills;
     };
     # Each skill is linked on its own so skills installed outside this repo

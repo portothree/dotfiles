@@ -159,7 +159,7 @@ home-manager's [`programs.claude-code`](https://nix-community.github.io/home-man
 | Source | Deployed to |
 |-|-|
 | `config/ai/agents/.agents/skills/<name>/` (vendored) | `~/.claude/skills/<name>`, `~/.agents/skills/<name>` (one link per skill, so other skills can sit next to them) |
-| `config/ai/AGENTS.md` (shared instructions) | `~/.agents/AGENTS.md`, Zed `~/.config/zed/AGENTS.md`, Codex `~/.codex/AGENTS.md` and Antigravity `~/.gemini/AGENTS.md` (one store copy with the ADHD rules appended, see [ADHD rules and memory](#adhd-rules-and-memory)); Claude Code includes the source from `CLAUDE.md` |
+| `config/ai/AGENTS.md` (shared instructions) | `~/.agents/AGENTS.md`, Zed `~/.config/zed/AGENTS.md`, Codex `~/.codex/AGENTS.md` and Antigravity `~/.gemini/AGENTS.md` (one store copy with the ADHD rules appended, see [ADHD rules and memory](#adhd-rules-and-memory)); Claude Code includes `~/.agents/AGENTS.md` from `CLAUDE.md` |
 | `config/ai/claude/.claude/CLAUDE.md` (imports the shared file, plus Claude-only rules) | `~/.claude/CLAUDE.md` (store copy) |
 | `config/ai/gemini/.gemini/GEMINI.md` (Antigravity-only rules, empty for now) | `~/.gemini/GEMINI.md` (store copy, read-only so nothing saves memories into it) |
 | `config/ai/claude/.claude/settings.json` | `~/.claude/settings.json` (live link) |
@@ -195,16 +195,17 @@ loaded when a model decides to read a file:
 
 | Tool | How it gets the rules |
 |-|-|
-| Claude Code | `outputStyle: "ADHD"` in `settings.json`; the style is built from the skill's `SKILL.md` |
+| Claude Code | `outputStyle: "ADHD"` in `settings.json`, built from the skill's `SKILL.md`, plus `~/.agents/AGENTS.md` below |
 | Codex, Zed's agent, Antigravity, anything else reading `~/.agents/AGENTS.md` | `~/.agents/AGENTS.md`, `~/.codex/AGENTS.md`, `~/.config/zed/AGENTS.md` and `~/.gemini/AGENTS.md` are all `config/ai/AGENTS.md` with the skill body appended and the checkout path filled in from `modules.ai.dotfilesPath` |
 | ChatGPT, Claude.ai, Gemini | Custom instructions pasted by hand from [`config/ai/chat-instructions.md`](config/ai/chat-instructions.md) |
 
-Claude Code's `CLAUDE.md` includes the plain `config/ai/AGENTS.md` from the
-checkout instead (path filled in from `modules.ai.dotfilesPath`), since the
-output style already has the rules and the built copy would load them twice.
+Claude Code includes `~/.agents/AGENTS.md` from `CLAUDE.md` like any other
+tool, so it gets the rules twice: in the system prompt from the output style,
+and in context from `AGENTS.md`. That's on purpose; the duplicate costs about
+1,800 tokens and keeps one generic file with no checkout path in `CLAUDE.md`.
 The `~/*/AGENTS.md` copies are built, not linked, so an edit to
-`config/ai/AGENTS.md` reaches them only after a switch (it used to be a live
-link); Claude Code sees it at once. Don't edit "Codex instructions" in the ChatGPT
+`config/ai/AGENTS.md` reaches every tool only after a switch (it used to be a
+live link). Don't edit "Codex instructions" in the ChatGPT
 app: that screen writes `~/.codex/AGENTS.md`, which the next switch replaces.
 Edit `config/ai/AGENTS.md` instead.
 

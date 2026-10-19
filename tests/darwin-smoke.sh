@@ -25,7 +25,7 @@ check "ADHD output style" "grep -qx 'keep-coding-instructions: true' ~/.claude/o
 check "claude auto memory off" "jq -e '.autoMemoryEnabled == false' ~/.claude/settings.json"
 check "codex memories off" "grep -qx 'memories = false' ~/.codex/config.toml"
 check "shared AGENTS.md" "grep -q 'Lead with the next action' ~/.agents/AGENTS.md"
-check "claude includes plain AGENTS.md" "f=\$(sed -n 's/^@//p' ~/.claude/CLAUDE.md | head -1) && grep -q 'Instructions for every coding agent' \"\$f\" && ! grep -q 'Lead with the next action' \"\$f\""
+check "claude includes shared AGENTS.md" "grep -qxF '@~/.agents/AGENTS.md' ~/.claude/CLAUDE.md"
 check "codex AGENTS.md has ADHD rules" "grep -q 'Lead with the next action' ~/.codex/AGENTS.md"
 check "antigravity AGENTS.md has ADHD rules" "grep -q 'Lead with the next action' ~/.gemini/AGENTS.md"
 check "antigravity GEMINI.md managed" "test -L ~/.gemini/GEMINI.md"

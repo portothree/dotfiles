@@ -61,8 +61,7 @@ pkgs.testers.runNixOSTest {
         gesonel.succeed("grep -q 'Lead with the next action' /home/nico/.gemini/AGENTS.md")
         gesonel.succeed("test -L /home/nico/.gemini/GEMINI.md")
         gesonel.succeed("cmp /home/nico/.agents/AGENTS.md /home/nico/.codex/AGENTS.md")
-        # Claude Code gets the plain file; the output style has the rules
-        gesonel.succeed("grep -qxF '@${self}/config/ai/AGENTS.md' /home/nico/.claude/CLAUDE.md")
+        gesonel.succeed("grep -qxF '@~/.agents/AGENTS.md' /home/nico/.claude/CLAUDE.md")
         # The generated copy names this machine's checkout, not the default
         gesonel.succeed("grep -qF '${self}' /home/nico/.codex/AGENTS.md")
         gesonel.succeed("test ! -L /home/nico/.agents/skills")

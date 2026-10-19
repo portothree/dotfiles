@@ -4,7 +4,7 @@ Shared by Claude Code, Zed's agent, Codex and Antigravity. The source is
 `config/ai/AGENTS.md` in the dotfiles repo (https://github.com/portothree/dotfiles,
 checked out at `~/www/portothree/dotfiles`); edit it there. Every
 `~/*/AGENTS.md` is a generated copy with the ADHD rules appended, so edits
-reach them after a rebuild; Claude Code reads the source directly.
+reach them after a rebuild.
 
 ## Formatting
 
@@ -75,4 +75,4 @@ Rules:
 
 ## Output for ADHD
 
-Follow the ADHD output rules in every reply, for the whole session, until I say "stop adhd mode". They come from the `i-have-adhd` skill (`~/.agents/skills/i-have-adhd/SKILL.md`) and are already in your context: `~/*/AGENTS.md` copies have them appended below, Claude Code loads them as its "ADHD" output style. If you see neither, read that file before your first reply.
+Follow the ADHD output rules in every reply, for the whole session, until I say "stop adhd mode". They come from the `i-have-adhd` skill (`~/.agents/skills/i-have-adhd/SKILL.md`) and are already in your context: they are appended below, and Claude Code also loads them as its "ADHD" output style. If you see neither, read that file before your first reply.
