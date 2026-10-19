@@ -93,6 +93,7 @@
   "theme": "dark",
   "editorMode": "vim",
   "autoCompactEnabled": false,
+  "autoMemoryEnabled": false,
   "voiceEnabled": true,
   "model": "opus"
 }

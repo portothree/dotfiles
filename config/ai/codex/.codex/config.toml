@@ -7,7 +7,11 @@ model_reasoning_effort = "high"
 service_tier = "priority"
 model_provider = "aperture"
 
-# ChatGPT subscription passthrough through Tailscale Aperture (see README).
+# Source: config/ai/codex/.codex/config.toml in https://github.com/portothree/dotfiles
+# (checked out at ~/www/portothree/dotfiles); edit it there, not here.
+
+# ChatGPT subscription passthrough through Tailscale Aperture (see the
+# dotfiles README, "Aperture").
 [model_providers.aperture]
 name = "Aperture"
 base_url = "http://localhost:8787/codex"
@@ -16,4 +20,11 @@ requires_openai_auth = true
 
 [features]
 js_repl = false
+# Basic Memory is the only memory store. The ChatGPT app's "Enable Codex
+# memories" toggle writes here too, but every switch puts this back.
+memories = false
+
+[memories]
+use_memories = false
+generate_memories = false
 

@@ -1,7 +1,10 @@
 // Zed settings
 //
 // Template: home-manager fills each ${VAR} from ~/.config/dotfiles/secrets.env
-// (see config/ai/secrets.env.example) and writes ~/.config/zed/settings.json.
+// and writes ~/.config/zed/settings.json. Source and secrets.env.example live in
+// https://github.com/portothree/dotfiles (checked out at ~/www/portothree/dotfiles):
+// config/editors/zed/.config/zed/settings.json and config/ai/secrets.env.example.
+// Edit the source there; changes here are overwritten on the next switch.
 //
 // For information on how to configure Zed, see the Zed
 // documentation: https://zed.dev/docs/configuring-zed

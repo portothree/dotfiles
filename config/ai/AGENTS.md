@@ -1,7 +1,10 @@
 # Instructions for every coding agent
 
-Shared by Claude Code, Zed's agent and Codex. The source is
-`config/ai/AGENTS.md` in the dotfiles repo; edit it there.
+Shared by Claude Code, Zed's agent, Codex and Antigravity. The source is
+`config/ai/AGENTS.md` in the dotfiles repo (https://github.com/portothree/dotfiles,
+checked out at `~/www/portothree/dotfiles`); edit it there. Codex, Zed and
+Antigravity get a generated copy with the ADHD rules appended, so edits reach
+them after a rebuild.
 
 ## Formatting
 
@@ -35,6 +38,7 @@ My notes live in Basic Memory (MCP server `basic-memory`, project `memex`). Its 
 - Start of a thread: load context with the `memory-continue` skill. Without skills, call `recent_activity` and `search_notes` for the current project.
 - Write only what's worth keeping: decisions, root causes, lessons, open items, status. Never write `[USER]`/`[ASSISTANT]` transcripts or a log of every exchange.
 - Search before creating a note; if one already covers the ticket, PR or topic, update it instead of adding another.
+- Don't use any built-in memory feature (Claude Code auto memory, Codex memories, Antigravity Knowledge Items, ChatGPT, Claude or Gemini memory), even when your harness offers one: don't save to it and don't rely on what it recalls. Save only to Basic Memory.
 
 Use these skills on your own when the situation fits:
 
@@ -71,4 +75,4 @@ Rules:
 
 ## Output for ADHD
 
-Follow the rules in `~/.agents/skills/i-have-adhd/SKILL.md` in every reply, for the whole session, until I say "stop adhd mode". Read that file at the start of each session if it isn't already in your instructions.
+Follow the ADHD output rules in every reply, for the whole session, until I say "stop adhd mode". They come from the `i-have-adhd` skill (`~/.agents/skills/i-have-adhd/SKILL.md`) and are already in your context: Codex, Zed and Antigravity get them appended below, Claude Code loads them as its "ADHD" output style. If you see neither, read that file before your first reply.
