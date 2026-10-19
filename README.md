@@ -159,12 +159,14 @@ home-manager's [`programs.claude-code`](https://nix-community.github.io/home-man
 | Source | Deployed to |
 |-|-|
 | `config/ai/agents/.agents/skills/<name>/` (vendored) | `~/.claude/skills/<name>`, `~/.agents/skills/<name>` (one link per skill, so other skills can sit next to them) |
-| `config/ai/AGENTS.md` (shared instructions) | `~/.agents/AGENTS.md`, Zed `~/.config/zed/AGENTS.md` and Codex `~/.codex/AGENTS.md` (live links) |
+| `config/ai/AGENTS.md` (shared instructions) | `~/.agents/AGENTS.md`, Zed `~/.config/zed/AGENTS.md`, Codex `~/.codex/AGENTS.md` and Antigravity `~/.gemini/AGENTS.md` (one store copy with the ADHD rules appended, see [ADHD rules and memory](#adhd-rules-and-memory)); Claude Code includes `~/.agents/AGENTS.md` from `CLAUDE.md` |
 | `config/ai/claude/.claude/CLAUDE.md` (imports the shared file, plus Claude-only rules) | `~/.claude/CLAUDE.md` (store copy) |
+| `config/ai/gemini/.gemini/GEMINI.md` (Antigravity-only rules, empty for now) | `~/.gemini/GEMINI.md` (store copy, read-only so nothing saves memories into it) |
 | `config/ai/claude/.claude/settings.json` | `~/.claude/settings.json` (live link) |
 | `config/ai/claude/.local/bin/claude-aperture` | `~/.local/bin/claude-aperture` (see [Aperture](#aperture)) |
 | `config/ai/aperture/config.hujson` | Not deployed; pasted into the Aperture admin UI (see [Aperture](#aperture)) |
 | `config/ai/snippets.md` | Not deployed; prompt snippets kept in Raycast (PR review, cross-review between agents) |
+| `config/ai/chat-instructions.md` | Not deployed; pasted into ChatGPT, Claude.ai and Gemini (see [ADHD rules and memory](#adhd-rules-and-memory)) |
 | `config/ai/codex/.codex/config.toml` | `~/.codex/config.toml` (written file, see [Secrets](#secrets)) |
 | `config/editors/zed/.config/zed/settings.json` (template, `modules.zed`) | `~/.config/zed/settings.json` (rendered file, see [Secrets](#secrets)) |
 
@@ -185,6 +187,39 @@ modules.ai = {
 
 On a machine that already has these files, move them out of the way on the
 first switch: `home-manager switch -b backup --flake .#<host>`.
+
+### ADHD rules and memory
+
+The `i-have-adhd` skill's rules are always on, in every tool, rather than
+loaded when a model decides to read a file:
+
+| Tool | How it gets the rules |
+|-|-|
+| Claude Code | `outputStyle: "ADHD"` in `settings.json`, built from the skill's `SKILL.md`, plus `~/.agents/AGENTS.md` below |
+| Codex, Zed's agent, Antigravity, anything else reading `~/.agents/AGENTS.md` | `~/.agents/AGENTS.md`, `~/.codex/AGENTS.md`, `~/.config/zed/AGENTS.md` and `~/.gemini/AGENTS.md` are all `config/ai/AGENTS.md` with the skill body appended and the checkout path filled in from `modules.ai.dotfilesPath` |
+| ChatGPT, Claude.ai, Gemini | Custom instructions pasted by hand from [`config/ai/chat-instructions.md`](config/ai/chat-instructions.md) |
+
+Claude Code includes `~/.agents/AGENTS.md` from `CLAUDE.md` like any other
+tool, so it gets the rules twice: in the system prompt from the output style,
+and in context from `AGENTS.md`. That's on purpose; the duplicate costs about
+1,800 tokens and keeps one generic file with no checkout path in `CLAUDE.md`.
+The `~/*/AGENTS.md` copies are built, not linked, so an edit to
+`config/ai/AGENTS.md` reaches every tool only after a switch (it used to be a
+live link). Don't edit "Codex instructions" in the ChatGPT
+app: that screen writes `~/.codex/AGENTS.md`, which the next switch replaces.
+Edit `config/ai/AGENTS.md` instead.
+
+Built-in memory is off everywhere, so [Basic Memory](#basic-memory) is the
+only store: `autoMemoryEnabled: false` in Claude Code's `settings.json`
+([docs](https://code.claude.com/docs/en/memory#enable-or-disable-auto-memory)),
+`[features] memories = false` in Codex's `config.toml`
+([docs](https://learn.chatgpt.com/docs/customization/memories)), and Zed's
+agent has none ([docs](https://zed.dev/docs/ai/instructions)). Antigravity's
+Knowledge Items ([docs](https://antigravity.google/docs/agent-settings/)) have
+no documented off switch, so the rule in `AGENTS.md`, which Antigravity reads
+from `~/.gemini/AGENTS.md` ([docs](https://antigravity.google/docs/rules)),
+tells it not to use them. The chat apps' memory is an account setting;
+`chat-instructions.md` lists the toggles to turn off by hand.
 
 ### Basic Memory
 
@@ -219,6 +254,16 @@ Aperture or here.
 | Codex (CLI, ChatGPT app, Zed) | `model_provider = "aperture"` in `config.toml` | `/codex/responses` |
 | Raycast AI, ChatGPT subscription | Runs the Codex CLI, so `config.toml` covers it | `/codex/responses` |
 | Raycast AI, Claude subscription | Claude "Advanced > Executable path" set to `~/.local/bin/claude-aperture` | `/v1/messages` |
+
+Antigravity (Zed's `antigravity-acp`, Google One sign-in) doesn't go through
+Aperture. Aperture's Gemini support takes an AI Studio API key or a Vertex
+service account ([docs](https://tailscale.com/docs/aperture/how-to/use-google-gemini)),
+and Gemini CLI honours `GOOGLE_GEMINI_BASE_URL` only with those
+([docs](https://tailscale.com/docs/aperture/cli)). A personal Google sign-in
+calls `cloudcode-pa.googleapis.com`, which Aperture has no adapter for, and
+Antigravity documents no base-URL setting. Recheck when Aperture's
+[passthrough](https://tailscale.com/docs/aperture/how-to/use-passthrough-mode)
+page gets a Google example.
 
 Requests show up at `http://localhost:8787/sessions`; the admin
 dashboard is at `/admin/`.
@@ -415,7 +460,9 @@ Installed:
   skills like `code-review`) aren't part of it.
 - `i-have-adhd` ([ayghri/i-have-adhd](https://github.com/ayghri/i-have-adhd)):
   ADHD-friendly output (next action first, numbered steps, restated state).
-  Only runs when invoked with `/i-have-adhd`; "stop adhd mode" turns it off.
+  Always on in every agent, not only on `/i-have-adhd` (see
+  [ADHD rules and memory](#adhd-rules-and-memory)); "stop adhd mode" turns it
+  off for a session.
 
 # Shell scripts
 

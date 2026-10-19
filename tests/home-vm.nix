@@ -56,10 +56,18 @@ pkgs.testers.runNixOSTest {
         gesonel.succeed("grep -qx 'keep-coding-instructions: true' /home/nico/.claude/output-styles/adhd.md")
         gesonel.succeed("grep -q 'Lead with the next action' /home/nico/.claude/output-styles/adhd.md")
         gesonel.succeed("grep -q 'Instructions for every coding agent' /home/nico/.agents/AGENTS.md")
-        gesonel.succeed("cmp /home/nico/.agents/AGENTS.md /home/nico/.config/zed/AGENTS.md")
+        gesonel.succeed("grep -q 'Lead with the next action' /home/nico/.codex/AGENTS.md")
+        gesonel.succeed("grep -q 'Lead with the next action' /home/nico/.config/zed/AGENTS.md")
+        gesonel.succeed("grep -q 'Lead with the next action' /home/nico/.gemini/AGENTS.md")
+        gesonel.succeed("test -L /home/nico/.gemini/GEMINI.md")
         gesonel.succeed("cmp /home/nico/.agents/AGENTS.md /home/nico/.codex/AGENTS.md")
+        gesonel.succeed("grep -qxF '@~/.agents/AGENTS.md' /home/nico/.claude/CLAUDE.md")
+        # The generated copy names this machine's checkout, not the default
+        gesonel.succeed("grep -qF '${self}' /home/nico/.codex/AGENTS.md")
         gesonel.succeed("test ! -L /home/nico/.agents/skills")
         gesonel.succeed("jq -e .permissions /home/nico/.claude/settings.json")
+        gesonel.succeed("jq -e '.autoMemoryEnabled == false' /home/nico/.claude/settings.json")
+        gesonel.succeed("grep -qx 'memories = false' /home/nico/.codex/config.toml")
         gesonel.succeed("su - nico -c /home/nico/.claude/hooks/basic-memory-health.sh")
 
     with subtest("git"):

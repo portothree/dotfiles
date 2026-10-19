@@ -12,13 +12,28 @@ let
   codexDir = ../../../config/ai/codex/.codex;
   link = path: config.lib.file.mkOutOfStoreSymlink "${config.modules.ai.dotfilesPath}/${path}";
   skillsDir = ../../../config/ai/agents/.agents/skills;
-  # The i-have-adhd skill doubles as Claude Code's output style: same body,
-  # output-style frontmatter, so the weekly skill updates reach it too.
+  # The i-have-adhd skill body (frontmatter stripped) is always on in every
+  # agent, so the weekly skill updates reach them too.
+  adhdRules = pkgs.runCommand "adhd-rules.md" { } ''
+    awk 'seen >= 2 { print; next } /^---$/ { seen++ }' ${skillsDir}/i-have-adhd/SKILL.md > $out
+  '';
+  # Claude Code: as an output style.
   adhdOutputStyle = pkgs.runCommand "adhd-output-style.md" { } ''
     {
       printf -- '---\nname: ADHD\ndescription: %s\nkeep-coding-instructions: true\n---\n' \
         "Lead with the next action, number steps, restate state, cap lists, no preamble or recaps"
-      awk 'seen >= 2 { print; next } /^---$/ { seen++ }' ${skillsDir}/i-have-adhd/SKILL.md
+      cat ${adhdRules}
+    } > $out
+  '';
+  # Every ~/*/AGENTS.md: the shared file with the rules appended. Claude Code
+  # includes it too, on top of the output style, so it gets the rules twice:
+  # in the system prompt and in CLAUDE.md.
+  agentsWithAdhd = pkgs.runCommand "AGENTS.md" { } ''
+    {
+      # The shared file names the default checkout; make it this machine's.
+      sed 's|~/www/portothree/dotfiles|${config.modules.ai.dotfilesPath}|g' ${../../../config/ai/AGENTS.md}
+      echo
+      cat ${adhdRules}
     } > $out
   '';
   skills = mapAttrs (name: _: skillsDir + "/${name}") (
@@ -46,11 +61,14 @@ in
             ".agents/AGENTS.md"
             ".config/zed/AGENTS.md"
             ".codex/AGENTS.md"
+            ".gemini/AGENTS.md"
           ]
           (_: {
-            source = link "config/ai/AGENTS.md";
+            source = agentsWithAdhd;
           })
       // {
+        # Store copy, so tools can't save memories into it
+        ".gemini/GEMINI.md".source = ../../../config/ai/gemini/.gemini/GEMINI.md;
         ".claude/settings.json".source = link "config/ai/claude/.claude/settings.json";
         ".claude/output-styles/adhd.md".source = adhdOutputStyle;
         ".claude/hooks/basic-memory-health.sh".source = claudeDir + "/hooks/basic-memory-health.sh";
