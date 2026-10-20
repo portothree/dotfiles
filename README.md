@@ -358,6 +358,35 @@ On a new machine:
 3. Check it: `curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:27123/`
    returns 200.
 
+### dayGLANCE
+
+[dayGLANCE](https://github.com/krelltunez/dayGLANCE) runs as the desktop app,
+built from the fork at `~/www/portothree/dayGLANCE` (`origin` is
+`portothree/dayGLANCE`, `upstream` is the original). Only the desktop app
+serves the MCP server: it's the `dayglance` server in Zed's settings, at
+`http://127.0.0.1:7893/mcp`, and it answers only while the app is open. Its
+data syncs to memex's `trails/planner/dayglance` (Settings > Sync > Direct
+Access), and its Obsidian integration uses the memex vault (`trails/notes`).
+
+Build and run (it runs from the build folder, pinned to the Dock; a rebuild
+replaces it in place):
+
+```
+$ cd ~/www/portothree/dayGLANCE && npm ci && npm run build:electron
+$ open dist-app/mac-arm64/dayGLANCE.app
+```
+
+On a new machine:
+
+1. In dayGLANCE Settings > Local Integrations, set the MCP server to
+   "dayGLANCE data only", and turn on "Allow schedule changes" for writes.
+2. Copy its token into `DAYGLANCE_MCP_TOKEN` in
+   `~/.config/dotfiles/secrets.env` (see [Secrets](#secrets)) and run the
+   switch.
+
+It's used from Zed's agent panel (Claude, Codex and Zed's own agent all get
+Zed's context servers), not added to Claude Code directly.
+
 ### Tailscale
 
 The personal tailnet's config lives in the admin console, so

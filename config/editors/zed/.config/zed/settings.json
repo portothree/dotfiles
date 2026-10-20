@@ -125,6 +125,13 @@
         "${CONTEXT7_API_KEY}"
       ]
     },
+    "dayglance": {
+      "enabled": true,
+      "url": "http://127.0.0.1:7893/mcp",
+      "headers": {
+        "Authorization": "Bearer ${DAYGLANCE_MCP_TOKEN}"
+      }
+    },
     "obsidian": {
       "enabled": true,
       "url": "http://127.0.0.1:27123/mcp/",
