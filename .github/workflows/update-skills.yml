@@ -28,7 +28,7 @@ jobs:
             | if $p == "" then $s else "\($s)/\($p)" end' skills-lock.json |
             sort -u |
             while read -r src; do
-              npx -y skills@1.7.2 add "$src" --skill '*' -a codex -y
+              npx -y skills@1.7.4 add "$src" --skill '*' -a codex -y
             done
           {
             echo 'summary<<EOF'
