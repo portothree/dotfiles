@@ -155,6 +155,7 @@
       "sublime-text"
       "tailscale-app"
       "telegram"
+      "thaw"
       "trader-workstation"
       "warrensbox/tap/tfswitch"
       "ungoogled-chromium"
