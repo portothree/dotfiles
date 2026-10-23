@@ -28,6 +28,12 @@ path = "config/ai/agents/.agents/skills/memory-*/**"
 SPDX-FileCopyrightText = "Basic Machines"
 SPDX-License-Identifier = "AGPL-3.0-or-later"
 
+# https://github.com/danyuchn/asd-ste100-skill
+[[annotations]]
+path = "config/ai/agents/.agents/skills/asd-ste100/**"
+SPDX-FileCopyrightText = "2026 Dustin Yuchen Teng"
+SPDX-License-Identifier = "MIT"
+
 # https://github.com/ayghri/i-have-adhd
 [[annotations]]
 path = "config/ai/agents/.agents/skills/i-have-adhd/**"

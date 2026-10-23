@@ -3,8 +3,8 @@
 Shared by Claude Code, Zed's agent, Codex and Antigravity. The source is
 `config/ai/AGENTS.md` in the dotfiles repo (https://github.com/portothree/dotfiles,
 checked out at `~/www/portothree/dotfiles`); edit it there. Every
-`~/*/AGENTS.md` is a generated copy with the ADHD rules appended, so edits
-reach them after a rebuild.
+`~/*/AGENTS.md` is a generated copy with the writing-style rules appended,
+so edits reach them after a rebuild.
 
 ## Formatting
 
@@ -72,7 +72,3 @@ Rules:
 - Never change an entry's Status yourself. When the work reaches a point where it might move (started, PR open, merged, issue closed), tell me the status you'd suggest and why; I decide, since some work stays in QA after a merge.
 - Create an entry for new work I ask you to track, or for a follow-up I agree to. Link the source ticket or issue. Show me the ID, title and fields first.
 - If the Notion MCP isn't available or authorized, say so in one line and give me the change to make by hand.
-
-## Output for ADHD
-
-Follow the ADHD output rules in every reply, for the whole session, until I say "stop adhd mode". They come from the `i-have-adhd` skill (`~/.agents/skills/i-have-adhd/SKILL.md`) and are already in your context: they are appended below, and Claude Code also loads them as its "ADHD" output style. If you see neither, read that file before your first reply.

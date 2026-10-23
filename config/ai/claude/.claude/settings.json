@@ -88,7 +88,7 @@
       }
     }
   },
-  "outputStyle": "ADHD",
+  "outputStyle": "ADHD-STE",
   "tui": "fullscreen",
   "theme": "dark",
   "editorMode": "vim",

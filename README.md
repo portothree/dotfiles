@@ -159,14 +159,14 @@ home-manager's [`programs.claude-code`](https://nix-community.github.io/home-man
 | Source | Deployed to |
 |-|-|
 | `config/ai/agents/.agents/skills/<name>/` (vendored) | `~/.claude/skills/<name>`, `~/.agents/skills/<name>` (one link per skill, so other skills can sit next to them) |
-| `config/ai/AGENTS.md` (shared instructions) | `~/.agents/AGENTS.md`, Zed `~/.config/zed/AGENTS.md`, Codex `~/.codex/AGENTS.md` and Antigravity `~/.gemini/AGENTS.md` (one store copy with the ADHD rules appended, see [ADHD rules and memory](#adhd-rules-and-memory)); Claude Code includes `~/.agents/AGENTS.md` from `CLAUDE.md` |
+| `config/ai/AGENTS.md` (shared instructions) | `~/.agents/AGENTS.md`, Zed `~/.config/zed/AGENTS.md`, Codex `~/.codex/AGENTS.md` and Antigravity `~/.gemini/AGENTS.md` (one store copy with the writing-style rules appended, see [Writing style and memory](#writing-style-and-memory)); Claude Code includes `~/.agents/AGENTS.md` from `CLAUDE.md` |
 | `config/ai/claude/.claude/CLAUDE.md` (imports the shared file, plus Claude-only rules) | `~/.claude/CLAUDE.md` (store copy) |
 | `config/ai/gemini/.gemini/GEMINI.md` (Antigravity-only rules, empty for now) | `~/.gemini/GEMINI.md` (store copy, read-only so nothing saves memories into it) |
 | `config/ai/claude/.claude/settings.json` | `~/.claude/settings.json` (live link) |
 | `config/ai/claude/.local/bin/claude-aperture` | `~/.local/bin/claude-aperture` (see [Aperture](#aperture)) |
 | `config/ai/aperture/config.hujson` | Not deployed; pasted into the Aperture admin UI (see [Aperture](#aperture)) |
 | `config/ai/snippets.md` | Not deployed; prompt snippets kept in Raycast (PR review, cross-review between agents) |
-| `config/ai/chat-instructions.md` | Not deployed; pasted into ChatGPT, Claude.ai and Gemini (see [ADHD rules and memory](#adhd-rules-and-memory)) |
+| `config/ai/chat-instructions.md` | Not deployed; pasted into ChatGPT, Claude.ai and Gemini (see [Writing style and memory](#writing-style-and-memory)) |
 | `config/ai/codex/.codex/config.toml` | `~/.codex/config.toml` (written file, see [Secrets](#secrets)) |
 | `config/editors/zed/.config/zed/settings.json` (template, `modules.zed`) | `~/.config/zed/settings.json` (rendered file, see [Secrets](#secrets)) |
 
@@ -188,24 +188,29 @@ modules.ai = {
 On a machine that already has these files, move them out of the way on the
 first switch: `home-manager switch -b backup --flake .#<host>`.
 
-### ADHD rules and memory
+### Writing style and memory
 
-The `i-have-adhd` skill's rules are always on, in every tool, rather than
-loaded when a model decides to read a file:
+Two skills' rules are always on, in every tool, rather than loaded when a
+model decides to read a file: `i-have-adhd` shapes the reply (next action
+first, numbered steps, capped lists) and `asd-ste100` shapes each sentence
+(active voice, short sentences, one instruction per sentence, hedges kept).
+[`config/ai/style.md`](config/ai/style.md) says which wins when they
+disagree. Both skill bodies follow it, built from their `SKILL.md`:
 
 | Tool | How it gets the rules |
 |-|-|
-| Claude Code | `outputStyle: "ADHD"` in `settings.json`, built from the skill's `SKILL.md`, plus `~/.agents/AGENTS.md` below |
-| Codex, Zed's agent, Antigravity, anything else reading `~/.agents/AGENTS.md` | `~/.agents/AGENTS.md`, `~/.codex/AGENTS.md`, `~/.config/zed/AGENTS.md` and `~/.gemini/AGENTS.md` are all `config/ai/AGENTS.md` with the skill body appended and the checkout path filled in from `modules.ai.dotfilesPath` |
+| Claude Code | `outputStyle: "ADHD-STE"` in `settings.json`, built from `style.md` and the two skill bodies, plus `~/.agents/AGENTS.md` below |
+| Codex, Zed's agent, anything else reading `~/.agents/AGENTS.md` | `~/.agents/AGENTS.md`, `~/.codex/AGENTS.md` and `~/.config/zed/AGENTS.md` are all `config/ai/AGENTS.md` with `style.md` and the skill bodies appended and the checkout path filled in from `modules.ai.dotfilesPath` |
+| Antigravity | `~/.gemini/AGENTS.md` carries the shared file, `style.md` and the ADHD body; the STE body is its own always-on rule in `~/.gemini/config/rules/asd-ste100.md`, because Antigravity truncates each rule file at 24,000 bytes |
 | ChatGPT, Claude.ai, Gemini | Custom instructions pasted by hand from [`config/ai/chat-instructions.md`](config/ai/chat-instructions.md) |
 
 Claude Code includes `~/.agents/AGENTS.md` from `CLAUDE.md` like any other
 tool, so it gets the rules twice: in the system prompt from the output style,
 and in context from `AGENTS.md`. That's on purpose; the duplicate costs about
-1,800 tokens and keeps one generic file with no checkout path in `CLAUDE.md`.
+7,000 tokens and keeps one generic file with no checkout path in `CLAUDE.md`.
 The `~/*/AGENTS.md` copies are built, not linked, so an edit to
-`config/ai/AGENTS.md` reaches every tool only after a switch (it used to be a
-live link). Don't edit "Codex instructions" in the ChatGPT
+`config/ai/AGENTS.md` or `style.md` reaches every tool only after a switch (it
+used to be a live link). Don't edit "Codex instructions" in the ChatGPT
 app: that screen writes `~/.codex/AGENTS.md`, which the next switch replaces.
 Edit `config/ai/AGENTS.md` instead.
 
@@ -490,8 +495,13 @@ Installed:
 - `i-have-adhd` ([ayghri/i-have-adhd](https://github.com/ayghri/i-have-adhd)):
   ADHD-friendly output (next action first, numbered steps, restated state).
   Always on in every agent, not only on `/i-have-adhd` (see
-  [ADHD rules and memory](#adhd-rules-and-memory)); "stop adhd mode" turns it
-  off for a session.
+  [Writing style and memory](#writing-style-and-memory)); "stop adhd mode"
+  turns it off for a session.
+- `asd-ste100` ([danyuchn/asd-ste100-skill](https://github.com/danyuchn/asd-ste100-skill)):
+  Simplified Technical English (ASD-STE100) for every sentence: active voice,
+  20 to 25 words, one instruction per sentence, no phrasal verbs, hedges
+  kept. Always on next to the ADHD rules (same section); `/asd-ste100` also
+  rewrites a given text or shows the rule table.
 
 # Shell scripts
 
