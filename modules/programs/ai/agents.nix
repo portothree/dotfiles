@@ -12,28 +12,59 @@ let
   codexDir = ../../../config/ai/codex/.codex;
   link = path: config.lib.file.mkOutOfStoreSymlink "${config.modules.ai.dotfilesPath}/${path}";
   skillsDir = ../../../config/ai/agents/.agents/skills;
-  # The i-have-adhd skill body (frontmatter stripped) is always on in every
-  # agent, so the weekly skill updates reach them too.
-  adhdRules = pkgs.runCommand "adhd-rules.md" { } ''
-    awk 'seen >= 2 { print; next } /^---$/ { seen++ }' ${skillsDir}/i-have-adhd/SKILL.md > $out
+  # A skill body with its frontmatter stripped. Its relative links to the
+  # skill's own files are made absolute, since the body is read from AGENTS.md.
+  rules =
+    name:
+    pkgs.runCommand "${name}-rules.md" { } ''
+      awk 'seen >= 2 { print; next } /^---$/ { seen++ }' ${skillsDir}/${name}/SKILL.md \
+        | sed 's#`\(references\|examples\|scripts\)/#`~/.agents/skills/${name}/\1/#g' > $out
+    '';
+  cat =
+    name: files:
+    pkgs.runCommand name { } ''
+      for f in ${concatMapStringsSep " " (f: "${f}") files}; do cat "$f"; echo; done > $out
+    '';
+  # The shared file names the default checkout; make it this machine's.
+  sharedAgents = pkgs.runCommand "shared-agents.md" { } ''
+    sed 's|~/www/portothree/dotfiles|${config.modules.ai.dotfilesPath}|g' ${../../../config/ai/AGENTS.md} > $out
   '';
+  # The i-have-adhd and asd-ste100 skill bodies are always on in every agent,
+  # behind style.md, which says how the two combine. Built from the skills so
+  # the weekly skill updates reach the agents too.
+  adhdRules = rules "i-have-adhd";
+  steRules = rules "asd-ste100";
+  styleRules = cat "style-rules.md" [
+    ../../../config/ai/style.md
+    adhdRules
+    steRules
+  ];
   # Claude Code: as an output style.
-  adhdOutputStyle = pkgs.runCommand "adhd-output-style.md" { } ''
+  outputStyle = pkgs.runCommand "adhd-ste.md" { } ''
     {
-      printf -- '---\nname: ADHD\ndescription: %s\nkeep-coding-instructions: true\n---\n' \
-        "Lead with the next action, number steps, restate state, cap lists, no preamble or recaps"
-      cat ${adhdRules}
+      printf -- '---\nname: ADHD-STE\ndescription: %s\nkeep-coding-instructions: true\n---\n' \
+        "ADHD shape (next action first, numbered steps, no preamble) with ASD-STE100 sentences"
+      cat ${styleRules}
     } > $out
   '';
   # Every ~/*/AGENTS.md: the shared file with the rules appended. Claude Code
   # includes it too, on top of the output style, so it gets the rules twice:
   # in the system prompt and in CLAUDE.md.
-  agentsWithAdhd = pkgs.runCommand "AGENTS.md" { } ''
+  agentsWithStyle = cat "AGENTS.md" [
+    sharedAgents
+    styleRules
+  ];
+  # Antigravity truncates each rule file at 24,000 bytes, so the STE body is a
+  # separate always-on rule in ~/.gemini/config/rules.
+  geminiAgents = cat "AGENTS.md" [
+    sharedAgents
+    ../../../config/ai/style.md
+    adhdRules
+  ];
+  geminiSteRule = pkgs.runCommand "asd-ste100.md" { } ''
     {
-      # The shared file names the default checkout; make it this machine's.
-      sed 's|~/www/portothree/dotfiles|${config.modules.ai.dotfilesPath}|g' ${../../../config/ai/AGENTS.md}
-      echo
-      cat ${adhdRules}
+      printf -- '---\ntrigger: always_on\n---\n'
+      cat ${steRules}
     } > $out
   '';
   skills = mapAttrs (name: _: skillsDir + "/${name}") (
@@ -61,16 +92,17 @@ in
             ".agents/AGENTS.md"
             ".config/zed/AGENTS.md"
             ".codex/AGENTS.md"
-            ".gemini/AGENTS.md"
           ]
           (_: {
-            source = agentsWithAdhd;
+            source = agentsWithStyle;
           })
       // {
+        ".gemini/AGENTS.md".source = geminiAgents;
+        ".gemini/config/rules/asd-ste100.md".source = geminiSteRule;
         # Store copy, so tools can't save memories into it
         ".gemini/GEMINI.md".source = ../../../config/ai/gemini/.gemini/GEMINI.md;
         ".claude/settings.json".source = link "config/ai/claude/.claude/settings.json";
-        ".claude/output-styles/adhd.md".source = adhdOutputStyle;
+        ".claude/output-styles/adhd-ste.md".source = outputStyle;
         ".claude/hooks/basic-memory-health.sh".source = claudeDir + "/hooks/basic-memory-health.sh";
         ".local/bin/claude-aperture".source = ../../../config/ai/claude/.local/bin/claude-aperture;
       };
