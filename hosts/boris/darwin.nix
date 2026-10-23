@@ -134,6 +134,7 @@
       "jamie"
       "sozercan/repo/kaset"
       "ledger-wallet"
+      "lulu"
       "microsoft-teams"
       "mono-mdk"
       "ngrok"
